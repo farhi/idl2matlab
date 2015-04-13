@@ -1,7 +1,0 @@
-function  [mat,p]=transpos(mat,p)
-%*******          ********
-%**
-
-if nargin==1, p=reverse(findgen(ndims(mat))+1); else, p=p+1; end;
-
-mat=permute(mat,p);

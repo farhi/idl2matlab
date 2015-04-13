@@ -1,5 +1,0 @@
-function c = plus(a,b)
-
-c=a;
-if ischar(b),       for i=1:n_elements(a), c(i) = [a(i) b];    end;
-if isa(b,'i2mstr'); for i=1:n_elements(a), c(i) = [a(i) b(i)]; end;

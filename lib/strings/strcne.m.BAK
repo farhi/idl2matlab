@@ -1,6 +1,0 @@
-function c=strcne(a,b)
-
-if     isnumeric(a), c= (a ~= str2num(b));
-elseif isnumeric(b), c= (str2num(a) ~= b);
-
-else,  c=~strcmp(a,b); end;
