@@ -18,12 +18,12 @@ inpot=input(prompt,'s');
 
 nx=15; str=inpot;
 for i=1:nx;
-    val=eval(['exp' strtrim(strung(i),2)]);
+    val=eval(['exp' strtrimi(strung(i),2)]);
     if ~isempty(val) | ischar(val);
 	if ischar(val)   ,     [val,cnt,err,nxt]=sscanf(str,'%c');            str=str(nxt:end);
 	elseif isnumeric(val), [val,cnt,err,nxt]=sscanf(str,'%g' ,size(val)); str=str(nxt:end); end;
 	
-	eval(['exp' strtrim(strung(i),2) '=val;']);
+	eval(['exp' strtrimi(strung(i),2) '=val;']);
     else, break; end;
 end;
 

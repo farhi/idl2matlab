@@ -21,7 +21,8 @@
 #define I2M_VERSION "Apr03 2003"
 
 /* Current version - NE PAS MODIFIER LA TAILLE = 10 */
-#define I2M_VERSION_2 "Jun13 2007"
+#define I2M_VERSION_2 "1.5 090121"
+                      
 
 /* OS cible */
 #ifdef WIN32

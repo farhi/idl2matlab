@@ -1,4 +1,29 @@
-IDL2Matlab Changes
+/*******************************************************************************
+*
+* IDL2Matlab and Scilab translator
+*   Computing for Science group
+*   Institut Laue langevin, BP 156
+*   F-38042 Grenoble cedex 9, FRANCE
+*
+* Documentation: CHANGES
+*
+* %Identification
+* Written by: EF, DR
+* Date: 2003-2009
+* Origin: ILL
+
+        Release 0.0 (28 jan 2003) dev (alpha)
+        Release 1.0 (31 jul 2003) dev (alpha)
+        Release 1.1 (17 Nov 2003) dev (alpha)
+        Release 1.2 (11 Mar 2004) dev (alpha)
+        Release 1.3 (20 Mar 2006) dev (alpha)
+        Release 1.4 (13 Jun 2007) beta
+        Release 1.5 (21 jan 2009) final
+*
+* This file is part of IDL2Matlab  version 1.5, released Jan 21th, 2008.
+* It gives a 'changes' list from the beginning of the project
+*
+*******************************************************************************/
 
 31 July 2003: first dev-alpha release (idl2matlab-31_Jul_2003.zip)
 -------------------------------------
@@ -20,6 +45,11 @@ With full libraries
 -------------------------------------
 small bug fix. Better localization of library.
 
-13 June 2007: beta release (idl2matlab-13_Jun_2007.zip)
+13 June 2007: beta release (idl2matlab-1.4)
 -------------------------------------
 better portability. Windows and Linux executables.
+
+21 January 2009: final release (idl2matlab-1.5)
+-------------------------------------
+Improved Linux and Windows installation procedures
+

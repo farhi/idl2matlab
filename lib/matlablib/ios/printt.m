@@ -18,7 +18,7 @@ if ~isempty(fmt), fmtc=i2m_format(fmt); disp(['printt:format ' fmt 'not implemen
 
 nx =15; cr=1;
    for i=1:nx;
-    val=eval(['exp' strtrim(strung(i),2)]);
+    val=eval(['exp' strtrimi(strung(i),2)]);
     if ~isempty(val) | ischar(val);
 	if isa(val,'i2mstr') , for i=1:n_elements(val), fprintf('%s\n',val(i)); end; cr=1;
 	elseif ischar(val)   ,                          fprintf('%s',val);           cr=0;

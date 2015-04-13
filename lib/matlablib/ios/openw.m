@@ -20,7 +20,7 @@ global I2Mflun I2Mflu0 I2Mflu1 I2Mflu2 I2Mflu3 I2Mflu4
 if isempty(I2Mflun), I2Mflun=lonarr(29)+1; end;
 
 if appd; perm='at'; else perm='wt'; end;
-file=strtrim(file,1);
+file=strtrimi(file,1);
 err=0;
 lan=fopen(file,perm);
 if lan < 0; err=1; if ~k_err; eval(I2M_out); UnableToOpenTheFile; end; end;

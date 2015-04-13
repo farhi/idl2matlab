@@ -1,4 +1,4 @@
-.TH "idl2matlab" "1" "1.4 (13 June 2007)" "ILL (richard@ill.fr and farhi@ill.fr)" "USER COMMANDS"
+.TH "idl2matlab" "1" "1.5 (21 January 2009)" "ILL (richard@ill.fr and farhi@ill.fr)" "USER COMMANDS"
 .SH "NAME"
 idl2matlab \- This tool translates automatically an IDL code into Matlab/Scilab code.
 .SH "SYNOPSIS"
@@ -27,7 +27,7 @@ This translator works as follow:
 IDL2Matlab works on all systems (Unix/Linux/Windows). It is built upon lex/yacc and programmed in C.
 The usage of the translator is done through the command line.
 .PP 
-Installation of the package is done with the usual procedure: ./configure; make; make install
+Installation of the package is done with the usual procedure: ./configure; make; make install on Linux/Unix systems. An installation script is provided for Windows systems.
 .P
 .SH "OPTIONS"
 .TP 
@@ -71,11 +71,12 @@ to translate for scilab(1) (default : matlab(1))
 .SH "ENVIRONMENT"
 The
 .B IDL2MATLAB
-environment variable may be set to define the IDL2Matlab library location. This is /usr/local/lib/idl2matlab on Linux/BSD systems. Executables are usually located in /usr/local/bin.
+environment variable may be set to define the IDL2Matlab library location. This is /usr/local/lib/idl2matlab on Linux/BSD systems, and C:\idl2matlab on Windows systems. Executables are usually located in /usr/local/bin on Linux/BSD systems, and in C:\idl2matlab\bin  on Windows systems.
 .SH "BUGS"
 idl2matlab is an experimental tool. The IDL grammar handled by idl2matlab is not fully qualified, and you should expect small translation errors. Additionally, the Library is certainly unstable and incomplete. PV\-Wave translation should work partially.
+Graphic functions (plot, surf, widgets) are incomplete. Translated code is not guaranteed to work. IDL objects are not translated.
 .SH "EXIT STATUS"
-idl2matlab returns 0 in case of error, 1 when all went fine
+idl2matlab returns 1 in case of error, 0 when all went fine
 .SH "AUTHOR"
 project leaders: Emmanuel FARHI and Didier RICHARD.
 team1: AZIZI MOURIER Karim, BENZEGHIOUA  ABDESLAM, GARDON Lucien, SYLVESTRE  Nadege.                
@@ -85,6 +86,8 @@ Designed by the Computing for Science group
 Institut Laue Langevin, BP 156
 F\-38042 Grenoble cedex 9, FRANCE
 .SH "SEE ALSO"
+.P
+Institut Laue Langevin at [http://www.ill.eu/]
 .P
 IDL at [http://www.ittvis.com/]
 .P

@@ -19,10 +19,9 @@
 #
 dnl Process this file with autoconf to produce a configure script.
 
-AC_INIT(IDL2Matlab, 1.3, www.ill.fr)
+AC_INIT(IDL2Matlab, 1.5, www.ill.fr)
 AC_PROG_CC
 AC_PROG_INSTALL
-CF_ANSI_CC_CHECK
 AC_FUNC_MALLOC
 AC_FUNC_REALLOC
 AC_PATH_PROGS(SCILAB, [scilab runscilab /usr/local/bin/scilab /usr/lib/scilab/bin/scilab /lib/scilab/bin/scilab scilex], no)

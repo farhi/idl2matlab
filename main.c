@@ -75,6 +75,7 @@ int openFile(char *pfileName, char *pstrLine)
 /* affiche un message d'erreur en cas de mauvaise utilisation */
 static void usage () {
   printf ("Usage : idl2matlab [-options] inputFile [outputDirectory]\n") ;
+  printf ("Action: translate IDL source code into Matlab\n");
   printf ("\nOptions :\n") ;
   printf ("  -s for script files translation\n") ;
   printf ("  -S for string translation\n");
@@ -87,7 +88,6 @@ static void usage () {
   printf ("  -f to translate only one function\n");
 	printf ("  -C to translate in Scilab (default : Matlab)\n");
 
-
   printf ("\nExamples :\n") ;
   printf ("  idl2matlab -qw essai.pro outDir/\n") ;
   printf ("  idl2matlab -t essai.pro outDir/ > out\n") ;
@@ -96,7 +96,7 @@ static void usage () {
   printf ("  idl2matlab -f essai.pro functionName outDir/ > out\n") ;
   printf ("  idl2matlab -C essai.pro outDir/\n") ;
 
-  exit (1) ;
+  exit (0) ;
 }
 
 /* test si le fichier peut etre ouvert en lecture et l ouvre par la meme occasion */
@@ -337,7 +337,7 @@ void parseArobase(char* inputFile, FILE* pOutputFile) {
   pInputFile = fopen(inputFile, "r");
   if (pInputFile == NULL) {
     fprintf(stderr, "Unable to open input file \"%s\"\n", inputFile);
-    exit(0);
+    exit(1);
   } else {
     c = fgetc(pInputFile);
     startOfLine = 1;
@@ -397,7 +397,7 @@ void scanArobase(char* inputFile) {
   pOutputFile =fopen(strTmp, "w");
   if (pOutputFile == NULL) {
     fprintf(stderr, "Unable to open output file !\n");
-    exit(0);
+    exit(1);
   } else {
     parseArobase(inputFile, pOutputFile);
     fclose(pOutputFile);
@@ -638,7 +638,7 @@ int main (int argc, char *argv[]) {
 
   if ((displayMessage==1) && (translationError == 1)) {
     fprintf (stderr,"SYNTAX ERROR LINE %d!!!\n", nb_lines) ;
-    exit(0);
+    exit(1);
   }
 
 
@@ -725,18 +725,20 @@ int main (int argc, char *argv[]) {
 
   if (translationError==0) {
     if (displayMessage == 1) { /* on affiche l'heure d'arret */
-      char buffer[1024];
-      char *ret=NULL;
-      ret=getcwd(buffer, 1024);
-      fprintf (stderr,"To execute:\n"
+      char buffer[1024]; strcpy(buffer,"");
+    
+      getcwd(buffer, 1024);
+      fprintf (stderr,"To execute (if you are NOT running idl2matlab from Matlab):\n"
       "1-Go into directory:\n  cd %s\n"
       "1-Launch Matlab\n"
-      "2-Type at Matlab prompt: p=pwd; cd('%s'); i2m_install; cd(p);\n"
+      "2-Type at Matlab prompt: p=pwd; cd('%s'); i2m_init; cd(p);\n"
       "3-Type the translated program name at Matlab prompt\n",
-      (ret ? buffer : "."), i2mDirName);
+      (strlen(buffer) ? buffer : "."), i2mDirName); 
+      fprintf (stderr,"To execute (if you are running idl2matlab from Matlab):\n"
+      "Type the translated program name at Matlab prompt\n");
     }
-    return 1;
-  } else {
     return 0;
+  } else {
+    return 1;
   }
 }

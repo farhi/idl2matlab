@@ -8,7 +8,7 @@ exec_prefix = ${prefix}
 bindir = ${exec_prefix}/bin
 srcdir = .
 libdir = ${exec_prefix}/lib
-mandir = ${prefix}/man
+mandir = ${prefix}/share/man
 
 
 DEBUG = -DDEBUG=0
@@ -122,10 +122,17 @@ install: installdirs $(BINOBJS)
 	  fi \
 	done
 	$(INSTALL_DATA) *.1 $(mandir)/man1
-	echo "==== Installation finished. Thanks for using IDL2Matlab ===="
+	$(srcdir)/mkinstalldirs $(mc_libdir)/doc
+	$(INSTALL_DATA) COPYING README CHANGES idl2matlab.html $(mc_libdir)/doc
+	@echo "==== Installation finished. Thanks for using IDL2Matlab ===="
 
 installdirs:
 	$(srcdir)/mkinstalldirs $(bindir) $(libdir) $(mc_libdir) $(mandir)/man1
 
 clean:
 	rm -f *.o y.* *.out y.* *.tab.* lex.yy.* $(BINOBJS).c $(BINOBJS).o $(BINOBJS).test* $(BINOBJS)
+
+uninstall:
+	rm -rf $(mc_libdir) $(bindir)/idl2matlab $(mandir)/man1/idl2matlab.1
+
+

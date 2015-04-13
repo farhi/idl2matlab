@@ -24,7 +24,7 @@ lst=0;
 if isa(exp,'i2mstr'); exp=cellstr(exp(:)); end;
 if ~isempty(exp);
     if  isempty(pos); pos=0; end;
-    if ~ischar(exp) & ~iscellstr(exp); exp=strtrim(strung(exp),2); end;
+    if ~ischar(exp) & ~iscellstr(exp); exp=strtrimi(strung(exp),2); end;
 
     sz=size(exp);
     if iscell(exp); lst=zeros(sz);

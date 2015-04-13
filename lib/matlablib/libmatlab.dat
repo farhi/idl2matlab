@@ -153,7 +153,7 @@ strlowcase;strlowcase;0
 strmid;strmid;0
 strpos;strpos;1
 strput;strput;0
-strtrim;strtrim;0
+strtrim;strtrimi;0
 //*
 string;strung;1
 strupcase;strupcase;0

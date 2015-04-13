@@ -4,7 +4,7 @@ Content-type: text/html
 <HTML><HEAD><TITLE>Man page of idl2matlab</TITLE>
 </HEAD><BODY>
 <H1>idl2matlab</H1>
-Section: USER COMMANDS (1)<BR>Updated: 1.4 (13 June 2007)<BR><A HREF="#index">Index</A>
+Section: USER COMMANDS (1)<BR>Updated: 1.5 (21 January 2009)<BR><A HREF="#index">Index</A>
 <A HREF="/cgi-bin/man/man2html">Return to Main Contents</A><HR>
 
 <A NAME="lbAB">&nbsp;</A>
@@ -45,7 +45,8 @@ IDL2Matlab works on all systems (Unix/Linux/Windows). It is built upon lex/yacc 
 The usage of the translator is done through the command line.
 <P>
 
-Installation of the package is done with the usual procedure: ./configure; make; make install
+Installation of the package is done with the usual procedure: ./configure; make; make install on Linux/Unix systems. An installation script is provided for Windows systems.
+<P>
 
 <A NAME="lbAE">&nbsp;</A>
 <H2>OPTIONS</H2>
@@ -86,15 +87,16 @@ to translate for <A HREF="/cgi-bin/man/man2html?1+scilab">scilab</A>(1) (default
 The
 <B>IDL2MATLAB</B>
 
-environment variable may be set to define the IDL2Matlab library location. This is /usr/local/lib/idl2matlab on Linux/BSD systems. Executables are usually located in /usr/local/bin.
+environment variable may be set to define the IDL2Matlab library location. This is /usr/local/lib/idl2matlab on Linux/BSD systems, and C:idl2matlab on Windows systems. Executables are usually located in /usr/local/bin on Linux/BSD systems, and in C:idl2matlabndows systems.
 <A NAME="lbAH">&nbsp;</A>
 <H2>BUGS</H2>
 
 idl2matlab is an experimental tool. The IDL grammar handled by idl2matlab is not fully qualified, and you should expect small translation errors. Additionally, the Library is certainly unstable and incomplete. PV-Wave translation should work partially.
+Graphic functions (plot, surf, widgets) are incomplete. Translated code is not guaranteed to work. IDL objects are not translated.
 <A NAME="lbAI">&nbsp;</A>
 <H2>EXIT STATUS</H2>
 
-idl2matlab returns 0 in case of error, 1 when all went fine
+idl2matlab returns 1 in case of error, 0 when all went fine
 <A NAME="lbAJ">&nbsp;</A>
 <H2>AUTHOR</H2>
 
@@ -108,12 +110,19 @@ F-38042 Grenoble cedex 9, FRANCE
 <A NAME="lbAK">&nbsp;</A>
 <H2>SEE ALSO</H2>
 
+<P>
+
+Institut Laue Langevin at [<A HREF="http://www.ill.eu/]">http://www.ill.eu/]</A>
+<P>
 
 IDL at [<A HREF="http://www.ittvis.com/]">http://www.ittvis.com/]</A>
+<P>
 
 Matlab at [<A HREF="http://www.mathworks.com/]">http://www.mathworks.com/]</A>
+<P>
 
 Scilab at [<A HREF="http://www.scilab.org]">http://www.scilab.org]</A>
+<P>
 
 <A HREF="/cgi-bin/man/man2html?1+matlab">matlab</A>(1), <A HREF="/cgi-bin/man/man2html?1+idl">idl</A>(1), <A HREF="/cgi-bin/man/man2html?1+scilab">scilab</A>(1), <A HREF="/cgi-bin/man/man2html?1+octave">octave</A>(1)
 <P>
@@ -136,6 +145,6 @@ Scilab at [<A HREF="http://www.scilab.org]">http://www.scilab.org]</A>
 This document was created by
 <A HREF="/cgi-bin/man/man2html">man2html</A>,
 using the manual pages.<BR>
-Time: 09:50:10 GMT, June 14, 2007
+Time: 10:29:26 GMT, January 21, 2009
 </BODY>
 </HTML>
