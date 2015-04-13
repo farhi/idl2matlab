@@ -21,21 +21,13 @@
 #define I2M_VERSION "Apr03 2003"
 
 /* Current version - NE PAS MODIFIER LA TAILLE = 10 */
-#define I2M_VERSION_2 "Mar20 2006"
+#define I2M_VERSION_2 "Jun13 2007"
 
 /* OS cible */
-/*#define OS_UNIX*/
 #ifdef WIN32
-#define OS_WINDOWS
-#else
-#define OS_UNIX
-#endif
-
-#ifdef OS_UNIX
-  #define PATHSEP '/'
-#endif
-#ifdef OS_WINDOWS
   #define PATHSEP '\\'
+#else
+  #define PATHSEP '/'
 #endif
 
 #ifndef IDL2MATLAB
@@ -45,10 +37,10 @@
 #ifdef MAC
 #define IDL2MATLAB ":idl2matlab" /* ToDo: What to put here? */
 #else  /* !MAC */
-#define IDL2MATLAB "/usr/local/idl2matlab"
+#define IDL2MATLAB "/usr/local/lib/idl2matlab"
 #endif /* !MAC */
 #endif /* !WIN32 */
-#endif /* MCSTAS */
+#endif
 
 
 /******************************************************/

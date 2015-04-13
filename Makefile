@@ -1,46 +1,131 @@
-CFLAGS=-g
-TOOL=idl2matlab
+# This Makefile is automatically produced by running: ./configure
+# Use that Makefile with: make
 
-$(TOOL): $(TOOL).o main.o tree.o code.o rename.o lib.o hashtable.o table_symb.o lex.yy.o
-	gcc $(CFLAGS) main.o $(TOOL).o tree.o hashtable.o table_symb.o rename.o lex.yy.o lib.o code.o -o $@
+SHELL = /bin/sh
 
-$(TOOL).o: $(TOOL).y type.h $(TOOL).l
-	yacc -d $(TOOL).y
-	flex $(TOOL).l
-	mv y.tab.c $(TOOL).c
-	gcc -c $(CFLAGS)   $(TOOL).c
+prefix = /usr/local
+exec_prefix = ${prefix}
+bindir = ${exec_prefix}/bin
+srcdir = .
+libdir = ${exec_prefix}/lib
+mandir = ${prefix}/man
+
+
+DEBUG = -DDEBUG=0
+mc_libdir = $(libdir)/idl2matlab
+
+CFLAGS = -g -O2
+CC = gcc
+FLEX = flex
+FLEXFLAGS=-i
+
+BISON = bison
+BISONFLAGS = -v -d
+
+INSTALL=/usr/bin/install -c
+INSTALL_PROGRAM = ${INSTALL}
+INSTALL_DATA = ${INSTALL} -m 644
+
+
+
+#
+# End of configuration section.
+#
+
+BINOBJS=idl2matlab
+
+OBJECTS=idl2matlab.o main.o tree.o code.o rename.o lib.o hashtable.o table_symb.o lex.yy.o
+
+COBJECTS=instrument.tab.c lex.yy.c debug.c \
+	memory.c list.c symtab.c coords.c cexp.c \
+	file.c cogen.c port.c
+
+.SUFFIXES: .c .o
+
+.c.o:
+	$(CC) -c $(CFLAGS)
+
+all: $(BINOBJS)
+
+$(BINOBJS): $(BINOBJS).o main.o tree.o code.o rename.o lib.o hashtable.o table_symb.o lex.yy.o
+	$(CC) $(CFLAGS) main.o $(BINOBJS).o tree.o hashtable.o table_symb.o rename.o lex.yy.o lib.o code.o -o $@
+
+$(BINOBJS).o: $(BINOBJS).y type.h $(BINOBJS).l
+	$(BISON) $(BISONFLAGS) $(BINOBJS).y --output-file=idl2matlab.c
+	$(FLEX) $(FLEXFLAGS) $(BINOBJS).l
+	$(CC) -c $(CFLAGS)   $(BINOBJS).c
 
 lex.yy.o : lex.yy.c
-	gcc -c ${CFLAGS} lex.yy.c
+	$(CC) -c ${CFLAGS} lex.yy.c
 
 main.o : main.c
-	gcc -c ${CFLAGS} main.c
+	$(CC) -c ${CFLAGS} main.c
 
 tree.o : tree.c
-	gcc -c ${CFLAGS} tree.c
+	$(CC) -c ${CFLAGS} tree.c
 
 rename.o : rename.c
-	gcc -c ${CFLAGS} rename.c
+	$(CC) -c ${CFLAGS} rename.c
 
 lib.o : lib.c
-	gcc -c ${CFLAGS} lib.c
+	$(CC) -c ${CFLAGS} lib.c
 
 table_symb.o : table_symb.c
-	gcc -c ${CFLAGS} table_symb.c
+	$(CC) -c ${CFLAGS} table_symb.c
 
 hashtable.o : hashtable.c
-	gcc -c ${CFLAGS} hashtable.c
+	$(CC) -c ${CFLAGS} hashtable.c
 
 code.o : code.c
-	gcc -c ${CFLAGS} code.c
+	$(CC) -c ${CFLAGS} code.c
+
+install: installdirs $(BINOBJS)
+	$(INSTALL_PROGRAM) idl2matlab $(bindir)/idl2matlab
+	if [ -d $(mc_libdir) ]; then \
+	  echo "Moving your old library dir $(mc_libdir) to $(mc_libdir).`date +%Y%m%d_%H.%M`"; \
+	  mv -f $(mc_libdir) $(mc_libdir).`date +%Y%m%d_%H.%M`;\
+        fi;
+	$(srcdir)/mkinstalldirs $(mc_libdir)
+	for file in `cd lib; ls`; do \
+	  if [ -d lib/$$file ]; then \
+	    $(srcdir)/mkinstalldirs $(mc_libdir)/$$file; \
+	    for comp in `cd lib/$$file; ls`; do \
+        if [ -f $(mc_libdir)/$$file/$$comp ]; then \
+          echo "Renaming old library element version $(mc_libdir)/$$file/$$comp to $(mc_libdir)/$$file/$$comp.old"; \
+          mv -f $(mc_libdir)/$$file/$$comp $(mc_libdir)/$$file/$$comp.old; \
+        fi; \
+	      if [ -d lib/$$file/$$comp ]; then \
+          $(srcdir)/mkinstalldirs $(mc_libdir)/$$file/$$comp; \
+          for tool in `cd lib/$$file/$$comp; ls`; do \
+	      if [ -d lib/$$file/$$comp/$$tool ]; then \
+          $(srcdir)/mkinstalldirs $(mc_libdir)/$$file/$$comp/$$tool ; \
+	        for subtool in `cd lib/$$file/$$comp/$$tool; ls`; do \
+		  if [ -d lib/$$file/$$comp/$$tool/$$subtool ]; then \
+		     $(srcdir)/mkinstalldirs $(mc_libdir)/$$file/$$comp/$$tool/$$subtool ; \
+	             for subsubtool in `cd lib/$$file/$$comp/$$tool/$$subtool; ls`; do \
+                       $(INSTALL_DATA) lib/$$file/$$comp/$$tool/$$subtool/$$subsubtool $(mc_libdir)/$$file/$$comp/$$tool/$$subtool/$$subsubtool; \
+                     done \
+		  else \
+                    $(INSTALL_DATA) lib/$$file/$$comp/$$tool/$$subtool $(mc_libdir)/$$file/$$comp/$$tool/$$subtool; \
+		  fi; \
+                done \
+              else \
+                $(INSTALL_DATA) lib/$$file/$$comp/$$tool $(mc_libdir)/$$file/$$comp/$$tool; \
+	      fi; \
+          done \
+        else \
+	        $(INSTALL_DATA) lib/$$file/$$comp $(mc_libdir)/$$file/$$comp; \
+        fi; \
+	    done \
+	  else \
+	    $(INSTALL_DATA) lib/$$file $(mc_libdir)/$$file; \
+	  fi \
+	done
+	$(INSTALL_DATA) *.1 $(mandir)/man1
+	echo "==== Installation finished. Thanks for using IDL2Matlab ===="
+
+installdirs:
+	$(srcdir)/mkinstalldirs $(bindir) $(libdir) $(mc_libdir) $(mandir)/man1
 
 clean:
-	rm -f *.o y.* *.out y.* lex.yy.* $(TOOL).c $(TOOL).o $(TOOL).test* $(TOOL)
-
-dochtml:docbd
-	cxref/cxref *.c -xref-all -Odocumentation -html
-	cxref/cxref *.h -xref-all -Odocumentation -html
-
-docbd: code.c code.h hashtable.c hashtable.h $(TOOL).c lib.c lib.h main.c rename.c rename.h table_symb.c table_symb.h tree.c tree.h type.h y.tab.h
-	cxref/cxref *.c -xref-all -Odocumentation
-	cxref/cxref *.h -xref-all -Odocumentation
+	rm -f *.o y.* *.out y.* *.tab.* lex.yy.* $(BINOBJS).c $(BINOBJS).o $(BINOBJS).test* $(BINOBJS)

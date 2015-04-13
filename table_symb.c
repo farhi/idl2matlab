@@ -20,7 +20,7 @@
 #include <stdlib.h>
 #include <fcntl.h>
 #include "tree.h"
-#include "y.tab.h"
+#include "idl2matlab.h"
 #include "hashtable.h"
 #include "rename.h"
 

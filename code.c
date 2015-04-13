@@ -15,17 +15,7 @@
 *
 *****************************************************************************/
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <dirent.h>
-#include <sys/types.h>
-#include <sys/stat.h>
 #include "code.h"
-#include "y.tab.h"
-#include "lib.h"
-#include "hashtable.h"
 
 #define MAX_STR 50
 
@@ -364,7 +354,7 @@ void parseTree(Node *n);
 void generer_ref_struct(Node *ng, Node *nd);
 void gerer_ident_parent(Node *n, Node *nd);
 
-/*+ Type representant un nom de structure et un booleen 
+/*+ Type representant un nom de structure et un booleen
  ident = vrai si  nom_struct est un tableau de structure +*/
 typedef struct {
   char*	nom_struct;	/*+ Nom de la structure analysee +*/
@@ -2376,7 +2366,7 @@ char strTmp2[256];
 
 char strTmp2[256];
 
-/*+ fonction recursive traduisant un noeud precis 
+/*+ fonction recursive traduisant un noeud precis
  ( traduction des cas de grammaire ) +*/
 void parseTree(Node *n) {
  Node* nodeTmp;

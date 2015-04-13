@@ -2,25 +2,29 @@
 *                                IDL2MATLAB Project
 *-----------------------------------------------------------------------------
 *   ILL (Institut Laue Langevin)
-*   
+*
 *   38000 GRENOBLE Cedex
 *-----------------------------------------------------------------------------
 *   Module              :       Abstract Tree
 *   Auteurs             :       Gardon Lucien
 *				Sylvestre Nadege
 *   Date creation       :       10 / 04 / 2002
-*   Modification        :     	23 / 05 / 2002   
-*                               
+*   Modification        :     	23 / 05 / 2002
+*
 *****************************************************************************/
 #ifndef TREE_H
  #define TREE_H
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "type.h"
+#include "idl2matlab.h" /* on inclut les constantes definies dans le resultat de yacc */
 
 /* Definition des types des noeuds de l'arbre abstrait */
 /* Ce type pernet d'identidier chaque instruction ou construction
     du language IDL */
-    
+
 #define BLOCK			11000
 #define DECLARATION_LIST	11001
 #define DECLARATION_PROC	11002
@@ -61,7 +65,7 @@
 #define CASE_STATEMENT_SUITE	11042
 #define FIN_CASE		11043
 #define CASE			11044
-#define CASE_ELSE		11045	
+#define CASE_ELSE		11045
 #define CASE_SUITE		11046
 #define NAME			11047
 #define WHILE			11048
@@ -91,7 +95,7 @@
 #define TIMES       	        11072
 #define INTERRO       	        11073
 #define DECL_PROC_OBJ	        11074
-#define DECL_FUNC_OBJ	        11075 
+#define DECL_FUNC_OBJ	        11075
 #define METHODE_CALL	        11076
 #define COMMENTSTATEMENT        11077
 #define STATEMENT_LIST_ET       11078
@@ -106,33 +110,33 @@
 void printTree(Node *n);
 
 /*  Creer un noeud de type t1 definie plus haut
-    n1 sera le fils gauche et n2 le fils droit */  
+    n1 sera le fils gauche et n2 le fils droit */
 Node *creerNode(int t1, Node *n1, Node *n2);
 
 /*  Creer un noeud de type t1 definie plus haut
     le noeud contiendra l'entier passe en parametre
-    n1 sera le fils gauche et n2 le fils droit */  
+    n1 sera le fils gauche et n2 le fils droit */
 Node *creerNodeInt(int t1, Node *n1, Node *n2, int x);
 
 /*  Creer un noeud de type t1 definie plus haut
     le noeud contiendra le reel passe en parametre
-    n1 sera le fils gauche et n2 le fils droit */  
+    n1 sera le fils gauche et n2 le fils droit */
 Node *creerNodeDouble(int t1, Node *n1, Node *n2, char* x);
 
 /*  Creer un noeud de type t1 definie plus haut
     le noeud contiendra la chaine passee en parametre en minuscule
-    n1 sera le fils gauche et n2 le fils droit */  
+    n1 sera le fils gauche et n2 le fils droit */
 Node *creerNodeString(int t1, Node *n1, Node *n2, char *str);
 
 /*  Creer un noeud de type t1 definie plus haut
     le noeud contiendra la chaine passee en parametre
-    n1 sera le fils gauche et n2 le fils droit */  
+    n1 sera le fils gauche et n2 le fils droit */
 Node *creerNodeNormalString(int t1, Node *n1, Node *n2, char *str);
 
-/*  Renvoie 1 si n est une feuille */  
+/*  Renvoie 1 si n est une feuille */
 int isLeaf(Node *n);
 
-/*  Creer un noeud VIDE */  
+/*  Creer un noeud VIDE */
 Node *getNull();
 
 #endif

@@ -1,0 +1,141 @@
+Content-type: text/html
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML><HEAD><TITLE>Man page of idl2matlab</TITLE>
+</HEAD><BODY>
+<H1>idl2matlab</H1>
+Section: USER COMMANDS (1)<BR>Updated: 1.4 (13 June 2007)<BR><A HREF="#index">Index</A>
+<A HREF="/cgi-bin/man/man2html">Return to Main Contents</A><HR>
+
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+idl2matlab - This tool translates automatically an IDL code into Matlab/Scilab code.
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>idl2matlab</B>
+
+[-options] inputFile [outputDirectory]
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+The
+<B>idl2matlab</B>
+
+command is an automatic translation tool from the IDL (and partly PV-Wave) to Matlab and Scilab source code.
+<P>
+
+<A HREF="/cgi-bin/man/man2html?1+idl">idl</A>(1) [<A HREF="http://www.ittvis.com]">http://www.ittvis.com]</A> and <A HREF="/cgi-bin/man/man2html?1+matlab">matlab</A>(1) [<A HREF="http://www.mathworks.com]">http://www.mathworks.com]</A> are two major numerical languages for scientists. Additionally, <A HREF="/cgi-bin/man/man2html?1+scilab">scilab</A>(1) [<A HREF="http://www.scilab.org]">http://www.scilab.org]</A> is a free Matlab-like software, which integrates a high compatibility (syntax, functions, graphics, user interfaces).
+Many IDL programs have been developed in large facilities studying astrophysics, geology,medicine, particle and nuclear physics.
+On the other hand, Matlab is widely used in smaller laboratories (universities, national scientific agencies, ...). In order to extend the portability of such IDL programs, we have developped an automatic translator from IDL to Matlab and Scilab.
+<P>
+
+This translator works as follow:
+<DL COMPACT>
+<DT><BR>&nbsp;&nbsp;*&nbsp;analyze&nbsp;and&nbsp;formalize&nbsp;the&nbsp;IDL&nbsp;grammar<DD>
+<DT><BR>&nbsp;&nbsp;*&nbsp;use&nbsp;lex/yacc&nbsp;to&nbsp;parse&nbsp;the&nbsp;original&nbsp;IDL&nbsp;source&nbsp;code&nbsp;to&nbsp;translate<DD>
+<DT><BR>&nbsp;&nbsp;*&nbsp;generate&nbsp;a&nbsp;translated&nbsp;equivalent&nbsp;program,&nbsp;using&nbsp;Matlab&nbsp;grammar&nbsp;(and&nbsp;all&nbsp;variable&nbsp;types)<DD>
+<DT><BR>&nbsp;&nbsp;*&nbsp;use&nbsp;a&nbsp;hash&nbsp;table&nbsp;for&nbsp;library&nbsp;functions.<DD>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;library&nbsp;is&nbsp;quite&nbsp;big,&nbsp;and&nbsp;covers&nbsp;the&nbsp;most&nbsp;useful&nbsp;IDL/Matlab&nbsp;functions,&nbsp;particularly&nbsp;mathematical&nbsp;functions,&nbsp;basic&nbsp;plotting&nbsp;functions,&nbsp;widgets/uicontrols.
+</DL>
+<P>
+
+IDL2Matlab works on all systems (Unix/Linux/Windows). It is built upon lex/yacc and programmed in C.
+The usage of the translator is done through the command line.
+<P>
+
+Installation of the package is done with the usual procedure: ./configure; make; make install
+
+<A NAME="lbAE">&nbsp;</A>
+<H2>OPTIONS</H2>
+
+<DL COMPACT>
+<DT>-s<DD>
+for script files translation
+<DT>-S string<DD>
+for string translation
+<DT>-q <DD>
+to hide messages
+<DT>-w <DD>
+to stop warnings writing
+<DT>-t <DD>
+to print the abstract tree
+<DT>-V <DD>
+to get idl2matlab version
+<DT>-Tx<DD>
+to get x spaces for a tabulation x&lt;10
+<DT>-f<DD>
+to translate only one function
+<DT>-C <DD>
+to translate for <A HREF="/cgi-bin/man/man2html?1+scilab">scilab</A>(1) (default : <A HREF="/cgi-bin/man/man2html?1+matlab">matlab</A>(1))
+</DL>
+<A NAME="lbAF">&nbsp;</A>
+<H2>EXAMPLES</H2>
+
+<DL COMPACT>
+<DT><BR>&nbsp;&nbsp;idl2matlab&nbsp;-qw&nbsp;essai.pro&nbsp;outDir/<DD>
+<DT><BR>&nbsp;&nbsp;idl2matlab&nbsp;-t&nbsp;essai.pro&nbsp;outDir/&nbsp;&gt;&nbsp;out<DD>
+<DT><BR>&nbsp;&nbsp;idl2matlab&nbsp;-S&nbsp;&quot;print,'IDL2Matlab'&quot;<DD>
+<DT><BR>&nbsp;&nbsp;idl2matlab&nbsp;-T4&nbsp;essai.pro&nbsp;outDir/&nbsp;&gt;&nbsp;out<DD>
+<DT><BR>&nbsp;&nbsp;idl2matlab&nbsp;-f&nbsp;essai.pro&nbsp;functionName&nbsp;outDir/&nbsp;&gt;&nbsp;out<DD>
+</DL>
+<A NAME="lbAG">&nbsp;</A>
+<H2>ENVIRONMENT</H2>
+
+The
+<B>IDL2MATLAB</B>
+
+environment variable may be set to define the IDL2Matlab library location. This is /usr/local/lib/idl2matlab on Linux/BSD systems. Executables are usually located in /usr/local/bin.
+<A NAME="lbAH">&nbsp;</A>
+<H2>BUGS</H2>
+
+idl2matlab is an experimental tool. The IDL grammar handled by idl2matlab is not fully qualified, and you should expect small translation errors. Additionally, the Library is certainly unstable and incomplete. PV-Wave translation should work partially.
+<A NAME="lbAI">&nbsp;</A>
+<H2>EXIT STATUS</H2>
+
+idl2matlab returns 0 in case of error, 1 when all went fine
+<A NAME="lbAJ">&nbsp;</A>
+<H2>AUTHOR</H2>
+
+project leaders: Emmanuel FARHI and Didier RICHARD.
+team1: AZIZI MOURIER Karim, BENZEGHIOUA  ABDESLAM, GARDON Lucien, SYLVESTRE  Nadege.                
+team2: BOURTEMBOURG Reynald, CORTINA Stephane, SZCZUCZAK  Nadege.   
+<P>
+Designed by the Computing for Science group
+Institut Laue Langevin, BP 156
+F-38042 Grenoble cedex 9, FRANCE
+<A NAME="lbAK">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+
+IDL at [<A HREF="http://www.ittvis.com/]">http://www.ittvis.com/]</A>
+
+Matlab at [<A HREF="http://www.mathworks.com/]">http://www.mathworks.com/]</A>
+
+Scilab at [<A HREF="http://www.scilab.org]">http://www.scilab.org]</A>
+
+<A HREF="/cgi-bin/man/man2html?1+matlab">matlab</A>(1), <A HREF="/cgi-bin/man/man2html?1+idl">idl</A>(1), <A HREF="/cgi-bin/man/man2html?1+scilab">scilab</A>(1), <A HREF="/cgi-bin/man/man2html?1+octave">octave</A>(1)
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">OPTIONS</A><DD>
+<DT><A HREF="#lbAF">EXAMPLES</A><DD>
+<DT><A HREF="#lbAG">ENVIRONMENT</A><DD>
+<DT><A HREF="#lbAH">BUGS</A><DD>
+<DT><A HREF="#lbAI">EXIT STATUS</A><DD>
+<DT><A HREF="#lbAJ">AUTHOR</A><DD>
+<DT><A HREF="#lbAK">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/cgi-bin/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 09:50:10 GMT, June 14, 2007
+</BODY>
+</HTML>

@@ -16,7 +16,10 @@
 *****************************************************************************/
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <fcntl.h>
+#include <string.h>
+#include <unistd.h>
 #include <time.h>   /* pour le calcul de temps de traduction */
 #include "code.h"
 #include "hashtable.h"
@@ -154,12 +157,12 @@ void initParam(char* s) {
     fprintf(stderr,"##   Project by D. RICHARD and E.FARHI    ##\n");
     fprintf(stderr,"##   (c) ILL, DS/CS 2001-2005             ##\n");
     fprintf(stderr,"##                                        ##\n");
-    fprintf(stderr,"## Coders: version %s             ##\n", I2M_VERSION);
+    fprintf(stderr,"## Coders: initial version                ##\n");
     fprintf(stderr,"##        AZIZI MOURIER Karim             ##\n");
     fprintf(stderr,"##       BENZEGHIOUA  ABDESLAM            ##\n");
     fprintf(stderr,"##           GARDON Lucien                ##\n");
     fprintf(stderr,"##         SYLVESTRE  Nadege              ##\n");
-    fprintf(stderr,"## Upgrade to - version %s - by : ##\n", I2M_VERSION_2);
+    fprintf(stderr,"##                                        ##\n");
     fprintf(stderr,"##        BOURTEMBOURG Reynald            ##\n");
     fprintf(stderr,"##          CORTINA Stephane              ##\n");
     fprintf(stderr,"##         SZCZUCZAK  Nadege              ##\n");
@@ -561,14 +564,14 @@ int main (int argc, char *argv[]) {
   nbGeneratedFile = 0;
   nbWarning = 0;
   strcpy(sourceDirName, getDirName(sourceFileName));
-  /* On stocke le repertoire dans lequel se trouve l'exe IDL2MATLAB */
-  strcpy(i2mDirName, getDirName(argv[0]));
+  /* On stocke le repertoire lib */
+  strcpy(i2mDirName, getenv("IDL2MATLAB") ? getenv("IDL2MATLAB") : IDL2MATLAB);
 
   strToLower(oneFunctionName);
 
   if (displayMessage == 1) {   /* on affiche l'heure de debut */
     fprintf (stderr,"Started at : %s",ctime(&tnow));
-    fprintf (stderr,"Expecting idl2matlab library in %s%clib\n", i2mDirName, PATHSEP);
+    fprintf (stderr,"Expecting idl2matlab library in %s%c\n", i2mDirName, PATHSEP);
   }
 
   /* creation des fichiers logs et cibles avec test d acces */
@@ -614,11 +617,10 @@ int main (int argc, char *argv[]) {
   }*/
 
   if (stringTranslation == 1) {
-#ifdef OS_UNIX
-      sprintf(strTmp, "rm -rf %s/idl2matlab_string_tmp.pro", outDir);
-#endif
-#ifdef OS_WINDOWS
+#ifdef WIN32
       sprintf(strTmp, "del %s\\idl2matlab_string_tmp.pro", outDir);
+#else
+      sprintf(strTmp, "rm -rf %s/idl2matlab_string_tmp.pro", outDir);
 #endif
       system(strTmp);
   }
@@ -700,11 +702,10 @@ int main (int argc, char *argv[]) {
   }
 
   if (writeWarning == 0) {
-#ifdef OS_UNIX
-    sprintf(strTmp, "rm -f %s", logFileName);
-#endif
-#ifdef OS_WINDOWS
+#ifdef WIN32
     sprintf(strTmp, "del %s", logFileName);
+#else
+    sprintf(strTmp, "rm -f %s", logFileName);
 #endif
     system(strTmp);
   }

@@ -39,10 +39,10 @@ void loadFunctionsTranlations(void) {
   recType *rec;
   statusEnum err;
   if (inScilabTranslation==0) { /* traduction en matlab */
-    sprintf(libPath,"%s%clib%cmatlablib%clibmatlab.dat",i2mDirName,PATHSEP,PATHSEP,PATHSEP);
+    sprintf(libPath,"%s%cmatlablib%clibmatlab.dat",i2mDirName,PATHSEP,PATHSEP,PATHSEP);
     strcpy(functionTableFile2,libPath);	/* table des mots reserves */
   } else { /* traduction en scilab */
-    sprintf(libPath,"%s%clib%cmatlablib%clibscilab.dat",i2mDirName,PATHSEP,PATHSEP,PATHSEP);
+    sprintf(libPath,"%s%cscilablib%clibscilab.dat",i2mDirName,PATHSEP,PATHSEP,PATHSEP);
     strcpy(functionTableFile2,libPath);	/* table des mots reserves */
   }
 

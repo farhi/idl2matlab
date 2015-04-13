@@ -1,0 +1,95 @@
+.TH "idl2matlab" "1" "1.4 (13 June 2007)" "ILL (richard@ill.fr and farhi@ill.fr)" "USER COMMANDS"
+.SH "NAME"
+idl2matlab \- This tool translates automatically an IDL code into Matlab/Scilab code.
+.SH "SYNOPSIS"
+.B idl2matlab
+[\-options] inputFile [outputDirectory]
+.SH "DESCRIPTION"
+The
+.B idl2matlab
+command is an automatic translation tool from the IDL (and partly PV\-Wave) to Matlab and Scilab source code.
+.PP 
+idl(1) [http://www.ittvis.com] and matlab(1) [http://www.mathworks.com] are two major numerical languages for scientists. Additionally, scilab(1) [http://www.scilab.org] is a free Matlab\-like software, which integrates a high compatibility (syntax, functions, graphics, user interfaces).
+Many IDL programs have been developed in large facilities studying astrophysics, geology,medicine, particle and nuclear physics.
+On the other hand, Matlab is widely used in smaller laboratories (universities, national scientific agencies, ...). In order to extend the portability of such IDL programs, we have developped an automatic translator from IDL to Matlab and Scilab.
+.PP 
+This translator works as follow:
+.TP 
+  * analyze and formalize the IDL grammar
+.TP 
+  * use lex/yacc to parse the original IDL source code to translate
+.TP 
+  * generate a translated equivalent program, using Matlab grammar (and all variable types)
+.TP 
+  * use a hash table for library functions.
+    This library is quite big, and covers the most useful IDL/Matlab functions, particularly mathematical functions, basic plotting functions, widgets/uicontrols.
+.PP 
+IDL2Matlab works on all systems (Unix/Linux/Windows). It is built upon lex/yacc and programmed in C.
+The usage of the translator is done through the command line.
+.PP 
+Installation of the package is done with the usual procedure: ./configure; make; make install
+.P
+.SH "OPTIONS"
+.TP 
+\-s
+for script files translation
+.TP 
+\-S string
+for string translation
+.TP 
+\-q 
+to hide messages
+.TP 
+\-w 
+to stop warnings writing
+.TP 
+\-t 
+to print the abstract tree
+.TP 
+\-V 
+to get idl2matlab version
+.TP 
+\-Tx
+to get x spaces for a tabulation x<10
+.TP 
+\-f
+to translate only one function
+.TP 
+\-C 
+to translate for scilab(1) (default : matlab(1))
+.SH "EXAMPLES"
+.TP 
+  idl2matlab \-qw essai.pro outDir/
+.TP 
+  idl2matlab \-t essai.pro outDir/ > out
+.TP 
+  idl2matlab \-S "print,'IDL2Matlab'"
+.TP 
+  idl2matlab \-T4 essai.pro outDir/ > out
+.TP 
+  idl2matlab \-f essai.pro functionName outDir/ > out
+.SH "ENVIRONMENT"
+The
+.B IDL2MATLAB
+environment variable may be set to define the IDL2Matlab library location. This is /usr/local/lib/idl2matlab on Linux/BSD systems. Executables are usually located in /usr/local/bin.
+.SH "BUGS"
+idl2matlab is an experimental tool. The IDL grammar handled by idl2matlab is not fully qualified, and you should expect small translation errors. Additionally, the Library is certainly unstable and incomplete. PV\-Wave translation should work partially.
+.SH "EXIT STATUS"
+idl2matlab returns 0 in case of error, 1 when all went fine
+.SH "AUTHOR"
+project leaders: Emmanuel FARHI and Didier RICHARD.
+team1: AZIZI MOURIER Karim, BENZEGHIOUA  ABDESLAM, GARDON Lucien, SYLVESTRE  Nadege.                
+team2: BOURTEMBOURG Reynald, CORTINA Stephane, SZCZUCZAK  Nadege.   
+
+Designed by the Computing for Science group
+Institut Laue Langevin, BP 156
+F\-38042 Grenoble cedex 9, FRANCE
+.SH "SEE ALSO"
+.P
+IDL at [http://www.ittvis.com/]
+.P
+Matlab at [http://www.mathworks.com/]
+.P
+Scilab at [http://www.scilab.org]
+.P
+matlab(1), idl(1), scilab(1), octave(1)

@@ -1,0 +1,43 @@
+#
+#   This file is part of the IDL2Matlab package
+#   Copyright (C) 2003-2007, All rights reserved
+#   Institut Laue Langevin, Grenoble, France
+#
+#   This program is free software; you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation; either version 2 of the License, or
+#   (at your option) any later version.
+#
+#   This program is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU General Public License for more details.
+#
+#   You should have received a copy of the GNU General Public License
+#   along with this program; if not, write to the Free Software
+#   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#
+dnl Process this file with autoconf to produce a configure script.
+
+AC_INIT(IDL2Matlab, 1.3, www.ill.fr)
+AC_PROG_CC
+AC_PROG_INSTALL
+CF_ANSI_CC_CHECK
+AC_FUNC_MALLOC
+AC_FUNC_REALLOC
+AC_PATH_PROGS(SCILAB, [scilab runscilab /usr/local/bin/scilab /usr/lib/scilab/bin/scilab /lib/scilab/bin/scilab scilex], no)
+AC_PATH_PROGS(MATLAB, [matlab /usr/local/bin/matlab], no)
+AC_PATH_PROGS(MAKE,   [make gmake], no)
+
+AC_OUTPUT(Makefile)
+
+# warnings and errors
+if test "$MAKE" == "no" ; then
+  echo "ERROR: IDL2Matlab installation requires 'make' or 'gmake'"
+  exit
+fi
+
+echo ""
+echo "Build and install IDL2Matlab by executing"
+echo "# make; make install"
+echo ""

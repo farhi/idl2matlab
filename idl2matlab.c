@@ -1,7 +1,9 @@
-/* A Bison parser, made by GNU Bison 2.0.  */
+/* A Bison parser, made by GNU Bison 2.3.  */
 
-/* Skeleton parser for Yacc-like parsing with Bison,
-   Copyright (C) 1984, 1989, 1990, 2000, 2001, 2002, 2003, 2004 Free Software Foundation, Inc.
+/* Skeleton implementation for Bison's Yacc-like parsers in C
+
+   Copyright (C) 1984, 1989, 1990, 2000, 2001, 2002, 2003, 2004, 2005, 2006
+   Free Software Foundation, Inc.
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,16 +17,24 @@
 
    You should have received a copy of the GNU General Public License
    along with this program; if not, write to the Free Software
-   Foundation, Inc., 59 Temple Place - Suite 330,
-   Boston, MA 02111-1307, USA.  */
+   Foundation, Inc., 51 Franklin Street, Fifth Floor,
+   Boston, MA 02110-1301, USA.  */
 
-/* As a special exception, when this file is copied by Bison into a
-   Bison output file, you may use that output file without restriction.
-   This special exception was added by the Free Software Foundation
-   in version 1.24 of Bison.  */
+/* As a special exception, you may create a larger work that contains
+   part or all of the Bison parser skeleton and distribute that work
+   under terms of your choice, so long as that work isn't itself a
+   parser generator using the skeleton or a modified version thereof
+   as a parser skeleton.  Alternatively, if you modify or redistribute
+   the parser skeleton itself, you may (at your option) remove this
+   special exception, which will cause the skeleton and the resulting
+   Bison output files to be licensed under the GNU General Public
+   License without this special exception.
 
-/* Written by Richard Stallman by simplifying the original so called
-   ``semantic'' parser.  */
+   This special exception was added by the Free Software Foundation in
+   version 2.2 of Bison.  */
+
+/* C LALR(1) parser skeleton written by Richard Stallman, by
+   simplifying the original so-called "semantic" parser.  */
 
 /* All symbols defined below should begin with yy or YY, to avoid
    infringing on user name space.  This should be done even for local
@@ -35,6 +45,9 @@
 
 /* Identify Bison output.  */
 #define YYBISON 1
+
+/* Bison version.  */
+#define YYBISON_VERSION "2.3"
 
 /* Skeleton name.  */
 #define YYSKELETON_NAME "yacc.c"
@@ -136,6 +149,7 @@
      UUMINUS = 338
    };
 #endif
+/* Tokens.  */
 #define ElseCase 258
 #define ACOMMENT 259
 #define DIESE2 260
@@ -259,16 +273,23 @@
 # define YYERROR_VERBOSE 0
 #endif
 
-#if ! defined (YYSTYPE) && ! defined (YYSTYPE_IS_DECLARED)
+/* Enabling the token table.  */
+#ifndef YYTOKEN_TABLE
+# define YYTOKEN_TABLE 0
+#endif
+
+#if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
+typedef union YYSTYPE
 #line 127 "idl2matlab.y"
-typedef union YYSTYPE {
+{
 	PNode uNode;
 	char uChar[256];
 	int uInt;
 	char uReal[256];
-} YYSTYPE;
-/* Line 190 of yacc.c.  */
-#line 272 "y.tab.c"
+}
+/* Line 187 of yacc.c.  */
+#line 292 "idl2matlab.c"
+	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
 # define YYSTYPE_IS_TRIVIAL 1
@@ -279,17 +300,94 @@ typedef union YYSTYPE {
 /* Copy the second part of user declarations.  */
 
 
-/* Line 213 of yacc.c.  */
-#line 284 "y.tab.c"
+/* Line 216 of yacc.c.  */
+#line 305 "idl2matlab.c"
 
-#if ! defined (yyoverflow) || YYERROR_VERBOSE
+#ifdef short
+# undef short
+#endif
 
-# ifndef YYFREE
-#  define YYFREE free
+#ifdef YYTYPE_UINT8
+typedef YYTYPE_UINT8 yytype_uint8;
+#else
+typedef unsigned char yytype_uint8;
+#endif
+
+#ifdef YYTYPE_INT8
+typedef YYTYPE_INT8 yytype_int8;
+#elif (defined __STDC__ || defined __C99__FUNC__ \
+     || defined __cplusplus || defined _MSC_VER)
+typedef signed char yytype_int8;
+#else
+typedef short int yytype_int8;
+#endif
+
+#ifdef YYTYPE_UINT16
+typedef YYTYPE_UINT16 yytype_uint16;
+#else
+typedef unsigned short int yytype_uint16;
+#endif
+
+#ifdef YYTYPE_INT16
+typedef YYTYPE_INT16 yytype_int16;
+#else
+typedef short int yytype_int16;
+#endif
+
+#ifndef YYSIZE_T
+# ifdef __SIZE_TYPE__
+#  define YYSIZE_T __SIZE_TYPE__
+# elif defined size_t
+#  define YYSIZE_T size_t
+# elif ! defined YYSIZE_T && (defined __STDC__ || defined __C99__FUNC__ \
+     || defined __cplusplus || defined _MSC_VER)
+#  include <stddef.h> /* INFRINGES ON USER NAME SPACE */
+#  define YYSIZE_T size_t
+# else
+#  define YYSIZE_T unsigned int
 # endif
-# ifndef YYMALLOC
-#  define YYMALLOC malloc
+#endif
+
+#define YYSIZE_MAXIMUM ((YYSIZE_T) -1)
+
+#ifndef YY_
+# if YYENABLE_NLS
+#  if ENABLE_NLS
+#   include <libintl.h> /* INFRINGES ON USER NAME SPACE */
+#   define YY_(msgid) dgettext ("bison-runtime", msgid)
+#  endif
 # endif
+# ifndef YY_
+#  define YY_(msgid) msgid
+# endif
+#endif
+
+/* Suppress unused-variable warnings by "using" E.  */
+#if ! defined lint || defined __GNUC__
+# define YYUSE(e) ((void) (e))
+#else
+# define YYUSE(e) /* empty */
+#endif
+
+/* Identity function, used to suppress warnings about constant conditions.  */
+#ifndef lint
+# define YYID(n) (n)
+#else
+#if (defined __STDC__ || defined __C99__FUNC__ \
+     || defined __cplusplus || defined _MSC_VER)
+static int
+YYID (int i)
+#else
+static int
+YYID (i)
+    int i;
+#endif
+{
+  return i;
+}
+#endif
+
+#if ! defined yyoverflow || YYERROR_VERBOSE
 
 /* The parser invokes alloca or malloc; define the necessary symbols.  */
 
@@ -297,34 +395,76 @@ typedef union YYSTYPE {
 #  if YYSTACK_USE_ALLOCA
 #   ifdef __GNUC__
 #    define YYSTACK_ALLOC __builtin_alloca
+#   elif defined __BUILTIN_VA_ARG_INCR
+#    include <alloca.h> /* INFRINGES ON USER NAME SPACE */
+#   elif defined _AIX
+#    define YYSTACK_ALLOC __alloca
+#   elif defined _MSC_VER
+#    include <malloc.h> /* INFRINGES ON USER NAME SPACE */
+#    define alloca _alloca
 #   else
 #    define YYSTACK_ALLOC alloca
+#    if ! defined _ALLOCA_H && ! defined _STDLIB_H && (defined __STDC__ || defined __C99__FUNC__ \
+     || defined __cplusplus || defined _MSC_VER)
+#     include <stdlib.h> /* INFRINGES ON USER NAME SPACE */
+#     ifndef _STDLIB_H
+#      define _STDLIB_H 1
+#     endif
+#    endif
 #   endif
 #  endif
 # endif
 
 # ifdef YYSTACK_ALLOC
-   /* Pacify GCC's `empty if-body' warning. */
-#  define YYSTACK_FREE(Ptr) do { /* empty */; } while (0)
-# else
-#  if defined (__STDC__) || defined (__cplusplus)
-#   include <stdlib.h> /* INFRINGES ON USER NAME SPACE */
-#   define YYSIZE_T size_t
+   /* Pacify GCC's `empty if-body' warning.  */
+#  define YYSTACK_FREE(Ptr) do { /* empty */; } while (YYID (0))
+#  ifndef YYSTACK_ALLOC_MAXIMUM
+    /* The OS might guarantee only one guard page at the bottom of the stack,
+       and a page size can be as small as 4096 bytes.  So we cannot safely
+       invoke alloca (N) if N exceeds 4096.  Use a slightly smaller number
+       to allow for a few compiler-allocated temporary stack slots.  */
+#   define YYSTACK_ALLOC_MAXIMUM 4032 /* reasonable circa 2006 */
 #  endif
+# else
 #  define YYSTACK_ALLOC YYMALLOC
 #  define YYSTACK_FREE YYFREE
+#  ifndef YYSTACK_ALLOC_MAXIMUM
+#   define YYSTACK_ALLOC_MAXIMUM YYSIZE_MAXIMUM
+#  endif
+#  if (defined __cplusplus && ! defined _STDLIB_H \
+       && ! ((defined YYMALLOC || defined malloc) \
+	     && (defined YYFREE || defined free)))
+#   include <stdlib.h> /* INFRINGES ON USER NAME SPACE */
+#   ifndef _STDLIB_H
+#    define _STDLIB_H 1
+#   endif
+#  endif
+#  ifndef YYMALLOC
+#   define YYMALLOC malloc
+#   if ! defined malloc && ! defined _STDLIB_H && (defined __STDC__ || defined __C99__FUNC__ \
+     || defined __cplusplus || defined _MSC_VER)
+void *malloc (YYSIZE_T); /* INFRINGES ON USER NAME SPACE */
+#   endif
+#  endif
+#  ifndef YYFREE
+#   define YYFREE free
+#   if ! defined free && ! defined _STDLIB_H && (defined __STDC__ || defined __C99__FUNC__ \
+     || defined __cplusplus || defined _MSC_VER)
+void free (void *); /* INFRINGES ON USER NAME SPACE */
+#   endif
+#  endif
 # endif
-#endif /* ! defined (yyoverflow) || YYERROR_VERBOSE */
+#endif /* ! defined yyoverflow || YYERROR_VERBOSE */
 
 
-#if (! defined (yyoverflow) \
-     && (! defined (__cplusplus) \
-	 || (defined (YYSTYPE_IS_TRIVIAL) && YYSTYPE_IS_TRIVIAL)))
+#if (! defined yyoverflow \
+     && (! defined __cplusplus \
+	 || (defined YYSTYPE_IS_TRIVIAL && YYSTYPE_IS_TRIVIAL)))
 
 /* A type that is properly aligned for any stack member.  */
 union yyalloc
 {
-  short int yyss;
+  yytype_int16 yyss;
   YYSTYPE yyvs;
   };
 
@@ -334,24 +474,24 @@ union yyalloc
 /* The size of an array large to enough to hold all stacks, each with
    N elements.  */
 # define YYSTACK_BYTES(N) \
-     ((N) * (sizeof (short int) + sizeof (YYSTYPE))			\
+     ((N) * (sizeof (yytype_int16) + sizeof (YYSTYPE)) \
       + YYSTACK_GAP_MAXIMUM)
 
 /* Copy COUNT objects from FROM to TO.  The source and destination do
    not overlap.  */
 # ifndef YYCOPY
-#  if defined (__GNUC__) && 1 < __GNUC__
+#  if defined __GNUC__ && 1 < __GNUC__
 #   define YYCOPY(To, From, Count) \
       __builtin_memcpy (To, From, (Count) * sizeof (*(From)))
 #  else
 #   define YYCOPY(To, From, Count)		\
       do					\
 	{					\
-	  register YYSIZE_T yyi;		\
+	  YYSIZE_T yyi;				\
 	  for (yyi = 0; yyi < (Count); yyi++)	\
 	    (To)[yyi] = (From)[yyi];		\
 	}					\
-      while (0)
+      while (YYID (0))
 #  endif
 # endif
 
@@ -369,39 +509,33 @@ union yyalloc
 	yynewbytes = yystacksize * sizeof (*Stack) + YYSTACK_GAP_MAXIMUM; \
 	yyptr += yynewbytes / sizeof (*yyptr);				\
       }									\
-    while (0)
+    while (YYID (0))
 
 #endif
 
-#if defined (__STDC__) || defined (__cplusplus)
-   typedef signed char yysigned_char;
-#else
-   typedef short int yysigned_char;
-#endif
-
-/* YYFINAL -- State number of the termination state. */
+/* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  120
 /* YYLAST -- Last index in YYTABLE.  */
 #define YYLAST   2967
 
-/* YYNTOKENS -- Number of terminals. */
+/* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  102
-/* YYNNTS -- Number of nonterminals. */
+/* YYNNTS -- Number of nonterminals.  */
 #define YYNNTS  60
-/* YYNRULES -- Number of rules. */
+/* YYNRULES -- Number of rules.  */
 #define YYNRULES  237
-/* YYNRULES -- Number of states. */
+/* YYNRULES -- Number of states.  */
 #define YYNSTATES  471
 
 /* YYTRANSLATE(YYLEX) -- Bison symbol number corresponding to YYLEX.  */
 #define YYUNDEFTOK  2
 #define YYMAXUTOK   338
 
-#define YYTRANSLATE(YYX) 						\
+#define YYTRANSLATE(YYX)						\
   ((unsigned int) (YYX) <= YYMAXUTOK ? yytranslate[YYX] : YYUNDEFTOK)
 
 /* YYTRANSLATE[YYLEX] -- Bison symbol number corresponding to YYLEX.  */
-static const unsigned char yytranslate[] =
+static const yytype_uint8 yytranslate[] =
 {
        0,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
@@ -442,7 +576,7 @@ static const unsigned char yytranslate[] =
 #if YYDEBUG
 /* YYPRHS[YYN] -- Index of the first RHS symbol of rule number YYN in
    YYRHS.  */
-static const unsigned short int yyprhs[] =
+static const yytype_uint16 yyprhs[] =
 {
        0,     0,     3,     7,    10,    13,    15,    19,    22,    25,
       27,    29,    33,    36,    38,    42,    44,    46,    48,    50,
@@ -470,8 +604,8 @@ static const unsigned short int yyprhs[] =
      807,   811,   815,   817,   820,   823,   826,   828
 };
 
-/* YYRHS -- A `-1'-separated list of the rules' RHS. */
-static const short int yyrhs[] =
+/* YYRHS -- A `-1'-separated list of the rules' RHS.  */
+static const yytype_int16 yyrhs[] =
 {
      103,     0,    -1,   161,   104,   161,    -1,   161,   104,    -1,
      104,   161,    -1,   104,    -1,   161,   105,   161,    -1,   161,
@@ -559,7 +693,7 @@ static const short int yyrhs[] =
 };
 
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
-static const unsigned short int yyrline[] =
+static const yytype_uint16 yyrline[] =
 {
        0,   211,   211,   213,   215,   217,   223,   225,   227,   229,
      231,   236,   238,   240,   242,   247,   249,   251,   253,   255,
@@ -588,9 +722,9 @@ static const unsigned short int yyrline[] =
 };
 #endif
 
-#if YYDEBUG || YYERROR_VERBOSE
-/* YYTNME[SYMBOL-NUM] -- String name of the symbol SYMBOL-NUM.
-   First, the terminals, then, starting at YYNTOKENS, nonterminals. */
+#if YYDEBUG || YYERROR_VERBOSE || YYTOKEN_TABLE
+/* YYTNAME[SYMBOL-NUM] -- String name of the symbol SYMBOL-NUM.
+   First, the terminals, then, starting at YYNTOKENS, nonterminals.  */
 static const char *const yytname[] =
 {
   "$end", "error", "$undefined", "ElseCase", "ACOMMENT", "DIESE2",
@@ -627,7 +761,7 @@ static const char *const yytname[] =
 # ifdef YYPRINT
 /* YYTOKNUM[YYLEX-NUM] -- Internal token number corresponding to
    token YYLEX-NUM.  */
-static const unsigned short int yytoknum[] =
+static const yytype_uint16 yytoknum[] =
 {
        0,   256,   257,   258,   259,   260,   261,   262,   263,   264,
      265,   266,   267,   268,   269,   270,   271,   272,   273,   274,
@@ -644,7 +778,7 @@ static const unsigned short int yytoknum[] =
 # endif
 
 /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
-static const unsigned char yyr1[] =
+static const yytype_uint8 yyr1[] =
 {
        0,   102,   103,   103,   103,   103,   104,   104,   104,   104,
      104,   105,   105,   105,   105,   106,   106,   106,   106,   106,
@@ -673,7 +807,7 @@ static const unsigned char yyr1[] =
 };
 
 /* YYR2[YYN] -- Number of symbols composing right hand side of rule YYN.  */
-static const unsigned char yyr2[] =
+static const yytype_uint8 yyr2[] =
 {
        0,     2,     3,     2,     2,     1,     3,     2,     2,     1,
        1,     3,     2,     1,     3,     1,     1,     1,     1,     1,
@@ -704,7 +838,7 @@ static const unsigned char yyr2[] =
 /* YYDEFACT[STATE-NAME] -- Default rule to reduce with in state
    STATE-NUM when YYTABLE doesn't specify something else to do.  Zero
    means the default is an error.  */
-static const unsigned char yydefact[] =
+static const yytype_uint8 yydefact[] =
 {
        0,   236,   136,    56,     0,     0,     0,     0,    56,     0,
        0,     0,   122,     0,     0,     0,     0,     0,   237,     0,
@@ -756,8 +890,8 @@ static const unsigned char yydefact[] =
      136
 };
 
-/* YYDEFGOTO[NTERM-NUM]. */
-static const short int yydefgoto[] =
+/* YYDEFGOTO[NTERM-NUM].  */
+static const yytype_int16 yydefgoto[] =
 {
       -1,    22,    59,    24,    77,    26,    27,    28,    29,    30,
       31,    32,    33,    34,   102,   212,   333,   301,    60,    61,
@@ -770,7 +904,7 @@ static const short int yydefgoto[] =
 /* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
    STATE-NUM.  */
 #define YYPACT_NINF -341
-static const short int yypact[] =
+static const yytype_int16 yypact[] =
 {
     1478,  -341,  2504,  1529,  2289,  2289,    45,  2289,  1890,    61,
       82,    23,    42,    48,    89,    89,    50,    50,  -341,    27,
@@ -823,7 +957,7 @@ static const short int yypact[] =
 };
 
 /* YYPGOTO[NTERM-NUM].  */
-static const short int yypgoto[] =
+static const yytype_int16 yypgoto[] =
 {
     -341,  -341,     6,    13,   399,  -341,   386,  -341,   -13,  -341,
     -341,  -341,  -341,  -341,    10,   -97,    69,  -210,    -1,  -341,
@@ -838,7 +972,7 @@ static const short int yypgoto[] =
    number is the opposite.  If zero, do what YYDEFACT says.
    If YYTABLE_NINF, syntax error.  */
 #define YYTABLE_NINF -178
-static const short int yytable[] =
+static const yytype_int16 yytable[] =
 {
       41,   242,   221,    41,   337,   233,    23,    95,    41,   186,
      158,    42,     1,   116,    42,   265,    41,    41,   370,    42,
@@ -1139,7 +1273,7 @@ static const short int yytable[] =
      142,     0,     0,     0,   143,   144,     0,   145
 };
 
-static const short int yycheck[] =
+static const yytype_int16 yycheck[] =
 {
        0,   123,    99,     3,   214,   112,     0,     8,     8,    16,
       53,     0,     4,     6,     3,     6,    16,    17,   293,     8,
@@ -1442,7 +1576,7 @@ static const short int yycheck[] =
 
 /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
    symbol of state STATE-NUM.  */
-static const unsigned char yystos[] =
+static const yytype_uint8 yystos[] =
 {
        0,     4,     6,    14,    15,    19,    27,    31,    32,    33,
       43,    44,    48,    51,    52,    56,    79,    80,    81,    87,
@@ -1494,22 +1628,6 @@ static const unsigned char yystos[] =
        6
 };
 
-#if ! defined (YYSIZE_T) && defined (__SIZE_TYPE__)
-# define YYSIZE_T __SIZE_TYPE__
-#endif
-#if ! defined (YYSIZE_T) && defined (size_t)
-# define YYSIZE_T size_t
-#endif
-#if ! defined (YYSIZE_T)
-# if defined (__STDC__) || defined (__cplusplus)
-#  include <stddef.h> /* INFRINGES ON USER NAME SPACE */
-#  define YYSIZE_T size_t
-# endif
-#endif
-#if ! defined (YYSIZE_T)
-# define YYSIZE_T unsigned int
-#endif
-
 #define yyerrok		(yyerrstatus = 0)
 #define yyclearin	(yychar = YYEMPTY)
 #define YYEMPTY		(-2)
@@ -1535,15 +1653,15 @@ do								\
       yychar = (Token);						\
       yylval = (Value);						\
       yytoken = YYTRANSLATE (yychar);				\
-      YYPOPSTACK;						\
+      YYPOPSTACK (1);						\
       goto yybackup;						\
     }								\
   else								\
-    { 								\
-      yyerror ("syntax error: cannot back up");\
+    {								\
+      yyerror (YY_("syntax error: cannot back up")); \
       YYERROR;							\
     }								\
-while (0)
+while (YYID (0))
 
 
 #define YYTERROR	1
@@ -1558,7 +1676,7 @@ while (0)
 #ifndef YYLLOC_DEFAULT
 # define YYLLOC_DEFAULT(Current, Rhs, N)				\
     do									\
-      if (N)								\
+      if (YYID (N))                                                    \
 	{								\
 	  (Current).first_line   = YYRHSLOC (Rhs, 1).first_line;	\
 	  (Current).first_column = YYRHSLOC (Rhs, 1).first_column;	\
@@ -1572,7 +1690,7 @@ while (0)
 	  (Current).first_column = (Current).last_column =		\
 	    YYRHSLOC (Rhs, 0).last_column;				\
 	}								\
-    while (0)
+    while (YYID (0))
 #endif
 
 
@@ -1584,8 +1702,8 @@ while (0)
 # if YYLTYPE_IS_TRIVIAL
 #  define YY_LOCATION_PRINT(File, Loc)			\
      fprintf (File, "%d.%d-%d.%d",			\
-              (Loc).first_line, (Loc).first_column,	\
-              (Loc).last_line,  (Loc).last_column)
+	      (Loc).first_line, (Loc).first_column,	\
+	      (Loc).last_line,  (Loc).last_column)
 # else
 #  define YY_LOCATION_PRINT(File, Loc) ((void) 0)
 # endif
@@ -1612,36 +1730,96 @@ while (0)
 do {						\
   if (yydebug)					\
     YYFPRINTF Args;				\
-} while (0)
+} while (YYID (0))
 
-# define YY_SYMBOL_PRINT(Title, Type, Value, Location)		\
-do {								\
-  if (yydebug)							\
-    {								\
-      YYFPRINTF (stderr, "%s ", Title);				\
-      yysymprint (stderr, 					\
-                  Type, Value);	\
-      YYFPRINTF (stderr, "\n");					\
-    }								\
-} while (0)
+# define YY_SYMBOL_PRINT(Title, Type, Value, Location)			  \
+do {									  \
+  if (yydebug)								  \
+    {									  \
+      YYFPRINTF (stderr, "%s ", Title);					  \
+      yy_symbol_print (stderr,						  \
+		  Type, Value); \
+      YYFPRINTF (stderr, "\n");						  \
+    }									  \
+} while (YYID (0))
+
+
+/*--------------------------------.
+| Print this symbol on YYOUTPUT.  |
+`--------------------------------*/
+
+/*ARGSUSED*/
+#if (defined __STDC__ || defined __C99__FUNC__ \
+     || defined __cplusplus || defined _MSC_VER)
+static void
+yy_symbol_value_print (FILE *yyoutput, int yytype, YYSTYPE const * const yyvaluep)
+#else
+static void
+yy_symbol_value_print (yyoutput, yytype, yyvaluep)
+    FILE *yyoutput;
+    int yytype;
+    YYSTYPE const * const yyvaluep;
+#endif
+{
+  if (!yyvaluep)
+    return;
+# ifdef YYPRINT
+  if (yytype < YYNTOKENS)
+    YYPRINT (yyoutput, yytoknum[yytype], *yyvaluep);
+# else
+  YYUSE (yyoutput);
+# endif
+  switch (yytype)
+    {
+      default:
+	break;
+    }
+}
+
+
+/*--------------------------------.
+| Print this symbol on YYOUTPUT.  |
+`--------------------------------*/
+
+#if (defined __STDC__ || defined __C99__FUNC__ \
+     || defined __cplusplus || defined _MSC_VER)
+static void
+yy_symbol_print (FILE *yyoutput, int yytype, YYSTYPE const * const yyvaluep)
+#else
+static void
+yy_symbol_print (yyoutput, yytype, yyvaluep)
+    FILE *yyoutput;
+    int yytype;
+    YYSTYPE const * const yyvaluep;
+#endif
+{
+  if (yytype < YYNTOKENS)
+    YYFPRINTF (yyoutput, "token %s (", yytname[yytype]);
+  else
+    YYFPRINTF (yyoutput, "nterm %s (", yytname[yytype]);
+
+  yy_symbol_value_print (yyoutput, yytype, yyvaluep);
+  YYFPRINTF (yyoutput, ")");
+}
 
 /*------------------------------------------------------------------.
 | yy_stack_print -- Print the state stack from its BOTTOM up to its |
 | TOP (included).                                                   |
 `------------------------------------------------------------------*/
 
-#if defined (__STDC__) || defined (__cplusplus)
+#if (defined __STDC__ || defined __C99__FUNC__ \
+     || defined __cplusplus || defined _MSC_VER)
 static void
-yy_stack_print (short int *bottom, short int *top)
+yy_stack_print (yytype_int16 *bottom, yytype_int16 *top)
 #else
 static void
 yy_stack_print (bottom, top)
-    short int *bottom;
-    short int *top;
+    yytype_int16 *bottom;
+    yytype_int16 *top;
 #endif
 {
   YYFPRINTF (stderr, "Stack now");
-  for (/* Nothing. */; bottom <= top; ++bottom)
+  for (; bottom <= top; ++bottom)
     YYFPRINTF (stderr, " %d", *bottom);
   YYFPRINTF (stderr, "\n");
 }
@@ -1650,37 +1828,45 @@ yy_stack_print (bottom, top)
 do {								\
   if (yydebug)							\
     yy_stack_print ((Bottom), (Top));				\
-} while (0)
+} while (YYID (0))
 
 
 /*------------------------------------------------.
 | Report that the YYRULE is going to be reduced.  |
 `------------------------------------------------*/
 
-#if defined (__STDC__) || defined (__cplusplus)
+#if (defined __STDC__ || defined __C99__FUNC__ \
+     || defined __cplusplus || defined _MSC_VER)
 static void
-yy_reduce_print (int yyrule)
+yy_reduce_print (YYSTYPE *yyvsp, int yyrule)
 #else
 static void
-yy_reduce_print (yyrule)
+yy_reduce_print (yyvsp, yyrule)
+    YYSTYPE *yyvsp;
     int yyrule;
 #endif
 {
+  int yynrhs = yyr2[yyrule];
   int yyi;
-  unsigned int yylno = yyrline[yyrule];
-  YYFPRINTF (stderr, "Reducing stack by rule %d (line %u), ",
-             yyrule - 1, yylno);
-  /* Print the symbols being reduced, and their result.  */
-  for (yyi = yyprhs[yyrule]; 0 <= yyrhs[yyi]; yyi++)
-    YYFPRINTF (stderr, "%s ", yytname [yyrhs[yyi]]);
-  YYFPRINTF (stderr, "-> %s\n", yytname [yyr1[yyrule]]);
+  unsigned long int yylno = yyrline[yyrule];
+  YYFPRINTF (stderr, "Reducing stack by rule %d (line %lu):\n",
+	     yyrule - 1, yylno);
+  /* The symbols being reduced.  */
+  for (yyi = 0; yyi < yynrhs; yyi++)
+    {
+      fprintf (stderr, "   $%d = ", yyi + 1);
+      yy_symbol_print (stderr, yyrhs[yyprhs[yyrule] + yyi],
+		       &(yyvsp[(yyi + 1) - (yynrhs)])
+		       		       );
+      fprintf (stderr, "\n");
+    }
 }
 
 # define YY_REDUCE_PRINT(Rule)		\
 do {					\
   if (yydebug)				\
-    yy_reduce_print (Rule);		\
-} while (0)
+    yy_reduce_print (yyvsp, Rule); \
+} while (YYID (0))
 
 /* Nonzero means print parse trace.  It is left uninitialized so that
    multiple parsers can coexist.  */
@@ -1702,7 +1888,7 @@ int yydebug;
    if the built-in stack extension method is used).
 
    Do not make this value too large; the results are undefined if
-   SIZE_MAX < YYSTACK_BYTES (YYMAXDEPTH)
+   YYSTACK_ALLOC_MAXIMUM < YYSTACK_BYTES (YYMAXDEPTH)
    evaluated with infinite-precision integer arithmetic.  */
 
 #ifndef YYMAXDEPTH
@@ -1714,45 +1900,47 @@ int yydebug;
 #if YYERROR_VERBOSE
 
 # ifndef yystrlen
-#  if defined (__GLIBC__) && defined (_STRING_H)
+#  if defined __GLIBC__ && defined _STRING_H
 #   define yystrlen strlen
 #  else
 /* Return the length of YYSTR.  */
+#if (defined __STDC__ || defined __C99__FUNC__ \
+     || defined __cplusplus || defined _MSC_VER)
 static YYSIZE_T
-#   if defined (__STDC__) || defined (__cplusplus)
 yystrlen (const char *yystr)
-#   else
+#else
+static YYSIZE_T
 yystrlen (yystr)
-     const char *yystr;
-#   endif
+    const char *yystr;
+#endif
 {
-  register const char *yys = yystr;
-
-  while (*yys++ != '\0')
+  YYSIZE_T yylen;
+  for (yylen = 0; yystr[yylen]; yylen++)
     continue;
-
-  return yys - yystr - 1;
+  return yylen;
 }
 #  endif
 # endif
 
 # ifndef yystpcpy
-#  if defined (__GLIBC__) && defined (_STRING_H) && defined (_GNU_SOURCE)
+#  if defined __GLIBC__ && defined _STRING_H && defined _GNU_SOURCE
 #   define yystpcpy stpcpy
 #  else
 /* Copy YYSRC to YYDEST, returning the address of the terminating '\0' in
    YYDEST.  */
+#if (defined __STDC__ || defined __C99__FUNC__ \
+     || defined __cplusplus || defined _MSC_VER)
 static char *
-#   if defined (__STDC__) || defined (__cplusplus)
 yystpcpy (char *yydest, const char *yysrc)
-#   else
+#else
+static char *
 yystpcpy (yydest, yysrc)
-     char *yydest;
-     const char *yysrc;
-#   endif
+    char *yydest;
+    const char *yysrc;
+#endif
 {
-  register char *yyd = yydest;
-  register const char *yys = yysrc;
+  char *yyd = yydest;
+  const char *yys = yysrc;
 
   while ((*yyd++ = *yys++) != '\0')
     continue;
@@ -1762,53 +1950,171 @@ yystpcpy (yydest, yysrc)
 #  endif
 # endif
 
-#endif /* !YYERROR_VERBOSE */
+# ifndef yytnamerr
+/* Copy to YYRES the contents of YYSTR after stripping away unnecessary
+   quotes and backslashes, so that it's suitable for yyerror.  The
+   heuristic is that double-quoting is unnecessary unless the string
+   contains an apostrophe, a comma, or backslash (other than
+   backslash-backslash).  YYSTR is taken from yytname.  If YYRES is
+   null, do not copy; instead, return the length of what the result
+   would have been.  */
+static YYSIZE_T
+yytnamerr (char *yyres, const char *yystr)
+{
+  if (*yystr == '"')
+    {
+      YYSIZE_T yyn = 0;
+      char const *yyp = yystr;
 
+      for (;;)
+	switch (*++yyp)
+	  {
+	  case '\'':
+	  case ',':
+	    goto do_not_strip_quotes;
+
+	  case '\\':
+	    if (*++yyp != '\\')
+	      goto do_not_strip_quotes;
+	    /* Fall through.  */
+	  default:
+	    if (yyres)
+	      yyres[yyn] = *yyp;
+	    yyn++;
+	    break;
+
+	  case '"':
+	    if (yyres)
+	      yyres[yyn] = '\0';
+	    return yyn;
+	  }
+    do_not_strip_quotes: ;
+    }
+
+  if (! yyres)
+    return yystrlen (yystr);
+
+  return yystpcpy (yyres, yystr) - yyres;
+}
+# endif
+
+/* Copy into YYRESULT an error message about the unexpected token
+   YYCHAR while in state YYSTATE.  Return the number of bytes copied,
+   including the terminating null byte.  If YYRESULT is null, do not
+   copy anything; just return the number of bytes that would be
+   copied.  As a special case, return 0 if an ordinary "syntax error"
+   message will do.  Return YYSIZE_MAXIMUM if overflow occurs during
+   size calculation.  */
+static YYSIZE_T
+yysyntax_error (char *yyresult, int yystate, int yychar)
+{
+  int yyn = yypact[yystate];
+
+  if (! (YYPACT_NINF < yyn && yyn <= YYLAST))
+    return 0;
+  else
+    {
+      int yytype = YYTRANSLATE (yychar);
+      YYSIZE_T yysize0 = yytnamerr (0, yytname[yytype]);
+      YYSIZE_T yysize = yysize0;
+      YYSIZE_T yysize1;
+      int yysize_overflow = 0;
+      enum { YYERROR_VERBOSE_ARGS_MAXIMUM = 5 };
+      char const *yyarg[YYERROR_VERBOSE_ARGS_MAXIMUM];
+      int yyx;
+
+# if 0
+      /* This is so xgettext sees the translatable formats that are
+	 constructed on the fly.  */
+      YY_("syntax error, unexpected %s");
+      YY_("syntax error, unexpected %s, expecting %s");
+      YY_("syntax error, unexpected %s, expecting %s or %s");
+      YY_("syntax error, unexpected %s, expecting %s or %s or %s");
+      YY_("syntax error, unexpected %s, expecting %s or %s or %s or %s");
+# endif
+      char *yyfmt;
+      char const *yyf;
+      static char const yyunexpected[] = "syntax error, unexpected %s";
+      static char const yyexpecting[] = ", expecting %s";
+      static char const yyor[] = " or %s";
+      char yyformat[sizeof yyunexpected
+		    + sizeof yyexpecting - 1
+		    + ((YYERROR_VERBOSE_ARGS_MAXIMUM - 2)
+		       * (sizeof yyor - 1))];
+      char const *yyprefix = yyexpecting;
+
+      /* Start YYX at -YYN if negative to avoid negative indexes in
+	 YYCHECK.  */
+      int yyxbegin = yyn < 0 ? -yyn : 0;
+
+      /* Stay within bounds of both yycheck and yytname.  */
+      int yychecklim = YYLAST - yyn + 1;
+      int yyxend = yychecklim < YYNTOKENS ? yychecklim : YYNTOKENS;
+      int yycount = 1;
+
+      yyarg[0] = yytname[yytype];
+      yyfmt = yystpcpy (yyformat, yyunexpected);
+
+      for (yyx = yyxbegin; yyx < yyxend; ++yyx)
+	if (yycheck[yyx + yyn] == yyx && yyx != YYTERROR)
+	  {
+	    if (yycount == YYERROR_VERBOSE_ARGS_MAXIMUM)
+	      {
+		yycount = 1;
+		yysize = yysize0;
+		yyformat[sizeof yyunexpected - 1] = '\0';
+		break;
+	      }
+	    yyarg[yycount++] = yytname[yyx];
+	    yysize1 = yysize + yytnamerr (0, yytname[yyx]);
+	    yysize_overflow |= (yysize1 < yysize);
+	    yysize = yysize1;
+	    yyfmt = yystpcpy (yyfmt, yyprefix);
+	    yyprefix = yyor;
+	  }
+
+      yyf = YY_(yyformat);
+      yysize1 = yysize + yystrlen (yyf);
+      yysize_overflow |= (yysize1 < yysize);
+      yysize = yysize1;
+
+      if (yysize_overflow)
+	return YYSIZE_MAXIMUM;
+
+      if (yyresult)
+	{
+	  /* Avoid sprintf, as that infringes on the user's name space.
+	     Don't have undefined behavior even if the translation
+	     produced a string with the wrong number of "%s"s.  */
+	  char *yyp = yyresult;
+	  int yyi = 0;
+	  while ((*yyp = *yyf) != '\0')
+	    {
+	      if (*yyp == '%' && yyf[1] == 's' && yyi < yycount)
+		{
+		  yyp += yytnamerr (yyp, yyarg[yyi++]);
+		  yyf += 2;
+		}
+	      else
+		{
+		  yyp++;
+		  yyf++;
+		}
+	    }
+	}
+      return yysize;
+    }
+}
+#endif /* YYERROR_VERBOSE */
 
 
-#if YYDEBUG
-/*--------------------------------.
-| Print this symbol on YYOUTPUT.  |
-`--------------------------------*/
-
-#if defined (__STDC__) || defined (__cplusplus)
-static void
-yysymprint (FILE *yyoutput, int yytype, YYSTYPE *yyvaluep)
-#else
-static void
-yysymprint (yyoutput, yytype, yyvaluep)
-    FILE *yyoutput;
-    int yytype;
-    YYSTYPE *yyvaluep;
-#endif
-{
-  /* Pacify ``unused variable'' warnings.  */
-  (void) yyvaluep;
-
-  if (yytype < YYNTOKENS)
-    YYFPRINTF (yyoutput, "token %s (", yytname[yytype]);
-  else
-    YYFPRINTF (yyoutput, "nterm %s (", yytname[yytype]);
-
-
-# ifdef YYPRINT
-  if (yytype < YYNTOKENS)
-    YYPRINT (yyoutput, yytoknum[yytype], *yyvaluep);
-# endif
-  switch (yytype)
-    {
-      default:
-        break;
-    }
-  YYFPRINTF (yyoutput, ")");
-}
-
-#endif /* ! YYDEBUG */
 /*-----------------------------------------------.
 | Release the memory associated to this symbol.  |
 `-----------------------------------------------*/
 
-#if defined (__STDC__) || defined (__cplusplus)
+/*ARGSUSED*/
+#if (defined __STDC__ || defined __C99__FUNC__ \
+     || defined __cplusplus || defined _MSC_VER)
 static void
 yydestruct (const char *yymsg, int yytype, YYSTYPE *yyvaluep)
 #else
@@ -1819,8 +2125,7 @@ yydestruct (yymsg, yytype, yyvaluep)
     YYSTYPE *yyvaluep;
 #endif
 {
-  /* Pacify ``unused variable'' warnings.  */
-  (void) yyvaluep;
+  YYUSE (yyvaluep);
 
   if (!yymsg)
     yymsg = "Deleting";
@@ -1830,7 +2135,7 @@ yydestruct (yymsg, yytype, yyvaluep)
     {
 
       default:
-        break;
+	break;
     }
 }
 
@@ -1838,13 +2143,13 @@ yydestruct (yymsg, yytype, yyvaluep)
 /* Prevent warnings from -Wmissing-prototypes.  */
 
 #ifdef YYPARSE_PARAM
-# if defined (__STDC__) || defined (__cplusplus)
+#if defined __STDC__ || defined __cplusplus
 int yyparse (void *YYPARSE_PARAM);
-# else
+#else
 int yyparse ();
-# endif
+#endif
 #else /* ! YYPARSE_PARAM */
-#if defined (__STDC__) || defined (__cplusplus)
+#if defined __STDC__ || defined __cplusplus
 int yyparse (void);
 #else
 int yyparse ();
@@ -1869,14 +2174,18 @@ int yynerrs;
 `----------*/
 
 #ifdef YYPARSE_PARAM
-# if defined (__STDC__) || defined (__cplusplus)
-int yyparse (void *YYPARSE_PARAM)
-# else
-int yyparse (YYPARSE_PARAM)
-  void *YYPARSE_PARAM;
-# endif
+#if (defined __STDC__ || defined __C99__FUNC__ \
+     || defined __cplusplus || defined _MSC_VER)
+int
+yyparse (void *YYPARSE_PARAM)
+#else
+int
+yyparse (YYPARSE_PARAM)
+    void *YYPARSE_PARAM;
+#endif
 #else /* ! YYPARSE_PARAM */
-#if defined (__STDC__) || defined (__cplusplus)
+#if (defined __STDC__ || defined __C99__FUNC__ \
+     || defined __cplusplus || defined _MSC_VER)
 int
 yyparse (void)
 #else
@@ -1887,13 +2196,19 @@ yyparse ()
 #endif
 {
   
-  register int yystate;
-  register int yyn;
+  int yystate;
+  int yyn;
   int yyresult;
   /* Number of tokens to shift before error messages enabled.  */
   int yyerrstatus;
   /* Look-ahead token as an internal (translated) token number.  */
   int yytoken = 0;
+#if YYERROR_VERBOSE
+  /* Buffer for error messages, and its allocated size.  */
+  char yymsgbuf[128];
+  char *yymsg = yymsgbuf;
+  YYSIZE_T yymsg_alloc = sizeof yymsgbuf;
+#endif
 
   /* Three stacks and their tools:
      `yyss': related to states,
@@ -1904,18 +2219,18 @@ yyparse ()
      to reallocate them elsewhere.  */
 
   /* The state stack.  */
-  short int yyssa[YYINITDEPTH];
-  short int *yyss = yyssa;
-  register short int *yyssp;
+  yytype_int16 yyssa[YYINITDEPTH];
+  yytype_int16 *yyss = yyssa;
+  yytype_int16 *yyssp;
 
   /* The semantic value stack.  */
   YYSTYPE yyvsa[YYINITDEPTH];
   YYSTYPE *yyvs = yyvsa;
-  register YYSTYPE *yyvsp;
+  YYSTYPE *yyvsp;
 
 
 
-#define YYPOPSTACK   (yyvsp--, yyssp--)
+#define YYPOPSTACK(N)   (yyvsp -= (N), yyssp -= (N))
 
   YYSIZE_T yystacksize = YYINITDEPTH;
 
@@ -1924,9 +2239,9 @@ yyparse ()
   YYSTYPE yyval;
 
 
-  /* When reducing, the number of symbols on the RHS of the reduced
-     rule.  */
-  int yylen;
+  /* The number of symbols on the RHS of the reduced rule.
+     Keep to zero when no symbol should be popped.  */
+  int yylen = 0;
 
   YYDPRINTF ((stderr, "Starting parse\n"));
 
@@ -1943,9 +2258,6 @@ yyparse ()
   yyssp = yyss;
   yyvsp = yyvs;
 
-
-  yyvsp[0] = yylval;
-
   goto yysetstate;
 
 /*------------------------------------------------------------.
@@ -1953,8 +2265,7 @@ yyparse ()
 `------------------------------------------------------------*/
  yynewstate:
   /* In all cases, when you get here, the value and location stacks
-     have just been pushed. so pushing a state here evens the stacks.
-     */
+     have just been pushed.  So pushing a state here evens the stacks.  */
   yyssp++;
 
  yysetstate:
@@ -1967,18 +2278,18 @@ yyparse ()
 
 #ifdef yyoverflow
       {
-	/* Give user a chance to reallocate the stack. Use copies of
+	/* Give user a chance to reallocate the stack.  Use copies of
 	   these so that the &'s don't force the real ones into
 	   memory.  */
 	YYSTYPE *yyvs1 = yyvs;
-	short int *yyss1 = yyss;
+	yytype_int16 *yyss1 = yyss;
 
 
 	/* Each stack pointer address is followed by the size of the
 	   data in use in that stack, in bytes.  This used to be a
 	   conditional around just the two extra args, but that might
 	   be undefined if yyoverflow is a macro.  */
-	yyoverflow ("parser stack overflow",
+	yyoverflow (YY_("memory exhausted"),
 		    &yyss1, yysize * sizeof (*yyssp),
 		    &yyvs1, yysize * sizeof (*yyvsp),
 
@@ -1989,21 +2300,21 @@ yyparse ()
       }
 #else /* no yyoverflow */
 # ifndef YYSTACK_RELOCATE
-      goto yyoverflowlab;
+      goto yyexhaustedlab;
 # else
       /* Extend the stack our own way.  */
       if (YYMAXDEPTH <= yystacksize)
-	goto yyoverflowlab;
+	goto yyexhaustedlab;
       yystacksize *= 2;
       if (YYMAXDEPTH < yystacksize)
 	yystacksize = YYMAXDEPTH;
 
       {
-	short int *yyss1 = yyss;
+	yytype_int16 *yyss1 = yyss;
 	union yyalloc *yyptr =
 	  (union yyalloc *) YYSTACK_ALLOC (YYSTACK_BYTES (yystacksize));
 	if (! yyptr)
-	  goto yyoverflowlab;
+	  goto yyexhaustedlab;
 	YYSTACK_RELOCATE (yyss);
 	YYSTACK_RELOCATE (yyvs);
 
@@ -2034,12 +2345,10 @@ yyparse ()
 `-----------*/
 yybackup:
 
-/* Do appropriate processing given the current state.  */
-/* Read a look-ahead token if we need one and don't already have one.  */
-/* yyresume: */
+  /* Do appropriate processing given the current state.  Read a
+     look-ahead token if we need one and don't already have one.  */
 
   /* First try to decide what to do without reference to look-ahead token.  */
-
   yyn = yypact[yystate];
   if (yyn == YYPACT_NINF)
     goto yydefault;
@@ -2081,22 +2390,21 @@ yybackup:
   if (yyn == YYFINAL)
     YYACCEPT;
 
-  /* Shift the look-ahead token.  */
-  YY_SYMBOL_PRINT ("Shifting", yytoken, &yylval, &yylloc);
-
-  /* Discard the token being shifted unless it is eof.  */
-  if (yychar != YYEOF)
-    yychar = YYEMPTY;
-
-  *++yyvsp = yylval;
-
-
   /* Count tokens shifted since error; after three, turn off error
      status.  */
   if (yyerrstatus)
     yyerrstatus--;
 
+  /* Shift the look-ahead token.  */
+  YY_SYMBOL_PRINT ("Shifting", yytoken, &yylval, &yylloc);
+
+  /* Discard the shifted token unless it is eof.  */
+  if (yychar != YYEOF)
+    yychar = YYEMPTY;
+
   yystate = yyn;
+  *++yyvsp = yylval;
+
   goto yynewstate;
 
 
@@ -2133,1206 +2441,1205 @@ yyreduce:
     {
         case 2:
 #line 212 "idl2matlab.y"
-    {root = creerNode(COMMENTSTATEMENT,(yyvsp[-2].uNode),creerNode(COMMENTSTATEMENT,(yyvsp[-1].uNode),(yyvsp[0].uNode)));YYACCEPT;}
+    {root = creerNode(COMMENTSTATEMENT,(yyvsp[(1) - (3)].uNode),creerNode(COMMENTSTATEMENT,(yyvsp[(2) - (3)].uNode),(yyvsp[(3) - (3)].uNode)));YYACCEPT;;}
     break;
 
   case 3:
 #line 214 "idl2matlab.y"
-    {root = creerNode(COMMENTSTATEMENT,(yyvsp[-1].uNode),(yyvsp[0].uNode));YYACCEPT;}
+    {root = creerNode(COMMENTSTATEMENT,(yyvsp[(1) - (2)].uNode),(yyvsp[(2) - (2)].uNode));YYACCEPT;;}
     break;
 
   case 4:
 #line 216 "idl2matlab.y"
-    {root = creerNode(COMMENTSTATEMENT,(yyvsp[-1].uNode),(yyvsp[0].uNode));YYACCEPT;}
+    {root = creerNode(COMMENTSTATEMENT,(yyvsp[(1) - (2)].uNode),(yyvsp[(2) - (2)].uNode));YYACCEPT;;}
     break;
 
   case 5:
 #line 218 "idl2matlab.y"
-    {root = (yyvsp[0].uNode);YYACCEPT;}
+    {root = (yyvsp[(1) - (1)].uNode);YYACCEPT;;}
     break;
 
   case 6:
 #line 224 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(COMMENTSTATEMENT,(yyvsp[-2].uNode),creerNode(COMMENTSTATEMENT,(yyvsp[-1].uNode),(yyvsp[0].uNode)));}
+    {(yyval.uNode)=creerNode(COMMENTSTATEMENT,(yyvsp[(1) - (3)].uNode),creerNode(COMMENTSTATEMENT,(yyvsp[(2) - (3)].uNode),(yyvsp[(3) - (3)].uNode)));;}
     break;
 
   case 7:
 #line 226 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(COMMENTSTATEMENT,(yyvsp[-1].uNode),(yyvsp[0].uNode));}
+    {(yyval.uNode)=creerNode(COMMENTSTATEMENT,(yyvsp[(1) - (2)].uNode),(yyvsp[(2) - (2)].uNode));;}
     break;
 
   case 8:
 #line 228 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(COMMENTSTATEMENT,(yyvsp[-1].uNode),(yyvsp[0].uNode));}
+    {(yyval.uNode)=creerNode(COMMENTSTATEMENT,(yyvsp[(1) - (2)].uNode),(yyvsp[(2) - (2)].uNode));;}
     break;
 
   case 9:
 #line 230 "idl2matlab.y"
-    {(yyval.uNode) = (yyvsp[0].uNode);}
+    {(yyval.uNode) = (yyvsp[(1) - (1)].uNode);;}
     break;
 
   case 10:
 #line 232 "idl2matlab.y"
-    {(yyval.uNode) = (yyvsp[0].uNode);}
+    {(yyval.uNode) = (yyvsp[(1) - (1)].uNode);;}
     break;
 
   case 11:
 #line 237 "idl2matlab.y"
-    {(yyval.uNode) = creerNode(BLOCK,(yyvsp[-2].uNode),(yyvsp[0].uNode));}
+    {(yyval.uNode) = creerNode(BLOCK,(yyvsp[(1) - (3)].uNode),(yyvsp[(3) - (3)].uNode));;}
     break;
 
   case 12:
 #line 239 "idl2matlab.y"
-    {(yyval.uNode) = creerNode(BLOCK,(yyvsp[-1].uNode),getNull());}
+    {(yyval.uNode) = creerNode(BLOCK,(yyvsp[(1) - (2)].uNode),getNull());;}
     break;
 
   case 13:
 #line 241 "idl2matlab.y"
-    {(yyval.uNode) = creerNode(BLOCK,(yyvsp[0].uNode),getNull());}
+    {(yyval.uNode) = creerNode(BLOCK,(yyvsp[(1) - (1)].uNode),getNull());;}
     break;
 
   case 14:
 #line 243 "idl2matlab.y"
-    {(yyval.uNode)=(yyvsp[-1].uNode);}
+    {(yyval.uNode)=(yyvsp[(2) - (3)].uNode);;}
     break;
 
   case 15:
 #line 248 "idl2matlab.y"
-    {(yyval.uNode)=creerNodeString(IDENTIFIER,getNull(),getNull(),(yyvsp[0].uChar));}
+    {(yyval.uNode)=creerNodeString(IDENTIFIER,getNull(),getNull(),(yyvsp[(1) - (1)].uChar));;}
     break;
 
   case 16:
 #line 250 "idl2matlab.y"
-    {(yyval.uNode)=(yyvsp[0].uNode);}
+    {(yyval.uNode)=(yyvsp[(1) - (1)].uNode);;}
     break;
 
   case 17:
 #line 252 "idl2matlab.y"
-    {(yyval.uNode)=(yyvsp[0].uNode);}
+    {(yyval.uNode)=(yyvsp[(1) - (1)].uNode);;}
     break;
 
   case 18:
 #line 254 "idl2matlab.y"
-    {(yyval.uNode)=(yyvsp[0].uNode);}
+    {(yyval.uNode)=(yyvsp[(1) - (1)].uNode);;}
     break;
 
   case 19:
 #line 256 "idl2matlab.y"
-    {(yyval.uNode)=(yyvsp[0].uNode);}
+    {(yyval.uNode)=(yyvsp[(1) - (1)].uNode);;}
     break;
 
   case 20:
 #line 258 "idl2matlab.y"
-    {(yyval.uNode)=(yyvsp[0].uNode);}
+    {(yyval.uNode)=(yyvsp[(1) - (1)].uNode);;}
     break;
 
   case 21:
 #line 263 "idl2matlab.y"
-    {(yyval.uNode)=(yyvsp[0].uNode);}
+    {(yyval.uNode)=(yyvsp[(1) - (1)].uNode);;}
     break;
 
   case 22:
 #line 265 "idl2matlab.y"
-    {(yyval.uNode) = creerNode(DECLARATION_LIST, (yyvsp[-1].uNode), (yyvsp[0].uNode));}
+    {(yyval.uNode) = creerNode(DECLARATION_LIST, (yyvsp[(1) - (2)].uNode), (yyvsp[(2) - (2)].uNode));;}
     break;
 
   case 23:
 #line 270 "idl2matlab.y"
-    {(yyval.uNode)=(yyvsp[0].uNode);}
+    {(yyval.uNode)=(yyvsp[(1) - (1)].uNode);;}
     break;
 
   case 24:
 #line 272 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(STATEMENT_LIST, getNull(), (yyvsp[0].uNode));}
+    {(yyval.uNode)=creerNode(STATEMENT_LIST, getNull(), (yyvsp[(1) - (1)].uNode));;}
     break;
 
   case 25:
 #line 277 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(COMMENTSTATEMENT,(yyvsp[-1].uNode),(yyvsp[0].uNode));}
+    {(yyval.uNode)=creerNode(COMMENTSTATEMENT,(yyvsp[(1) - (2)].uNode),(yyvsp[(2) - (2)].uNode));;}
     break;
 
   case 26:
 #line 279 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(COMMENTSTATEMENT,(yyvsp[-1].uNode),(yyvsp[0].uNode));}
+    {(yyval.uNode)=creerNode(COMMENTSTATEMENT,(yyvsp[(1) - (2)].uNode),(yyvsp[(2) - (2)].uNode));;}
     break;
 
   case 27:
 #line 281 "idl2matlab.y"
-    {(yyval.uNode)=(yyvsp[0].uNode);}
+    {(yyval.uNode)=(yyvsp[(1) - (1)].uNode);;}
     break;
 
   case 28:
 #line 283 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(COMMENTSTATEMENT,(yyvsp[-2].uNode),creerNode(COMMENTSTATEMENT,(yyvsp[-1].uNode),(yyvsp[0].uNode)));}
+    {(yyval.uNode)=creerNode(COMMENTSTATEMENT,(yyvsp[(1) - (3)].uNode),creerNode(COMMENTSTATEMENT,(yyvsp[(2) - (3)].uNode),(yyvsp[(3) - (3)].uNode)));;}
     break;
 
   case 29:
 #line 288 "idl2matlab.y"
-    {(yyval.uNode)=(yyvsp[0].uNode);}
+    {(yyval.uNode)=(yyvsp[(1) - (1)].uNode);;}
     break;
 
   case 30:
 #line 290 "idl2matlab.y"
-    {(yyval.uNode)=(yyvsp[0].uNode);}
+    {(yyval.uNode)=(yyvsp[(1) - (1)].uNode);;}
     break;
 
   case 31:
 #line 295 "idl2matlab.y"
-    {(yyval.uNode) = creerNodeString(DECLARATION_PROC, (yyvsp[-2].uNode), (yyvsp[-1].uNode), (yyvsp[-3].uChar));}
+    {(yyval.uNode) = creerNodeString(DECLARATION_PROC, (yyvsp[(3) - (5)].uNode), (yyvsp[(4) - (5)].uNode), (yyvsp[(2) - (5)].uChar));;}
     break;
 
   case 32:
 #line 297 "idl2matlab.y"
-    {(yyval.uNode) = creerNodeString(DECLARATION_PROC, getNull(), (yyvsp[-1].uNode), (yyvsp[-2].uChar));}
+    {(yyval.uNode) = creerNodeString(DECLARATION_PROC, getNull(), (yyvsp[(3) - (4)].uNode), (yyvsp[(2) - (4)].uChar));;}
     break;
 
   case 33:
 #line 299 "idl2matlab.y"
     {(yyval.uNode) = creerNodeString(DECL_PROC_OBJ, 
-      	creerNodeString(DECLARATION_PROC, (yyvsp[-2].uNode), (yyvsp[-1].uNode), (yyvsp[-3].uChar)),getNull(), (yyvsp[-6].uChar));}
+      	creerNodeString(DECLARATION_PROC, (yyvsp[(6) - (8)].uNode), (yyvsp[(7) - (8)].uNode), (yyvsp[(5) - (8)].uChar)),getNull(), (yyvsp[(2) - (8)].uChar));;}
     break;
 
   case 34:
 #line 302 "idl2matlab.y"
     {(yyval.uNode) = creerNodeString(DECL_PROC_OBJ, 
-      	creerNodeString(DECLARATION_PROC, getNull(), (yyvsp[-1].uNode), (yyvsp[-2].uChar)),getNull(), (yyvsp[-5].uChar));}
+      	creerNodeString(DECLARATION_PROC, getNull(), (yyvsp[(6) - (7)].uNode), (yyvsp[(5) - (7)].uChar)),getNull(), (yyvsp[(2) - (7)].uChar));;}
     break;
 
   case 35:
 #line 308 "idl2matlab.y"
-    {(yyval.uNode) = creerNodeString(DECLARATION_FUNC, (yyvsp[-2].uNode), (yyvsp[-1].uNode), (yyvsp[-3].uChar));}
+    {(yyval.uNode) = creerNodeString(DECLARATION_FUNC, (yyvsp[(3) - (5)].uNode), (yyvsp[(4) - (5)].uNode), (yyvsp[(2) - (5)].uChar));;}
     break;
 
   case 36:
 #line 310 "idl2matlab.y"
-    {(yyval.uNode) = creerNodeString(DECLARATION_FUNC, getNull(), (yyvsp[-1].uNode), (yyvsp[-2].uChar));}
+    {(yyval.uNode) = creerNodeString(DECLARATION_FUNC, getNull(), (yyvsp[(3) - (4)].uNode), (yyvsp[(2) - (4)].uChar));;}
     break;
 
   case 37:
 #line 312 "idl2matlab.y"
     {(yyval.uNode) = creerNodeString(DECL_FUNC_OBJ, 
-      	creerNodeString(DECLARATION_FUNC, (yyvsp[-2].uNode), (yyvsp[-1].uNode), (yyvsp[-3].uChar)),getNull(), (yyvsp[-6].uChar));}
+      	creerNodeString(DECLARATION_FUNC, (yyvsp[(6) - (8)].uNode), (yyvsp[(7) - (8)].uNode), (yyvsp[(5) - (8)].uChar)),getNull(), (yyvsp[(2) - (8)].uChar));;}
     break;
 
   case 38:
 #line 315 "idl2matlab.y"
     {(yyval.uNode) = creerNodeString(DECL_FUNC_OBJ, 
-      	creerNodeString(DECLARATION_FUNC, getNull(), (yyvsp[-1].uNode), (yyvsp[-2].uChar)),getNull(), (yyvsp[-5].uChar));}
+      	creerNodeString(DECLARATION_FUNC, getNull(), (yyvsp[(6) - (7)].uNode), (yyvsp[(5) - (7)].uChar)),getNull(), (yyvsp[(2) - (7)].uChar));;}
     break;
 
   case 39:
 #line 321 "idl2matlab.y"
-    {(yyval.uNode) = creerNode(FORWARD_FUNCTION, getNull(), (yyvsp[0].uNode));}
+    {(yyval.uNode) = creerNode(FORWARD_FUNCTION, getNull(), (yyvsp[(2) - (2)].uNode));;}
     break;
 
   case 40:
 #line 326 "idl2matlab.y"
-    {(yyval.uNode) = creerNode(COMPILE_OPT, getNull(), (yyvsp[0].uNode));}
+    {(yyval.uNode) = creerNode(COMPILE_OPT, getNull(), (yyvsp[(2) - (2)].uNode));;}
     break;
 
   case 41:
 #line 331 "idl2matlab.y"
-    {(yyval.uNode) = creerNode(COMMON_CASE, getNull(), (yyvsp[0].uNode));}
+    {(yyval.uNode) = creerNode(COMMON_CASE, getNull(), (yyvsp[(2) - (2)].uNode));;}
     break;
 
   case 42:
 #line 333 "idl2matlab.y"
-    {(yyval.uNode) = creerNode(COMMON_CASE, (yyvsp[0].uNode), getNull());}
+    {(yyval.uNode) = creerNode(COMMON_CASE, (yyvsp[(3) - (3)].uNode), getNull());;}
     break;
 
   case 43:
 #line 338 "idl2matlab.y"
-    {(yyval.uNode)=creerNodeString(IDENTIFIER, getNull(), getNull(), (yyvsp[0].uChar));}
+    {(yyval.uNode)=creerNodeString(IDENTIFIER, getNull(), getNull(), (yyvsp[(1) - (1)].uChar));;}
     break;
 
   case 44:
 #line 340 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(SUITE_IDENT, creerNodeString(IDENTIFIER, getNull(), getNull(),(yyvsp[-2].uChar)), (yyvsp[0].uNode));}
+    {(yyval.uNode)=creerNode(SUITE_IDENT, creerNodeString(IDENTIFIER, getNull(), getNull(),(yyvsp[(1) - (3)].uChar)), (yyvsp[(3) - (3)].uNode));;}
     break;
 
   case 45:
 #line 345 "idl2matlab.y"
-    {(yyval.uNode)=(yyvsp[0].uNode);}
+    {(yyval.uNode)=(yyvsp[(2) - (2)].uNode);;}
     break;
 
   case 46:
 #line 347 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(SUITE_PARAM, (yyvsp[-2].uNode), (yyvsp[0].uNode));}
+    {(yyval.uNode)=creerNode(SUITE_PARAM, (yyvsp[(1) - (3)].uNode), (yyvsp[(3) - (3)].uNode));;}
     break;
 
   case 47:
 #line 352 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(PARAM, creerNodeString(IDENTIFIER, getNull(), getNull(), (yyvsp[0].uChar)), getNull());}
+    {(yyval.uNode)=creerNode(PARAM, creerNodeString(IDENTIFIER, getNull(), getNull(), (yyvsp[(1) - (1)].uChar)), getNull());;}
     break;
 
   case 48:
 #line 354 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(PARAM, creerNodeString(IDENTIFIER, getNull(), getNull(), (yyvsp[-2].uChar)),
-      creerNodeString(IDENTIFIER, getNull(), getNull(), (yyvsp[0].uChar)));}
+    {(yyval.uNode)=creerNode(PARAM, creerNodeString(IDENTIFIER, getNull(), getNull(), (yyvsp[(1) - (3)].uChar)),
+      creerNodeString(IDENTIFIER, getNull(), getNull(), (yyvsp[(3) - (3)].uChar)));;}
     break;
 
   case 49:
 #line 357 "idl2matlab.y"
     {(yyval.uNode)=creerNode(PARAM, creerNodeString(IDENTIFIER, getNull(), getNull(), "I2M_EXTRA"),
-      creerNodeString(IDENTIFIER, getNull(), getNull(), (yyvsp[0].uChar)));}
+      creerNodeString(IDENTIFIER, getNull(), getNull(), (yyvsp[(3) - (3)].uChar)));;}
     break;
 
   case 50:
 #line 360 "idl2matlab.y"
     {(yyval.uNode)=creerNode(PARAM, creerNodeString(IDENTIFIER, getNull(), getNull(), "I2M_REF_EXTRA"),
-      creerNodeString(IDENTIFIER, getNull(), getNull(), (yyvsp[0].uChar)));}
+      creerNodeString(IDENTIFIER, getNull(), getNull(), (yyvsp[(3) - (3)].uChar)));;}
     break;
 
   case 51:
 #line 363 "idl2matlab.y"
     {(yyval.uNode)=creerNode(PARAM, creerNodeString(IDENTIFIER, getNull(), getNull(), "RETURN"),
-      creerNodeString(IDENTIFIER, getNull(), getNull(), (yyvsp[0].uChar)));}
+      creerNodeString(IDENTIFIER, getNull(), getNull(), (yyvsp[(3) - (3)].uChar)));;}
     break;
 
   case 52:
 #line 369 "idl2matlab.y"
-    {(yyval.uNode) = (yyvsp[-1].uNode);}
+    {(yyval.uNode) = (yyvsp[(2) - (3)].uNode);;}
     break;
 
   case 53:
 #line 371 "idl2matlab.y"
-    {(yyval.uNode) = creerNode(STATEMENT_LIST, getNull(), (yyvsp[0].uNode));}
+    {(yyval.uNode) = creerNode(STATEMENT_LIST, getNull(), (yyvsp[(1) - (1)].uNode));;}
     break;
 
   case 54:
 #line 376 "idl2matlab.y"
-    {(yyval.uNode) = (yyvsp[0].uNode);}
+    {(yyval.uNode) = (yyvsp[(1) - (1)].uNode);;}
     break;
 
   case 55:
 #line 378 "idl2matlab.y"
-    {(yyval.uNode) = (yyvsp[-1].uNode);}
+    {(yyval.uNode) = (yyvsp[(2) - (3)].uNode);;}
     break;
 
   case 56:
 #line 380 "idl2matlab.y"
-    {(yyval.uNode) = creerNode(STATEMENT_LIST, getNull(), getNull());}
+    {(yyval.uNode) = creerNode(STATEMENT_LIST, getNull(), getNull());;}
     break;
 
   case 57:
 #line 385 "idl2matlab.y"
-    {(yyval.uNode) = creerNode(STATEMENT_LIST, getNull(), (yyvsp[0].uNode));}
+    {(yyval.uNode) = creerNode(STATEMENT_LIST, getNull(), (yyvsp[(1) - (1)].uNode));;}
     break;
 
   case 58:
 #line 387 "idl2matlab.y"
-    {(yyval.uNode) = creerNode(STATEMENT_LIST, (yyvsp[-1].uNode), (yyvsp[0].uNode));}
+    {(yyval.uNode) = creerNode(STATEMENT_LIST, (yyvsp[(1) - (2)].uNode), (yyvsp[(2) - (2)].uNode));;}
     break;
 
   case 59:
 #line 392 "idl2matlab.y"
-    {(yyval.uNode) = creerNode(INTERRO, creerNode(INTERRO, (yyvsp[-4].uNode), (yyvsp[-2].uNode)), (yyvsp[0].uNode));}
+    {(yyval.uNode) = creerNode(INTERRO, creerNode(INTERRO, (yyvsp[(1) - (5)].uNode), (yyvsp[(3) - (5)].uNode)), (yyvsp[(5) - (5)].uNode));;}
     break;
 
   case 60:
 #line 394 "idl2matlab.y"
-    {(yyval.uNode) = (yyvsp[0].uNode);}
+    {(yyval.uNode) = (yyvsp[(1) - (1)].uNode);;}
     break;
 
   case 61:
 #line 399 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(Or, (yyvsp[-2].uNode), (yyvsp[0].uNode));}
+    {(yyval.uNode)=creerNode(Or, (yyvsp[(1) - (3)].uNode), (yyvsp[(3) - (3)].uNode));;}
     break;
 
   case 62:
 #line 401 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(ORSHORTCUT, (yyvsp[-2].uNode), (yyvsp[0].uNode));}
+    {(yyval.uNode)=creerNode(ORSHORTCUT, (yyvsp[(1) - (3)].uNode), (yyvsp[(3) - (3)].uNode));;}
     break;
 
   case 63:
 #line 403 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(And, (yyvsp[-2].uNode), (yyvsp[0].uNode));}
+    {(yyval.uNode)=creerNode(And, (yyvsp[(1) - (3)].uNode), (yyvsp[(3) - (3)].uNode));;}
     break;
 
   case 64:
 #line 405 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(ANDSHORTCUT, (yyvsp[-2].uNode), (yyvsp[0].uNode));}
+    {(yyval.uNode)=creerNode(ANDSHORTCUT, (yyvsp[(1) - (3)].uNode), (yyvsp[(3) - (3)].uNode));;}
     break;
 
   case 65:
 #line 407 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(LT, (yyvsp[-2].uNode), (yyvsp[0].uNode));}
+    {(yyval.uNode)=creerNode(LT, (yyvsp[(1) - (3)].uNode), (yyvsp[(3) - (3)].uNode));;}
     break;
 
   case 66:
 #line 409 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(GT, (yyvsp[-2].uNode), (yyvsp[0].uNode));}
+    {(yyval.uNode)=creerNode(GT, (yyvsp[(1) - (3)].uNode), (yyvsp[(3) - (3)].uNode));;}
     break;
 
   case 67:
 #line 411 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(LE, (yyvsp[-2].uNode), (yyvsp[0].uNode));}
+    {(yyval.uNode)=creerNode(LE, (yyvsp[(1) - (3)].uNode), (yyvsp[(3) - (3)].uNode));;}
     break;
 
   case 68:
 #line 413 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(GE, (yyvsp[-2].uNode), (yyvsp[0].uNode));}
+    {(yyval.uNode)=creerNode(GE, (yyvsp[(1) - (3)].uNode), (yyvsp[(3) - (3)].uNode));;}
     break;
 
   case 69:
 #line 415 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(EQ, (yyvsp[-2].uNode), (yyvsp[0].uNode));}
+    {(yyval.uNode)=creerNode(EQ, (yyvsp[(1) - (3)].uNode), (yyvsp[(3) - (3)].uNode));;}
     break;
 
   case 70:
 #line 417 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(NE, (yyvsp[-2].uNode), (yyvsp[0].uNode));}
+    {(yyval.uNode)=creerNode(NE, (yyvsp[(1) - (3)].uNode), (yyvsp[(3) - (3)].uNode));;}
     break;
 
   case 71:
 #line 419 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(PLUS, (yyvsp[-2].uNode), (yyvsp[0].uNode));}
+    {(yyval.uNode)=creerNode(PLUS, (yyvsp[(1) - (3)].uNode), (yyvsp[(3) - (3)].uNode));;}
     break;
 
   case 72:
 #line 421 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(MINUS, (yyvsp[-2].uNode), (yyvsp[0].uNode));}
+    {(yyval.uNode)=creerNode(MINUS, (yyvsp[(1) - (3)].uNode), (yyvsp[(3) - (3)].uNode));;}
     break;
 
   case 73:
 #line 423 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(PUISS, (yyvsp[-2].uNode), (yyvsp[0].uNode));}
+    {(yyval.uNode)=creerNode(PUISS, (yyvsp[(1) - (3)].uNode), (yyvsp[(3) - (3)].uNode));;}
     break;
 
   case 74:
 #line 425 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(TIMES, (yyvsp[-2].uNode), (yyvsp[0].uNode));}
+    {(yyval.uNode)=creerNode(TIMES, (yyvsp[(1) - (3)].uNode), (yyvsp[(3) - (3)].uNode));;}
     break;
 
   case 75:
 #line 427 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(SLASH, (yyvsp[-2].uNode), (yyvsp[0].uNode));}
+    {(yyval.uNode)=creerNode(SLASH, (yyvsp[(1) - (3)].uNode), (yyvsp[(3) - (3)].uNode));;}
     break;
 
   case 76:
 #line 429 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(Mod, (yyvsp[-2].uNode), (yyvsp[0].uNode));}
+    {(yyval.uNode)=creerNode(Mod, (yyvsp[(1) - (3)].uNode), (yyvsp[(3) - (3)].uNode));;}
     break;
 
   case 77:
 #line 431 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(DIESE, (yyvsp[-2].uNode), (yyvsp[0].uNode));}
+    {(yyval.uNode)=creerNode(DIESE, (yyvsp[(1) - (3)].uNode), (yyvsp[(3) - (3)].uNode));;}
     break;
 
   case 78:
 #line 433 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(DIESE2, (yyvsp[-2].uNode), (yyvsp[0].uNode));}
+    {(yyval.uNode)=creerNode(DIESE2, (yyvsp[(1) - (3)].uNode), (yyvsp[(3) - (3)].uNode));;}
     break;
 
   case 79:
 #line 435 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(INF, (yyvsp[-2].uNode), (yyvsp[0].uNode));}
+    {(yyval.uNode)=creerNode(INF, (yyvsp[(1) - (3)].uNode), (yyvsp[(3) - (3)].uNode));;}
     break;
 
   case 80:
 #line 437 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(SUP, (yyvsp[-2].uNode), (yyvsp[0].uNode));}
+    {(yyval.uNode)=creerNode(SUP, (yyvsp[(1) - (3)].uNode), (yyvsp[(3) - (3)].uNode));;}
     break;
 
   case 81:
 #line 439 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(XOR, (yyvsp[-2].uNode), (yyvsp[0].uNode));}
+    {(yyval.uNode)=creerNode(XOR, (yyvsp[(1) - (3)].uNode), (yyvsp[(3) - (3)].uNode));;}
     break;
 
   case 82:
 #line 441 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(Not, (yyvsp[0].uNode), getNull());}
+    {(yyval.uNode)=creerNode(Not, (yyvsp[(2) - (2)].uNode), getNull());;}
     break;
 
   case 83:
 #line 443 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(TILDE, (yyvsp[0].uNode), getNull());}
+    {(yyval.uNode)=creerNode(TILDE, (yyvsp[(2) - (2)].uNode), getNull());;}
     break;
 
   case 84:
 #line 445 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(UMINUS, (yyvsp[0].uNode), getNull());}
+    {(yyval.uNode)=creerNode(UMINUS, (yyvsp[(2) - (2)].uNode), getNull());;}
     break;
 
   case 85:
 #line 447 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(UPLUS, (yyvsp[0].uNode), getNull());}
+    {(yyval.uNode)=creerNode(UPLUS, (yyvsp[(2) - (2)].uNode), getNull());;}
     break;
 
   case 86:
 #line 449 "idl2matlab.y"
-    {(yyval.uNode)=(yyvsp[0].uNode);}
+    {(yyval.uNode)=(yyvsp[(1) - (1)].uNode);;}
     break;
 
   case 87:
 #line 451 "idl2matlab.y"
-    {(yyval.uNode)=(yyvsp[0].uNode);}
+    {(yyval.uNode)=(yyvsp[(1) - (1)].uNode);;}
     break;
 
   case 88:
 #line 453 "idl2matlab.y"
-    {(yyval.uNode) = creerNode(FLECHE, (yyvsp[-2].uNode), (yyvsp[0].uNode));}
+    {(yyval.uNode) = creerNode(FLECHE, (yyvsp[(1) - (3)].uNode), (yyvsp[(3) - (3)].uNode));;}
     break;
 
   case 89:
 #line 455 "idl2matlab.y"
-    {(yyval.uNode) = creerNode(FLECHE, (yyvsp[-2].uNode), (yyvsp[0].uNode));}
+    {(yyval.uNode) = creerNode(FLECHE, (yyvsp[(1) - (3)].uNode), (yyvsp[(3) - (3)].uNode));;}
     break;
 
   case 90:
 #line 457 "idl2matlab.y"
-    {(yyval.uNode)=(yyvsp[0].uNode);}
+    {(yyval.uNode)=(yyvsp[(1) - (1)].uNode);;}
     break;
 
   case 91:
 #line 459 "idl2matlab.y"
-    {(yyval.uNode)=(yyvsp[0].uNode);}
+    {(yyval.uNode)=(yyvsp[(1) - (1)].uNode);;}
     break;
 
   case 92:
 #line 461 "idl2matlab.y"
-    {(yyval.uNode)=(yyvsp[0].uNode);}
+    {(yyval.uNode)=(yyvsp[(1) - (1)].uNode);;}
     break;
 
   case 93:
 #line 463 "idl2matlab.y"
-    {(yyval.uNode)=(yyvsp[0].uNode);}
+    {(yyval.uNode)=(yyvsp[(1) - (1)].uNode);;}
     break;
 
   case 94:
 #line 465 "idl2matlab.y"
-    {(yyval.uNode)=(yyvsp[0].uNode);}
+    {(yyval.uNode)=(yyvsp[(1) - (1)].uNode);;}
     break;
 
   case 95:
 #line 467 "idl2matlab.y"
-    {(yyval.uNode)=(yyvsp[0].uNode);}
+    {(yyval.uNode)=(yyvsp[(1) - (1)].uNode);;}
     break;
 
   case 96:
 #line 469 "idl2matlab.y"
-    {(yyval.uNode)=(yyvsp[0].uNode);}
+    {(yyval.uNode)=(yyvsp[(1) - (1)].uNode);;}
     break;
 
   case 97:
 #line 471 "idl2matlab.y"
-    {(yyval.uNode)=(yyvsp[0].uNode);}
+    {(yyval.uNode)=(yyvsp[(1) - (1)].uNode);;}
     break;
 
   case 98:
 #line 473 "idl2matlab.y"
-    {(yyval.uNode)=(yyvsp[0].uNode);}
+    {(yyval.uNode)=(yyvsp[(1) - (1)].uNode);;}
     break;
 
   case 99:
 #line 478 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(PlusPlus, getNull(),(yyvsp[0].uNode));}
+    {(yyval.uNode)=creerNode(PlusPlus, getNull(),(yyvsp[(2) - (2)].uNode));;}
     break;
 
   case 100:
 #line 480 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(PlusPlus,(yyvsp[-1].uNode), getNull());}
+    {(yyval.uNode)=creerNode(PlusPlus,(yyvsp[(1) - (2)].uNode), getNull());;}
     break;
 
   case 101:
 #line 482 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(MoinsMoins, getNull(),(yyvsp[0].uNode));}
+    {(yyval.uNode)=creerNode(MoinsMoins, getNull(),(yyvsp[(2) - (2)].uNode));;}
     break;
 
   case 102:
 #line 484 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(MoinsMoins,(yyvsp[-1].uNode), getNull());}
+    {(yyval.uNode)=creerNode(MoinsMoins,(yyvsp[(1) - (2)].uNode), getNull());;}
     break;
 
   case 103:
 #line 489 "idl2matlab.y"
-    {(yyval.uNode)=(yyvsp[0].uNode);}
+    {(yyval.uNode)=(yyvsp[(1) - (1)].uNode);;}
     break;
 
   case 104:
 #line 491 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(COMMENTSTATEMENT,(yyvsp[-1].uNode),(yyvsp[0].uNode));}
+    {(yyval.uNode)=creerNode(COMMENTSTATEMENT,(yyvsp[(1) - (2)].uNode),(yyvsp[(2) - (2)].uNode));;}
     break;
 
   case 105:
 #line 493 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(COMMENTSTATEMENT,(yyvsp[-1].uNode),(yyvsp[0].uNode));}
+    {(yyval.uNode)=creerNode(COMMENTSTATEMENT,(yyvsp[(1) - (2)].uNode),(yyvsp[(2) - (2)].uNode));;}
     break;
 
   case 106:
 #line 495 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(COMMENTSTATEMENT,(yyvsp[-2].uNode),creerNode(COMMENTSTATEMENT,(yyvsp[-1].uNode),(yyvsp[0].uNode)));}
+    {(yyval.uNode)=creerNode(COMMENTSTATEMENT,(yyvsp[(1) - (3)].uNode),creerNode(COMMENTSTATEMENT,(yyvsp[(2) - (3)].uNode),(yyvsp[(3) - (3)].uNode)));;}
     break;
 
   case 107:
 #line 497 "idl2matlab.y"
-    { (yyval.uNode) = (yyvsp[0].uNode); }
+    { (yyval.uNode) = (yyvsp[(1) - (1)].uNode); ;}
     break;
 
   case 108:
 #line 504 "idl2matlab.y"
-    {(yyval.uNode)=(yyvsp[-1].uNode);}
+    {(yyval.uNode)=(yyvsp[(2) - (3)].uNode);;}
     break;
 
   case 109:
 #line 506 "idl2matlab.y"
-    {(yyval.uNode)=(yyvsp[0].uNode);}
+    {(yyval.uNode)=(yyvsp[(1) - (1)].uNode);;}
     break;
 
   case 110:
 #line 508 "idl2matlab.y"
-    {(yyval.uNode)=(yyvsp[0].uNode);}
+    {(yyval.uNode)=(yyvsp[(1) - (1)].uNode);;}
     break;
 
   case 111:
 #line 510 "idl2matlab.y"
-    {(yyval.uNode)=(yyvsp[0].uNode);}
+    {(yyval.uNode)=(yyvsp[(1) - (1)].uNode);;}
     break;
 
   case 112:
 #line 512 "idl2matlab.y"
-    {(yyval.uNode)=(yyvsp[0].uNode);}
+    {(yyval.uNode)=(yyvsp[(1) - (1)].uNode);;}
     break;
 
   case 113:
 #line 514 "idl2matlab.y"
-    {(yyval.uNode)=(yyvsp[0].uNode);}
+    {(yyval.uNode)=(yyvsp[(1) - (1)].uNode);;}
     break;
 
   case 114:
 #line 516 "idl2matlab.y"
-    {(yyval.uNode)=(yyvsp[0].uNode);}
+    {(yyval.uNode)=(yyvsp[(1) - (1)].uNode);;}
     break;
 
   case 115:
 #line 518 "idl2matlab.y"
-    {(yyval.uNode)=(yyvsp[0].uNode);}
+    {(yyval.uNode)=(yyvsp[(1) - (1)].uNode);;}
     break;
 
   case 116:
 #line 520 "idl2matlab.y"
-    {(yyval.uNode)=(yyvsp[0].uNode);}
+    {(yyval.uNode)=(yyvsp[(1) - (1)].uNode);;}
     break;
 
   case 117:
 #line 522 "idl2matlab.y"
-    {(yyval.uNode)=(yyvsp[0].uNode);}
+    {(yyval.uNode)=(yyvsp[(1) - (1)].uNode);;}
     break;
 
   case 118:
 #line 524 "idl2matlab.y"
-    {(yyval.uNode)=(yyvsp[0].uNode);}
+    {(yyval.uNode)=(yyvsp[(1) - (1)].uNode);;}
     break;
 
   case 119:
 #line 526 "idl2matlab.y"
-    {(yyval.uNode)=(yyvsp[0].uNode);}
+    {(yyval.uNode)=(yyvsp[(1) - (1)].uNode);;}
     break;
 
   case 120:
 #line 528 "idl2matlab.y"
-    {(yyval.uNode)=(yyvsp[0].uNode);}
+    {(yyval.uNode)=(yyvsp[(1) - (1)].uNode);;}
     break;
 
   case 121:
 #line 530 "idl2matlab.y"
-    {(yyval.uNode) = creerNode(RETURN, (yyvsp[0].uNode), getNull());}
+    {(yyval.uNode) = creerNode(RETURN, (yyvsp[(3) - (3)].uNode), getNull());;}
     break;
 
   case 122:
 #line 532 "idl2matlab.y"
-    {(yyval.uNode) = creerNode(RETURN, getNull(), getNull());}
+    {(yyval.uNode) = creerNode(RETURN, getNull(), getNull());;}
     break;
 
   case 123:
 #line 534 "idl2matlab.y"
-    {(yyval.uNode) = creerNode(FLECHE, (yyvsp[-2].uNode), (yyvsp[0].uNode));}
+    {(yyval.uNode) = creerNode(FLECHE, (yyvsp[(1) - (3)].uNode), (yyvsp[(3) - (3)].uNode));;}
     break;
 
   case 124:
 #line 536 "idl2matlab.y"
-    {(yyval.uNode) = creerNode(FLECHE, (yyvsp[-2].uNode), (yyvsp[0].uNode));}
+    {(yyval.uNode) = creerNode(FLECHE, (yyvsp[(1) - (3)].uNode), (yyvsp[(3) - (3)].uNode));;}
     break;
 
   case 125:
 #line 543 "idl2matlab.y"
-    {(yyval.uNode)=creerNodeString(DECIMAL, getNull(), getNull(), (yyvsp[0].uChar));}
+    {(yyval.uNode)=creerNodeString(DECIMAL, getNull(), getNull(), (yyvsp[(1) - (1)].uChar));;}
     break;
 
   case 126:
 #line 545 "idl2matlab.y"
-    {(yyval.uNode)=creerNodeString(HEXADECIMAL, getNull(), getNull(), (yyvsp[0].uChar));}
+    {(yyval.uNode)=creerNodeString(HEXADECIMAL, getNull(), getNull(), (yyvsp[(1) - (1)].uChar));;}
     break;
 
   case 127:
 #line 547 "idl2matlab.y"
-    {(yyval.uNode)=creerNodeString(OCTAL, getNull(), getNull(), (yyvsp[0].uChar));}
+    {(yyval.uNode)=creerNodeString(OCTAL, getNull(), getNull(), (yyvsp[(1) - (1)].uChar));;}
     break;
 
   case 128:
 #line 552 "idl2matlab.y"
-    {(yyval.uNode)=creerNodeInt(INTEGER, getNull(), getNull(), (yyvsp[0].uInt));}
+    {(yyval.uNode)=creerNodeInt(INTEGER, getNull(), getNull(), (yyvsp[(1) - (1)].uInt));;}
     break;
 
   case 129:
 #line 554 "idl2matlab.y"
-    {(yyval.uNode)=creerNodeDouble(REAL, getNull(), getNull(), (yyvsp[0].uReal));}
+    {(yyval.uNode)=creerNodeDouble(REAL, getNull(), getNull(), (yyvsp[(1) - (1)].uReal));;}
     break;
 
   case 130:
 #line 556 "idl2matlab.y"
-    {(yyval.uNode)=creerNodeString(IDENTIFIER, getNull(), getNull(), (yyvsp[0].uChar));}
+    {(yyval.uNode)=creerNodeString(IDENTIFIER, getNull(), getNull(), (yyvsp[(1) - (1)].uChar));;}
     break;
 
   case 131:
 #line 558 "idl2matlab.y"
-    {(yyval.uNode)=creerNodeNormalString(STRING, getNull(), getNull(), (yyvsp[0].uChar));}
+    {(yyval.uNode)=creerNodeNormalString(STRING, getNull(), getNull(), (yyvsp[(1) - (1)].uChar));;}
     break;
 
   case 132:
 #line 563 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(Catch,(yyvsp[0].uNode),getNull());}
+    {(yyval.uNode)=creerNode(Catch,(yyvsp[(3) - (3)].uNode),getNull());;}
     break;
 
   case 133:
 #line 568 "idl2matlab.y"
-    {(yyval.uNode)=creerNodeString(METHODE_CALL, (yyvsp[0].uNode), getNull(), (yyvsp[-3].uChar));}
+    {(yyval.uNode)=creerNodeString(METHODE_CALL, (yyvsp[(4) - (4)].uNode), getNull(), (yyvsp[(1) - (4)].uChar));;}
     break;
 
   case 134:
 #line 573 "idl2matlab.y"
-    {(yyval.uNode)=creerNodeString(METHODE_CALL, (yyvsp[0].uNode), getNull(), (yyvsp[-3].uChar));}
+    {(yyval.uNode)=creerNodeString(METHODE_CALL, (yyvsp[(4) - (4)].uNode), getNull(), (yyvsp[(1) - (4)].uChar));;}
     break;
 
   case 135:
 #line 578 "idl2matlab.y"
-    {(yyval.uNode)=creerNodeString(PROCEDURE_CALL,(yyvsp[0].uNode),getNull(),(yyvsp[-2].uChar));}
+    {(yyval.uNode)=creerNodeString(PROCEDURE_CALL,(yyvsp[(3) - (3)].uNode),getNull(),(yyvsp[(1) - (3)].uChar));;}
     break;
 
   case 136:
 #line 580 "idl2matlab.y"
-    {(yyval.uNode)=creerNodeString(PROCEDURE_CALL,getNull(),getNull(),(yyvsp[0].uChar));}
+    {(yyval.uNode)=creerNodeString(PROCEDURE_CALL,getNull(),getNull(),(yyvsp[(1) - (1)].uChar));;}
     break;
 
   case 137:
 #line 585 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(PARENTHESE,(yyvsp[-2].uNode),(yyvsp[0].uNode));}
+    {(yyval.uNode)=creerNode(PARENTHESE,(yyvsp[(2) - (4)].uNode),(yyvsp[(4) - (4)].uNode));;}
     break;
 
   case 138:
 #line 590 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(PARENTHESE,(yyvsp[-1].uNode),getNull());}
+    {(yyval.uNode)=creerNode(PARENTHESE,(yyvsp[(2) - (3)].uNode),getNull());;}
     break;
 
   case 139:
 #line 592 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(PARENTHESE,(yyvsp[-1].uNode),getNull());}
+    {(yyval.uNode)=creerNode(PARENTHESE,(yyvsp[(2) - (3)].uNode),getNull());;}
     break;
 
   case 140:
 #line 594 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(REF_STRUCT,(yyvsp[-1].uNode),getNull());}
+    {(yyval.uNode)=creerNode(REF_STRUCT,(yyvsp[(3) - (4)].uNode),getNull());;}
     break;
 
   case 141:
 #line 596 "idl2matlab.y"
-    {(yyval.uNode)=getNull();}
+    {(yyval.uNode)=getNull();;}
     break;
 
   case 142:
 #line 601 "idl2matlab.y"
-    {(yyval.uNode)=creerNodeString(FUNCTION_CALL_OU_REF_MATRIX,(yyvsp[-1].uNode),getNull(),(yyvsp[-3].uChar));}
+    {(yyval.uNode)=creerNodeString(FUNCTION_CALL_OU_REF_MATRIX,(yyvsp[(3) - (4)].uNode),getNull(),(yyvsp[(1) - (4)].uChar));;}
     break;
 
   case 143:
 #line 603 "idl2matlab.y"
-    {(yyval.uNode)=creerNodeString(FUNCTION_CALL_OU_REF_MATRIX,(yyvsp[-1].uNode),getNull(),(yyvsp[-3].uChar));}
+    {(yyval.uNode)=creerNodeString(FUNCTION_CALL_OU_REF_MATRIX,(yyvsp[(3) - (4)].uNode),getNull(),(yyvsp[(1) - (4)].uChar));;}
     break;
 
   case 144:
 #line 605 "idl2matlab.y"
-    {(yyval.uNode)=creerNodeString(FUNCTION_CALL,getNull(),getNull(),(yyvsp[-2].uChar));}
+    {(yyval.uNode)=creerNodeString(FUNCTION_CALL,getNull(),getNull(),(yyvsp[(1) - (3)].uChar));;}
     break;
 
   case 145:
 #line 611 "idl2matlab.y"
-    {(yyval.uNode)=(yyvsp[0].uNode);}
+    {(yyval.uNode)=(yyvsp[(1) - (1)].uNode);;}
     break;
 
   case 146:
 #line 613 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(SUITE_CALL_LIST,(yyvsp[-2].uNode),(yyvsp[0].uNode));}
+    {(yyval.uNode)=creerNode(SUITE_CALL_LIST,(yyvsp[(1) - (3)].uNode),(yyvsp[(3) - (3)].uNode));;}
     break;
 
   case 147:
 #line 618 "idl2matlab.y"
-    {(yyval.uNode)=(yyvsp[0].uNode);}
+    {(yyval.uNode)=(yyvsp[(1) - (1)].uNode);;}
     break;
 
   case 148:
 #line 620 "idl2matlab.y"
-    {(yyval.uNode)=creerNodeString(IDENTIFIER,(yyvsp[0].uNode),getNull(),(yyvsp[-2].uChar));}
+    {(yyval.uNode)=creerNodeString(IDENTIFIER,(yyvsp[(3) - (3)].uNode),getNull(),(yyvsp[(1) - (3)].uChar));;}
     break;
 
   case 149:
 #line 622 "idl2matlab.y"
-    {(yyval.uNode)=creerNodeString(IDENTIFIER,(yyvsp[0].uNode),getNull(),"I2M_EXTRA");}
+    {(yyval.uNode)=creerNodeString(IDENTIFIER,(yyvsp[(3) - (3)].uNode),getNull(),"I2M_EXTRA");;}
     break;
 
   case 150:
 #line 624 "idl2matlab.y"
-    {(yyval.uNode)=creerNodeString(IDENTIFIER,(yyvsp[0].uNode),getNull(),"I2M_REF_EXTRA");}
+    {(yyval.uNode)=creerNodeString(IDENTIFIER,(yyvsp[(3) - (3)].uNode),getNull(),"I2M_REF_EXTRA");;}
     break;
 
   case 151:
 #line 626 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(PARAM_MATRIX_ETOILE,getNull(),getNull());}
+    {(yyval.uNode)=creerNode(PARAM_MATRIX_ETOILE,getNull(),getNull());;}
     break;
 
   case 152:
 #line 628 "idl2matlab.y"
-    {(yyval.uNode)=creerNodeString(SUITE_CALL,getNull(),getNull(),(yyvsp[0].uChar));}
+    {(yyval.uNode)=creerNodeString(SUITE_CALL,getNull(),getNull(),(yyvsp[(2) - (2)].uChar));;}
     break;
 
   case 153:
 #line 630 "idl2matlab.y"
-    {(yyval.uNode)=creerNodeString(SUITE_CALL,getNull(),getNull(),"RETURN");}
+    {(yyval.uNode)=creerNodeString(SUITE_CALL,getNull(),getNull(),"RETURN");;}
     break;
 
   case 154:
 #line 632 "idl2matlab.y"
-    {(yyval.uNode)=(yyvsp[0].uNode);}
+    {(yyval.uNode)=(yyvsp[(1) - (1)].uNode);;}
     break;
 
   case 155:
 #line 637 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(STRUCTURE,(yyvsp[-1].uNode),getNull());}
+    {(yyval.uNode)=creerNode(STRUCTURE,(yyvsp[(2) - (3)].uNode),getNull());;}
     break;
 
   case 156:
 #line 639 "idl2matlab.y"
-    {(yyval.uNode)=creerNodeString(NAMED_STRUCTURE,(yyvsp[-1].uNode),getNull(),(yyvsp[-3].uChar));}
+    {(yyval.uNode)=creerNodeString(NAMED_STRUCTURE,(yyvsp[(4) - (5)].uNode),getNull(),(yyvsp[(2) - (5)].uChar));;}
     break;
 
   case 157:
 #line 641 "idl2matlab.y"
-    {(yyval.uNode)=creerNodeString(NAMED_STRUCTURE,(yyvsp[-1].uNode),getNull(),(yyvsp[-3].uChar));}
+    {(yyval.uNode)=creerNodeString(NAMED_STRUCTURE,(yyvsp[(4) - (5)].uNode),getNull(),(yyvsp[(2) - (5)].uChar));;}
     break;
 
   case 158:
 #line 643 "idl2matlab.y"
-    {(yyval.uNode)=creerNodeString(STRUCTURE,getNull(),getNull(), (yyvsp[-1].uChar));}
+    {(yyval.uNode)=creerNodeString(STRUCTURE,getNull(),getNull(), (yyvsp[(2) - (3)].uChar));;}
     break;
 
   case 159:
 #line 648 "idl2matlab.y"
-    {(yyval.uNode)=creerNodeString(SUITE_CONS,(yyvsp[0].uNode),getNull(),(yyvsp[-2].uChar));}
+    {(yyval.uNode)=creerNodeString(SUITE_CONS,(yyvsp[(3) - (3)].uNode),getNull(),(yyvsp[(1) - (3)].uChar));;}
     break;
 
   case 160:
 #line 650 "idl2matlab.y"
-    {(yyval.uNode)=creerNodeString(SUITE_CONS,getNull(),getNull(),(yyvsp[0].uChar));}
+    {(yyval.uNode)=creerNodeString(SUITE_CONS,getNull(),getNull(),(yyvsp[(2) - (2)].uChar));;}
     break;
 
   case 161:
 #line 652 "idl2matlab.y"
-    {(yyval.uNode)=creerNodeString(SUITE_CONS,(yyvsp[-2].uNode),(yyvsp[0].uNode),(yyvsp[-4].uChar));}
+    {(yyval.uNode)=creerNodeString(SUITE_CONS,(yyvsp[(3) - (5)].uNode),(yyvsp[(5) - (5)].uNode),(yyvsp[(1) - (5)].uChar));;}
     break;
 
   case 162:
 #line 654 "idl2matlab.y"
-    {(yyval.uNode)=creerNodeString(SUITE_CONS,getNull(),(yyvsp[0].uNode),(yyvsp[-2].uChar));}
+    {(yyval.uNode)=creerNodeString(SUITE_CONS,getNull(),(yyvsp[(4) - (4)].uNode),(yyvsp[(2) - (4)].uChar));;}
     break;
 
   case 163:
 #line 659 "idl2matlab.y"
-    {(yyval.uNode)=creerNodeString(OBJECT,(yyvsp[0].uNode),getNull(),(yyvsp[-1].uChar));}
+    {(yyval.uNode)=creerNodeString(OBJECT,(yyvsp[(3) - (3)].uNode),getNull(),(yyvsp[(2) - (3)].uChar));;}
     break;
 
   case 164:
 #line 661 "idl2matlab.y"
-    {(yyval.uNode)=creerNodeString(OBJECT,(yyvsp[0].uNode), (yyvsp[-2].uNode),(yyvsp[-3].uChar));}
+    {(yyval.uNode)=creerNodeString(OBJECT,(yyvsp[(6) - (6)].uNode), (yyvsp[(4) - (6)].uNode),(yyvsp[(3) - (6)].uChar));;}
     break;
 
   case 165:
 #line 663 "idl2matlab.y"
-    {(yyval.uNode)=(yyvsp[-1].uNode);}
+    {(yyval.uNode)=(yyvsp[(2) - (3)].uNode);;}
     break;
 
   case 166:
 #line 665 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(OBJECT,(yyvsp[-1].uNode),getNull());}
+    {(yyval.uNode)=creerNode(OBJECT,(yyvsp[(2) - (3)].uNode),getNull());;}
     break;
 
   case 167:
 #line 667 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(OBJECT,creerNode(OBJECT,(yyvsp[-3].uNode), (yyvsp[0].uNode)), (yyvsp[-2].uNode));}
+    {(yyval.uNode)=creerNode(OBJECT,creerNode(OBJECT,(yyvsp[(3) - (6)].uNode), (yyvsp[(6) - (6)].uNode)), (yyvsp[(4) - (6)].uNode));;}
     break;
 
   case 168:
 #line 672 "idl2matlab.y"
-    {(yyval.uNode)=(yyvsp[0].uNode);}
+    {(yyval.uNode)=(yyvsp[(2) - (2)].uNode);;}
     break;
 
   case 169:
 #line 674 "idl2matlab.y"
-    {(yyval.uNode)=(yyvsp[0].uNode);}
+    {(yyval.uNode)=(yyvsp[(1) - (1)].uNode);;}
     break;
 
   case 170:
 #line 676 "idl2matlab.y"
-    {(yyval.uNode)=(yyvsp[0].uNode);}
+    {(yyval.uNode)=(yyvsp[(2) - (2)].uNode);;}
     break;
 
   case 171:
 #line 685 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(REF_STRUCT_LIST,(yyvsp[-2].uNode),(yyvsp[0].uNode));}
+    {(yyval.uNode)=creerNode(REF_STRUCT_LIST,(yyvsp[(1) - (3)].uNode),(yyvsp[(3) - (3)].uNode));;}
     break;
 
   case 172:
 #line 687 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(REF_STRUCT,(yyvsp[-2].uNode),(yyvsp[0].uNode));}
+    {(yyval.uNode)=creerNode(REF_STRUCT,(yyvsp[(1) - (3)].uNode),(yyvsp[(3) - (3)].uNode));;}
     break;
 
   case 173:
 #line 689 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(REF_STRUCT_PARENTHESE,(yyvsp[-4].uNode),(yyvsp[-1].uNode));}
+    {(yyval.uNode)=creerNode(REF_STRUCT_PARENTHESE,(yyvsp[(1) - (5)].uNode),(yyvsp[(4) - (5)].uNode));;}
     break;
 
   case 174:
 #line 694 "idl2matlab.y"
-    {(yyval.uNode)=creerNodeString(IDENTIFIER_PARENTHESE,(yyvsp[-1].uNode),getNull(),(yyvsp[-3].uChar));}
+    {(yyval.uNode)=creerNodeString(IDENTIFIER_PARENTHESE,(yyvsp[(3) - (4)].uNode),getNull(),(yyvsp[(1) - (4)].uChar));;}
     break;
 
   case 175:
 #line 696 "idl2matlab.y"
-    {(yyval.uNode)=creerNodeString(IDENTIFIER_PARENTHESE,(yyvsp[-1].uNode),getNull(),(yyvsp[-3].uChar));}
+    {(yyval.uNode)=creerNodeString(IDENTIFIER_PARENTHESE,(yyvsp[(3) - (4)].uNode),getNull(),(yyvsp[(1) - (4)].uChar));;}
     break;
 
   case 176:
 #line 698 "idl2matlab.y"
-    {(yyval.uNode)=creerNodeString(IDENTIFIER,getNull(),getNull(),(yyvsp[0].uChar));}
+    {(yyval.uNode)=creerNodeString(IDENTIFIER,getNull(),getNull(),(yyvsp[(1) - (1)].uChar));;}
     break;
 
   case 177:
 #line 700 "idl2matlab.y"
-    {(yyval.uNode)=(yyvsp[0].uNode);}
+    {(yyval.uNode)=(yyvsp[(1) - (1)].uNode);;}
     break;
 
   case 178:
 #line 704 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(MATRIX,(yyvsp[-1].uNode),getNull());}
+    {(yyval.uNode)=creerNode(MATRIX,(yyvsp[(2) - (3)].uNode),getNull());;}
     break;
 
   case 179:
 #line 709 "idl2matlab.y"
-    {(yyval.uNode)=(yyvsp[0].uNode);}
+    {(yyval.uNode)=(yyvsp[(1) - (1)].uNode);;}
     break;
 
   case 180:
 #line 711 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(SUITE_MATRIX,(yyvsp[-2].uNode),(yyvsp[0].uNode));}
+    {(yyval.uNode)=creerNode(SUITE_MATRIX,(yyvsp[(1) - (3)].uNode),(yyvsp[(3) - (3)].uNode));;}
     break;
 
   case 181:
 #line 733 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(INTERVALLE,(yyvsp[-2].uNode),(yyvsp[0].uNode));}
+    {(yyval.uNode)=creerNode(INTERVALLE,(yyvsp[(1) - (3)].uNode),(yyvsp[(3) - (3)].uNode));;}
     break;
 
   case 182:
 #line 738 "idl2matlab.y"
-    {(yyval.uNode)=(yyvsp[0].uNode);}
+    {(yyval.uNode)=(yyvsp[(1) - (1)].uNode);;}
     break;
 
   case 183:
 #line 740 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(PARAM_MATRIX_ETOILE,getNull(),getNull());}
+    {(yyval.uNode)=creerNode(PARAM_MATRIX_ETOILE,getNull(),getNull());;}
     break;
 
   case 184:
 #line 746 "idl2matlab.y"
-    {(yyval.uNode)=creerNodeString(VAR_SYSTEM,getNull(),getNull(),(yyvsp[0].uChar));}
+    {(yyval.uNode)=creerNodeString(VAR_SYSTEM,getNull(),getNull(),(yyvsp[(2) - (2)].uChar));;}
     break;
 
   case 185:
 #line 748 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(VAR_SYSTEM,(yyvsp[0].uNode),getNull());}
+    {(yyval.uNode)=creerNode(VAR_SYSTEM,(yyvsp[(2) - (2)].uNode),getNull());;}
     break;
 
   case 186:
 #line 753 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(CASE_STATEMENT,(yyvsp[-5].uNode),creerNode(CASE_STATEMENT_SUITE,(yyvsp[-3].uNode),creerNode(CASE_ELSE,(yyvsp[-1].uNode),getNull())));}
+    {(yyval.uNode)=creerNode(CASE_STATEMENT,(yyvsp[(2) - (7)].uNode),creerNode(CASE_STATEMENT_SUITE,(yyvsp[(4) - (7)].uNode),creerNode(CASE_ELSE,(yyvsp[(6) - (7)].uNode),getNull())));;}
     break;
 
   case 187:
 #line 755 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(CASE_STATEMENT,(yyvsp[-6].uNode),creerNode(CASE_STATEMENT_SUITE,creerNode(COMMENTSTATEMENT,(yyvsp[-4].uNode),(yyvsp[-3].uNode)),creerNode(CASE_ELSE,(yyvsp[-1].uNode),getNull())));}
+    {(yyval.uNode)=creerNode(CASE_STATEMENT,(yyvsp[(2) - (8)].uNode),creerNode(CASE_STATEMENT_SUITE,creerNode(COMMENTSTATEMENT,(yyvsp[(4) - (8)].uNode),(yyvsp[(5) - (8)].uNode)),creerNode(CASE_ELSE,(yyvsp[(7) - (8)].uNode),getNull())));;}
     break;
 
   case 188:
 #line 757 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(CASE_STATEMENT,(yyvsp[-3].uNode),creerNode(CASE_STATEMENT_SUITE,(yyvsp[-1].uNode),getNull()));}
+    {(yyval.uNode)=creerNode(CASE_STATEMENT,(yyvsp[(2) - (5)].uNode),creerNode(CASE_STATEMENT_SUITE,(yyvsp[(4) - (5)].uNode),getNull()));;}
     break;
 
   case 189:
 #line 759 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(CASE_STATEMENT,(yyvsp[-4].uNode),creerNode(CASE_STATEMENT_SUITE,creerNode(COMMENTSTATEMENT,(yyvsp[-2].uNode),(yyvsp[-1].uNode)),getNull()));}
+    {(yyval.uNode)=creerNode(CASE_STATEMENT,(yyvsp[(2) - (6)].uNode),creerNode(CASE_STATEMENT_SUITE,creerNode(COMMENTSTATEMENT,(yyvsp[(4) - (6)].uNode),(yyvsp[(5) - (6)].uNode)),getNull()));;}
     break;
 
   case 190:
 #line 764 "idl2matlab.y"
-    {(yyval.uNode)=getNull();}
+    {(yyval.uNode)=getNull();;}
     break;
 
   case 191:
 #line 766 "idl2matlab.y"
-    {(yyval.uNode)=getNull();}
+    {(yyval.uNode)=getNull();;}
     break;
 
   case 192:
 #line 771 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(CASE_SUITE,(yyvsp[0].uNode), creerNode(CASE,(yyvsp[-2].uNode),
-      	  creerNode(STATEMENT_LIST, getNull(), getNull())));}
+    {(yyval.uNode)=creerNode(CASE_SUITE,(yyvsp[(3) - (3)].uNode), creerNode(CASE,(yyvsp[(1) - (3)].uNode),
+      	  creerNode(STATEMENT_LIST, getNull(), getNull())));;}
     break;
 
   case 193:
 #line 774 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(CASE_SUITE,(yyvsp[0].uNode), creerNode(CASE,(yyvsp[-3].uNode),
-      	  creerNode(STATEMENT_LIST, (yyvsp[-1].uNode), getNull())));}
+    {(yyval.uNode)=creerNode(CASE_SUITE,(yyvsp[(4) - (4)].uNode), creerNode(CASE,(yyvsp[(1) - (4)].uNode),
+      	  creerNode(STATEMENT_LIST, (yyvsp[(3) - (4)].uNode), getNull())));;}
     break;
 
   case 194:
 #line 777 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(CASE_SUITE,(yyvsp[0].uNode), creerNode(CASE,(yyvsp[-3].uNode),(yyvsp[-1].uNode)));}
+    {(yyval.uNode)=creerNode(CASE_SUITE,(yyvsp[(4) - (4)].uNode), creerNode(CASE,(yyvsp[(1) - (4)].uNode),(yyvsp[(3) - (4)].uNode)));;}
     break;
 
   case 195:
 #line 779 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(CASE,(yyvsp[-2].uNode),(yyvsp[0].uNode));}
+    {(yyval.uNode)=creerNode(CASE,(yyvsp[(1) - (3)].uNode),(yyvsp[(3) - (3)].uNode));;}
     break;
 
   case 196:
 #line 784 "idl2matlab.y"
-    {(yyval.uNode) = creerNode(STATEMENT_LIST, getNull(), getNull());}
+    {(yyval.uNode) = creerNode(STATEMENT_LIST, getNull(), getNull());;}
     break;
 
   case 197:
 #line 786 "idl2matlab.y"
-    {(yyval.uNode) = (yyvsp[-1].uNode);}
+    {(yyval.uNode) = (yyvsp[(2) - (3)].uNode);;}
     break;
 
   case 198:
 #line 788 "idl2matlab.y"
-    {(yyval.uNode) = creerNode(STATEMENT_LIST, getNull(), (yyvsp[0].uNode));}
+    {(yyval.uNode) = creerNode(STATEMENT_LIST, getNull(), (yyvsp[(1) - (1)].uNode));;}
     break;
 
   case 199:
 #line 801 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(If,(yyvsp[-2].uNode),creerNode(Then,(yyvsp[0].uNode),getNull()));}
+    {(yyval.uNode)=creerNode(If,(yyvsp[(2) - (4)].uNode),creerNode(Then,(yyvsp[(4) - (4)].uNode),getNull()));;}
     break;
 
   case 200:
 #line 803 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(If,(yyvsp[-3].uNode),creerNode(Then,(yyvsp[-1].uNode),creerNode(Else,(yyvsp[0].uNode),getNull())));}
+    {(yyval.uNode)=creerNode(If,(yyvsp[(2) - (5)].uNode),creerNode(Then,(yyvsp[(4) - (5)].uNode),creerNode(Else,(yyvsp[(5) - (5)].uNode),getNull())));;}
     break;
 
   case 201:
 #line 808 "idl2matlab.y"
-    {(yyval.uNode)=(yyvsp[0].uNode);}
+    {(yyval.uNode)=(yyvsp[(2) - (2)].uNode);;}
     break;
 
   case 202:
 #line 815 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(WHILE,(yyvsp[-2].uNode),(yyvsp[0].uNode));}
+    {(yyval.uNode)=creerNode(WHILE,(yyvsp[(2) - (4)].uNode),(yyvsp[(4) - (4)].uNode));;}
     break;
 
   case 203:
 #line 820 "idl2matlab.y"
-    {(yyval.uNode)=creerNode(REPEAT_STATEMENT,(yyvsp[-2].uNode),(yyvsp[0].uNode));}
+    {(yyval.uNode)=creerNode(REPEAT_STATEMENT,(yyvsp[(2) - (4)].uNode),(yyvsp[(4) - (4)].uNode));;}
     break;
 
   case 204:
 #line 825 "idl2matlab.y"
     {(yyval.uNode)=creerNode(FOR,creerNode(FOR_COND,
-      creerNodeString(FOR_COND,(yyvsp[-6].uNode),(yyvsp[-4].uNode),(yyvsp[-8].uChar)),(yyvsp[-2].uNode)),(yyvsp[0].uNode));}
+      creerNodeString(FOR_COND,(yyvsp[(4) - (10)].uNode),(yyvsp[(6) - (10)].uNode),(yyvsp[(2) - (10)].uChar)),(yyvsp[(8) - (10)].uNode)),(yyvsp[(10) - (10)].uNode));;}
     break;
 
   case 205:
 #line 828 "idl2matlab.y"
     {(yyval.uNode)=creerNode(FOR,creerNode(FOR_COND,
-      creerNodeString(FOR_COND,(yyvsp[-4].uNode),(yyvsp[-2].uNode),(yyvsp[-6].uChar)),getNull()),(yyvsp[0].uNode));}
+      creerNodeString(FOR_COND,(yyvsp[(4) - (8)].uNode),(yyvsp[(6) - (8)].uNode),(yyvsp[(2) - (8)].uChar)),getNull()),(yyvsp[(8) - (8)].uNode));;}
     break;
 
   case 206:
 #line 834 "idl2matlab.y"
-    {(yyval.uNode)=getNull();}
+    {(yyval.uNode)=getNull();;}
     break;
 
   case 207:
 #line 836 "idl2matlab.y"
-    {(yyval.uNode)=getNull();}
+    {(yyval.uNode)=getNull();;}
     break;
 
   case 208:
 #line 838 "idl2matlab.y"
-    {(yyval.uNode)=getNull();}
+    {(yyval.uNode)=getNull();;}
     break;
 
   case 209:
 #line 840 "idl2matlab.y"
-    {(yyval.uNode)=getNull();}
+    {(yyval.uNode)=getNull();;}
     break;
 
   case 210:
 #line 842 "idl2matlab.y"
-    {(yyval.uNode)=getNull();}
+    {(yyval.uNode)=getNull();;}
     break;
 
   case 211:
 #line 844 "idl2matlab.y"
-    {(yyval.uNode)=getNull();}
+    {(yyval.uNode)=getNull();;}
     break;
 
   case 212:
 #line 860 "idl2matlab.y"
-    {(yyval.uNode)=creerNodeString(ASSIGNMENT,(yyvsp[-2].uNode),(yyvsp[0].uNode),"=");}
+    {(yyval.uNode)=creerNodeString(ASSIGNMENT,(yyvsp[(1) - (3)].uNode),(yyvsp[(3) - (3)].uNode),"=");;}
     break;
 
   case 213:
 #line 862 "idl2matlab.y"
-    {(yyval.uNode)=creerNodeString(ASSIGNMENT,(yyvsp[-2].uNode),(yyvsp[0].uNode),"+=");}
+    {(yyval.uNode)=creerNodeString(ASSIGNMENT,(yyvsp[(1) - (3)].uNode),(yyvsp[(3) - (3)].uNode),"+=");;}
     break;
 
   case 214:
 #line 864 "idl2matlab.y"
-    {(yyval.uNode)=creerNodeString(ASSIGNMENT,(yyvsp[-2].uNode),(yyvsp[0].uNode),"##=");}
+    {(yyval.uNode)=creerNodeString(ASSIGNMENT,(yyvsp[(1) - (3)].uNode),(yyvsp[(3) - (3)].uNode),"##=");;}
     break;
 
   case 215:
 #line 866 "idl2matlab.y"
-    {(yyval.uNode)=creerNodeString(ASSIGNMENT,(yyvsp[-2].uNode),(yyvsp[0].uNode),"#=");}
+    {(yyval.uNode)=creerNodeString(ASSIGNMENT,(yyvsp[(1) - (3)].uNode),(yyvsp[(3) - (3)].uNode),"#=");;}
     break;
 
   case 216:
 #line 868 "idl2matlab.y"
-    {(yyval.uNode)=creerNodeString(ASSIGNMENT,(yyvsp[-2].uNode),(yyvsp[0].uNode),"*=");}
+    {(yyval.uNode)=creerNodeString(ASSIGNMENT,(yyvsp[(1) - (3)].uNode),(yyvsp[(3) - (3)].uNode),"*=");;}
     break;
 
   case 217:
 #line 870 "idl2matlab.y"
-    {(yyval.uNode)=creerNodeString(ASSIGNMENT,(yyvsp[-2].uNode),(yyvsp[0].uNode),"-=");}
+    {(yyval.uNode)=creerNodeString(ASSIGNMENT,(yyvsp[(1) - (3)].uNode),(yyvsp[(3) - (3)].uNode),"-=");;}
     break;
 
   case 218:
 #line 872 "idl2matlab.y"
-    {(yyval.uNode)=creerNodeString(ASSIGNMENT,(yyvsp[-2].uNode),(yyvsp[0].uNode),"/=");}
+    {(yyval.uNode)=creerNodeString(ASSIGNMENT,(yyvsp[(1) - (3)].uNode),(yyvsp[(3) - (3)].uNode),"/=");;}
     break;
 
   case 219:
 #line 874 "idl2matlab.y"
-    {(yyval.uNode)=creerNodeString(ASSIGNMENT,(yyvsp[-2].uNode),(yyvsp[0].uNode),"<=");}
+    {(yyval.uNode)=creerNodeString(ASSIGNMENT,(yyvsp[(1) - (3)].uNode),(yyvsp[(3) - (3)].uNode),"<=");;}
     break;
 
   case 220:
 #line 876 "idl2matlab.y"
-    {(yyval.uNode)=creerNodeString(ASSIGNMENT,(yyvsp[-2].uNode),(yyvsp[0].uNode),">=");}
+    {(yyval.uNode)=creerNodeString(ASSIGNMENT,(yyvsp[(1) - (3)].uNode),(yyvsp[(3) - (3)].uNode),">=");;}
     break;
 
   case 221:
 #line 878 "idl2matlab.y"
-    {(yyval.uNode)=creerNodeString(ASSIGNMENT,(yyvsp[-2].uNode),(yyvsp[0].uNode),"AND=");}
+    {(yyval.uNode)=creerNodeString(ASSIGNMENT,(yyvsp[(1) - (3)].uNode),(yyvsp[(3) - (3)].uNode),"AND=");;}
     break;
 
   case 222:
 #line 880 "idl2matlab.y"
-    {(yyval.uNode)=creerNodeString(ASSIGNMENT,(yyvsp[-2].uNode),(yyvsp[0].uNode),"EQ=");}
+    {(yyval.uNode)=creerNodeString(ASSIGNMENT,(yyvsp[(1) - (3)].uNode),(yyvsp[(3) - (3)].uNode),"EQ=");;}
     break;
 
   case 223:
 #line 882 "idl2matlab.y"
-    {(yyval.uNode)=creerNodeString(ASSIGNMENT,(yyvsp[-2].uNode),(yyvsp[0].uNode),"GE=");}
+    {(yyval.uNode)=creerNodeString(ASSIGNMENT,(yyvsp[(1) - (3)].uNode),(yyvsp[(3) - (3)].uNode),"GE=");;}
     break;
 
   case 224:
 #line 884 "idl2matlab.y"
-    {(yyval.uNode)=creerNodeString(ASSIGNMENT,(yyvsp[-2].uNode),(yyvsp[0].uNode),"GT=");}
+    {(yyval.uNode)=creerNodeString(ASSIGNMENT,(yyvsp[(1) - (3)].uNode),(yyvsp[(3) - (3)].uNode),"GT=");;}
     break;
 
   case 225:
 #line 886 "idl2matlab.y"
-    {(yyval.uNode)=creerNodeString(ASSIGNMENT,(yyvsp[-2].uNode),(yyvsp[0].uNode),"LE=");}
+    {(yyval.uNode)=creerNodeString(ASSIGNMENT,(yyvsp[(1) - (3)].uNode),(yyvsp[(3) - (3)].uNode),"LE=");;}
     break;
 
   case 226:
 #line 888 "idl2matlab.y"
-    {(yyval.uNode)=creerNodeString(ASSIGNMENT,(yyvsp[-2].uNode),(yyvsp[0].uNode),"LT=");}
+    {(yyval.uNode)=creerNodeString(ASSIGNMENT,(yyvsp[(1) - (3)].uNode),(yyvsp[(3) - (3)].uNode),"LT=");;}
     break;
 
   case 227:
 #line 890 "idl2matlab.y"
-    {(yyval.uNode)=creerNodeString(ASSIGNMENT,(yyvsp[-2].uNode),(yyvsp[0].uNode),"MOD=");}
+    {(yyval.uNode)=creerNodeString(ASSIGNMENT,(yyvsp[(1) - (3)].uNode),(yyvsp[(3) - (3)].uNode),"MOD=");;}
     break;
 
   case 228:
 #line 892 "idl2matlab.y"
-    {(yyval.uNode)=creerNodeString(ASSIGNMENT,(yyvsp[-2].uNode),(yyvsp[0].uNode),"NE=");}
+    {(yyval.uNode)=creerNodeString(ASSIGNMENT,(yyvsp[(1) - (3)].uNode),(yyvsp[(3) - (3)].uNode),"NE=");;}
     break;
 
   case 229:
 #line 894 "idl2matlab.y"
-    {(yyval.uNode)=creerNodeString(ASSIGNMENT,(yyvsp[-2].uNode),(yyvsp[0].uNode),"OR=");}
+    {(yyval.uNode)=creerNodeString(ASSIGNMENT,(yyvsp[(1) - (3)].uNode),(yyvsp[(3) - (3)].uNode),"OR=");;}
     break;
 
   case 230:
 #line 896 "idl2matlab.y"
-    {(yyval.uNode)=creerNodeString(ASSIGNMENT,(yyvsp[-2].uNode),(yyvsp[0].uNode),"XOR=");}
+    {(yyval.uNode)=creerNodeString(ASSIGNMENT,(yyvsp[(1) - (3)].uNode),(yyvsp[(3) - (3)].uNode),"XOR=");;}
     break;
 
   case 231:
 #line 898 "idl2matlab.y"
-    {(yyval.uNode)=creerNodeString(ASSIGNMENT,(yyvsp[-2].uNode),(yyvsp[0].uNode),"^=");}
+    {(yyval.uNode)=creerNodeString(ASSIGNMENT,(yyvsp[(1) - (3)].uNode),(yyvsp[(3) - (3)].uNode),"^=");;}
     break;
 
   case 232:
 #line 900 "idl2matlab.y"
-    {(yyval.uNode)=creerNodeString(ASSIGNMENT,(yyvsp[0].uNode),getNull(),"++");}
+    {(yyval.uNode)=creerNodeString(ASSIGNMENT,(yyvsp[(1) - (1)].uNode),getNull(),"++");;}
     break;
 
   case 233:
 #line 905 "idl2matlab.y"
-    {(yyval.uNode)=creerNodeString(GESTION_ERREUR,getNull(),getNull(),(yyvsp[-1].uChar));}
+    {(yyval.uNode)=creerNodeString(GESTION_ERREUR,getNull(),getNull(),(yyvsp[(1) - (2)].uChar));;}
     break;
 
   case 234:
 #line 910 "idl2matlab.y"
-    {(yyval.uNode)= creerNode(COMMENTSTATEMENT,(yyvsp[-1].uNode),creerNodeString(ACOMMENT,getNull(),getNull(),(yyvsp[0].uChar)));}
+    {(yyval.uNode)= creerNode(COMMENTSTATEMENT,(yyvsp[(1) - (2)].uNode),creerNodeString(ACOMMENT,getNull(),getNull(),(yyvsp[(2) - (2)].uChar)));;}
     break;
 
   case 235:
 #line 912 "idl2matlab.y"
-    {(yyval.uNode)= creerNode(COMMENTSTATEMENT,(yyvsp[-1].uNode),creerNodeString(CR,getNull(),getNull(),(yyvsp[0].uChar)));}
+    {(yyval.uNode)= creerNode(COMMENTSTATEMENT,(yyvsp[(1) - (2)].uNode),creerNodeString(CR,getNull(),getNull(),(yyvsp[(2) - (2)].uChar)));;}
     break;
 
   case 236:
 #line 914 "idl2matlab.y"
-    {(yyval.uNode)= creerNodeString(ACOMMENT,getNull(),getNull(),(yyvsp[0].uChar));}
+    {(yyval.uNode)= creerNodeString(ACOMMENT,getNull(),getNull(),(yyvsp[(1) - (1)].uChar));;}
     break;
 
   case 237:
 #line 916 "idl2matlab.y"
-    {(yyval.uNode)= creerNodeString(CR,getNull(),getNull(),(yyvsp[0].uChar));}
+    {(yyval.uNode)= creerNodeString(CR,getNull(),getNull(),(yyvsp[(1) - (1)].uChar));;}
     break;
 
 
+/* Line 1267 of yacc.c.  */
+#line 3637 "idl2matlab.c"
+      default: break;
     }
+  YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
 
-/* Line 1037 of yacc.c.  */
-#line 3331 "y.tab.c"
-
-  yyvsp -= yylen;
-  yyssp -= yylen;
-
-
+  YYPOPSTACK (yylen);
+  yylen = 0;
   YY_STACK_PRINT (yyss, yyssp);
 
   *++yyvsp = yyval;
@@ -3361,66 +3668,41 @@ yyerrlab:
   if (!yyerrstatus)
     {
       ++yynerrs;
-#if YYERROR_VERBOSE
-      yyn = yypact[yystate];
-
-      if (YYPACT_NINF < yyn && yyn < YYLAST)
-	{
-	  YYSIZE_T yysize = 0;
-	  int yytype = YYTRANSLATE (yychar);
-	  const char* yyprefix;
-	  char *yymsg;
-	  int yyx;
-
-	  /* Start YYX at -YYN if negative to avoid negative indexes in
-	     YYCHECK.  */
-	  int yyxbegin = yyn < 0 ? -yyn : 0;
-
-	  /* Stay within bounds of both yycheck and yytname.  */
-	  int yychecklim = YYLAST - yyn;
-	  int yyxend = yychecklim < YYNTOKENS ? yychecklim : YYNTOKENS;
-	  int yycount = 0;
-
-	  yyprefix = ", expecting ";
-	  for (yyx = yyxbegin; yyx < yyxend; ++yyx)
-	    if (yycheck[yyx + yyn] == yyx && yyx != YYTERROR)
-	      {
-		yysize += yystrlen (yyprefix) + yystrlen (yytname [yyx]);
-		yycount += 1;
-		if (yycount == 5)
-		  {
-		    yysize = 0;
-		    break;
-		  }
-	      }
-	  yysize += (sizeof ("syntax error, unexpected ")
-		     + yystrlen (yytname[yytype]));
-	  yymsg = (char *) YYSTACK_ALLOC (yysize);
-	  if (yymsg != 0)
-	    {
-	      char *yyp = yystpcpy (yymsg, "syntax error, unexpected ");
-	      yyp = yystpcpy (yyp, yytname[yytype]);
-
-	      if (yycount < 5)
-		{
-		  yyprefix = ", expecting ";
-		  for (yyx = yyxbegin; yyx < yyxend; ++yyx)
-		    if (yycheck[yyx + yyn] == yyx && yyx != YYTERROR)
-		      {
-			yyp = yystpcpy (yyp, yyprefix);
-			yyp = yystpcpy (yyp, yytname[yyx]);
-			yyprefix = " or ";
-		      }
-		}
-	      yyerror (yymsg);
+#if ! YYERROR_VERBOSE
+      yyerror (YY_("syntax error"));
+#else
+      {
+	YYSIZE_T yysize = yysyntax_error (0, yystate, yychar);
+	if (yymsg_alloc < yysize && yymsg_alloc < YYSTACK_ALLOC_MAXIMUM)
+	  {
+	    YYSIZE_T yyalloc = 2 * yysize;
+	    if (! (yysize <= yyalloc && yyalloc <= YYSTACK_ALLOC_MAXIMUM))
+	      yyalloc = YYSTACK_ALLOC_MAXIMUM;
+	    if (yymsg != yymsgbuf)
 	      YYSTACK_FREE (yymsg);
-	    }
-	  else
-	    yyerror ("syntax error; also virtual memory exhausted");
-	}
-      else
-#endif /* YYERROR_VERBOSE */
-	yyerror ("syntax error");
+	    yymsg = (char *) YYSTACK_ALLOC (yyalloc);
+	    if (yymsg)
+	      yymsg_alloc = yyalloc;
+	    else
+	      {
+		yymsg = yymsgbuf;
+		yymsg_alloc = sizeof yymsgbuf;
+	      }
+	  }
+
+	if (0 < yysize && yysize <= yymsg_alloc)
+	  {
+	    (void) yysyntax_error (yymsg, yystate, yychar);
+	    yyerror (yymsg);
+	  }
+	else
+	  {
+	    yyerror (YY_("syntax error"));
+	    if (yysize != 0)
+	      goto yyexhaustedlab;
+	  }
+      }
+#endif
     }
 
 
@@ -3431,23 +3713,15 @@ yyerrlab:
 	 error, discard it.  */
 
       if (yychar <= YYEOF)
-        {
-          /* If at end of input, pop the error token,
-	     then the rest of the stack, then return failure.  */
+	{
+	  /* Return failure if at end of input.  */
 	  if (yychar == YYEOF)
-	     for (;;)
-	       {
-
-		 YYPOPSTACK;
-		 if (yyssp == yyss)
-		   YYABORT;
-		 yydestruct ("Error: popping",
-                             yystos[*yyssp], yyvsp);
-	       }
-        }
+	    YYABORT;
+	}
       else
 	{
-	  yydestruct ("Error: discarding", yytoken, &yylval);
+	  yydestruct ("Error: discarding",
+		      yytoken, &yylval);
 	  yychar = YYEMPTY;
 	}
     }
@@ -3462,15 +3736,17 @@ yyerrlab:
 `---------------------------------------------------*/
 yyerrorlab:
 
-#ifdef __GNUC__
-  /* Pacify GCC when the user code never invokes YYERROR and the label
-     yyerrorlab therefore never appears in user code.  */
-  if (0)
+  /* Pacify compilers like GCC when the user code never invokes
+     YYERROR and the label yyerrorlab therefore never appears in user
+     code.  */
+  if (/*CONSTCOND*/ 0)
      goto yyerrorlab;
-#endif
 
-yyvsp -= yylen;
-  yyssp -= yylen;
+  /* Do not reclaim the symbols of the rule which action triggered
+     this YYERROR.  */
+  YYPOPSTACK (yylen);
+  yylen = 0;
+  YY_STACK_PRINT (yyss, yyssp);
   yystate = *yyssp;
   goto yyerrlab1;
 
@@ -3500,8 +3776,9 @@ yyerrlab1:
 	YYABORT;
 
 
-      yydestruct ("Error: popping", yystos[yystate], yyvsp);
-      YYPOPSTACK;
+      yydestruct ("Error: popping",
+		  yystos[yystate], yyvsp);
+      YYPOPSTACK (1);
       yystate = *yyssp;
       YY_STACK_PRINT (yyss, yyssp);
     }
@@ -3512,7 +3789,7 @@ yyerrlab1:
   *++yyvsp = yylval;
 
 
-  /* Shift the error token. */
+  /* Shift the error token.  */
   YY_SYMBOL_PRINT ("Shifting", yystos[yyn], yyvsp, yylsp);
 
   yystate = yyn;
@@ -3530,28 +3807,43 @@ yyacceptlab:
 | yyabortlab -- YYABORT comes here.  |
 `-----------------------------------*/
 yyabortlab:
-  yydestruct ("Error: discarding lookahead",
-              yytoken, &yylval);
-  yychar = YYEMPTY;
   yyresult = 1;
   goto yyreturn;
 
 #ifndef yyoverflow
-/*----------------------------------------------.
-| yyoverflowlab -- parser overflow comes here.  |
-`----------------------------------------------*/
-yyoverflowlab:
-  yyerror ("parser stack overflow");
+/*-------------------------------------------------.
+| yyexhaustedlab -- memory exhaustion comes here.  |
+`-------------------------------------------------*/
+yyexhaustedlab:
+  yyerror (YY_("memory exhausted"));
   yyresult = 2;
   /* Fall through.  */
 #endif
 
 yyreturn:
+  if (yychar != YYEOF && yychar != YYEMPTY)
+     yydestruct ("Cleanup: discarding lookahead",
+		 yytoken, &yylval);
+  /* Do not reclaim the symbols of the rule which action triggered
+     this YYABORT or YYACCEPT.  */
+  YYPOPSTACK (yylen);
+  YY_STACK_PRINT (yyss, yyssp);
+  while (yyssp != yyss)
+    {
+      yydestruct ("Cleanup: popping",
+		  yystos[*yyssp], yyvsp);
+      YYPOPSTACK (1);
+    }
 #ifndef yyoverflow
   if (yyss != yyssa)
     YYSTACK_FREE (yyss);
 #endif
-  return yyresult;
+#if YYERROR_VERBOSE
+  if (yymsg != yymsgbuf)
+    YYSTACK_FREE (yymsg);
+#endif
+  /* Make sure YYID is used.  */
+  return YYID (yyresult);
 }
 
 

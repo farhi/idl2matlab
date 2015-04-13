@@ -22,7 +22,7 @@ extern int nb_lines ;
 #include <stdlib.h>
 #include <string.h>
 #include "type.h"
-#include "y.tab.h"
+#include "idl2matlab.h"
 
 char* lexError=NULL;
 int nbOccCharInString(char c, char * s);

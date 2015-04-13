@@ -1,0 +1,25 @@
+IDL2Matlab Changes
+
+31 July 2003: first dev-alpha release (idl2matlab-31_Jul_2003.zip)
+-------------------------------------
+Supplies an Intel/Linux binary (idl2matlab).
+Translate basic scripts (computations) but not efficient for graphics
+
+17 Nov 2003: second dev-alpha release (idl2matlab-17_Nov_2003.zip)
+-------------------------------------
+Has many enhancements/bug corrections in grammar and code generation
+Also is now supplied with a complete Matlab library, which may not work 100 %
+A Scilab library is given as experimental...
+
+11 march 2004: third dev-alpha release (idl2matlab-11_Mar_2004.zip)
+-------------------------------------
+Includes binaries for linux, OSF and SGI machines
+With full libraries
+
+20 march 2006: forth dev-alpha release (idl2matlab-20_Mar_2006.zip)
+-------------------------------------
+small bug fix. Better localization of library.
+
+13 June 2007: beta release (idl2matlab-13_Jun_2007.zip)
+-------------------------------------
+better portability. Windows and Linux executables.

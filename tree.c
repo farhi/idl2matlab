@@ -2,20 +2,19 @@
 *                                IDL2MATLAB Project
 *-----------------------------------------------------------------------------
 *   ILL (Institut Laue Langevin)
-*   
+*
 *   38000 GRENOBLE Cedex
 *-----------------------------------------------------------------------------
 *   Module              :       Abstract Tree
 *   Auteurs             :       Gardon Lucien
 *				Sylvestre Nadege
 *   Date creation       :       11 / 11 / 2001
-*   Modification        :     	23 / 05 / 2002   
-*                               
+*   Modification        :     	23 / 05 / 2002
+*
 *****************************************************************************/
 
-#include <stdio.h>
+
 #include "tree.h"
-#include "y.tab.h" /* on inclut les constantes definies dans le resultat de yacc */
 
 /* Construction de l'AA (Analyse) */
 
@@ -41,82 +40,82 @@ void printNodeType(Node *n) {
       printf("SUITE_PARAM         "); break;
     case  Catch:
       printf("CATCH               "); break;
-    case  PARAM	:		
+    case  PARAM	:
       printf("PARAM               "); break;
-    case  PARAM_EXTRA:		
+    case  PARAM_EXTRA:
       printf("PARAM_EXTRA         "); break;
-    case  PARAM_REF_EXTRA:		
-      printf("PARAM_REF_EXTRA     "); break; 
-    case  STATEMENT:		
-      printf("STATEMENT           "); break; 
-    case  STATEMENT_LIST:		
-      printf("STATEMENT_LIST      "); break; 
+    case  PARAM_REF_EXTRA:
+      printf("PARAM_REF_EXTRA     "); break;
+    case  STATEMENT:
+      printf("STATEMENT           "); break;
+    case  STATEMENT_LIST:
+      printf("STATEMENT_LIST      "); break;
     case  STATEMENT_LIST_ET:
       printf("STATEMENT_LIST_ET   "); break;
     case COMMENTSTATEMENT:
       printf("COMMENTSTATEMENT      "); break;
-    case  PARENTHESE:		
-      printf("PARENTHESE          "); break; 
-    case  AROBASE:			
-      printf("AROBASE             "); break; 
-    case  AROBASE_POINT	:	
-      printf("AROBASE_POINT       "); break; 
-    case  RETURN:			
-      printf("RETURN              "); break; 
-    case  PLUS	:		
+    case  PARENTHESE:
+      printf("PARENTHESE          "); break;
+    case  AROBASE:
+      printf("AROBASE             "); break;
+    case  AROBASE_POINT	:
+      printf("AROBASE_POINT       "); break;
+    case  RETURN:
+      printf("RETURN              "); break;
+    case  PLUS	:
       printf("PLUS                "); break;
-    case  MINUS	:		
-      printf("MINUS               "); break; 
-    case  PUISS	:		
-      printf("PUISS               "); break; 
+    case  MINUS	:
+      printf("MINUS               "); break;
+    case  PUISS	:
+      printf("PUISS               "); break;
     case  PROCEDURE_CALL:
       printf("PROCEDURE_CALL      "); break;
-    case  FUNCTION_CALL	:	
-      printf("FUNCTION_CALL       "); break; 
-    case  SUITE_CALL_LIST:		
-      printf("SUITE_CALL_LIST     "); break; 
-    case  SUITE_CALL:		
-      printf("SUITE_CALL          "); break; 
-    case  STRUCTURE:		
-      printf("STRUCTURE           "); break; 
+    case  FUNCTION_CALL	:
+      printf("FUNCTION_CALL       "); break;
+    case  SUITE_CALL_LIST:
+      printf("SUITE_CALL_LIST     "); break;
+    case  SUITE_CALL:
+      printf("SUITE_CALL          "); break;
+    case  STRUCTURE:
+      printf("STRUCTURE           "); break;
     case  SUITE_CONS:
       printf("SUITE_CONS          "); break;
     case  REF_STRUCT:
-      printf("REF_STRUCT          "); break; 
-    case  MATRIX:			
-      printf("MATRIX              "); break; 
-    case  SUITE_MATRIX	:	
-      printf("SUITE_MATRIX        "); break; 
-    case  REF_MATRIX	:	
-      printf("REF_MATRIX          "); break; 
-    case  PARAM_MATRIX_SUITE:	
-      printf("PARAM_MATRIX_SUITE  "); break; 
+      printf("REF_STRUCT          "); break;
+    case  MATRIX:
+      printf("MATRIX              "); break;
+    case  SUITE_MATRIX	:
+      printf("SUITE_MATRIX        "); break;
+    case  REF_MATRIX	:
+      printf("REF_MATRIX          "); break;
+    case  PARAM_MATRIX_SUITE:
+      printf("PARAM_MATRIX_SUITE  "); break;
     case  PARAM_MATRIX_ETOILE	:
-      printf("PARAM_MATRIX_ETOILE "); break; 
-    case  INTERVALLE	:	
+      printf("PARAM_MATRIX_ETOILE "); break;
+    case  INTERVALLE	:
       printf("INTERVALLE          "); break;
-    case  CROCHET	:		
-      printf("CROCHET             "); break; 
-    case  SUITE_EXPRESSION:	
-      printf("SUITE_EXPRESSION    "); break; 
+    case  CROCHET	:
+      printf("CROCHET             "); break;
+    case  SUITE_EXPRESSION:
+      printf("SUITE_EXPRESSION    "); break;
     case  FIN_IF	:
       printf("FIN_IF              "); break;
     case  VAR_SYSTEM:
-      printf("VAR_SYSTEM          "); break; 
-    case  FIN_ELSE	:	
+      printf("VAR_SYSTEM          "); break;
+    case  FIN_ELSE	:
       printf("FIN_ELSE            "); break;
     case  CASE_STATEMENT:
-      printf("CASE_STATEMENT      "); break; 
-    case  CASE_STATEMENT_SUITE:	
-      printf("CASE_STATEMENT_SUITE"); break; 
-    case  FIN_CASE:		
-      printf("FIN_CASE            "); break; 
-    case  CASE	:		
-      printf("CASE                "); break; 
-    case  CASE_ELSE:			
+      printf("CASE_STATEMENT      "); break;
+    case  CASE_STATEMENT_SUITE:
+      printf("CASE_STATEMENT_SUITE"); break;
+    case  FIN_CASE:
+      printf("FIN_CASE            "); break;
+    case  CASE	:
+      printf("CASE                "); break;
+    case  CASE_ELSE:
       printf("CASE_ELSE           "); break;
-    case  CASE_SUITE:		
-      printf("CASE_SUITE          "); break; 
+    case  CASE_SUITE:
+      printf("CASE_SUITE          "); break;
     case FUNCTION_CALL_OU_REF_MATRIX:
       printf("FUNCorMATR %s", (n->valNode).uString); break;
     case  NAME	: /* on ecrit ici l'identificateur contenu dans le noeud */
@@ -125,53 +124,53 @@ void printNodeType(Node *n) {
       } else {
   	printf("NAME                ");
       }
-      break; 
-    case  WHILE	:		
-      printf("WHILE               "); break; 
-    case  FIN_WHILE:		
-      printf("FIN_WHILE           "); break; 
-    case  REPEAT_STATEMENT:	
-      printf("REPEAT_STATEMENT    "); break; 
-    case  FIN_REPEAT:		
-      printf("FIN_REPEAT          "); break; 
+      break;
+    case  WHILE	:
+      printf("WHILE               "); break;
+    case  FIN_WHILE:
+      printf("FIN_WHILE           "); break;
+    case  REPEAT_STATEMENT:
+      printf("REPEAT_STATEMENT    "); break;
+    case  FIN_REPEAT:
+      printf("FIN_REPEAT          "); break;
     case  FOR:
-      printf("FOR                 "); break; 
-    case  FIN_FOR:			
-      printf("FIN_FOR             "); break; 
+      printf("FOR                 "); break;
+    case  FIN_FOR:
+      printf("FIN_FOR             "); break;
     case  FOR_COND:
       printf("FOR_COND            "); break;
     case  EXPRESSION_FAC:
-      printf("EXPRESSION_FAC      "); break; 
+      printf("EXPRESSION_FAC      "); break;
     case EXP_OU_FUNCALL:
-      printf("EXP_OU_FUNCALL      "); break; 
-    case  ASSIGNMENT:		  
+      printf("EXP_OU_FUNCALL      "); break;
+    case  ASSIGNMENT:
       printf("ASSIGNMENT : %s",(n->valNode).uString); break;
     case 	IDENTIFIER:
       printf("IDENT : %s",(n->valNode).uString); break;
     case 	INTEGER	:
       printf("INTEGER : %d   ",(n->valNode).uInt); break;
     case 	REAL	:
-      printf("REAL                "); break; 
+      printf("REAL                "); break;
     case 	DECIMAL	:
-      printf("DECIMAL             "); break; 
+      printf("DECIMAL             "); break;
     case 	HEXADECIMAL	:
-      printf("HEXADECIMAL         "); break; 
+      printf("HEXADECIMAL         "); break;
     case 	OCTAL	:
-      printf("OCTAL               "); break; 
+      printf("OCTAL               "); break;
     case 	STRING	:
       printf("STRING              "); break;
     case 	End	:
-      printf("End                 "); break; 
+      printf("End                 "); break;
     case 	Begin	:
-      printf("Begin               "); break; 
+      printf("Begin               "); break;
     case 	If	:
-      printf("If                  "); break; 
+      printf("If                  "); break;
     case 	Then	:
-      printf("Then                "); break; 
+      printf("Then                "); break;
     case 	Of	:
       printf("Of                  "); break;
-    case 	Or	: 
-      printf("Or                  "); break; 
+    case 	Or	:
+      printf("Or                  "); break;
     case ORSHORTCUT :
       printf("||                  "); break;
     case 	 Case	:
@@ -185,57 +184,57 @@ void printNodeType(Node *n) {
     case 	LE	:
       printf("LE                  "); break;
     case 	UMINUS	:
-      printf("UMINUS              "); break; 
+      printf("UMINUS              "); break;
     case 	UPLUS	:
-      printf("UPLUS               "); break; 
+      printf("UPLUS               "); break;
     case PlusPlus :
       printf("++                  "); break;
     case MoinsMoins :
       printf("--                  "); break;
     case 	GT	:
-      printf("GT                  "); break; 
+      printf("GT                  "); break;
     case GE	:
       printf("GE                  "); break;
     case EQ	:
-      printf("EQ                  "); break; 
+      printf("EQ                  "); break;
     case NE	:
-      printf("NE                  "); break; 
+      printf("NE                  "); break;
     case Pro	:
-      printf("Pro                 "); break; 
+      printf("Pro                 "); break;
     case Not	:
-      printf("Not                 "); break; 
+      printf("Not                 "); break;
     case TILDE	:
       printf("~                 "); break;
     case TIMES	:
       printf("TIMES               "); break;
     case SLASH	:
-      printf("SLASH               "); break; 
+      printf("SLASH               "); break;
     case Mod	:
-      printf("Mod                 "); break; 
+      printf("Mod                 "); break;
     case While	:
-      printf("While               "); break; 
+      printf("While               "); break;
     case Repeat	:
-      printf("Repeat              "); break; 
+      printf("Repeat              "); break;
     case For	:
-      printf("For                 "); break; 
+      printf("For                 "); break;
     case Endrep	:
-      printf("Endrep              "); break; 
+      printf("Endrep              "); break;
     case Endwhile:
-      printf("Endwhile            "); break; 
+      printf("Endwhile            "); break;
     case Endfor	:
-      printf("Endfor              "); break; 
+      printf("Endfor              "); break;
     case Do	:
-      printf("Do                  "); break; 
+      printf("Do                  "); break;
     case Until	:
-      printf("Until               "); break; 
+      printf("Until               "); break;
     case Assign	:
       printf("Assign              "); break;
     case Else	:
-      printf("Else                "); break; 
+      printf("Else                "); break;
     case Endelse	:
-      printf("Endelse             "); break; 
+      printf("Endelse             "); break;
     case Endif	:
-      printf("Endif               "); break; 
+      printf("Endif               "); break;
     case Function:
       printf("Function            "); break;
     case Common	:

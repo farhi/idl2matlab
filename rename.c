@@ -33,10 +33,10 @@ void loadReservedWord(void) {
   recType *rec;
   statusEnum err;
   if (inScilabTranslation==0) { /* traduction en matlab */
-    sprintf(renamePath,"%s%clib%cmatlablib%crenamematlab.dat",i2mDirName,PATHSEP,PATHSEP,PATHSEP);
+    sprintf(renamePath,"%s%cmatlablib%crenamematlab.dat",i2mDirName,PATHSEP,PATHSEP,PATHSEP);
     strcpy(functionTableFile,renamePath);	/* table des mots reserves */
   } else { /* traduction en scilab */
-    sprintf(renamePath,"%s%clib%cmatlablib%crenamescilab.dat",i2mDirName,PATHSEP,PATHSEP,PATHSEP);
+    sprintf(renamePath,"%s%cscilablib%crenamescilab.dat",i2mDirName,PATHSEP,PATHSEP,PATHSEP);
     strcpy(functionTableFile,renamePath);	/* table des mots reserves */
   }
 
@@ -46,38 +46,37 @@ void loadReservedWord(void) {
     /* fichier introuvable */
     fprintf(stderr, "File %s not found !\n", functionTableFile);
     exit(0);
-  } else {
-    while (! feof(fichero)) {
-      i = 0;
-      do {
-        c = fgetc(fichero);
-        strString[i] = c;
-        i++;
-      } while ((c != EOF) && (c != '\n'));
-      strString[i] = '\0';
-      rec = malloc(sizeof(recType));
-      rec->ptype = malloc(sizeof(type));
-      rec->name = (char*) malloc (strlen(strString)+15);
-      i=0;
-      while ((strString[i] != ';') && (strString[i] != '\0')) {
-        i++;
-      }
-      if (strString[i] != '\0') {
-        c = strString[i+1];
-        strString[i]='\0';
-        sprintf(rec->name, "RESERVED %s", strString);
-        if (c == '0') {
-          rec->ptype->num_type = RESERVED_VAR;
-        } else if (c == '1') {
-          rec->ptype->num_type = RESERVED_FUNCTION;
-        } else {
-          rec->ptype->num_type = RESERVED;
-        }
-        err = insert(rec);
-      } else {
-        free(rec);
-      }
-    }
-    fclose(fichero);
   }
+  while (! feof(fichero)) {
+    i = 0;
+    do {
+      c = fgetc(fichero);
+      strString[i] = c;
+      i++;
+    } while ((c != EOF) && (c != '\n'));
+    strString[i] = '\0';
+    rec = malloc(sizeof(recType));
+    rec->ptype = malloc(sizeof(type));
+    rec->name = (char*) malloc (strlen(strString)+15);
+    i=0;
+    while ((strString[i] != ';') && (strString[i] != '\0')) {
+      i++;
+    }
+    if (strString[i] != '\0') {
+      c = strString[i+1];
+      strString[i]='\0';
+      sprintf(rec->name, "RESERVED %s", strString);
+      if (c == '0') {
+        rec->ptype->num_type = RESERVED_VAR;
+      } else if (c == '1') {
+        rec->ptype->num_type = RESERVED_FUNCTION;
+      } else {
+        rec->ptype->num_type = RESERVED;
+      }
+      err = insert(rec);
+    } else {
+      free(rec);
+    }
+  }
+  fclose(fichero);
 }
