@@ -1,7 +1,7 @@
 # idl2matlab
 an IDL to Matlab/Scilab translator
 
-version 1.4 (March 20th 2006)
+version 1.4.1 (March 20th 2006)
 
 (c) Institut Laue-Langevin, Grenoble, France.
 --------------------------------------------------------------------------------
