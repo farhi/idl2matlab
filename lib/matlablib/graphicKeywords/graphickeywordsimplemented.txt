@@ -1,0 +1,27 @@
+background ... OK
+color ........ OK sauf dans AXIS,DRAW_ROI,ERASE
+charsize ..... OK  sauf dans AXIS
+charthick .... OK  sauf dans AXIS
+linestyle .... OK  sauf dans DRAW_ROI
+orientation .. OK  sauf dans DRAW_ROI et POLYFILL
+position ..... OK  sauf dans MAP_SET
+psym ......... OK  sauf dans DRAW_ROI, pas au point dans PLOTS
+symsize ...... OK  sauf dans DRAW_ROI, pas tout a fait au point dans PLOTS
+thick ........ OK  sauf dans AXIS, DRAW_ROI et POLYFILL
+ticklen ...... OK  sauf dans AXIS
+title ........ OK  sauf dans AXIS
+xminor ....... OK  sauf dans AXIS
+yminor ....... OK  sauf dans AXIS
+zminor ....... OK  sauf dans AXIS
+xtitle ....... OK  sauf dans AXIS
+ytitle ....... OK  sauf dans AXIS
+ztitle ....... OK  sauf dans AXIS
+
+
+
+
+
+
+
+
+

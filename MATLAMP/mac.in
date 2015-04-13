@@ -1,0 +1,30 @@
+;
+; Sets up and copies work-space stuff into simple arrays
+@lamp.cbk
+      nwk=''
+      x=0.0
+      y=0.0
+      w=0.0
+      if one ne 0 then out_wk=one
+      if two ne 0 then begin
+     	n_wk=strtrim(string(two),2)
+      	iii=execute('w_in = w' +n_wk)      
+      	iii=execute('n_in = n' +n_wk)
+      	iii=execute('pv_in= pv'+n_wk)       
+      	iii=execute('p_in = p' +n_wk)       
+      	iii=execute('x_in = x' +n_wk)
+      	iii=execute('y_in = y' +n_wk)
+      	iii=execute('z_in = z' +n_wk)
+      	iii=execute('e_in = e' +n_wk)
+      	
+;	set defaults      	
+      	n_out =n_in
+      	p_out =p_in
+      	pv_out=pv_in
+      	x_out =x_in
+      	y_out =y_in
+      	z_out =z_in
+      	e_out =e_in
+	endif
+;
+;done

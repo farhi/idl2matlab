@@ -1,0 +1,68 @@
+This file contains any messages produced by compilers while
+running configure, to aid debugging if configure makes a mistake.
+
+configure:552: checking for gcc
+configure:665: checking whether the C compiler (gcc  ) works
+configure:681: gcc -o conftest    conftest.c  1>&5
+configure:707: checking whether the C compiler (gcc  ) is a cross-compiler
+configure:712: checking whether we are using GNU C
+configure:721: gcc -E conftest.c
+configure:740: checking whether gcc accepts -g
+configure:776: checking for mawk
+configure:776: checking for gawk
+configure:810: checking for bison
+configure:841: checking how to run the C preprocessor
+configure:862: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:923: checking for flex
+configure:957: checking for yywrap in -lfl
+configure:976: gcc -o conftest -g -O2   conftest.c -lfl   1>&5
+configure:1029: checking for a BSD compatible install
+configure:1082: checking whether ln -s works
+configure:1103: checking whether make sets ${MAKE}
+configure:1132: checking for perl
+configure:1161: checking for latex
+configure:1190: checking for dvips
+configure:1219: checking for ANSI C header files
+configure:1232: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1299: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:1323: checking for sys/wait.h that is POSIX.1 compatible
+configure:1344: gcc -c -g -O2  conftest.c 1>&5
+configure:1368: checking for malloc.h
+configure:1378: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1368: checking for unistd.h
+configure:1378: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1406: checking for working const
+configure:1460: gcc -c -g -O2  conftest.c 1>&5
+configure:1481: checking for pid_t
+configure:1517: checking for working alloca.h
+configure:1529: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:1550: checking for alloca
+configure:1583: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:1751: checking for getcwd
+configure:1779: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:1751: checking for mkdir
+configure:1779: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:1751: checking for strerror
+configure:1779: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:1751: checking for strstr
+configure:1779: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:1820: gcc -c -g -O2  conftest.c 1>&5
+configure: In function `foo':
+configure:1814: `__builtin_va_alist' undeclared (first use in this function)
+configure:1814: (Each undeclared identifier is reported only once
+configure:1814: for each function it appears in.)
+configure: failed program was:
+#line 1805 "configure"
+#include "confdefs.h"
+
+#include <varargs.h>
+
+int main() {
+
+int foo(void *s, ...)
+{
+ va_list ap;
+ va_start(ap);
+}
+
+; return 0; }

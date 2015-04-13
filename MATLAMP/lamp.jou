@@ -1,0 +1,25 @@
+*******             
+SESSION            10-Sep-2003 09:49:37.00
+*******             
+RDSET,base="Current Path            
+SEE ,w=1 ,/image,/below            
+RDSET,inst="demo"            
+SEE ,w=1 ,/image,/beside            
+*******             
+SESSION            10-Sep-2003 09:54:37.00
+*******             
+RDSET,base="Current Path            
+RDSET,inst="demo"            
+SEE ,w=1 ,/image,/below            
+*******             
+SESSION            10-Sep-2003 09:55:03.00
+*******             
+RDSET,base="Current Path            
+RDSET,inst="demo"            
+SEE ,w=1 ,/image,/below            
+*******             
+SESSION            12-Sep-2003 19:04:31.00
+*******             
+RDSET,base="Current Path            
+RDSET,inst="demo"            
+SEE ,w=1 ,/image,/below            

@@ -1,0 +1,179 @@
+***********************
+IDL2SCILAB Version 3.8bis
+-----------------------
+
+Sauvegarde effectuée le 30 septembre 2003 à 11h00
+
+Le '&' est consideré comme un CR (\n).
+
+***********************
+IDL2SCILAB Version 3.8
+-----------------------
+
+Sauvegarde effectuée le 30 septembre 2003 à 10h00
+
+Correction des problemes d'indentation.
+Le '&' est toujours ignoré.
+
+***********************
+IDL2SCILAB Version 3.7
+-----------------------
+
+Sauvegarde effectuée le 29 septembre 2003 à 13h30
+
+Ajout d'un message " Line numbers refer to the file "results\idl2matlab_sourcefile.pro" !" au début du fichier log.
+
+***********************
+IDL2SCILAB Version 3.6
+-----------------------
+
+Sauvegarde effectuée le 29 septembre 2003 à 12h00
+
+Modifications de matlablib par Didier Richard.
+
+
+***********************
+IDL2SCILAB Version 3.5
+-----------------------
+
+Sauvegarde effectuée le 29 septembre 2003 à 9h00
+
+Correction d'une erreur lors de la traduction de code du style :
+case c of
+   1: if expr then if expr then statment_list
+else: statment_list
+endcase
+=> creation du lexeme : elseCase = [eE][lL][sS][eE]{space}*":"
+
+***********************
+IDL2SCILAB Version 3.4
+-----------------------
+
+Sauvegarde effectuée le 25 septembre 2003 à 13h45
+
+Correction du problème dans les CASE en prenant en compte 
+le \n lors de l'analyse lexicale
+
+présentation du code traduit :
+- problèmes d'indentation dans les CASE
+- problème de saut de ligne (trop nombreux).
+
+***********************
+IDL2SCILAB Version 3.3
+-----------------------
+
+Sauvegarde effectuee le 24 septembre 2003 à 11h15
+
+Correction du problème d'indentation dans les affectations de structures.
+
+Problèmes dans les case
+1/
+CASE truc of
+ 1: bidule = 5
+-1: bidule = 4
+ENDCASE
+
+actuellement mal traduit par
+switch(truc)
+  case 1,
+  case bidule = 5 - 1, bidule = 4
+end %switch
+2/
+  dans readxml : SYNTAX ERROR
+CASE strlowcase(tag(jj)) of
+       ON_IOERROR,misloop
+	 'nxmlfile': ....
+	 'nxentry': ....
+	...
+ENDCASE
+Cas non traite dans la grammaire actuelle
+
+
+***********************
+IDL2SCILAB Version 3.2
+-----------------------
+
+Sauvegarde effectuee le 22 septembre 2003 a 10h25
+
+Modifications de matlablib par Didier
+
+problème d'indentation dans les case pour la 1ère instruction 
+quand il y a une liste d'instructions entre Begin et End dans un case ou else
+case 'exemple' : begin
+inst1 ; comment
+inst2
+end
+
+***********************
+IDL2SCILAB Version 3.1
+-----------------------
+
+Sauvegarde effectuee le 19 septembre 2003 a 12h30
+
+Le traducteur accepte les nouveaux operateurs d'IDL6.0
+C'est-à-dire les opérateurs d'affectation (+=,/=,...)
+	     les nouveaux opérateurs logiques (&&,||,et ~)
+             les opérateurs ++ et -- 
+
+
+***********************
+IDL2SCILAB Version 3.0
+-----------------------
+
+Sauvegarde effectuee le 19 septembre 2003 a 10h10
+
+Le traducteur accepte les nouveaux opérateurs d'affectation de IDL6.0
+(+=, -=, *=, etc et les traduit tel quel)
+
+
+***********************
+IDL2SCILAB Version 2.9
+-----------------------
+
+Sauvegarde effectuee le 17 septembre 2003 a 15h15
+
+Le traducteur accepte les commentaires après le case of
+problème d'indentation dans le cas :
+
+case expr :
+ begin
+	statement_suite
+ end
+
+Correction du problème des variables renommées dans les structures.
+ex: d.log était renommé en d.M2I_log de temps en temps.
+
+
+***********************
+IDL2SCILAB Version 2.8
+-----------------------
+
+Sauvegarde effectuee le 16 septembre 2003 a 16h00
+
+Résolution du problème du ';' qui disparaissait à certains endroits.
+
+***********************
+IDL2SCILAB Version 2.7
+-----------------------
+
+Sauvegarde effectuee le 16 septembre 2003 a 15h25
+
+Version integrant les commentaires dans la grammaire
+Gere le cas $ ; ... autrement que par la grammaire (avec l'ancienne methode)
+
+Encore quelques problemes avec Bygeorge
+
+Probleme de set(gcf,'visible', ...) egalement
+cad que apres avoir lance Bygeorge, il faut faire set(gcf,'visible','on') pour voir la 
+fenetre.
+
+problème des unknown procedures corrigé
+
+- commentaires apres case of -> SYNTAX ERROR
+
+- ; disparait a certains endroits
+
+Correction du KG nodata => il y avait un probleme avec les limites des axes
+
+Affichage d'un warning lorsqu'on detecte un keyword dans une fonction ou procedure 
+dont le passage de parametres est cense etre simple (= 0 dans le lib.dat)

@@ -1,0 +1,6 @@
+//lib generation
+// Penser a generer les chemins en absolu
+genlib('libscilab','lib/scilablib/');
+
+
+

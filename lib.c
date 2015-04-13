@@ -1,5 +1,5 @@
 /******************************************************************************
-*                                IDL2MATLAB Project
+*                                IDL2SCILAB Project
 *-----------------------------------------------------------------------------
 *   ILL (Institut Laue Langevin)
 *
@@ -7,9 +7,11 @@
 *-----------------------------------------------------------------------------
 *   Module              :       Base de connaissance
 *   Auteurs             :       Gardon Lucien
-*				Sylvestre Nadege
+*                               Sylvestre Nadege
+*                               Cortina Stephane
+*                               Bourtembourg Reynald
 *   Date creation       :       29 / 04 / 2002
-*   Modification        :     	23 / 05 / 2002
+*   Modification        :     	25 / 08 / 2003
 *
 *****************************************************************************/
 
@@ -18,6 +20,7 @@
 #include <string.h>
 #include "type.h"
 #include "hashtable.h"
+#include "lib.h"
 
 /* Fichier contenant les information de traduction avancee */
 /* C'est un fichier texte */
@@ -28,27 +31,22 @@
 /* Charge le fichier contenant toutes les traductions connues des fonctions IDL */
 void loadFunctionsTranlations(void) {
   char strString[256];
+  char libPath[500]; /* chemin complet du fichier lib */
+	char strtmp[256];
   FILE *fichero;  /* pointeur sur le fichier d'informations */
   Node* n;
   int i, j, c;
   recType *rec;
   statusEnum err;
-  
-  #ifdef OS_UNIX
-   strcpy(functionTableFile2,"./lib/lib");	/* table de conversion de nom de fonctions */
+  if (inScilabTranslation==0) { /* traduction en matlab */
+    sprintf(libPath,"%s%clib%cmatlablib%clibmatlab.dat",i2mDirName,PATHSEP,PATHSEP,PATHSEP);
+    strcpy(functionTableFile2,libPath);	/* table des mots reserves */
+  } else { /* traduction en scilab */
+    sprintf(libPath,"%s%clib%cmatlablib%clibscilab.dat",i2mDirName,PATHSEP,PATHSEP,PATHSEP);
+    strcpy(functionTableFile2,libPath);	/* table des mots reserves */
+  }
 
-#endif
-#ifdef OS_WINDOWS
-   strcpy(functionTableFile2,".\\lib\\lib");	/* table de conversion de nom de fonctions */
-#endif
 
-
-	if (inScilabTranslation==0) { /* traduction en matlab */
-          strcat(functionTableFile2, "matlab.dat");
-	}
-	else { /* traduction en scilab */
-					strcat(functionTableFile2, "scilab.dat");
-	}
   /* on ouvre le fichier en lecture */
 	fichero = fopen( functionTableFile2, "r" );
   if( fichero == NULL ) {

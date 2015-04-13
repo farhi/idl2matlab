@@ -1,0 +1,162 @@
+Arbre abstrait : 
+->BLOCK                l:37 	->COMMENTSTATEMENT       l:37 	->ACOMMENT : ;=============================================================================== l:1 	->NULL
+  									->NULL
+  						->DECL_PROC: error_msg l:36 	->SUITE_PARAM          l:2 	->PARAM                l:2 	->IDENT : error_number l:2 	->NULL
+  																		->NULL
+  															->NULL
+  												->PARAM                l:2 	->IDENT : str1 l:2 	->NULL
+  																		->NULL
+  															->NULL
+  									->STATEMENT_LIST       l:36 	->STATEMENT_LIST       l:35 	->STATEMENT_LIST       l:9 	->NULL
+  																		->COMMENTSTATEMENT       l:9 	->COMMENTSTATEMENT       l:5 	->COMMENTSTATEMENT       l:4 	->COMMENTSTATEMENT       l:3 	->ACOMMENT : ; ============== l:2 	->NULL
+  																																	->NULL
+  																														->ACOMMENT : ;=============================================================================== l:3 	->NULL
+  																																	->NULL
+  																											->ACOMMENT : ; display error message identified by error_number l:4 	->NULL
+  																														->NULL
+  																								->ACOMMENT : ; l:5 	->NULL
+  																											->NULL
+  																					->COMMON_CASE          l:9 	->NULL
+  																								->IDENT : gc_wid l:9 	->NULL
+  																											->NULL
+  															->CASE_STATEMENT       l:34 	->IDENT : error_number l:9 	->NULL
+  																					->NULL
+  																		->CASE_STATEMENT_SUITE l:34 	->CASE_SUITE           l:33 	->CASE_SUITE           l:33 	->CASE_SUITE           l:33 	->CASE_SUITE           l:33 	->CASE_SUITE           l:33 	->CASE_SUITE           l:33 	->CASE_SUITE           l:33 	->CASE_SUITE           l:33 	->CASE_SUITE           l:33 	->CASE_SUITE           l:33 	->CASE_SUITE           l:33 	->CASE_SUITE           l:33 	->CASE                 l:33 	->INTEGER : 10    l:29 	->NULL
+  																																																															->NULL
+  																																																												->STATEMENT_LIST       l:33 	->NULL
+  																																																															->STATEMENT_LIST       l:32 	->STATEMENT_LIST       l:31 	->NULL
+  																																																																					->PROCEDURE_CALL       l:31 	->FUNCorMATR string l:31 	->DECIMAL              l:30 	->NULL
+  																																																																														->NULL
+  																																																																											->NULL
+  																																																																								->NULL
+  																																																																		->ASSIGNMENT : = l:32 	->IDENT : str l:31 	->NULL
+  																																																																								->NULL
+  																																																																					->STRING               l:31 	->NULL
+  																																																																								->NULL
+  																																																									->CASE                 l:33 	->INTEGER : 9    l:25 	->NULL
+  																																																															->NULL
+  																																																												->STATEMENT_LIST       l:29 	->NULL
+  																																																															->STATEMENT_LIST       l:28 	->STATEMENT_LIST       l:27 	->NULL
+  																																																																					->PROCEDURE_CALL       l:27 	->FUNCorMATR string l:27 	->DECIMAL              l:26 	->NULL
+  																																																																														->NULL
+  																																																																											->NULL
+  																																																																								->NULL
+  																																																																		->ASSIGNMENT : = l:28 	->IDENT : str l:27 	->NULL
+  																																																																								->NULL
+  																																																																					->STRING               l:27 	->NULL
+  																																																																								->NULL
+  																																																						->CASE                 l:33 	->INTEGER : 8    l:24 	->NULL
+  																																																												->NULL
+  																																																									->STATEMENT_LIST       l:25 	->NULL
+  																																																												->ASSIGNMENT : = l:25 	->IDENT : str l:24 	->NULL
+  																																																																		->NULL
+  																																																															->STRING               l:24 	->NULL
+  																																																																		->NULL
+  																																																			->CASE                 l:33 	->INTEGER : 7    l:22 	->NULL
+  																																																									->NULL
+  																																																						->STATEMENT_LIST       l:24 	->NULL
+  																																																									->COMMENTSTATEMENT       l:24 	->ASSIGNMENT : = l:23 	->IDENT : str l:22 	->NULL
+  																																																																		->NULL
+  																																																															->STRING               l:22 	->NULL
+  																																																																		->NULL
+  																																																												->ACOMMENT : ;str='use left mouse-button to define peak #'+strtrim(string(str1), 2) l:23 	->NULL
+  																																																															->NULL
+  																																																->CASE                 l:33 	->INTEGER : 6    l:21 	->NULL
+  																																																						->NULL
+  																																																			->STATEMENT_LIST       l:22 	->NULL
+  																																																						->ASSIGNMENT : = l:22 	->IDENT : str l:21 	->NULL
+  																																																												->NULL
+  																																																									->STRING               l:21 	->NULL
+  																																																												->NULL
+  																																													->CASE                 l:33 	->INTEGER : 5    l:20 	->NULL
+  																																																			->NULL
+  																																																->STATEMENT_LIST       l:21 	->NULL
+  																																																			->ASSIGNMENT : = l:21 	->IDENT : str l:20 	->NULL
+  																																																									->NULL
+  																																																						->PLUS                 l:21 	->PLUS                 l:20 	->STRING               l:20 	->NULL
+  																																																															->NULL
+  																																																												->FUNCorMATR string l:20 	->DECIMAL              l:20 	->NULL
+  																																																																		->NULL
+  																																																															->NULL
+  																																																									->STRING               l:20 	->NULL
+  																																																												->NULL
+  																																										->CASE                 l:33 	->INTEGER : 4    l:16 	->NULL
+  																																																->NULL
+  																																													->STATEMENT_LIST       l:20 	->NULL
+  																																																->STATEMENT_LIST       l:19 	->STATEMENT_LIST       l:18 	->NULL
+  																																																						->PROCEDURE_CALL       l:18 	->FUNCorMATR string l:18 	->DECIMAL              l:17 	->NULL
+  																																																															->NULL
+  																																																												->NULL
+  																																																									->NULL
+  																																																			->ASSIGNMENT : = l:19 	->IDENT : str l:18 	->NULL
+  																																																									->NULL
+  																																																						->STRING               l:18 	->NULL
+  																																																									->NULL
+  																																							->CASE                 l:33 	->INTEGER : 3    l:15 	->NULL
+  																																													->NULL
+  																																										->STATEMENT_LIST       l:16 	->NULL
+  																																													->ASSIGNMENT : = l:16 	->IDENT : str l:15 	->NULL
+  																																																			->NULL
+  																																																->STRING               l:15 	->NULL
+  																																																			->NULL
+  																																				->CASE                 l:33 	->INTEGER : 2    l:14 	->NULL
+  																																										->NULL
+  																																							->STATEMENT_LIST       l:15 	->NULL
+  																																										->ASSIGNMENT : = l:15 	->IDENT : str l:14 	->NULL
+  																																																->NULL
+  																																													->STRING               l:14 	->NULL
+  																																																->NULL
+  																																	->CASE                 l:33 	->INTEGER : 1    l:13 	->NULL
+  																																							->NULL
+  																																				->STATEMENT_LIST       l:14 	->NULL
+  																																							->ASSIGNMENT : = l:14 	->IDENT : str l:13 	->NULL
+  																																													->NULL
+  																																										->STRING               l:13 	->NULL
+  																																													->NULL
+  																														->CASE                 l:33 	->INTEGER : 0    l:12 	->NULL
+  																																				->NULL
+  																																	->STATEMENT_LIST       l:13 	->NULL
+  																																				->ASSIGNMENT : = l:13 	->IDENT : str l:12 	->NULL
+  																																										->NULL
+  																																							->STRING               l:12 	->NULL
+  																																										->NULL
+  																											->CASE                 l:33 	->ASSIGNMENT : = l:11 	->IDENT : str l:10 	->NULL
+  																																				->NULL
+  																																	->MINUS                l:11 	->PLUS                 l:11 	->INTEGER : 2    l:10 	->NULL
+  																																										->NULL
+  																																							->INTEGER : 1    l:10 	->NULL
+  																																										->NULL
+  																																				->INTEGER : 1    l:11 	->NULL
+  																																							->NULL
+  																														->STATEMENT_LIST       l:12 	->NULL
+  																																	->ASSIGNMENT : = l:12 	->IDENT : str l:11 	->NULL
+  																																							->NULL
+  																																				->IDENT : str1 l:12 	->NULL
+  																																							->NULL
+  																								->CASE                 l:33 	->UMINUS               l:10 	->INTEGER : 2    l:10 	->NULL
+  																																	->NULL
+  																														->NULL
+  																											->STATEMENT_LIST       l:33 	->NULL
+  																														->NULL
+  																					->CASE_ELSE            l:34 	->STATEMENT_LIST       l:34 	->NULL
+  																											->ASSIGNMENT : = l:34 	->IDENT : str l:33 	->NULL
+  																																	->NULL
+  																														->PLUS                 l:34 	->STRING               l:33 	->NULL
+  																																				->NULL
+  																																	->IDENT : error_number l:34 	->NULL
+  																																				->NULL
+  																								->NULL
+  												->PROCEDURE_CALL       l:36 	->SUITE_CALL_LIST      l:36 	->IDENT : bad_id l:35 	->IDENT : i l:35 	->NULL
+  																								->NULL
+  																					->NULL
+  																		->SUITE_CALL_LIST      l:36 	->IDENT : gw_err_lab l:35 	->NULL
+  																								->NULL
+  																					->IDENT : set_value l:36 	->IDENT : str l:36 	->NULL
+  																											->NULL
+  																								->NULL
+  															->NULL
+  			->NULL
+
+Fin Arbre abstrait
+/* Il n'y a que le nom du "common" */
+/* Il n'y a que le nom du "common" */

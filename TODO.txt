@@ -1,0 +1,17 @@
+################### TO DO ##################################
+- Fonction byte ne renvoie pas le meme resultat qu'IDL !?
+
+-Fonctions TV, TVSCL, pb qd on veut refaire un nouveau plot, sur l'axe precedent
+
+
+- Probleme d'indentation apres les case
+
+
+- Coherence des variables globales, renommage de certaines fonctions
+
+cas non encore traite :
+
+if expression COMMENT then ...
+
+COMMENT (qui peut etre un CR) dans les suite_call_list, dans les suite_param
+et dans les suite_iden (cas du common)

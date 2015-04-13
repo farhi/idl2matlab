@@ -1,14 +1,15 @@
 /******************************************************************************
-*                                IDL2MATLAB Project
+*                                IDL2SCILAB Project
 *-----------------------------------------------------------------------------
 *   ILL (Institut Laue Langevin)
 *
 *   38000 GRENOBLE Cedex
 *-----------------------------------------------------------------------------
-*   Module              :       Table des symbole
+*   Module              :       Table des symboles
 *   Auteurs             :       Gardon Lucien
+*                               Bourtembourg Reynald
 *   Date creation       :       08 / 10 / 2002
-*   Modification        :     	08 / 10 / 2002
+*   Modification        :     	25 / 08 / 2003
 *
 *****************************************************************************/
 
@@ -16,23 +17,29 @@
 #include <stdlib.h>
 #include <string.h>
 #include "hashtable.h"
+#include "rename.h"
 
-/* Fichier contenant les information de traduction simple */
-/* C'est un fichier texte */
-#ifdef OS_UNIX
-  const char* functionTableFile="./lib/rename.dat";
-#endif
-#ifdef OS_WINDOWS
-  const char* functionTableFile=".\\lib\\rename.dat";	/* table de conversion de nom de fonctions */
-#endif
+/*+ Fichier contenant les information de traduction simple +*/
+/*+ C'est un fichier texte +*/
+char functionTableFile[256];
 
-/* Charge la table des mots reserve dans la table de hachage */
+
+/*+ Charge la table des mots reserve dans la table de hachage +*/
 void loadReservedWord(void) {
   char strString[256];
+  char renamePath[500]; /* chemin complet du fichier rename */
   FILE *fichero;  /* pointeur sur le fichier d'informations */
   int i, c;
   recType *rec;
   statusEnum err;
+  if (inScilabTranslation==0) { /* traduction en matlab */
+    sprintf(renamePath,"%s%clib%cmatlablib%crenamematlab.dat",i2mDirName,PATHSEP,PATHSEP,PATHSEP);
+    strcpy(functionTableFile,renamePath);	/* table des mots reserves */
+  } else { /* traduction en scilab */
+    sprintf(renamePath,"%s%clib%cmatlablib%crenamescilab.dat",i2mDirName,PATHSEP,PATHSEP,PATHSEP);
+    strcpy(functionTableFile,renamePath);	/* table des mots reserves */
+  }
+
   /* on ouvre le fichier en lecture */
   fichero = fopen( functionTableFile, "r" );
   if( fichero == NULL ) {

@@ -13,7 +13,7 @@
 *                               
 *****************************************************************************/
 #ifndef TREE_H
-#define TREE_H
+ #define TREE_H
 
 #include "type.h"
 
@@ -93,6 +93,8 @@
 #define DECL_PROC_OBJ	        11074
 #define DECL_FUNC_OBJ	        11075 
 #define METHODE_CALL	        11076
+#define COMMENTSTATEMENT        11077
+#define STATEMENT_LIST_ET       11078
 
 
 

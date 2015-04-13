@@ -1,0 +1,6 @@
+pro mypro
+
+print,'Hello world'
+
+end
+

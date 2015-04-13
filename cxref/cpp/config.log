@@ -1,0 +1,45 @@
+This file contains any messages produced by compilers while
+running configure, to aid debugging if configure makes a mistake.
+
+configure:541: checking for gcc
+configure:654: checking whether the C compiler (gcc  ) works
+configure:670: gcc -o conftest    conftest.c  1>&5
+configure:696: checking whether the C compiler (gcc  ) is a cross-compiler
+configure:701: checking whether we are using GNU C
+configure:729: checking whether gcc accepts -g
+configure:765: checking for bison
+configure:796: checking how to run the C preprocessor
+configure:906: checking for a BSD compatible install
+configure:959: checking whether ln -s works
+configure:980: checking whether make sets ${MAKE}
+configure:1009: checking for ANSI C header files
+configure:1113: checking whether time.h and sys/time.h may both be included
+configure:1127: gcc -c -g -O2  conftest.c 1>&5
+configure:1151: checking for fcntl.h
+configure:1161: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1151: checking for malloc.h
+configure:1151: checking for sys/time.h
+configure:1161: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1151: checking for unistd.h
+configure:1151: checking for stdlib.h
+configure:1161: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1189: checking for working const
+configure:1264: checking for pid_t
+configure:1297: checking whether struct tm is in sys/time.h or time.h
+configure:1310: gcc -c -g -O2  conftest.c 1>&5
+configure:1331: checking size of int
+configure:1351: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:1371: checking size of long
+configure:1391: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:1414: checking for working alloca.h
+configure:1447: checking for alloca
+configure:1646: checking return type of signal handlers
+configure:1668: gcc -c -g -O2  conftest.c 1>&5
+configure:1687: checking for vprintf
+configure:1715: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:1794: checking for strerror
+configure:1794: checking for strstr
+configure:1794: checking for bcmp
+configure:1822: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:1851: checking if we can use gcc instead of cxref-cpp
+configure:1867: gcc -o conftest -g -O2   conftest.c  1>&5

@@ -1,0 +1,40 @@
+// Fichier de mots reserves pour Matlab 
+// derniere mise a jour le 24/07/2003
+//
+// Liste d'identificateurs reserves pour les fichiers traduits matlab
+// Les identificateurs du source IDL presents dans cette liste seront renommes
+//
+// Regles de syntaxe - 1 mot cle par ligne
+//    	      	     - Pas de majuscule
+//
+// Parametres
+//    0 = renommage pour les variables
+//    1 = renommage pour les functions/procedures
+//    2 = renommage pour tous
+//
+cdd;2
+fixt;2
+sizz;2
+maax;2
+miin;2
+sortt;2
+cloze;2
+atann;2
+rotat;2
+printt;2
+plott;2
+surfacee;2
+contourr;2
+axxis;2
+strung;2
+doubll;2
+strcomp;2
+transpos;2
+
+now;2
+rem;2
+var;2
+line;2
+
+datestr;2
+lasterr;2

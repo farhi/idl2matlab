@@ -51,6 +51,10 @@ void printNodeType(Node *n) {
       printf("STATEMENT           "); break; 
     case  STATEMENT_LIST:		
       printf("STATEMENT_LIST      "); break; 
+    case  STATEMENT_LIST_ET:
+      printf("STATEMENT_LIST_ET   "); break;
+    case COMMENTSTATEMENT:
+      printf("COMMENTSTATEMENT      "); break;
     case  PARENTHESE:		
       printf("PARENTHESE          "); break; 
     case  AROBASE:			
@@ -141,7 +145,7 @@ void printNodeType(Node *n) {
     case EXP_OU_FUNCALL:
       printf("EXP_OU_FUNCALL      "); break; 
     case  ASSIGNMENT:		  
-      printf("ASSIGNMENT          "); break;	
+      printf("ASSIGNMENT : %s",(n->valNode).uString); break;
     case 	IDENTIFIER:
       printf("IDENT : %s",(n->valNode).uString); break;
     case 	INTEGER	:
@@ -168,10 +172,14 @@ void printNodeType(Node *n) {
       printf("Of                  "); break;
     case 	Or	: 
       printf("Or                  "); break; 
+    case ORSHORTCUT :
+      printf("||                  "); break;
     case 	 Case	:
-      printf("Case                "); break; 
+      printf("Case                "); break;
     case 	And	:
       printf("And                 "); break;
+    case ANDSHORTCUT :
+      printf("&&                  "); break;
     case 	LT	:
       printf("LT                  "); break;
     case 	LE	:
@@ -180,10 +188,14 @@ void printNodeType(Node *n) {
       printf("UMINUS              "); break; 
     case 	UPLUS	:
       printf("UPLUS               "); break; 
+    case PlusPlus :
+      printf("++                  "); break;
+    case MoinsMoins :
+      printf("--                  "); break;
     case 	GT	:
       printf("GT                  "); break; 
     case GE	:
-      printf("GE                  "); break; \
+      printf("GE                  "); break;
     case EQ	:
       printf("EQ                  "); break; 
     case NE	:
@@ -192,6 +204,8 @@ void printNodeType(Node *n) {
       printf("Pro                 "); break; 
     case Not	:
       printf("Not                 "); break; 
+    case TILDE	:
+      printf("~                 "); break;
     case TIMES	:
       printf("TIMES               "); break;
     case SLASH	:
@@ -266,6 +280,10 @@ void printNodeType(Node *n) {
       printf("DIESE2              "); break;
     case COMPILE_OPT:
       printf("COMPILE_OPT         "); break;
+    case ACOMMENT:
+      printf("ACOMMENT : %s",(n->valNode).uString); break;
+    case CR:
+      printf("CR :                "); break;
   default:
     printf(" CAS NON TRAITE = %d", n->typeNode);
   }

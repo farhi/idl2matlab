@@ -1,0 +1,18 @@
+type.h leaf union {...} leaf
+type.h Node struct Node Node
+type.h PNode Node* PNode
+type.h Comment struct Comment Comment
+hashtable.h type_decl enum {...} type_decl
+hashtable.h type struct {...} type
+hashtable.h recType struct {...} recType
+hashtable.h hashIndexType int hashIndexType
+hashtable.h statusEnum enum {...} statusEnum
+hashtable.h nodeType struct nodeTag nodeType
+hashtable.h HashIndexType unsigned char HashIndexType
+lex.yy.c YY_BUFFER_STATE struct yy_buffer_state* YY_BUFFER_STATE
+lex.yy.c yy_size_t unsigned int yy_size_t
+lex.yy.c # struct yy_buffer_state
+lex.yy.c YY_CHAR unsigned char YY_CHAR
+lex.yy.c yy_state_type int yy_state_type
+idl2matlab.c YYSTYPE union {...} YYSTYPE
+code.c struct_indice struct {...} struct_indice

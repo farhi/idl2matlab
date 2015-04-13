@@ -9,8 +9,9 @@
 *   Auteurs             :       Gardon Lucien
 *                               Sylvestre Nadege
                                 Cortina Stephane
+                                Bourtembourg Reynald
 *   Date creation       :       02 / 04 / 2002
-*   Modification        :       23 / 05 / 2003
+*   Modification        :       25 / 08 / 2003
 *
 *****************************************************************************/
 
@@ -20,6 +21,7 @@
 #include "code.h"
 #include "hashtable.h"
 #include "table_symb.h"
+#include "type.h"
 
 /* definition de l'extension ds fichiers de sorties */
 #define OUTPUT_EXTENSION ".m"
@@ -32,23 +34,15 @@ extern char* lexError;
 extern FILE *yyin ;
   /* entree de yacc - on lui donne le fichier source */
 
-int nb_lines=1 ;
-	/* le numero de ligne dans le source, incremente dans le lex  */
-char outDir[256];
-	/* nom du repertoire cible */
-char logFileName[256];
-	/* nom du fichier log */
-char sourceFileName[256];
-	/* nom du fichier source */
-char outFileName[256];
-	/* nom du fichier cible */
-char sourceDirName[256];
-	/* repertoire source */
-char* stringTranslationResult;
-	/* chaine contenant la traduction */
-int hashTableSize = 256;
-	/* Taille de la hashtable */
-char oneFunctionName[256];
+int nb_lines=1 ;         	   /*+ le numero de ligne dans le source, incremente dans le lex  +*/
+char outDir[256];  	           /*+ nom du repertoire cible +*/
+char logFileName[256];   	   /*+ nom du fichier log +*/
+char sourceFileName[256];      /*+ nom du fichier source +*/
+char outFileName[256];         /*+ nom du fichier cible +*/
+char sourceDirName[256];       /*+ repertoire source +*/
+char* stringTranslationResult; /*+ chaine contenant la traduction +*/
+int hashTableSize = 256;       /*+ Taille de la hashtable +*/
+char oneFunctionName[256];     /*+ Nom de lafonction a traduire +*/
 
 char strTmp2[256];
 
@@ -81,10 +75,11 @@ static void usage () {
   printf ("\nOptions :\n") ;
   printf ("  -s for script files translation\n") ;
   printf ("  -S for string translation\n");
-  printf ("  -q to hide messages\n") ;
+  printf ("  -q to hide messages (quiet mode)\n") ;
   printf ("  -w to stop warnings writing\n");
-  printf ("  -t to print the abstract tree\n");
+  printf ("  -t to print the abstract tree (long output)\n");
   printf ("  -V to get idl2Matlab version\n");
+  printf ("  -A to get idl2Matlab authors\n");
   printf ("  -Tx to get x spaces for a tabulation x<10\n");
   printf ("  -f to translate only one function\n");
 	printf ("  -C to translate in Scilab (default : Matlab)\n");
@@ -149,18 +144,22 @@ void initParam(char* s) {
   if (containsChar(s,'V')==1) {
     /* Cas de l'affichage de la version */
     fprintf(stderr,"#####################################\n");
-    fprintf(stderr,"## IDL2Matlab - version %s ##\n", I2M_VERSION);
+    fprintf(stderr,"## IDL2Matlab %c version %s ##\n", PATHSEP, I2M_VERSION_2);
     fprintf(stderr,"#####################################\n");
   }
   if ((containsChar(s,'a')==1) || (containsChar(s,'A') == 1)) {
     /* Cas de l'affichage des auteurs */
     fprintf(stderr,"############################################\n");
-    fprintf(stderr,"## IDL2Matlab - version %s - by : ##\n", I2M_VERSION);
+    fprintf(stderr,"## IDL2Matlab - version %s        ##\n", I2M_VERSION_2);
+    fprintf(stderr,"##   Project by D. RICHARD and E.FARHI    ##\n");
+    fprintf(stderr,"##   (c) ILL, DS/CS 2001-2005             ##\n");
+    fprintf(stderr,"##                                        ##\n");
+    fprintf(stderr,"## Coders: version %s             ##\n", I2M_VERSION);
     fprintf(stderr,"##        AZIZI MOURIER Karim             ##\n");
     fprintf(stderr,"##       BENZEGHIOUA  ABDESLAM            ##\n");
     fprintf(stderr,"##           GARDON Lucien                ##\n");
     fprintf(stderr,"##         SYLVESTRE  Nadege              ##\n");
-		fprintf(stderr,"## Upgrade to - version %s - by : ##\n", I2M_VERSION_2);
+    fprintf(stderr,"## Upgrade to - version %s - by : ##\n", I2M_VERSION_2);
     fprintf(stderr,"##        BOURTEMBOURG Reynald            ##\n");
     fprintf(stderr,"##          CORTINA Stephane              ##\n");
     fprintf(stderr,"##         SZCZUCZAK  Nadege              ##\n");
@@ -187,6 +186,9 @@ void initParam(char* s) {
   }
   if (containsChar(s,'s')==1) {
     scriptFileTranslation = 1;        	/* traduction de script */
+  }
+  if (containsChar(s,'h')==1) {
+    usage ();        	/* help */
   }
   if (containsChar(s,'q')==1) {
     displayMessage = 0;    	      	/* affichage des messages si = 1 sinon 0 */
@@ -220,7 +222,7 @@ static char* getTargetFileName (char *s) {
 	if (inScilabTranslation != 1) { /* traduction en matlab */
     if (ok == 1) {	/* si on a trouve le slash on renvoie le nom du fichier */
 			int len = strlen(s) + 1;
-    	/* Allocation de la mémoire */
+    	/* Allocation de la mï¿½oire */
     	result = (char*)malloc(len*sizeof(char)+1);
     	strncpy(result, s, i+1);
     	result[i+1]='\0';
@@ -235,7 +237,7 @@ static char* getTargetFileName (char *s) {
 	else { /* traduction en scilab */
 		if (ok == 1) {	/* si on a trouve le slash on renvoie le nom du fichier */
 			int len = strlen(s) + 3;
-    	/* Allocation de la mémoire */
+    	/* Allocation de la mï¿½oire */
     	result = (char*)malloc(len*sizeof(char)+1);
     	strncpy(result, s, i+1);
     	result[i+1]='\0';
@@ -271,7 +273,7 @@ static char* getFileName (char *s)
 		else {
 			len = strlen(s) + 3;
 		}
-		/* Allocation de la mémoire */
+		/* Allocation de la mï¿½oire */
     result = (char*)malloc(len*sizeof(char)+1);
     j=-i-1;
     while (*s != '\0'){ /* on copie la fin de la chaine */
@@ -309,13 +311,14 @@ static char* getDirName (char *s) {
   }
   if (ok == 1) {	/* si on a trouve le slash on renvoie le nom du repertoire */
     int len = strlen(s) + 1;
-    /* Allocation de la mémoire */
+    /* Allocation de la mï¿½oire */
     result = (char*)malloc(len*sizeof(char)+1);
     strncpy(result, s, i+1);
     result[i+1]='\0';
   } else { /* si pas de repertoire on renvoie le repertoire courant (.) */
-    result = (char*)malloc(10);
-    strcpy(result,".");
+    result = (char*)malloc(256);
+
+    strcpy(result, getenv("IDL2MATLAB") ? getenv("IDL2MATLAB") : IDL2MATLAB);
   }
   return result;
 }
@@ -558,11 +561,14 @@ int main (int argc, char *argv[]) {
   nbGeneratedFile = 0;
   nbWarning = 0;
   strcpy(sourceDirName, getDirName(sourceFileName));
+  /* On stocke le repertoire dans lequel se trouve l'exe IDL2MATLAB */
+  strcpy(i2mDirName, getDirName(argv[0]));
 
   strToLower(oneFunctionName);
 
   if (displayMessage == 1) {   /* on affiche l'heure de debut */
     fprintf (stderr,"Started at : %s",ctime(&tnow));
+    fprintf (stderr,"Expecting idl2matlab library in %s%clib\n", i2mDirName, PATHSEP);
   }
 
   /* creation des fichiers logs et cibles avec test d acces */
@@ -577,7 +583,7 @@ int main (int argc, char *argv[]) {
   pFile = fopen(logFileName, "w"); /* on ecrase le fichier log d erreurs */
   if (pFile == NULL) {
     if (displayMessage == 1) {
-      fprintf (stderr,"Enable to write in the log file\n") ;
+      fprintf (stderr,"Unable to write in the log file\n") ;
     }    /* si on arrive pas ecrire dans le fichier log on arrete */
     exit(1);
   }
@@ -717,6 +723,17 @@ int main (int argc, char *argv[]) {
   }
 
   if (translationError==0) {
+    if (displayMessage == 1) { /* on affiche l'heure d'arret */
+      char buffer[1024];
+      char *ret=NULL;
+      ret=getcwd(buffer, 1024);
+      fprintf (stderr,"To execute:\n"
+      "1-Go into directory:\n  cd %s\n"
+      "1-Launch Matlab\n"
+      "2-Type at Matlab prompt: p=pwd; cd('%s'); i2m_install; cd(p);\n"
+      "3-Type the translated program name at Matlab prompt\n",
+      (ret ? buffer : "."), i2mDirName);
+    }
     return 1;
   } else {
     return 0;

@@ -7,9 +7,10 @@
 *-----------------------------------------------------------------------------
 *   Module              :       Symbol table
 *   Auteurs             :       Gardon Lucien
-*				Sylvestre Nadege
+*                               Sylvestre Nadege
+*                               Bourtembourg Reynald
 *   Date creation       :       15 / 11 / 2001
-*   Modification        :     	23 / 05 / 2002
+*   Modification        :       07 / 07 / 2003
 *
 *****************************************************************************/
 
@@ -27,12 +28,11 @@ int nb_lines;
 char *bloc_courant;
 
 
-/* fonction recursive traduisant un noeud precis */
-
-/* cette fonction parcours l'arbre abstrait par recurence sur les noeuds */
-/* Elle ajoute dans la table des symboles le nom des procedures et fonction */
-/* definies par l'utilisateur */
-/* Les autres elements seront ajoutes dynamiquement lors de la generation de code*/
+/*+ fonction recursive traduisant un noeud precis +*/
+/*+ cette fonction parcours l'arbre abstrait par recurence sur les noeuds +*/
+/*+ Elle ajoute dans la table des symboles le nom des procedures et fonction +*/
+/*+ definies par l'utilisateur +*/
+/*+ Les autres elements seront ajoutes dynamiquement lors de la generation de code+*/
 void parseTreeSymb(Node *n)
 {
  char* strTmp;
@@ -41,12 +41,12 @@ void parseTreeSymb(Node *n)
  if (n!=NULL) {
   switch(n->typeNode){
     case BLOCK:
-      	parseTreeSymb(n->fg);
-      	break;
+        parseTreeSymb(n->fg);
+        break;
     case DECLARATION_LIST:
-      	parseTreeSymb(n->fg);
-      	parseTreeSymb(n->fd);
-      	break;
+        parseTreeSymb(n->fg);
+        parseTreeSymb(n->fd);
+        break;
     case  DECLARATION_PROC:
       /* si l'identificateur est reserve alors => insertion special */
 
@@ -68,33 +68,41 @@ void parseTreeSymb(Node *n)
       insert(rec);
       break;
     case  COMMON_CASE :
-     	break;
+      break;
     case  SUITE_IDENT:
-    	break;
+      break;
     case  SUITE_PARAM:
       break;
-    case  PARAM	:
+    case  PARAM :
       break;
     case  PARAM_EXTRA:
-	    break;
+      break;
     case  PARAM_REF_EXTRA:
-	    break;
+      break;
     case  STATEMENT:
-      	break;
+        break;
     case  STATEMENT_LIST:
       parseTreeSymb(n->fg);
       parseTreeSymb(n->fd);
         break;
+    case COMMENTSTATEMENT:
+      parseTreeSymb(n->fg);
+      parseTreeSymb(n->fd);
+        break;
+    case ACOMMENT:
+        break;
+    case CR:
+         break;
     case  PARENTHESE:
-      	break;
+        break;
     case GESTION_ERREUR :
       break;
     case  AROBASE:
-    	break;
-    case  AROBASE_POINT	:
-	    break;
+      break;
+    case  AROBASE_POINT :
+      break;
     case  RETURN:
-	    break;
+      break;
     case Or :
     case And :
     case LT :
@@ -103,11 +111,11 @@ void parseTreeSymb(Node *n)
     case GE :
     case EQ :
     case NE :
-    case PLUS	:
-    case MINUS	:
-    case PUISS	:
+    case PLUS :
+    case MINUS  :
+    case PUISS  :
     case TIMES  :
-    case SLASH	:
+    case SLASH  :
     case Mod :
     case DIESE :
     case INF :
@@ -119,97 +127,97 @@ void parseTreeSymb(Node *n)
     case UPLUS :
       break ;
     case  PROCEDURE_CALL:
-    case  FUNCTION_CALL	:
+    case  FUNCTION_CALL :
       break;
     case  SUITE_CALL_LIST:
     case  SUITE_CALL:
-	    break;
+      break;
     case  STRUCTURE:
-	    break;
+      break;
     case  SUITE_CONS:
-	    break;
+      break;
     case  REF_STRUCT:
-	    break;
+      break;
     case  MATRIX:
-	    break;
-    case  SUITE_MATRIX	:
-	    break;
-    case  REF_MATRIX	:
-	    break;
+      break;
+    case  SUITE_MATRIX  :
+      break;
+    case  REF_MATRIX  :
+      break;
     case  PARAM_MATRIX_SUITE:
-	    break;
-    case  PARAM_MATRIX_ETOILE	:
-	    break;
-    case  INTERVALLE	:
-	    break;
-    case  CROCHET	:
-	    break;
+      break;
+    case  PARAM_MATRIX_ETOILE :
+      break;
+    case  INTERVALLE  :
+      break;
+    case  CROCHET :
+      break;
     case  SUITE_EXPRESSION:
-	    break;
-    case  FIN_IF	:
+      break;
+    case  FIN_IF  :
       break;
     case  VAR_SYSTEM:
-	    break;
-    case  FIN_ELSE	:
-	    break;
+      break;
+    case  FIN_ELSE  :
+      break;
     case  CASE_STATEMENT:
-	    break;
+      break;
     case  CASE_STATEMENT_SUITE:
-	    break;
+      break;
     case  FIN_CASE:
-    	break;
-    case  CASE	:
-	    parseTreeSymb(n->fd);
-	    break;
+      break;
+    case  CASE  :
+      parseTreeSymb(n->fd);
+      break;
     case  CASE_ELSE:
-	    break;
+      break;
     case  CASE_SUITE:
       break;
-    case  NAME	:
+    case  NAME  :
       break;
-    case  WHILE	:
+    case  WHILE :
       break;
     case  FIN_WHILE:
       break;
     case  REPEAT_STATEMENT:
       break;
     case  FIN_REPEAT:
-	    break;
+      break;
     case  FOR:
       break;
     case  FIN_FOR:
-	    break;
+      break;
     case  FOR_COND:
-    	break;
+      break;
     case  EXPRESSION_FAC:
-	    break;
+      break;
     case FUNCTION_CALL_OU_REF_MATRIX:
         break;
     case  ASSIGNMENT:
       break;
-    case IDENTIFIER 	:
+    case IDENTIFIER   :
       break;
-    case INTEGER	:
-    case REAL		:
-    case DECIMAL	:
-    case HEXADECIMAL	:
-    case OCTAL		:
-    case STRING		:
-    	break;
-    case If	:
+    case INTEGER  :
+    case REAL   :
+    case DECIMAL  :
+    case HEXADECIMAL  :
+    case OCTAL    :
+    case STRING   :
       break;
-    case Then	:
+    case If :
       break;
-    case Else	:
+    case Then :
       break;
-  default:
+    case Else :
+      break;
+  default: break;
 
   } /* en switch */
  }
 }
 
 
-/* fonction principale pour generer le code traduit */
+/*+ fonction principale pour generer le code traduit +*/
 void genererTableSymb ()
 {
   parseTreeSymb(root);

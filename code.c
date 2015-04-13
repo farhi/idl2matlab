@@ -1,5 +1,5 @@
 /******************************************************************************
-*                                IDL2MATLAB Project
+*                                IDL2SCILAB Project
 *-----------------------------------------------------------------------------
 *   ILL (Institut Laue Langevin)
 *
@@ -8,9 +8,10 @@
 *   Module              :       Code generation
 *   Auteurs             :       Gardon Lucien
 *                               Benzeghioua Abdeslam
-*								Cortina Stephane
+*                               Cortina Stephane
+*                               Bourtembourg Reynald
 *   Date creation       :       19 / 04 / 2002
-*   Modification        :       05 / 06 / 2003
+*   Modification        :       26 / 09 / 2003
 *
 *****************************************************************************/
 
@@ -28,80 +29,78 @@
 
 #define MAX_STR 50
 
-int tab;
-    /* tabulation courante - elle est modifiee par les fonction incTab et decTab */
+int tab;    /*+ tabulation courante - elle est modifiee par les fonction incTab et decTab +*/
 
+/*+  Variable de numerotation de variable - utilisee dans toutes les fonctions
+     construisant les parametres des fonctions
+ +*/
 int numVar;
-    /*  Variable de numerotation de variable - utilisee dans toutes les fonctions
-      	construisant les parametres des fonctions
-    */
+int numParamInCurProc; /* Le nombre de parametres de la procedure que l'on traite actuellement */
+
 extern int nb_lines;
 
-char strIdl2Matlab[1024]; /* contient le code Matlab de preparation des parametres */
+char strIdl2Matlab[1024]; /*+ contient le code Matlab de preparation des parametres +*/
 
-char outFile[256];
-	/* nom du fichier cible */
-char outDir[256];
-	/* nom du repertoire cible */
-char logFileName[256];
-	/* nom du fichier log */
-char sourceFileName[256];
-	/* nom du fichier source */
-char outFileName[256];
-	/* nom du fichier source */
-char sourceDirName[256];
-	/* nom du repertoire source */
-char* stringTranslationResult;
-  /* chaine contenant la traduction */
+char outFile[256];        /*+ nom du fichier cible +*/
+char outDir[256];         /*+ nom du repertoire cible +*/
+char logFileName[256];    /*+ nom du fichier log +*/
+char sourceFileName[256]; /*+ nom du fichier source +*/
+char outFileName[256];    /*+ nom du fichier source +*/
+char sourceDirName[256];  /*+ nom du repertoire source +*/
+char* stringTranslationResult;  /*+ chaine contenant la traduction +*/
 char oneFunctionName[256];
 
 FILE *pOutputFile, *pLogFile;
 
-int errExec; /* erreur pendant l execution du exec dans le arobase */
+int errExec; /*+ erreur pendant l execution du exec dans le arobase +*/
 
-/* Erreur renvoyee par la table des symboles */
+/*+ Erreur renvoyee par la table des symboles +*/
 statusEnum erreurHashTable;
-/* Erreur renvoyee par le systeme */
+/*+ Erreur renvoyee par le systeme +*/
 statusEnum err;
 
-/* variables locales  utilisees par parsetree */
-int inMatrix = 0;         /* vaut 1 si on est dans une matrix sinon 0 */
-int inRef_struct_list = 0;/* vaut 1 si on est dans une ref_struct_list sinon 0 */
-int inFunction = 0;       /* vaut 1 si on est dans une fonction sinon 0 */
-int inFunctionWithParam = 0; /* vaut 1 si on est dans une function avec parametres sinon 0 */
-int inProcWithParam = 0;	/* vaut 1 si on est dans une procedure avec parametres sinon 0 */
-int isFunctionCall = 0 ;   	/* vaut 1 si on est dans un appel de fonction sinon 0 */
-int common = 0;       	      	/* vaut 1 si on est dans un common sinon 0 */
-int appel_matrice_struct = 0;	/* vaut 1 si on est dans un appel de matrice sinon 0 */
-int inNamedCommon = 0;    	/* vaut 1 si on est dans un common nomme */
-int exp_for = 0;      	        /* vaut 1 si on est dans l'expression d'un "for" */
-int appelFonction = 0;	      	/* vaut 1 ou 0 selon la position de l'appel */
-      	      	      	      	/* vaut 1 si dans un assignement */
-int inCondStruct = 0;      	    /* vaut 1 si on est dans un if, while ... */
+/*+ variables locales  utilisees par parsetree +*/
+int inMatrix = 0;            /*+ vaut 1 si on est dans une matrix sinon 0 +*/
+int inRef_struct_list = 0;   /*+ vaut 1 si on est dans une ref_struct_list sinon 0 +*/
+int inFunction = 0;          /*+ vaut 1 si on est dans une fonction sinon 0 +*/
+int inFunctionWithParam = 0; /*+ vaut 1 si on est dans une fonction avec parametres sinon 0 +*/
+int inProcWithParam = 0;	   /*+ vaut 1 si on est dans une procedure avec parametres sinon 0 +*/
+int isFunctionCall = 0 ;     /*+ vaut 1 si on est dans un appel de fonction sinon 0 +*/
+int common = 0;              /*+ vaut 1 si on est dans un common sinon 0 +*/
+int appel_matrice_struct = 0;/*+ vaut 1 si on est dans un appel de matrice sinon 0 +*/
+int inNamedCommon = 0;       /*+ vaut 1 si on est dans un common nomme +*/
+int exp_for = 0;             /*+ vaut 1 si on est dans l'expression d'un "for" +*/
+/*+ vaut 1 ou 0 selon la position de l'appel +*/
+/*+ vaut 1 si dans un assignement +*/
+int appelFonction = 0;
+int inCondStruct = 0;        /*+ vaut 1 si on est dans un if, while ... +*/
 
-unsigned char printOnOff = 1;   /* indique si on ecrit (1) dans le fichier cible ou pas */
-
+unsigned char printOnOff = 1;/*+ indique si on ecrit (1) dans le fichier cible ou pas +*/
 int Pas_tab = 0;
-/* Tableau contenant l'ensemble des dimensions d'une matrice */
-/* TabDim[n] contient la n eme dimension */
+
+/*+ Tableau contenant l'ensemble des dimensions d'une matrice +*/
+/*+ TabDim[n] contient la n eme dimension +*/
 int TabDim[4096];
 
 char undeclaredVariables[4096];
 
-/* Longueur de TabDim */
+/*+ Longueur de TabDim +*/
 int indDim = 0;
 
-Node* nameAssignement;	  /* pointe vers le noeud devant un = */
-Node* catchVar[256];	  /* variable du Handle du catch */
-Node* catchExecNode[256]; /* instruction du catch */
+Node* nameAssignement;   /*+ pointe vers le noeud devant un =, +=, -=, ...(une affectation)+*/
+char opAssignment[10];   /*+ pour stocker le type d'operation associee a l'affectation en cours ("=", "+=", "*=", ...) +*/
+char *strTmpOp; /*+ Chaine de caractere utile pour stocker l'operateur avant de l'afficher dans le fichier de traduction +*/
+Node* catchVar[256];     /*+ variable du Handle du catch +*/
+Node* catchExecNode[256];/*+ instruction du catch +*/
 Node* ioErrNode[256];
-unsigned char catchCount; /* numero du catch courant */
+unsigned char catchCount;/*+ numero du catch courant +*/
 unsigned char ioErrCount;
 
 /*****************************************************************/
 /***  fonctions de premieres necessite   **/
 /*****************************************************************/
 
+/*+ libere un noeud +*/
 void freeNode(Node* n) {
   if (n != NULL) {
     freeNode(n->fg);
@@ -110,10 +109,10 @@ void freeNode(Node* n) {
   }
 }
 
-/* ouvre un fichier en lecture et lit la premiere ligne     */
-/* pstrline doit deja etre alloue pour recevoir le resultat */
+/*+ ouvre un fichier en lecture et lit la premiere ligne
+    pstrline doit deja etre alloue pour recevoir le resultat +*/
 int readLineInFile(char *pfileName, char *pstrLine) {
-  /* la fonction renvoie 0 si tout se passe bien et -1 sinon */
+  /*+ la fonction renvoie 0 si tout se passe bien et -1 sinon +*/
   FILE *fichero;
   int i, c;
 
@@ -137,10 +136,9 @@ int readLineInFile(char *pfileName, char *pstrLine) {
 }
 
 
-/* la chaine standard strIdl2Matlab  */
-/* prepare les valeur des parametres */
-/*  Cette suite de commande est placee en entete de chaque fonction et procedure cree
-    pour permettre de passer les parametre par adresse */
+/*+ la chaine standard strIdl2Matlab prepare les valeur des parametres
+ Cette suite de commande est placee en entete de chaque fonction et procedure cree
+ pour permettre de passer les parametres par adresse +*/
 void setString() {
     if (inScilabTranslation==0) {
   		strcpy(strIdl2Matlab, "  I2M_lst={}; I2M_out=''; lv=length(varargin); if rem(lv,2) ~= 0, I2M_ok=0; else, I2M_ok=1;\n");
@@ -150,17 +148,17 @@ void setString() {
 	}
 	else {
 
-		strcpy(strIdl2Matlab, "  I2M_lst=[];  I2M_out=[];  lv=length(varargin); if (~(modulo(lv,2)==0)), I2M_ok=0;  else,   I2M_ok=1;\n");
-		strcat(strIdl2Matlab, "  for I2M=1:2:lv, I2M_tmp=varargin(I2M);	if (typeof(I2M_tmp)~='string'); I2M_ok=0;break;	end;I2Mx=strindex(I2M_tmp,I2Mkwn); if length(I2Mx) ~=1;	I2M_ok=0;break;	end; str=string(I2Mkwv(I2Mx));	str=str+'=';str=str+string(varargin(I2M+1)); str=str+';';execstr([str]);	I2M_lst((I2M+1)/2)=I2Mkwv(I2Mx); end;  end;\n");
-		strcat(strIdl2Matlab, "  if ~I2M_ok; for I2M=1:lv; str=string(I2Mkwv(I2M)); str=str+'='; str=str+string(varargin(I2M)); str=str+';';  execstr([str]);end; end;\n");
-		strcat(strIdl2Matlab, "  if ~isempty(I2M_pos);	for I2M=1:length(I2M_pos); str=sprintf(\"varargout(%d)=I2M_lst(I2M_pos(%d));\",I2M,I2M); I2M_out= [I2M_out  str];	end; end;\n");
+		strcpy(strIdl2Matlab, "  I2M_lst=[]; I2M_out=[];  lv=length(varargin); if (~(modulo(lv,2)==0)), I2M_ok=0;  else,   I2M_ok=1;\n");
+		strcat(strIdl2Matlab, "  for I2M=1:2:lv, I2M_tmp=varargin(I2M); if (typeof(I2M_tmp)~='string'); I2M_ok=0;break; end;[varquisertarien,I2Mx]=grep(I2M_tmp,I2Mkwn); if length(I2Mx) ~=1; I2M_ok=0;break; end; str=string(I2Mkwv(I2Mx)) + '=' + string(varargin(I2M+1)) + ';'; execstr([str]); I2M_lst((I2M+1)/2)=I2Mkwv(I2Mx); end; end;\n");
+		strcat(strIdl2Matlab, "  if ~I2M_ok; for I2M=1:lv; str=string(I2Mkwv(I2M)) + '=' + string(varargin(I2M)) + ';';  execstr([str]);end; end;\n");
+		strcat(strIdl2Matlab, "  if ~isempty(I2M_pos); for I2M=1:length(I2M_pos);str='varargout(' + string(I2M) + ') = ' + I2M_lst(I2M_pos(I2M)) + ';'; I2M_out= [I2M_out  str]; end; end;\n");
 
 	}
 }
 
-/* enleve le caractere en parametre d une chaine de caractere en renvoie le resultat dans strString*/
-/* ne fait pas de difference entre les minuscules et majuscules */
-/* ie b enleve B et b */
+/*+ enleve le caractere en parametre d une chaine de caractere en renvoie le resultat dans strString
+ ne fait pas de difference entre les minuscules et majuscules
+ ie b enleve B et b +*/
 void removeCharacter(char *str, char car, char* strString) {
   int i;
   strcpy(strString, "");
@@ -174,9 +172,9 @@ void removeCharacter(char *str, char car, char* strString) {
   strString[i]='\0';
  }
 
-/* remplace le caractere car par car2 */
-/* ne fait pas de difference entre les minuscules et majuscules */
-/* ie b enleve B et b */
+/*+ remplace le caractere car par car2
+ ne fait pas de difference entre les minuscules et majuscules
+ ie b enleve B et b +*/
 void replaceCharacter(char *str, char car, char car2, char* strString) {
   int i;
   strcpy(strString, "");
@@ -192,8 +190,8 @@ void replaceCharacter(char *str, char car, char car2, char* strString) {
   strString[i]='\0';
 }
 
-/* Transforme une chaine IDL en chaine Matlab */
-/* result doit etre suffisamment alloue */
+/*+ Transforme une chaine IDL en chaine Matlab
+ result doit etre suffisamment alloue +*/
 void adaptString(char *str, char* result) {
   int i, len;
   i=0;
@@ -225,9 +223,9 @@ void adaptString(char *str, char* result) {
   }
 }
 
-/* lit dans str jusqu au premier ; et renvoie la chaine lu dans strString */
-/* le reste de la chaine est renvoye par la fonction */
-/* fonction utile pour parser le fichier de traduction avancee de la base de connaissance */
+/*+ lit dans str jusqu au premier ; et renvoie la chaine lu dans strString
+ le reste de la chaine est renvoye par la fonction
+ fonction utile pour parser le fichier de traduction avancee de la base de connaissance +*/
 char* getLibFileWord(char* str, char*strString) {
   char* strTmp;
   int i,j,bOk;
@@ -254,7 +252,7 @@ char* getLibFileWord(char* str, char*strString) {
    return strTmp;
 }
 
-/* Ecrit la chaine dans le fichier cible */
+/*+ Ecrit la chaine dans le fichier cible +*/
 void printOut(char *pstrLine) {
   if (stringTranslation == 1) { /* cas de la traduction d une chaine */
     strcat(stringTranslationResult, pstrLine);
@@ -267,6 +265,7 @@ void printOut(char *pstrLine) {
   }
 }
 
+/*+ ecrit la chaine dans le fichier de log +*/
 void printToLog(char *pstrLine) {
   if (pLogFile != NULL) {
     if (printOnOff == 1) {
@@ -282,17 +281,17 @@ void printToLog(char *pstrLine) {
 /** Fonctions d indentation du code cible ***/
 /********************************************/
 
-/* incremente la tabulation du code */
+/*+ incremente la tabulation du code +*/
 void incTab() {
   tab = tab + tabVal;
 }
 
-/* decremente la tabulation du code */
+/*+ decremente la tabulation du code +*/
 void decTab() {
   tab = tab - tabVal;
 }
 
-/* affiche la tabulation */
+/*+ affiche la tabulation +*/
 void printTab() {
   int i;
   for (i=0; i<tab; i++) {
@@ -300,7 +299,7 @@ void printTab() {
   }
 }
 
-/* Parse the node to find the real line number - ie the min */
+/*+ Parse le noeud pour trouver le numero de ligne reel - ie le min +*/
 int realLineInSource(Node* n) {
 int result, resTmp;
   if (n == NULL) {
@@ -323,18 +322,23 @@ int result, resTmp;
   return result;
 }
 
-/* Ecrit tous les commentaires non ecrits jusqu a la ligne parametre */
+/*+ Ecrit tous les commentaires non ecrits jusqu a la ligne dont le numero est passe en parametres +*/
 void insertComment(int nLine) {
 char *strTmp;
+char *strTmp2;
 
   if (printOnOff == 1) {
     if (commentTable != NULL) {
       while (commentTable->lineInSource <= nLine) {
 		printOut(commentaire);
         strTmp = (char*) malloc (strlen(commentTable->commentString)+1);
-        removeCharacter(commentTable->commentString, ';', strTmp);
-        printOut(strTmp);
+        removeCharacter(commentTable->commentString, '$', strTmp);
+        strTmp2 = (char*) malloc (strlen(strTmp)+1);
+        removeCharacter(strTmp, ';', strTmp2);
+        printOut(strTmp2);
+        /*printf("%s - tab = %d\n",strTmp2,tab);*/
         free(strTmp);
+        free(strTmp2);
         printOut("\n");
         printTab();
         numCurrentLine++;
@@ -360,29 +364,29 @@ void parseTree(Node *n);
 void generer_ref_struct(Node *ng, Node *nd);
 void gerer_ident_parent(Node *n, Node *nd);
 
-/* Type representant un nom de structure et un booleen */
-/* ident = vrai si  nom_struct est un tableau de structure */
+/*+ Type representant un nom de structure et un booleen 
+ ident = vrai si  nom_struct est un tableau de structure +*/
 typedef struct {
-  char*	nom_struct;	/* Nom de la structure analysee */
-  int ident;		/* Booleen qui vaut vrai si la structure est indicee */
+  char*	nom_struct;	/*+ Nom de la structure analysee +*/
+  int ident;		/*+ Booleen qui vaut vrai si la structure est indicee +*/
 } struct_indice;
 
-/* L'ensemble des structures sont contenues dans le tableau TabStruct */
+/*+ L'ensemble des structures sont contenues dans le tableau TabStruct +*/
 struct_indice TabStruct[1024];
 
-/* indStruct est la longueur de TabStruct */
+/*+ indStruct est la longueur de TabStruct +*/
 int indStruct = 0;
 
-/* Un appel de structure peut s'ecrire de cette facon : st_array(a1,a2,...,aN).field1 = X */
-/* indice1 == N */
+/*+ Un appel de structure peut s'ecrire de cette facon : st_array(a1,a2,...,aN).field1 = X +*/
+/*+ indice1 == N +*/
 int ind_in_matrice = 0;
 
 
 
 /*****************************************************************************/
 
-/* Un structure est representee sous la forme : str_array = struct('field1',val1,'field2',val2...) */
-/* genererStruct(n) genere a partir du noeud n, la suite "'field1',val1,'field2',val2..." */
+/*+ Une structure est representee sous la forme : str_array = struct('field1',val1,'field2',val2...)
+ genererStruct(n) genere a partir du noeud n, la suite "'field1',val1,'field2',val2..." +*/
 void genererStruct(Node *n) {
   char *strTmp;
 
@@ -400,10 +404,10 @@ void genererStruct(Node *n) {
   }
 }
 
-/* Un structure est representee sous la forme : str_array = struct('field1',val1,'field2',val2...) */
-/* genererStruct(n) genere a partir du noeud n, la suite "'field1',val1,'field2',val2..." */
+/*+ Une structure est representee sous la forme : str_array = struct('field1',val1,'field2',val2...)
+ genererStruct(n) genere a partir du noeud n, la suite "'field1',val1,'field2',val2..." +*/
 void genererNamedStruct(Node *n, Node *nval) {
-/* n contient le nom des champs et nval les valeur d init */
+/*+ n contient le nom des champs et nval les valeur d init +*/
   char *strTmp;
 
   if (n != NULL) {
@@ -430,8 +434,8 @@ void genererNamedStruct(Node *n, Node *nval) {
 
 /*****************************************************************************/
 
-/*  Creer le "recType" de nom "str" avec le num_type "REFERENCE" et le suite_comp "n"  */
-/*  Et insere ce "recType" dans la table des symboles */
+/*+  Creer le "recType" de nom "str" avec le num_type "REFERENCE" et le suite_comp "n"
+ et insere ce "recType" dans la table des symboles +*/
 void creer_ref_tab_symb(char *str, Node *n) {
   recType *rec;
 
@@ -450,15 +454,15 @@ void creer_ref_tab_symb(char *str, Node *n) {
 
 /*****************************************************************************/
 
-/* st_array(a1,a2,...,aN).field1....fieldn = X */
-/* n = l'arbre representant a1,a2,...,aN ///nd = X /// suite = field1....fieldn */
-/* generer_suite_param(n, nd, suite) genere st_array(a1,a2,...,aN) */
-/* en matlab sous forme de boucle imbriquee */
+/*+ st_array(a1,a2,...,aN).field1....fieldn = X
+ n = l'arbre representant a1,a2,...,aN ///nd = X /// suite = field1....fieldn
+ generer_suite_param(n, nd, suite) genere st_array(a1,a2,...,aN)
+ en matlab sous forme de boucle imbriquee +*/
 void generer_suite_param(Node *n, Node *nd, Node *suite){
   char* strTmp;
   Node *croch;
 
-  /* ind_in_matrice est egal au numero du parametre traite de st_array(a1,a2,...,aN) */
+  /*+ ind_in_matrice est egal au numero du parametre traite de st_array(a1,a2,...,aN) +*/
   ind_in_matrice++;
   if (n != NULL){
     /* On regarde 2 cas : on traite le dernier parametre ou pas */
@@ -536,7 +540,7 @@ void generer_suite_param(Node *n, Node *nd, Node *suite){
         case MATRIX :
           /* aN est une matrice */
           printOut("for j");
-          /* On affice le numero du parametre (ind_in_matrice) */
+          /* On affiche le numero du parametre (ind_in_matrice) */
           /* L'index de la boucle aura la valeur jind_in_matrice */
           /* Les valeurs des index seront alors toutes distinctes */
           strTmp = (char*) malloc (MAX_STR);
@@ -751,21 +755,21 @@ void generer_suite_param(Node *n, Node *nd, Node *suite){
 
 /*****************************************************************************/
 
-/* str_array(a).field1...fieldn = X */
-/* n = l'arbre representant str_array(a).field1...fieldn ///nd = X  */
-/* gerer_ident_parent(n, nd) genere str_array(a) */
-/* en matlab sous forme de boucle imbriquee */
+/*+ str_array(a).field1...fieldn = X
+ n = l'arbre representant str_array(a).field1...fieldn ///nd = X
+ gerer_ident_parent(n, nd) genere str_array(a)
+ en matlab sous forme de boucle imbriquee +*/
 void gerer_ident_parent(Node *n, Node *nd){
 
 char* strTmp;
   int i;
   Node *croch;
 
-  /* La grammaire reconnait str_array(a) de 4 facons : soit c'est une FUNCTION_CALL_OU_REF_MATRIX */
-  /* soit c'est un IDENTIFIER_PARENTHESE soit il fait parti d'un REF_STRUCT */
-  /* soit il fait parti d'un REF_STRUCT_LIST */
+  /*+ La grammaire reconnait str_array(a) de 4 facons : soit c'est une FUNCTION_CALL_OU_REF_MATRIX +*/
+  /*+ soit c'est un IDENTIFIER_PARENTHESE soit il fait parti d'un REF_STRUCT +*/
+  /*+ soit il fait parti d'un REF_STRUCT_LIST +*/
 
-  /* On genere alors str_array(a) selon ces 4 cas */
+  /*+ On genere alors str_array(a) selon ces 4 cas +*/
   if (n->typeNode == FUNCTION_CALL_OU_REF_MATRIX) {
     /* str_array(a) est representee par une FUNCTION_CALL_OU_REF_MATRIX */
     /* On regarde le "type" de a */
@@ -804,10 +808,13 @@ char* strTmp;
 
         /* st_array(a) a fini d'etre genere */
         /* Il faut maintenant generer field1....fieldn = X */
+        printTab();
         generer_ref_struct(n->fd, nd);
-        printOut("end\n");
-              numCurrentLine++;
-              incTab();
+        decTab(); /* TEST ?? */
+        printTab();
+        printOut("end");
+/*              numCurrentLine++;
+              decTab();*/
         break;
 
       case PARAM_MATRIX_ETOILE :
@@ -824,12 +831,16 @@ char* strTmp;
 	/* iind_in_matrice parcourt la boucle jusqu'a size(str_array,2) */
 	printOut("=1:end\n");
 	numCurrentLine++;
+    incTab(); /* TEST ?? */
 	/* st_array(a) a fini d'etre genere */
 	/* Il faut maintenant generer field1....fieldn = X */
+    printTab();
 	generer_ref_struct(n->fd, nd);
-	printOut("end\n");
-        numCurrentLine++;
-        incTab();
+    decTab(); /* TEST ?? */
+    printTab();
+	printOut("end");
+/*        numCurrentLine++;
+        decTab();          */
 	break;
       case MATRIX :
       	/* a est une matrice */
@@ -862,13 +873,15 @@ char* strTmp;
 
 	/* st_array(a) a fini d'etre genere */
 	/* Il faut maintenant generer field1....fieldn = X */
+    printTab();
 	generer_ref_struct(n->fd, nd);
-	printOut("\n");
-        numCurrentLine++;
-        incTab();
-	printOut("end\n");
-        numCurrentLine++;
-        incTab();
+	/*printOut("\n");
+        numCurrentLine++;*/
+    decTab();
+    printTab();
+	printOut("end");
+        /*numCurrentLine++;
+        decTab();*/
 	break;
       case SUITE_CALL_LIST :
 	/* a est une suite de parametre */
@@ -879,28 +892,30 @@ char* strTmp;
 	printOut("for i");
 	strTmp = (char*) malloc (MAX_STR);
         /* On affice le numero du parametre (ind_in_matrice) */
-	/* L'index de la boucle aura la valeur iind_in_matrice */
+        /* L'index de la boucle aura la valeur iind_in_matrice */
   /* Les valeurs des index seront alors toutes distinctes */
   sprintf(strTmp, "%d", indStruct);
-        printOut(strTmp);
-        free(strTmp);
+  printOut(strTmp);
+  free(strTmp);
   /* On genere aN comme si on generait une matrice */
   printOut("=[");
   parseTree(n->fg);
   printOut("+1");
   printOut("]\n");
-        numCurrentLine++;
-        incTab();
+  numCurrentLine++;
+  incTab();
 
   /* st_array(a) a fini d'etre genere */
   /* Il faut maintenant generer field1....fieldn = X */
+  printTab();
   generer_ref_struct(n->fd, nd);
-  printOut("\n");
-        numCurrentLine++;
-        incTab();
-  printOut("end\n");
-        numCurrentLine++;
-        incTab();
+  /*printOut("\n");
+        numCurrentLine++;*/
+  decTab();
+  printTab();
+  printOut("end");
+        /*numCurrentLine++;
+        decTab();*/
 
     }
   } else {
@@ -912,13 +927,13 @@ char* strTmp;
     /* a est un intervalle */
     printOut("for ");
     strTmp = (char*) malloc (MAX_STR);
-          printOut("i");
+    printOut("i");
     /* On affice le numero du parametre (ind_in_matrice) */
     /* L'index de la boucle aura la valeur iind_in_matrice */
-          /* Les valeurs des index seront alors toutes distinctes */
+    /* Les valeurs des index seront alors toutes distinctes */
     sprintf(strTmp, "%d", indStruct);
     printOut(strTmp);
-          free(strTmp);
+    free(strTmp);
 
     /* On affiche le "=" de la boucle */
     printOut("=");
@@ -939,43 +954,47 @@ char* strTmp;
       printOut("+1");
     }
     printOut("\n");
-          numCurrentLine++;
-          incTab();
+    numCurrentLine++;
+    incTab();
 
     /* st_array(a) a fini d'etre genere */
     /* Il faut maintenant generer field1....fieldn = X */
+    printTab();
     generer_ref_struct(n->fd, nd);
-    printOut("\n");
-          numCurrentLine++;
-    incTab();
+    /*printOut("\n");
+          numCurrentLine++;*/
+    decTab();
+    printTab();
     printOut("end");
-          printOut("\n");
-          numCurrentLine++;
-          incTab();
+    printOut("\n");
+    numCurrentLine++;
+          /*decTab();*/
     break;
 
   case PARAM_MATRIX_ETOILE :
     /* a est une * */
     printOut("for i");
     strTmp = (char*) malloc (MAX_STR);
-          /* On affice le numero du parametre (ind_in_matrice) */
+    /* On affice le numero du parametre (ind_in_matrice) */
     /* L'index de la boucle aura la valeur iind_in_matrice */
     /* Les valeurs des index seront alors toutes distinctes */
     sprintf(strTmp, "%d", indStruct);
-          printOut(strTmp);
-          free(strTmp);
-          printOut("=1:end\n");
+    printOut(strTmp);
+    free(strTmp);
+    printOut("=1:end\n");
     numCurrentLine++;
-
+    incTab(); /* TEST */
     /* st_array(a) a fini d'etre genere */
     /* Il faut maintenant generer field1....fieldn = X */
+    printTab();
     generer_ref_struct(n->fd, nd);
-    printOut("\n");
-          numCurrentLine++;
-          incTab();
-    printOut("end\n");
-          numCurrentLine++;
-          incTab();
+    /*printOut("\n");
+          numCurrentLine++;*/
+    decTab();
+    printTab();
+    printOut("end");
+          /*numCurrentLine++;
+          decTab();*/
     break;
         case MATRIX :
     /* a est une matrice */
@@ -1005,19 +1024,21 @@ char* strTmp;
 
     printOut("]");
     printOut("\n");
-          numCurrentLine++;
-          incTab();
+    numCurrentLine++;
+    incTab();
 
     /* st_array(a) a fini d'etre genere */
     /* Il faut maintenant generer field1....fieldn = X */
+    printTab();
     generer_ref_struct(n->fd, nd);
-    printOut("\n");
-          numCurrentLine++;
-          incTab();
+    /*printOut("\n");
+          numCurrentLine++;*/
+    decTab();
+    printTab();
     printOut("end");
           printOut("\n");
           numCurrentLine++;
-          incTab();
+          /*decTab();*/
       break;
 
   case PARAM_MATRIX_SUITE :
@@ -1042,18 +1063,20 @@ char* strTmp;
     parseTree(n->fg->fg);
     printOut("+1");
     printOut("]\n");
-          numCurrentLine++;
-          incTab();
+    numCurrentLine++;
+    incTab();
 
     /* st_array(a) a fini d'etre genere */
     /* Il faut maintenant generer field1....fieldn = X */
+    printTab();
     generer_ref_struct(n->fd, nd);
-    printOut("\n");
-          numCurrentLine++;
-          incTab();
-    printOut("end\n");
-          numCurrentLine++;
-          incTab();
+    /*printOut("\n");
+          numCurrentLine++;*/
+    decTab();
+    printTab();
+    printOut("end");
+          /*numCurrentLine++;
+          decTab();*/
       break;
       }
     } else {
@@ -1092,18 +1115,20 @@ char* strTmp;
         printOut("+1");
       }
       printOut("\n");
-            numCurrentLine++;
-            incTab();
+      numCurrentLine++;
+      incTab();
 
-            /* st_array(a) a fini d'etre genere */
-            /* Il faut maintenant generer field1....fieldn = X */
+      /* st_array(a) a fini d'etre genere */
+      /* Il faut maintenant generer field1....fieldn = X */
+      printTab();
       generer_ref_struct(n->fd, nd);
-      printOut("\n");
-            numCurrentLine++;
-            incTab();
-      printOut("end\n");
-            numCurrentLine++;
-            incTab();
+      /*printOut("\n");
+            numCurrentLine++;*/
+      decTab();
+      printTab();
+      printOut("end");
+      /*numCurrentLine++;
+      decTab();*/
       break;
 
     case PARAM_MATRIX_ETOILE :
@@ -1119,15 +1144,18 @@ char* strTmp;
             free(strTmp);
             printOut("=1:end\n");
       numCurrentLine++;
+      incTab();  /* TEST */
       /* st_array(a) a fini d'etre genere */
-            /* Il faut maintenant generer field1....fieldn = X */
+      /* Il faut maintenant generer field1....fieldn = X */
+      printTab();
       generer_ref_struct(n->fd, nd);
-      printOut("\n");
-            numCurrentLine++;
-            incTab();
-      printOut("end\n");
-            numCurrentLine++;
-            incTab();
+      /*printOut("\n");
+            numCurrentLine++;*/
+      decTab();
+      printTab();
+      printOut("end");
+            /*numCurrentLine++;
+            decTab();          */
       break;
 
     case MATRIX :
@@ -1161,13 +1189,15 @@ char* strTmp;
 
       /* st_array(a) a fini d'etre genere */
       /* Il faut maintenant generer field1....fieldn = X */
+      printTab();
       generer_ref_struct(n->fd, nd);
-      printOut("\n");
-            numCurrentLine++;
-            incTab();
-      printOut("end\n");
-            numCurrentLine++;
-            incTab();
+      /*printOut("\n");
+            numCurrentLine++;*/
+            decTab();
+            printTab();
+      printOut("end");
+            /*numCurrentLine++;
+            decTab();*/
       break;
 
     case PARAM_MATRIX_SUITE :
@@ -1196,14 +1226,16 @@ char* strTmp;
 
       /* st_array(a) a fini d'etre genere */
       /* Il faut maintenant generer field1....fieldn = X */
+      printTab();
       generer_ref_struct(n->fd, nd);
-      printOut("\n");
-            numCurrentLine++;
-            incTab();
+      /*printOut("\n");
+            numCurrentLine++;*/
+            decTab();
+            printTab();
       printOut("end");
-            printOut("\n");
-            numCurrentLine++;
-            incTab();
+            /*printOut("\n");
+            numCurrentLine++;*/
+            /*decTab();*/
       break;
   }
       }
@@ -1213,9 +1245,9 @@ char* strTmp;
 
 /*****************************************************************************/
 
-/* Genere "ng = nd" en matlab ou ng est un appel de structure */
-/* Cette generation se fera sous forme de boucles imbriquees */
-/* ng represente field1.field2....fieldn = X.  fieldX peuvent avoir des "parametres" */
+/*+ Genere "ng = nd" en matlab ou ng est un appel de structure
+ Cette generation se fera sous forme de boucles imbriquees
+ ng represente field1.field2....fieldn = X.  fieldX peuvent avoir des "parametres" +*/
 void generer_ref_struct(Node *ng, Node *nd){
   char* strTmp;
   int i;
@@ -1225,20 +1257,22 @@ void generer_ref_struct(Node *ng, Node *nd){
   int point_virgule = 0;
 
   /* indStruct est egal au numero du field traite */
+  /*if (indStruct == 2)
+     printTab();*/
   indStruct++;
 
-  /* On genere en deux parties : 1ere partie : Les boucles imbriquees seules */
-  /* 2eme partie : Ce qu'il y a a l'interieur de la boucle imbriquee */
-  /* Voici un exemple de ce qui ait genere : pour salut(1:3,*).bonjour([1,2]).salut = 6 */
-  /*
+  /*+ On genere en deux parties : 1ere partie : Les boucles imbriquees seules +*/
+  /*+ 2eme partie : Ce qu'il y a a l'interieur de la boucle imbriquee +*/
+  /*+ Voici un exemple de ce qui est genere : pour salut(1:3,*).bonjour([1,2]).salut = 6 +*/
+  /*+
   for j1 = 1:3  	      	      	      	    <-- boucles imbriquees
     for j2 = 1:size(salut,2)    	      	    <-- boucles imbriquees
       for i2 = [1 2]    	      	      	    <-- boucles imbriquees
-        salut(j1,j2).bonjour(j2).salut = 6    <-- ce qu'il y a a l'interieur
+        salut(j1,j2).bonjour(i2).salut = 6    <-- ce qu'il y a a l'interieur
       end
     end
   end
-  */
+  +*/
 
   /* Si ng est NULL, on genere "ce qu'il y a a l'interieur" */
   if (ng == NULL){
@@ -1252,46 +1286,47 @@ void generer_ref_struct(Node *ng, Node *nd){
       ou le field a plus d'un parametre */
       /* Si le field n'a pas de parametres, on ne fait rien */
       if (TabStruct[i].ident == 1) {
-      point_virgule = 1;
+         point_virgule = 1;
         /* Le field a un seul parametre. On affiche alors l'index de la boucle
-    a laquelle il appartient. L'index commence par i */
-  printOut("(i");
-  strTmp = (char*) malloc (MAX_STR);
+        a laquelle il appartient. L'index commence par i */
+        printOut("(i");
+        strTmp = (char*) malloc (MAX_STR);
         sprintf(strTmp, "%d", i);
         printOut(strTmp);
         free(strTmp);
-  printOut(")");
+        printOut(")");
       } else {
-  if (TabStruct[i].ident > 1) {
-  point_virgule = 1;
-    /* Le field a plusieurs parametres. On affiche alors les index de la boucle
-    a laquelle ils appartient. Les index commencent par j */
-    printOut("(");
-    while (j < TabStruct[i].ident) {
-      strTmp = (char*) malloc (MAX_STR);
-      printOut("j");
-      sprintf(strTmp, "%d", j);
-            printOut(strTmp);
-            free(strTmp);
-      printOut(",");
-      j++;
-    }
-    /* On affiche le dernier j */
+        if (TabStruct[i].ident > 1) {
+           point_virgule = 1;
+           /* Le field a plusieurs parametres. On affiche alors les index de la boucle
+           a laquelle ils appartient. Les index commencent par j */
+           printOut("(");
+           while (j < TabStruct[i].ident) {
+                 strTmp = (char*) malloc (MAX_STR);
+                 printOut("j");
+                 sprintf(strTmp, "%d", j);
+                 printOut(strTmp);
+                 free(strTmp);
+                 printOut(",");
+                 j++;
+           }
+           /* On affiche le dernier j */
           strTmp = (char*) malloc (MAX_STR);
-    printOut("j");
-    sprintf(strTmp, "%d", j);
+          printOut("j");
+          sprintf(strTmp, "%d", j);
           printOut(strTmp);
           free(strTmp);
-    printOut(")");
-    j++;
-  }
+          printOut(")");
+          j++;
+        }
       }
       /* On n'affiche pas de "." apres le dernier field */
       if (i != (indStruct - 1) ) {
-      printOut(".");
+         printOut(".");
       }
     }
     /* On genere la partie droite de "ce qu'il y a a l'interieur" */
+
     printOut(" = ");
     parseTree(nd);
     if (point_virgule == 1) {printOut(";\n"); numCurrentLine++;}
@@ -1306,57 +1341,54 @@ void generer_ref_struct(Node *ng, Node *nd){
     switch (ng->typeNode){
       case REF_STRUCT :
       case REF_STRUCT_LIST :
-  if (ng->fg->typeNode == IDENTIFIER) {
-    /* On met TabStruct a jour */
-    TabStruct[indStruct].nom_struct = (ng->fg->valNode).uString;
-    TabStruct[indStruct].ident = 0;
-    /* fieldX n'a pas de parametres */
-    /* On genere alors la suite (field(X+1)....fieldN) */
-    generer_ref_struct(ng->fd, nd);
-  };
-  if (ng->fg->typeNode == IDENTIFIER_PARENTHESE) {
-    /* On met TabStruct a jour */
-    TabStruct[indStruct].nom_struct = (ng->fg->valNode).uString;
-    TabStruct[indStruct].ident = 1;
-    /* fieldX a des parametres */
-    /* On genere les boucles imbriquees correspondant a fieldX */
-    gerer_ident_parent(ng,nd);
-  }
-        break;
-
+           if (ng->fg->typeNode == IDENTIFIER) {
+              /* On met TabStruct a jour */
+              TabStruct[indStruct].nom_struct = (ng->fg->valNode).uString;
+              TabStruct[indStruct].ident = 0;
+              /* fieldX n'a pas de parametres */
+              /* On genere alors la suite (field(X+1)....fieldN) */
+              generer_ref_struct(ng->fd, nd);
+           };
+           if (ng->fg->typeNode == IDENTIFIER_PARENTHESE) {
+              /* On met TabStruct a jour */
+              TabStruct[indStruct].nom_struct = (ng->fg->valNode).uString;
+              TabStruct[indStruct].ident = 1;
+              /* fieldX a des parametres */
+              /* On genere les boucles imbriquees correspondant a fieldX */
+              gerer_ident_parent(ng,nd);
+           }
+           break;
       case FUNCTION_CALL_OU_REF_MATRIX :
         /* On met TabStruct a jour */
         TabStruct[indStruct].nom_struct = (ng->valNode).uString;
         TabStruct[indStruct].ident = 1;
-  /* fieldX a des parametres */
-  /* On genere les boucles imbriquees correspondant a fieldX */
-  gerer_ident_parent(ng,nd);
-  break;
-
-      case IDENTIFIER :
-  /* On met TabStruct a jour */
-        TabStruct[indStruct].nom_struct = (ng->valNode).uString;
-  TabStruct[indStruct].ident = 0;
-  /* Cas ou on a finit de generer les boucles imbriquees */
-  /* Appel a generer_ref_struct pour afficher "ce qu'il y a a l'interieur" */
-  generer_ref_struct(ng->fg, nd);
+        /* fieldX a des parametres */
+        /* On genere les boucles imbriquees correspondant a fieldX */
+        gerer_ident_parent(ng,nd);
         break;
-
+      case IDENTIFIER :
+           /* On met TabStruct a jour */
+           TabStruct[indStruct].nom_struct = (ng->valNode).uString;
+           TabStruct[indStruct].ident = 0;
+           /* Cas ou on a finit de generer les boucles imbriquees */
+           /* Appel a generer_ref_struct pour afficher "ce qu'il y a a l'interieur" */
+           generer_ref_struct(ng->fg, nd);
+           break;
       case IDENTIFIER_PARENTHESE :
-  /* On met TabStruct a jour */
-        TabStruct[indStruct].nom_struct = (ng->valNode).uString;
-        TabStruct[indStruct].ident = 1;
-  /* fieldX a des parametres */
-  /* On genere les boucles imbriquees correspondant a fieldX */
-  gerer_ident_parent(ng,nd);
-  break;
-
+           /* On met TabStruct a jour */
+           TabStruct[indStruct].nom_struct = (ng->valNode).uString;
+           TabStruct[indStruct].ident = 1;
+           /* fieldX a des parametres */
+           /* On genere les boucles imbriquees correspondant a fieldX */
+           gerer_ident_parent(ng,nd);
+           break;
     }
   }
 }
 
 /*************************************************/
 
+/*
 int matrixDim(Node *n) {
   if (n != NULL ) {
     if (n->typeNode == MATRIX) {
@@ -1366,8 +1398,8 @@ int matrixDim(Node *n) {
   return 0;
 }
 
-/* n est ce au'il y a dans la matrice. On calcule la dimension de cette matrice */
-/* La dimension de cette matrice est egale au nombre d'elements de n */
+/*+ n est ce qu'il y a dans la matrice. On calcule la dimension de cette matrice
+ La dimension de cette matrice est egale au nombre d'elements de n +*/
 int calculer_dim(Node *n) {
 
   /* S'il n'y a qu' 1 element (autre qu'une matrice), la dimension est alors de 1 */
@@ -1393,8 +1425,8 @@ int calculer_dim(Node *n) {
 
 /*************************************************/
 
-/* Affiche les dimensions entre "," de la matrice contenue dans TabDim */
-/* IDL a au maximum 7 dimensions. On va donc afficher ces 7 dimensions */
+/*+ Affiche les dimensions entre "," de la matrice contenue dans TabDim
+ IDL a au maximum 7 dimensions. On va donc afficher ces 7 dimensions +*/
 void afficher_dims(){
   int i, j, tous, nb, divis, r;
   char* strTmp;
@@ -1458,7 +1490,7 @@ void afficher_dims(){
 
 /*******************************************************************************/
 
-/* afficher_matrix_crochet(n) affiche la matrice n en rajoutant 1 a chaque cellule */
+/*+ afficher_matrix_crochet(n) affiche la matrice n en rajoutant 1 a chaque cellule +*/
 void afficher_matrix_crochet(Node *n){
   Node *croch;
 
@@ -1478,8 +1510,8 @@ void afficher_matrix_crochet(Node *n){
   printOut("]");
 }
 
-/* Renvoie la dimension de la matrice de n */
-/* Renvoie 1 si n = [x] - 2 si n = [[x]] ... */
+/*+ Renvoie la dimension de la matrice de n
+ Renvoie 1 si n = [x] - 2 si n = [[x]] ... +*/
 int getMatrixDim(Node *n) {
   if (n != NULL ) {
     if (n->typeNode == MATRIX) {
@@ -1502,8 +1534,8 @@ int getMatrixDim(Node *n) {
 /*************************************************/
 /*************************************************/
 
-/* inserer_tuer(str) cherche s'il existe un bloc de nom "str" dans la table des symboles */
-/* Si c'est le cas, il enleve le bloc sinon, il ne fait rien */
+/*+ inserer_tuer(str) cherche s'il existe un bloc de nom "str" dans la table des symboles
+ Si c'est le cas, il enleve le bloc sinon, il ne fait rien +*/
 void inserer_tuer(char *str, int typeRec) {
 /* Si l'identificateur est deja present, on l'enleve  */
   recType *resultat, *rec;
@@ -1523,7 +1555,7 @@ void inserer_tuer(char *str, int typeRec) {
 /****************************************************
 **  3 fonction de generation d entete de fonction  **
 *****************************************************/
-/* ecrit la premiere ligne de commande de traitement des parametres */
+/*+ ecrit la premiere ligne de commande de traitement des parametres +*/
 void parseFuncParam1(Node* n) {
   char* strTmp;
   unsigned char c;
@@ -1555,7 +1587,7 @@ void parseFuncParam1(Node* n) {
   }
 }
 
-/* ecrit la 2eme ligne de commande de traitement des parametres */
+/*+ ecrit la 2eme ligne de commande de traitement des parametres +*/
 void parseFuncParam2(Node* n) {
   char strTmp2[256];
   recType* resultat;
@@ -1606,6 +1638,7 @@ void parseFuncParam2(Node* n) {
   }
 }
 
+/*+ ecrit la 3eme ligne de commande de traitement des parametres +*/
 void parseFuncParam3(Node* n) {
   char* strTmp;
 
@@ -1634,10 +1667,10 @@ void parseFuncParam3(Node* n) {
 /**********************************************
 ** 3 Fonctions de generation d appel de procedure
 ***********************************************/
-/* parse les parametres d un appel de procedure et ecrit le recepteur de resultats */
+/*+ parse les parametres d un appel de procedure et ecrit le recepteur de resultats +*/
 int parseProCallParam1(Node* n, int debut) {
-/* debut vaut 1 si on a encore rien ecrit dans le fichier cible et 0 apres*/
-/* cela permet de voir quand il faut ecrire le premier [ */
+/*+ debut vaut 1 si on a encore rien ecrit dans le fichier cible et 0 apres +*/
+/*+ cela permet de voir quand il faut ecrire le premier [ +*/
 int nextDebut;
 char* strTmp;
 char strTmp2[256];
@@ -1645,8 +1678,8 @@ recType* resultat;
 
   if (n != NULL) {
     if (n->typeNode == SUITE_CALL_LIST) { /* si c est un noeud suite call on sonde les fils */
-      nextDebut = parseProCallParam1(n->fg, debut);
-      nextDebut = parseProCallParam1(n->fd, nextDebut);
+      nextDebut = parseProCallParam1(n->fd, debut);
+      nextDebut = parseProCallParam1(n->fg, nextDebut);
       return nextDebut;
     } else if (n->typeNode == IDENTIFIER) {
       if (debut) {
@@ -1749,8 +1782,8 @@ recType* resultat;
   return debut;
 }
 
-/* parse les parametres d un appel de procedure et ecrit les parametres formelles de l appel */
-/* debut indique si c est le premier parametre =0 - dans ce cas pas de , */
+/*+ parse les parametres d un appel de procedure et ecrit les parametres formelles de l appel
+ debut indique si c est le premier parametre =0 - dans ce cas pas de , +*/
 int parseProCallParam2(Node* n, int debut) {
 char* strTmp;
 recType *scriptRec;  	/* decrit un script dans la table des symboles */
@@ -1758,9 +1791,11 @@ recType* tableSymbNode;
 int nextDebut;
 char strTmp2[256];
 recType* resultat;
+int oldNumVar;
 unsigned char c;
 
   nextDebut = debut;
+
   if (n != NULL) {
     if (n->typeNode == SUITE_CALL_LIST) { /* si c est un noeud suite call on sonde les fils */
       nextDebut = parseProCallParam2(n->fg, nextDebut);
@@ -1778,6 +1813,7 @@ unsigned char c;
           printOut(strTmp);
           free(strTmp);
           /* renommage ? */
+          if ( inRef_struct_list == 0 ) {
           sprintf(strTmp2, "RESERVED %s",(n->valNode).uString);
           resultat = malloc(sizeof(recType));
           if (find(strTmp2,resultat) == STATUS_OK) {
@@ -1788,6 +1824,7 @@ unsigned char c;
             }
           }
           free(resultat); /* fin renommage */
+          }
           strTmp = (char*) malloc (MAX_STR + strlen((n->valNode).uString));
           strcpy(strTmp, (n->valNode).uString);
           tableSymbNode = malloc(sizeof(recType));
@@ -1857,20 +1894,34 @@ unsigned char c;
         sprintf(strTmp, "'I2M_%c%d', ",c, numVar % 10);
         printOut(strTmp);
         free(strTmp);
+        oldNumVar = numVar;
         parseTree(n); /* on ecrit l'expression */
+        numVar = oldNumVar;
         nextDebut = 1;
+        numVar++;
         if (numVar % 10 == 0) {
           numVar++;
         }
-        numVar++;
       }
     }
   }
   return nextDebut;
 }
 
+/* renvoie le nombre de parametres de la procedure a traduire */
+int nbParamPro(Node* n)
+{
+  if (n != NULL) {
+    if (n->typeNode == SUITE_CALL_LIST) { /* si c est un noeud suite call on sonde les fils */
+      return nbParamPro(n->fg) + nbParamPro(n->fd);
+    } else {
+      return 1;
+    }
+  }
+  return 0;
+}
 
-/* parse les parametres d un appel de procedure et termine la liste de param avec I2M_pos*/
+/*+ parse les parametres d un appel de procedure et termine la liste de param avec I2M_pos +*/
 int parseProCallParam3(Node* n, int debut) {
 char* strTmp;
 char strTmp2[256];
@@ -1881,8 +1932,8 @@ nextDebut = debut;
 
   if (n != NULL) {
     if (n->typeNode == SUITE_CALL_LIST) { /* si c est un noeud suite call on sonde les fils */
-      nextDebut = parseProCallParam3(n->fg,nextDebut);
       nextDebut = parseProCallParam3(n->fd,nextDebut);
+      nextDebut = parseProCallParam3(n->fg,nextDebut);
       return nextDebut;
     } else if (n->typeNode == IDENTIFIER) {
       if (n->fg == NULL) { /* on a une variable par adresse */
@@ -1902,7 +1953,7 @@ nextDebut = debut;
           printOut(", ");
         }
         strTmp = (char*) malloc (10);
-        sprintf(strTmp, "%d",numVar);
+        sprintf(strTmp, "%d",numParamInCurProc - numVar + 1);
         printOut(strTmp);
         free(strTmp);
       } else {
@@ -1923,7 +1974,7 @@ nextDebut = debut;
             printOut(", ");
           }
           strTmp = (char*) malloc (10);
-          sprintf(strTmp, "%d",numVar);
+          sprintf(strTmp, "%d",numParamInCurProc - numVar + 1);
           printOut(strTmp);
           free(strTmp);
         }
@@ -1935,8 +1986,8 @@ nextDebut = debut;
 }
 
 
-/* parse les parametres d un appel de procedure et verifie la presence de keywords*/
-/* renvoie 1 si l'appel de fonction contient un keyword */
+/*+ parse les parametres d un appel de procedure et verifie la presence de keywords
+ renvoie 1 si l'appel de fonction contient un keyword +*/
 int containsKeywords(Node* n) {
   int result;
 
@@ -1961,8 +2012,8 @@ int containsKeywords(Node* n) {
   return result;
 }
 
-/* parse les parametres d un appel de procedure et verifie la presence de variables*/
-/* renvoie 1 si l'appel de fonction contient une variable passee par adresse */
+/*+ parse les parametres d un appel de procedure et verifie la presence de variables
+ renvoie 1 si l'appel de fonction contient une variable passee par adresse +*/
 int containsVariable(Node* n) {
   int result;
 
@@ -1988,8 +2039,8 @@ int containsVariable(Node* n) {
 }
 
 
-/* renvoie 0 si les parametres sont simples et 1 sinon*/
-/* c est a dire pas de keyword et pas de passage par adresse */
+/*+ renvoie 0 si les parametres sont simples et 1 sinon
+ c est a dire pas de keyword et pas de passage par adresse +*/
 int parseProCallParam4(Node* n, int result) {
 char* strTmp;
 int nextResult;
@@ -2009,8 +2060,8 @@ int nextResult;
 }
 
 
-/* parse le noeud a la recherche de variables systemes */
-/* le parametre indique le nombre de var globales */
+/*+ parse le noeud a la recherche de variables systemes
+ le parametre indique le nombre de var globales +*/
 int parseForVarSystem(Node* n, int nbVar) {
   int result = nbVar;
   recType *resultat, *rec;
@@ -2023,7 +2074,7 @@ int parseForVarSystem(Node* n, int nbVar) {
       } else {
         strTmp = (n->valNode).uString;
       }
-      if ((strcmp(strTmp,"err_string") != 0) && (strcmp(strTmp,"stime") != 0)) {
+      if (strcmp(strTmp,"stime") != 0) {
         if (result == 0) {
           printTab();
           printOut("global");
@@ -2036,8 +2087,27 @@ int parseForVarSystem(Node* n, int nbVar) {
           strcpy(rec->name, strTmp);
           rec->ptype->num_type = SYSVAR;
           insert(rec);
-          printOut(" i2mvs_");
-          printOut(strTmp);
+          if (strcmp(strTmp,"err_string") == 0) {
+             /* On traite !ERR_STRING */
+             if (find("error",resultat) == STATUS_OK) {
+                /* On a deja rencontre la VS !ERROR donc i2mvs_error_state est deja declaree en global */
+             } else {
+                printOut(" i2mvs_error_state");
+             }
+          } else {
+             if (strcmp(strTmp,"error") == 0) {
+                /* On traite !ERROR */
+                if (find("err_string",resultat) == STATUS_OK) {
+                   /* On a deja rencontre la VS !ERR_STRING donc i2mvs_error_state est deja declaree en global */
+                } else {
+                   printOut(" i2mvs_error_state");
+                }
+             } else {
+                /* Cas normal */
+                printOut(" i2mvs_");
+                printOut(strTmp);
+             }
+          }
           result++;
         }
       }
@@ -2048,7 +2118,7 @@ int parseForVarSystem(Node* n, int nbVar) {
   return result;
 }
 
-/* Parse le noeud pour detecter tous les appels de variable systeme */
+/*+ Parse le noeud pour detecter tous les appels de variable systeme +*/
 void printVarSystemCalled(Node* n) {
   deleteObjetOfType(SYSVAR);
   if (parseForVarSystem(n,0) > 0) {
@@ -2058,7 +2128,7 @@ void printVarSystemCalled(Node* n) {
   }
 }
 
-/* Parse le noeud pour detecter tous les appels de variable non declaree */
+/*+ Parse le noeud pour detecter tous les appels de variable non declaree +*/
 void printUndeclaredVariables(Node* n) {
   printOnOff = 0;
   strcpy(undeclaredVariables,"");
@@ -2087,7 +2157,7 @@ void printUndeclaredVariables(Node* n) {
 ** Fonctions de test sur les noeud
 *******************************************/
 
-/* renvoie 1 si le node est un refmatrix et pas un fonctioncall */
+/*+ renvoie 1 si le node est un refmatrix et pas un fonctioncall +*/
 int isVariable(Node* n) {
   int result;
   recType* tableSymbNode;
@@ -2109,7 +2179,7 @@ int isVariable(Node* n) {
 
 
 
-/* renvoie 1 si le node est un refmatrix et pas un fonctioncall */
+/*+ renvoie 1 si le node est un refmatrix et pas un fonctioncall +*/
 int isMatrix(Node* n) {
   int result;
   recType* tableSymbNode;
@@ -2127,6 +2197,7 @@ int isMatrix(Node* n) {
   return result;
 }
 
+/* renvoie 1 si le noeud est un "functionCall" +*/
 int isNodeFunctionCall(Node* n) {
   recType *resultat;
 
@@ -2181,6 +2252,7 @@ int result = 0;
 /**  FONCTIONS TRAVAILLANTS SUR LES CHAINES ***/
 /**********************************************/
 
+/*+ remplace toute les apostrophes de strIn en double apostrophe et stocke le resultat dans strOut +*/
 void doubleApostrophe (char* strIn, char* strOut) {
 int i;
 char* strTmp;
@@ -2205,7 +2277,7 @@ char* strTmp;
 }
 
 
-/* Traitement du Catch */
+/*+ Traitement du Catch +*/
 void gestionCatch (int oldCatchCount, Node* n) {
 int oldCatchCount2;
 char strTmp2[256];
@@ -2243,7 +2315,7 @@ char strTmp2[256];
 }
 
 
-/* retourne 1 si le if etait celui d un catch et le traite par la meme occasion */
+/*+ retourne 1 si le if etait celui d un catch et le traite par la meme occasion +*/
 int testIfCatch(Node* n) {
 char strTmp2[256];
 
@@ -2253,7 +2325,7 @@ char strTmp2[256];
           (strcmp((n->fg->fg->valNode).uString,(catchVar[catchCount]->valNode).uString)==0)) {
         if ((n->fg->typeNode == NE) && (n->fg->fd->typeNode == INTEGER)) {
           if ((n->fg->fd->valNode).uInt == 0) { /* Cas du CatchVar NE 0 */
-            catchExecNode[catchCount] = n->fd->fg; /* on stock le traitement du catch pour plus tard */
+            catchExecNode[catchCount] = n->fd->fg; /* on stocke le traitement du catch pour plus tard */
             if (n->fd->fd != NULL) { /* On a un else */
               printOut("\n");
               numCurrentLine++;
@@ -2289,7 +2361,7 @@ char strTmp2[256];
     } else if (catchVar[catchCount] != NULL) {
       if ((n->fg->typeNode == IDENTIFIER) &&
           (strcmp((n->fg->valNode).uString,(catchVar[catchCount]->valNode).uString)==0)) {
-        catchExecNode[catchCount] = n->fd->fg; /* on stock le traitement du catch pour plus tard */
+        catchExecNode[catchCount] = n->fd->fg; /* on stocke le traitement du catch pour plus tard */
         if (n->fd->fd != NULL) { /* On a un else */
           printOut("\n");
           numCurrentLine++;
@@ -2304,7 +2376,8 @@ char strTmp2[256];
 
 char strTmp2[256];
 
-/* fonction recursive traduisant un noeud precis */
+/*+ fonction recursive traduisant un noeud precis 
+ ( traduction des cas de grammaire ) +*/
 void parseTree(Node *n) {
  Node* nodeTmp;
  Node* ioErrNode = NULL;
@@ -2315,14 +2388,14 @@ void parseTree(Node *n) {
  recType* tableSymbNode;
  recType* cherch;
  recType* resultat;
- recType *scriptRec;  	/* decrit un script dans la table des symboles */
+ recType *scriptRec;  	/*+ decrit un script dans la table des symboles +*/
  recType *rec;
- int appelFonctionTmp = 0;	      	/* vaut 1 ou 0 selon la position de l'appel */
+ int appelFonctionTmp = 0;	      	/*+ vaut 1 ou 0 selon la position de l'appel +*/
  unsigned char oldCatchCount;
  unsigned char oldIoErrCount;
 
  if (n!=NULL) {
-/*  printf("node %d - ",n->typeNode );  printf("line = %d\n",n->lineInSource);/* */
+  /* printf("node %d - ",n->typeNode );  printf("line = %d\n",n->lineInSource);/* */
   switch(n->typeNode){
     case BLOCK:
       parseTree(n->fg);
@@ -2343,7 +2416,7 @@ void parseTree(Node *n) {
         printUndeclaredVariables(n);
       }
       deleteObjetOfType(VARIABLE); /* on clean la table des symboles */
-      fileTranslationError = 0; /* aucune erreur detecte */
+      fileTranslationError = 0; /* aucune erreur detectee */
       nbWarningFile = 0;
       sprintf(strTmp2, "RESERVED %s",(n->valNode).uString);
       resultat = malloc(sizeof(recType));
@@ -2364,7 +2437,7 @@ void parseTree(Node *n) {
 			else { /* traduction en scilab */
 					sprintf(outFile,"%s%c%s.sci",outDir, PATHSEP, (n->valNode).uString);
 			}
-      /* sprintf(outFile,"%s%c%s.m",outDir, PATHSEP, (n->valNode).uString); */
+      /* sprintf(outFile,"%s%c%s.m",outDir, PATHSEP, (n->valNode).uString);*/
       if (displayMessage == 1) {
         if (strlen(outFile) <= 30) {
           fprintf (stderr,"Creating %-30s", outFile) ;
@@ -2431,12 +2504,13 @@ void parseTree(Node *n) {
         /* l'entete est ecrite => on ecrit la construction des tables */
 
        	printOut("\n");
+        numCurrentLine++;
         printOut(commentaire);
         printOut(commentaire);
         printOut("Initialization of parameters\n");
         numCurrentLine++;
         printTab();
-        /* choix de la structure suivant le langage de traductionn */
+        /* choix de la structure suivant le langage de traduction*/
         if (inScilabTranslation==0) {
                 printOut("I2Mkwn=char(");
                 parseFuncParam1(n->fg);
@@ -2487,27 +2561,31 @@ void parseTree(Node *n) {
       gestionCatch(0, n);
       decTab();
       printOut("\n");
+      numCurrentLine ++;
       printTab();
       if (n->fg != NULL) { /* la procedure a des parametres */
-            if (inScilabTranslation==0) {
-	   			        printOut("eval(I2M_out);\n ");
-	   		}
-	   		else {
-	   					printOut("if ~(isempty(I2M_out)); eval(I2M_out); else varargout(1)=varargin(1); end \n");
-			}
-        printTab();
-        printOut("return;\n");
-        numCurrentLine ++;
+      if (inScilabTranslation==0) {
+            printOut("if ~isempty(I2M_out),eval(I2M_out);end;\n ");
+            numCurrentLine ++;
+      } else {
+           printOut("if ~(isempty(I2M_out)); execstr([I2M_out]); else varargout(1)=[]; end \n");
+           numCurrentLine ++;
+      }
+      printTab();
+      printOut("return;\n");
+      numCurrentLine ++;
       }
       else{
       	printOut("return;\n");
+        numCurrentLine ++;
       }
-      numCurrentLine += 2;
+      /*numCurrentLine += 2;*/
       insertComment(n->lineInSource);
       strTmp = (char*) malloc (MAX_STR + strlen((n->valNode).uString));
       sprintf(strTmp, "%s%s end of function %s\n",commentaire,commentaire, (n->valNode).uString);
-      numCurrentLine += 3;
+      /*numCurrentLine += 3; /* ?? pourquoi 3  ?? */
       printOut(strTmp);
+      numCurrentLine ++;
       free(strTmp);
       if (displayMessage == 1) {
         fprintf(stderr, "%c%c%c%c%c%c", 8,8,8,8,8,8);
@@ -2566,7 +2644,7 @@ void parseTree(Node *n) {
 						else { /* traduction en scilab */
 										sprintf(outFile,"%s%c%s.sci",outDir, PATHSEP, (n->valNode).uString);
 						}
-      /* sprintf(outFile,"%s%c%s.m",outDir, PATHSEP, (n->valNode).uString); */
+      /*sprintf(outFile,"%s%c%s.m",outDir, PATHSEP, (n->valNode).uString);*/
       if (displayMessage == 1) {
         if (strlen(outFile) <= 30) {
           fprintf (stderr,"Creating %-30s", outFile) ;
@@ -2633,6 +2711,7 @@ void parseTree(Node *n) {
       if (n->fg != NULL) { /* la fonction a des parametres */
       /* l'entete est ecrite => on ecrit la construction des tables */
 	    printOut("\n");
+        numCurrentLine++;
 	    printOut(commentaire);
 	    printOut(commentaire);
 	    printOut("Initialization of parameters\n");
@@ -2681,10 +2760,11 @@ void parseTree(Node *n) {
         printTab();
         printOut(commentaire);
         printOut(" Creation of undeclared variables of functions parameters\n");
+        numCurrentLine ++;
         printTab();
         printOut(undeclaredVariables);
         printOut("\n\n");
-        numCurrentLine+=3;
+        numCurrentLine+=2;
       }
       parseTree(n->fd);
       gestionCatch(0,n);
@@ -2708,12 +2788,12 @@ void parseTree(Node *n) {
       nbWarning += nbWarningFile;
       inFunction = 0;	/* on est plus dans une fonction */
       inFunctionWithParam = 0;
-			if (inScilabTranslation==0) { /* traduction en matlab */
-					          sprintf(outFile,"%s%c%s.m",outDir, PATHSEP, "main");
-						}
-						else { /* traduction en scilab */
-										sprintf(outFile,"%s%c%s.sci",outDir, PATHSEP, "main");
-						}
+      if (inScilabTranslation==0) { /* traduction en matlab */
+         sprintf(outFile,"%s%c%s.m",outDir, PATHSEP, "main");
+      }
+      else { /* traduction en scilab */
+           sprintf(outFile,"%s%c%s.sci",outDir, PATHSEP, "main");
+      }
       if (pOutputFile != NULL) {
         fclose(pOutputFile);
       }
@@ -2739,22 +2819,22 @@ void parseTree(Node *n) {
       } else {
         inNamedCommon =1;
         if (n->fd->typeNode == IDENTIFIER) {
-          /* Il n'y a que le nom du "common" */
+          /* Il n'y a que le nom du \"common\" */
           resultat = malloc(sizeof(recType));
           sprintf(strTmp2, "COMMON %s",(n->fd->valNode).uString);
           erreurHashTable = find(strTmp2, resultat);
           if (erreurHashTable == STATUS_OK) {
-            Pas_tab = 1;
+            Pas_tab = 1; /* ??? */
             parseTree((resultat->ptype)->suite_comp);
-            Pas_tab = 0;
+            Pas_tab = 0; /* ??? */
             strTmp = (char*) malloc (MAX_STR + strlen((n->fd->valNode).uString));
-            sprintf(strTmp," %s%s %s",(n->fd->valNode).uString,commentaire,commentaire);
+            sprintf(strTmp," %s%s %s",commentaire,commentaire,(n->fd->valNode).uString);
             printOut(strTmp);
             free(strTmp);
             free(resultat);
           }
         } else {
-          /* Il n'y a un nom de "common" puis les variables */
+          /* Il n'y a un nom de \"common\" puis les variables */
           /* On insere le "common" avec les variables */
           parseTree(n->fd->fd);
           rec = malloc(sizeof(recType));
@@ -2808,34 +2888,78 @@ void parseTree(Node *n) {
     case  STATEMENT:
       break;
     case  STATEMENT_LIST:
+    /* -------- debug ------------------------
+    printOut("fg");
+    if(n->fg != NULL) {
+        strTmp = (char *) malloc(sizeof(int));
+        sprintf(strTmp,"%d",n->fg->typeNode);
+        printOut(strTmp);
+        free(strTmp);
+    } */
+
+
+      /*if (n->fg != NULL) {
+        if ((n->fg->typeNode == If) || (n->fg->typeNode == REPEAT_STATEMENT)
+        || (n->fg->typeNode == WHILE) || (n->fg->typeNode == FOR) || (n->fg->typeNode == Catch)
+        || (n->fg->typeNode == GESTION_ERREUR)) {
+          printOut("\n");
+          numCurrentLine++;
+          printTab();
+          /*printOut("1SL");*/
+        /*}
+      }   */
+
       parseTree(n->fg);
       if (n->fd == NULL) {
+        /*printTab();
+        printOut("2SL");*/
         return;
       }
-      if (n->fd != NULL) {
-        if (n->fd->typeNode == STATEMENT_LIST) {
-          parseTree(n->fd);
-          break;
-        }
-      }
+
+      if((n->fd->typeNode != STATEMENT_LIST) && (n->fd->typeNode != COMMENTSTATEMENT)) {
       printTab();
-      if (n->fd != NULL) {
-        if (n->fd->typeNode != If &&  n->fd->typeNode != WHILE
-            &&  n->fd->typeNode != FOR &&  n->fd->typeNode != REPEAT_STATEMENT
-            &&  n->fd->typeNode != CASE &&  n->fd->typeNode != CASE_STATEMENT) {
+      /*printOut("3SL");*/
+      /*printOut("ICI");*/                          }
+
+      if (  n->fd->typeNode != If &&  n->fd->typeNode != WHILE
+         && n->fd->typeNode != FOR &&  n->fd->typeNode != REPEAT_STATEMENT
+         &&  n->fd->typeNode != CASE &&  n->fd->typeNode != CASE_STATEMENT
+         && n->fd->typeNode != RETURN ) {
           insertComment(realLineInSource(n->fd));
-        }
       }
+    /* -------- debug ------------------------
+    printOut("fd");
+        if(n->fd != NULL) {
+        strTmp = (char *) malloc(sizeof(int));
+        sprintf(strTmp,"%d",n->fd->typeNode);
+        printOut(strTmp);
+        free(strTmp);
+    } */
+    /*  if ((n->fd->typeNode == If) || (n->fd->typeNode == REPEAT_STATEMENT)
+        || (n->fd->typeNode == WHILE) || (n->fd->typeNode == FOR) || (n->fd->typeNode == Catch)
+        || (n->fd->typeNode == GESTION_ERREUR)) {
+          printOut("\n");
+          numCurrentLine++;
+          printTab();
+          /*printOut("4SL");*/
+      /*}*/
       parseTree(n->fd);
-      if (n->fd != NULL) {
-        if (n->fd->typeNode == ASSIGNMENT ||
-            n->fd->typeNode == FUNCTION_CALL_OU_REF_MATRIX ||
-            n->fd->typeNode == FUNCTION_CALL || n->fd->typeNode == RETURN) {
-          printOut(";");
-        }
-        printOut("\n");
-        numCurrentLine++;
+      if (n->fd->typeNode == STATEMENT_LIST) {
+          break;
       }
+
+      if (n->fd->typeNode == ASSIGNMENT ||
+          n->fd->typeNode == FUNCTION_CALL_OU_REF_MATRIX ||
+          n->fd->typeNode == FUNCTION_CALL || n->fd->typeNode == RETURN) {
+           printOut(";");
+      }
+
+
+        /*if (n->fd->typeNode != ACOMMENT ||
+            n->fd->typeNode != COMMENTSTATEMENT) {
+            printOut("\n");
+            numCurrentLine++;
+        } */
       break;
     case  PARENTHESE:
       if (n->fd == NULL) {
@@ -2863,11 +2987,14 @@ void parseTree(Node *n) {
     case  RETURN:
       if (inFunctionWithParam || inProcWithParam ) {
         if (inScilabTranslation==0) {
-			        printOut("eval(I2M_out); ");
-		}
-		else {
-					printOut("if ~(isempty(I2M_out)); eval(I2M_out); else varargout(1)=varargin(1); end \n");
-		}
+					/* On traduit vers Matlab */
+					printOut("if ~isempty(I2M_out),eval(I2M_out);end;");
+				}
+				else {
+					/* On traduit vers Scilab */
+					printOut("if ~(isempty(I2M_out)); execstr([I2M_out]); else varargout(1)=[]; end \n");
+                    numCurrentLine++;
+				}
       }
       if (n->fg == NULL) {
         printOut("return");
@@ -2905,7 +3032,7 @@ void parseTree(Node *n) {
       if (find(strTmp, tableSymbNode) == STATUS_OK) {
       /* on regarde si la procedure est dans la table des symboles */
         if (tableSymbNode->ptype->num_type == PROCEDURE) {
-	      /* si elle y est est que c est bien une procedure on garde le bon nom */
+	      /* si elle y est et que c'est bien une procedure on garde le bon nom */
 	      /* LA PROCEDURE EST DEFINIE PAR L UTILISATEUR */
 
           /* Test du nom de la fonction */
@@ -2942,13 +3069,14 @@ void parseTree(Node *n) {
       	      if (containsVariable(n->fg) == 1) { /* on a des variables par adresse */
               	numVar=1;  /* numerotation des variables */
               	printOut(", 'I2M_pos', [");
+                numParamInCurProc = nbParamPro(n->fg);
               	parseProCallParam3(n->fg,1); /* on ecrit le dernier parametre indiquant les variables */
                 deleteObjetOfType(REFPARAM); /* on clean la table des symboles */
               	printOut("])");
               } else {	/* pas de i2m_pos */
                 printOut(")");
               }
-            } else { /* cas du passage de paramaetre simple */
+            } else { /* cas du passage de parametre simple */
               printOut("(");
               parseTree(n->fg);
               printOut(")");
@@ -3029,13 +3157,19 @@ void parseTree(Node *n) {
         i = atoi(strTmp2);
         if (i == 0) { /* passage simple */
       	  printOut(strTmp3); /*on ecrit le nom de la fonction */
-      	  free(strTmp3);
           if (n->fg != NULL) { /* on a des parametres */
+          if (containsKeywords(n->fg) == 1) {
+             strcpy(strTmp,(n->valNode).uString);
+                sprintf(strTmp2, "Line %d => procedure <%s> (-> %s) doesn't accept keywords at line %d in %s\n",n->lineInSource, strTmp, strTmp3,numCurrentLine, outFile);
+             printToLog(strTmp2);
+             /*free(strTmp);*/
+          }
       	    printOut("(");
 	          parseTree(n->fg);
             printOut(")");
           }
-        } else {  /* passage de paramatre complexe */
+          free(strTmp3);
+        } else {  /* passage de parametres complexe */
           if (parseProCallParam4(n->fg,0) ==1) { /* cas du passage de parametres complexe */
             if (parseProCallParam1(n->fg,1) == 0) { /* on a ecrit quelque chose */
               deleteObjetOfType(REFPARAM); /* on clean la table des symboles */
@@ -3052,6 +3186,7 @@ void parseTree(Node *n) {
       	      if (containsVariable(n->fg) == 1) { /* on a des variables par adresse */
               	numVar=1;  /* numerotation des variables */
               	printOut(", 'I2M_pos', [");
+                numParamInCurProc = nbParamPro(n->fg);
               	parseProCallParam3(n->fg,1); /* on ecrit le dernier parametre indiquant les variables */
                 deleteObjetOfType(REFPARAM); /* on clean la table des symboles */
               	printOut("])");
@@ -3179,10 +3314,20 @@ void parseTree(Node *n) {
               }
               parseProCallParam1(n->fg,0);
               deleteObjetOfType(REFPARAM); /* on clean la table des symboles */
-              printOut("] = ");
+              strTmpOp = (char *) malloc(10);
+              sprintf(strTmpOp,"] %s ",opAssignment);
+              printOut(strTmpOp);
+              /* Affichage d'un warning si opAssignment <> "=" ?? */
+              free(strTmpOp);
+              /* printOut("] = ");*/
             } else {
               parseTree(nameAssignement);
-              printOut(" = ");
+              strTmpOp = (char *) malloc(10);
+              sprintf(strTmpOp," %s ",opAssignment);
+              printOut(strTmpOp);
+              /* Affichage d'un warning si opAssignment <> "=" ?? */
+              free(strTmpOp);
+              /*printOut(" = ");*/
             }
           }
           strcpy(strTmp,(n->valNode).uString);
@@ -3204,6 +3349,7 @@ void parseTree(Node *n) {
                       inserer_tuer(strTmp2, REFPARAM);
                     } /* on insere le retour de fonction pour eviter les pb de param identiques */
                   }
+                  numParamInCurProc = nbParamPro(n->fg);
                   parseProCallParam3(n->fg,1); /* on ecrit le dernier parametre indiquant les variables */
                   deleteObjetOfType(REFPARAM); /* on clean la table des symboles */
                   printOut("])");
@@ -3229,7 +3375,12 @@ void parseTree(Node *n) {
       if (strcmp((n->valNode).uString, "execute") == 0) {
         if (appelFonctionTmp == 1) { /* si on est dans un assignement */
           parseTree(nameAssignement);
-          printOut(" = ");
+          strTmpOp = (char *) malloc(10);
+          sprintf(strTmpOp," %s ",opAssignment);
+          printOut(strTmpOp);
+          /* Affichage d'un warning si opAssignment <> "=" ?? */
+          free(strTmpOp);
+          /*printOut(" = ");*/
           printOut("1; eval(i2m_tr");
           if (n->fg != NULL) {
             printOut("(");
@@ -3262,7 +3413,12 @@ void parseTree(Node *n) {
       if (strcmp((n->valNode).uString, "n_elements") == 0) {
         if (appelFonctionTmp == 1) { /* si on est dans un assignement */
           parseTree(nameAssignement);
-          printOut(" = ");
+          strTmpOp = (char *) malloc(10);
+          sprintf(strTmpOp," %s ",opAssignment);
+          printOut(strTmpOp);
+          /* Affichage d'un warning si opAssignment <> "=" ?? */
+          free(strTmpOp);
+          /*printOut(" = ");*/
         }
         printOut("eval('n_elements(");
         if (n->fg != NULL) {
@@ -3276,7 +3432,12 @@ void parseTree(Node *n) {
       if (strcmp((n->valNode).uString, "n_params") == 0) {
         if (appelFonctionTmp == 1) { /* si on est dans un assignement */
           parseTree(nameAssignement);
-          printOut(" = ");
+          strTmpOp = (char *) malloc(10);
+          sprintf(strTmpOp," %s ",opAssignment);
+          printOut(strTmpOp);
+          /* Affichage d'un warning si opAssignment <> "=" ?? */
+          free(strTmpOp);
+          /*printOut(" = ");*/
         }
         printOut("n_params(nargin, eval('varargin','{}'))");
         return;
@@ -3286,7 +3447,12 @@ void parseTree(Node *n) {
       if (strcmp((n->valNode).uString, "size") == 0) {
         if (appelFonctionTmp == 1) { /* si on est dans un assignement */
           parseTree(nameAssignement);
-          printOut(" = ");
+          strTmpOp = (char *) malloc(10);
+          sprintf(strTmpOp," %s ",opAssignment);
+          printOut(strTmpOp);
+          /* Affichage d'un warning si opAssignment <> "=" ?? */
+          free(strTmpOp);
+          /*printOut(" = ");*/
         }
         printOut("eval('sizz(");
         if (n->fg != NULL) {
@@ -3302,7 +3468,12 @@ void parseTree(Node *n) {
         /* on a 2 cas selon le nombre de param de la fonction */
         if (appelFonctionTmp == 1) { /* si on est dans un assignement */
           parseTree(nameAssignement);
-          printOut(" = ");
+          strTmpOp = (char *) malloc(10);
+          sprintf(strTmpOp," %s ",opAssignment);
+          printOut(strTmpOp);
+          /* Affichage d'un warning si opAssignment <> "=" ?? */
+          free(strTmpOp);
+          /*printOut(" = ");*/
         }
         printOut("eval(i2m_tr(");
         if (n->fg->typeNode != SUITE_CALL_LIST) { /* on a qu'un param */
@@ -3355,15 +3526,26 @@ void parseTree(Node *n) {
         if (i == 0) { /* passage simple */
           if (appelFonctionTmp == 1) { /* si on est dans un assignement */
             parseTree(nameAssignement);
-            printOut(" = ");
+            strTmpOp = (char *) malloc(10);
+            sprintf(strTmpOp," %s ",opAssignment);
+            printOut(strTmpOp);
+            /* Affichage d'un warning si opAssignment <> "=" ?? */
+            free(strTmpOp);
+            /*printOut(" = ");*/
           }
           printOut(strTmp3); /*on ecrit le nom de la fonction */
-          free(strTmp3);
           if (n->fg != NULL) { /* on a des parametres */
+            if (containsKeywords(n->fg) == 1) {
+                strcpy(strTmp,(n->valNode).uString);
+                sprintf(strTmp2, "Line %d => function <%s> (-> %s) doesn't accept keywords at line %d in %s\n",n->lineInSource, strTmp, strTmp3, numCurrentLine, outFile);
+                printToLog(strTmp2);
+                /*free(strTmp);*/
+            }
             printOut("(");
              parseTree(n->fg);
             printOut(")");
           }
+          free(strTmp3);
         } else {  /* passage de paramatre complexe */
           if (appelFonctionTmp == 1) { /* si on est dans un assignement */
             if (containsVariable(n->fg) == 1) { /* on a aussi des variables de retour */
@@ -3377,10 +3559,20 @@ void parseTree(Node *n) {
               }
               parseProCallParam1(n->fg,0);
               deleteObjetOfType(REFPARAM); /* on clean la table des symboles */
-              printOut("] = ");
+              strTmpOp = (char *) malloc(10);
+              sprintf(strTmpOp,"] %s ",opAssignment);
+              printOut(strTmpOp);
+              /* Affichage d'un warning si opAssignment <> "=" ?? */
+              free(strTmpOp);
+              /*printOut("] = ");*/
             } else {
               parseTree(nameAssignement);
-              printOut(" = ");
+              strTmpOp = (char *) malloc(10);
+              sprintf(strTmpOp," %s ",opAssignment);
+              printOut(strTmpOp);
+              /* Affichage d'un warning si opAssignment <> "=" ?? */
+              free(strTmpOp);
+              /*printOut(" = ");*/
             }
           }
           printOut(strTmp3); /*on ecrit le nom de la fonction */
@@ -3400,6 +3592,7 @@ void parseTree(Node *n) {
                       inserer_tuer(strTmp2, REFPARAM);
                     } /* on insere le retour de fonction pour eviter les pb de param identiques */
                   }
+                  numParamInCurProc = nbParamPro(n->fg);
                   parseProCallParam3(n->fg,1); /* on ecrit le dernier parametre indiquant les variables */
                   deleteObjetOfType(REFPARAM); /* on clean la table des symboles */
                   printOut("])");
@@ -3429,7 +3622,12 @@ void parseTree(Node *n) {
       sprintf(strTmp, "%s", strTmp);
       if (appelFonctionTmp == 1) { /* si on est dans un assignement */
         parseTree(nameAssignement);
-        printOut(" = ");
+        strTmpOp = (char *) malloc(10);
+        sprintf(strTmpOp," %s ",opAssignment);
+        printOut(strTmpOp);
+        /* Affichage d'un warning si opAssignment <> "=" ?? */
+        free(strTmpOp);
+        /*printOut(" = ");*/
       }
       printOut(strTmp);
       free(strTmp);
@@ -3558,7 +3756,7 @@ void parseTree(Node *n) {
       break;
     case  REF_STRUCT:
       if (inRef_struct_list == 0) {
-        inRef_struct_list == 1;
+        inRef_struct_list = 1;
         if (n->fg->typeNode != IDENTIFIER) printOut("[");
         parseTree(n->fg);
         printOut(".");
@@ -3710,7 +3908,7 @@ void parseTree(Node *n) {
     case  VAR_SYSTEM:
       if (n->fg == NULL) {
         if (strcmp((n->valNode).uString, "err_string") == 0) {
-          printOut("lasterr");
+          printOut("i2mvs_error_state.msg");
           return;
         }
         if (strcmp((n->valNode).uString, "stime") == 0) {
@@ -3718,9 +3916,9 @@ void parseTree(Node *n) {
           return;
         }
         if (strcmp((n->valNode).uString, "error") == 0) {
-          printOut("i2mvs_error");
-          sprintf(strTmp2, "Line %d => Dangerous translation of var system <error> at line %d in %s\n", n->lineInSource, numCurrentLine, outFile);
-          printToLog(strTmp2);
+          printOut("i2mvs_error_state.code");
+          /*sprintf(strTmp2, "Line %d => Dangerous translation of var system <error> at line %d in %s\n", n->lineInSource, numCurrentLine, outFile);
+          printToLog(strTmp2); */
           return;
         }
         strTmp = (char*) malloc (256);
@@ -3749,21 +3947,28 @@ void parseTree(Node *n) {
 	  }
       parseTree(n->fg); /* on ecrit le parametre du switch */
       incTab();
-      printOut(",\n");
-      numCurrentLine++;
+      /*printOut(",\n");
+      numCurrentLine++;*/
       parseTree(n->fd); /* on ecrit les cases */
       decTab();
       printTab();
       printOut("end ");
       printOut(commentaire);
       if  (inScilabTranslation==0) {
-	      	  printOut("switch");
+	      	  printOut(" switch");
 	  	  }
 	        else {
-	        	  printOut("select");
+	        	  printOut(" select");
 	  }
+      printOut("\n");
+      numCurrentLine++;
       break;
     case  CASE_STATEMENT_SUITE:
+      if(n->fg->typeNode == COMMENTSTATEMENT) {
+      printTab();
+      /*printOut("CASE");*/
+
+      }
       parseTree(n->fg); /* on ecrit les cases */
       parseTree(n->fd); /* on ecrit l otherwise */
       break;
@@ -3835,7 +4040,9 @@ void parseTree(Node *n) {
       printTab();
       printOut("end");
       printOut(commentaire);
-      printOut("while");
+      printOut(" while");
+      printOut("\n");
+      numCurrentLine++;
       break;
     case  REPEAT_STATEMENT:
       printOut(commentaire);
@@ -3857,9 +4064,11 @@ void parseTree(Node *n) {
       printTab();
       printOut("end");
 	  printOut(commentaire);
-      printOut("while");
+      printOut(" while");
+      printOut("\n");
+      numCurrentLine++;
       break;
-    case  FOR:
+    case FOR:
       printOut("for ");
       oldCatchCount = catchCount;
       if (n->fg != NULL) { /* on verifie qu il est construit correctement */
@@ -3897,10 +4106,19 @@ void parseTree(Node *n) {
       printTab();
       printOut("end");
 	  printOut(commentaire);
-      printOut("for");
+      /*printOut("for");*/
+      printOut(" for\n");
+      numCurrentLine++;
       break;
     case  ASSIGNMENT:
-      nameAssignement = n->fg; /* on stock ce qu'il y a avant le = */
+      if (n->fd == NULL) {
+        /* On est dans le cas du ++ ou du --  */
+        parseTree(n->fg);
+        break;
+      }
+
+      nameAssignement = n->fg; /* on stocke ce qu'il y a avant le = */
+      strcpy(opAssignment,(n->valNode).uString);
       /* Traitement special de la variable system QUIET et PATH*/
       if ((n->fg->valNode).uString != NULL) {
         if ((strcmp((n->fg->valNode).uString, "quiet") == 0) && (n->fg->typeNode == VAR_SYSTEM)) {
@@ -3923,7 +4141,8 @@ void parseTree(Node *n) {
       }
       /* Fin du Traitement du QUIET et PATH */
 
-      /* Renommage ? */
+      /* Renommage si ce n'est pas une variable systeme ? */
+      if(n->fg->typeNode != VAR_SYSTEM) {
       sprintf(strTmp2, "RESERVED %s",(n->fg->valNode).uString);
       resultat = malloc(sizeof(recType));
       if (find(strTmp2,resultat) == STATUS_OK) {
@@ -3933,7 +4152,7 @@ void parseTree(Node *n) {
           strcpy((n->fg->valNode).uString, strTmp2);
         }
       }
-      free(resultat);
+      free(resultat);     }
 
       if (n->fg->fg == NULL && n->fg->fd == NULL) {
         /* On met l'identificateur (partie gauche de l'ASSIGNEMENT) dans la table des symboles */
@@ -3947,7 +4166,7 @@ void parseTree(Node *n) {
 
         inserer_tuer((n->fg->valNode).uString, VARIABLE);
       }
-      /* on test si la partie droite est un fonctionn call */
+      /* on teste si la partie droite est un fonction call */
       if (isNodeFunctionCall(n->fd)) {
       	appelFonction = 1;
         parseTree(n->fd);
@@ -3964,26 +4183,32 @@ void parseTree(Node *n) {
         generer_ref_struct(n->fg, n->fd);
       } else {/* On genere simplement l'assignement */
         parseTree(n->fg);
-        printOut(" = ");
+        strTmpOp = (char*) malloc (10);
+        sprintf(strTmpOp," %s ",(n->valNode).uString);
+        printOut(strTmpOp);
+        /* On affiche un warning si (n->valNode).uString <> "=" ??  */
+        free(strTmpOp);
         parseTree(n->fd);
       }
-      break;
+     break;
     case IDENTIFIER:
       /* Test du nom de l identificateur */
       if (n->fg != NULL) { /* Cas special du suite call = passage keyword */
         parseTree(n->fg);
         return;
       }
-      sprintf(strTmp2, "RESERVED %s",(n->valNode).uString);
-      resultat = malloc(sizeof(recType));
-      if (find(strTmp2,resultat) == STATUS_OK) {
-        if ((resultat->ptype->num_type == RESERVED_VAR) ||
-            (resultat->ptype->num_type == RESERVED)) {
-          sprintf(strTmp2, "M2I_%s",(n->valNode).uString);
-          strcpy((n->valNode).uString, strTmp2);
+      if (inRef_struct_list == 0 ) {
+        sprintf(strTmp2, "RESERVED %s",(n->valNode).uString);
+        resultat = malloc(sizeof(recType));
+        if (find(strTmp2,resultat) == STATUS_OK) {
+          if ((resultat->ptype->num_type == RESERVED_VAR) ||
+              (resultat->ptype->num_type == RESERVED)) {
+            sprintf(strTmp2, "M2I_%s",(n->valNode).uString);
+            strcpy((n->valNode).uString, strTmp2);
+          }
         }
+        free(resultat);
       }
-      free(resultat);
 
       if (common == 1) {
       /* C'est un identifier dans le common. On doit le rentrer dans la table des symboles */
@@ -4073,6 +4298,12 @@ void parseTree(Node *n) {
       printOut(" | ");
       parseTree(n->fd);
       break;
+    case ORSHORTCUT :
+      /* genere le || */
+      parseTree(n->fg);
+      printOut(" || ");
+      parseTree(n->fd);
+      break;
     case 	And	:
       /* Genere le "ET" */
       if ((n->fg->typeNode == IDENTIFIER) || (n->fg->typeNode == INTEGER) ||
@@ -4088,6 +4319,12 @@ void parseTree(Node *n) {
         printOut(" & ");
         parseTree(n->fd);
       }
+      break;
+    case ANDSHORTCUT :
+      /* genere le && */
+      parseTree(n->fg);
+      printOut(" && ");
+      parseTree(n->fd);
       break;
     case 	LT	:
       /* Genere le "<" */
@@ -4112,6 +4349,32 @@ void parseTree(Node *n) {
       /* Genere le "-" unaire */
       printOut("-");
       parseTree(n->fg);
+      break;
+    case PlusPlus :
+      /* cas du ++ */
+      if (n->fg != NULL) {
+        /*  cas var++  */
+        parseTree(n->fg);
+        printOut("++");
+      } else {
+        /*  cas ++var  */
+        printOut("++");
+        parseTree(n->fd);
+      }
+      /* Affichage d'un warning ?? */
+      break;
+    case MoinsMoins :
+      /* cas du -- */
+      if (n->fg != NULL) {
+        /*  cas var--  */
+        parseTree(n->fg);
+        printOut("--");
+      } else {
+        /*  cas --var  */
+        printOut("--");
+        parseTree(n->fd);
+      }
+      /* Affichage d'un warning ?? */
       break;
     case 	LE	:
       /* Genere le "<=" */
@@ -4188,6 +4451,16 @@ void parseTree(Node *n) {
       printOut(" ~");
       parseTree(n->fg);
       break;
+      /*
+      printOut("i2m_not(");
+      parseTree(n->fg);
+      printOut(")");
+      break;*/
+    case TILDE :
+      /* Genere le "~" */
+      printOut(" ~");
+      parseTree(n->fg);
+      break;
     case TIMES	:
       /* Genere la multiplication */
       parseTree(n->fg);
@@ -4234,9 +4507,11 @@ void parseTree(Node *n) {
       parseTree(n->fg);
       inCondStruct = 0;
       incTab();
+      /*printOut("), ");*/
       printOut(")\n");
       numCurrentLine++;
       parseTree(n->fd); /* on ecrit le then */
+      /************ Obsolete ********************
       if (n->fd->fd != NULL) {
         if (n->fd->fd->fg != NULL) {
           if (n->fd->fd->fg->typeNode == CASE_ELSE) {
@@ -4245,14 +4520,16 @@ void parseTree(Node *n) {
             printOut("end");
             printOut(commentaire);
             printOut("if\n");
+
             numCurrentLine++;
             decTab();
             parseTree(n->fd->fd->fg);
             incTab();
             return;
           }
-        }
+        } ********* Fin du code obsolete *********/
         /* On parse le else */
+      if (n->fd->fd != NULL) {
         parseTree(n->fd->fd);
       }
       decTab();
@@ -4260,6 +4537,8 @@ void parseTree(Node *n) {
       printOut("end");
 	  printOut(commentaire);
       printOut("if\n");
+      /*printOut(" if");*/
+      numCurrentLine++;
       break;
     case Then	:
       oldCatchCount = catchCount; /* on garde le niveau d imbriquement des catch */
@@ -4268,6 +4547,12 @@ void parseTree(Node *n) {
       break;
     case Else	:
       oldCatchCount = catchCount; /* on garde le niveau d imbriquement des catch */
+      decTab();
+      printTab();
+      incTab();
+      /*printOut("else");*/
+      printOut("\n");
+      numCurrentLine++;
       decTab();
       printTab();
       incTab();
@@ -4300,7 +4585,71 @@ void parseTree(Node *n) {
       parseTree(n->fd);
       printOut(")");
       break;
-    case COMMENT :
+    case ACOMMENT :
+         /*printf("Commentaire : %s\n",(n->valNode).uString);*/
+         printOut(commentaire);
+         strTmp = (char*) malloc (strlen((n->valNode).uString)+1);
+         removeCharacter((n->valNode).uString, ';', strTmp);
+         printOut(strTmp);
+         free(strTmp);
+         /*printOut("\n");*/
+         /*printTab();*/
+/*         numCurrentLine++;  */
+      break;
+    case CR :
+          printOut("\n");
+          numCurrentLine++;
+      break;
+    case COMMENTSTATEMENT :
+         /*printf("commentstatement\n");*/
+         if (n->fg != NULL) {
+           /*if ((n->fg->typeNode == If) || (n->fg->typeNode == REPEAT_STATEMENT)
+              || (n->fg->typeNode == WHILE) || (n->fg->typeNode == FOR) || (n->fg->typeNode == Catch)
+              || (n->fg->typeNode == GESTION_ERREUR)) {
+                printOut("\n");
+                numCurrentLine++;
+                printTab();
+                /*printOut("1CS");*/
+           /*} else { */if ((n->fg->typeNode != CR) && (n->fg->typeNode != COMMENTSTATEMENT)
+                         && (n->fg->typeNode != STATEMENT_LIST) /*&& (n->fg->typeNode != ACOMMENT)*/) {
+                       printTab();
+                       /*printOut("newCS");*/
+                    }
+           /*}*/
+         }
+         parseTree(n->fg);
+         if (n->fg != NULL) {
+            if (n->fg->typeNode == ASSIGNMENT ||
+            n->fg->typeNode == FUNCTION_CALL_OU_REF_MATRIX ||
+            n->fg->typeNode == FUNCTION_CALL || n->fg->typeNode == RETURN) {
+              printOut(";");
+            }
+         }
+         if (n->fd != NULL) {
+           /*if (((n->fd->typeNode == If) || (n->fd->typeNode == REPEAT_STATEMENT)
+              || (n->fd->typeNode == WHILE) || (n->fd->typeNode == FOR) || (n->fd->typeNode == Catch)
+              || (n->fd->typeNode == GESTION_ERREUR)) && ((n->fg == NULL) || (n->fg->typeNode == CR))) {
+                printOut("\n");
+                printTab();
+                /*printOut("2CS");*/
+    /*          numCurrentLine++;
+           } else {*/ if((n->fd->typeNode != CASE_SUITE) && (n->fd->typeNode != CR) && (n->fd->typeNode != CASE) && (n->fd->typeNode != COMMENTSTATEMENT)
+                         && (n->fd->typeNode != STATEMENT_LIST)) {
+                      printTab();
+                      /*strTmp = (char *) malloc(256);
+                      sprintf(strTmp,"3CS%d ",n->fg->*/
+                      /*printOut("3CS");*/
+                    }
+           /*}*/
+         }
+         parseTree(n->fd);
+         if (n->fd != NULL) {
+            if (n->fd->typeNode == ASSIGNMENT ||
+            n->fd->typeNode == FUNCTION_CALL_OU_REF_MATRIX ||
+            n->fd->typeNode == FUNCTION_CALL || n->fd->typeNode == RETURN) {
+              printOut(";");
+            }
+         }
       break;
     case Catch :
       if (n->fg->typeNode == IDENTIFIER) {
@@ -4366,14 +4715,15 @@ void parseTree(Node *n) {
   default:
     sprintf(strTmp2, "Line %d => Translation error at node type %d at line %d in %s\n", n->lineInSource, n->typeNode, numCurrentLine, outFile);
     printToLog(strTmp2);
-  } /* en switch */
+  } /* end switch */
  }
 }
 
 
-/* fonction principale pour generer le code traduit */
+/*+ fonction principale pour generer le code traduit +*/
 void genereCode (char *od, char *lfn, char* sfn, char* sdn, char* ofn, char* str,char* onefn, int translation) {
 char strTmp[512];
+char * strTmpLog;
 
   /* initialisation des variables */
   tab = 0;
@@ -4431,6 +4781,15 @@ char strTmp[512];
   sprintf(strTmp, "%s%cidl2matlab.log", outDir, PATHSEP);
   pLogFile = fopen(strTmp, "w");
   if (pLogFile != NULL) {
+    printToLog("********************************************************************************\n");
+    strTmpLog = (char *) malloc(strlen(sfn)+70);
+    sprintf(strTmpLog,"! Line numbers refer to the file \"%s\" !\n",sfn);
+    printToLog(strTmpLog);
+    free(strTmpLog);
+    printToLog("________________________________________________________________________________\n\n");
+      fileTranslationError = 0; /* On remet les compteurs a 0 */
+      nbWarningFile = 0;
+      translationError = 0;
     parseTree(root);  /* LANCE LA TRADUCTION */
     fclose(pLogFile);
   } else {
