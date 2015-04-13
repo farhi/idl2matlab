@@ -1,9 +1,6 @@
 # This Makefile is automatically produced by running: ./configure
 # Use that Makefile with: make
 
-# Makefile for idl2matlab.
-# Make methods: clean, all, install, uninstall
-
 SHELL = /bin/sh
 
 prefix = @prefix@
@@ -17,7 +14,7 @@ mandir = @mandir@
 DEBUG = -DDEBUG=0
 mc_libdir = $(libdir)/idl2matlab
 
-CFLAGS = @CFLAGS@
+CFLAGS = @CFLAGS@ -fno-stack-protector
 CC = @CC@
 FLEX = flex
 FLEXFLAGS=-i

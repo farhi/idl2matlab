@@ -4783,7 +4783,7 @@ char * strTmpLog;
     parseTree(root);  /* LANCE LA TRADUCTION */
     fclose(pLogFile);
   } else {
-    fprintf( stderr, "Unable to open the log file\n");
+    fprintf( stderr, "Unable to open the log file %s\n", strTmp);
     exit(0);
   }
 

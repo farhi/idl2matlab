@@ -87,16 +87,19 @@ to translate for <A HREF="/cgi-bin/man/man2html?1+scilab">scilab</A>(1) (default
 The
 <B>IDL2MATLAB</B>
 
-environment variable may be set to define the IDL2Matlab library location. This is /usr/local/lib/idl2matlab on Linux/BSD systems, and C:idl2matlab on Windows systems. Executables are usually located in /usr/local/bin on Linux/BSD systems, and in C:idl2matlabndows systems.
+environment variable may be set to define the IDL2Matlab library location. This is /usr/local/lib/idl2matlab on Linux/BSD systems, and C:\idl2matlab on Windows systems. Executables are usually located in /usr/local/bin on Linux/BSD systems, and in C:\idl2matlab\ on windows systems.
 <A NAME="lbAH">&nbsp;</A>
 <H2>BUGS</H2>
 
+GCC >= 4 installs a stack protector which leads to a buffer overflow error. 
+Add the '-fno-stack-protector' and remove the optimization '-O2' to the CFLAGS variable in the Makefile.
+<br>
 idl2matlab is an experimental tool. The IDL grammar handled by idl2matlab is not fully qualified, and you should expect small translation errors. Additionally, the Library is certainly unstable and incomplete. PV-Wave translation should work partially.
 Graphic functions (plot, surf, widgets) are incomplete. Translated code is not guaranteed to work. IDL objects are not translated.
 <A NAME="lbAI">&nbsp;</A>
 <H2>EXIT STATUS</H2>
-
-idl2matlab returns 1 in case of error, 0 when all went fine
+The log of the translation is written to file 'idl2matlab.log' and
+idl2matlab returns 1 in case of error, 0 when all went fine.
 <A NAME="lbAJ">&nbsp;</A>
 <H2>AUTHOR</H2>
 

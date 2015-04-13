@@ -33,7 +33,7 @@
 @echo Use Ctrl-C if you want to break this script to install these packages or
 @pause
 @set CC=c:\Dev-Cpp\bin\gcc.exe
-@set /P CC=Set CC compiler variable (default is %CC%):
+@set /P CC=Set CC compiler variable (default is %CC%, use quotes if path contains spaces):
 
 @if exist %CC% goto cc_ok
 @echo ERROR: the C compiler %CC% can not be found. Aborting.
@@ -44,14 +44,14 @@ exit
 @echo ...
 @echo NOTE: Set the C include and lib paths using / or \\ - NOT single \
 @echo ...
-@set /P INCLUDE=Set C INCLUDE variable (default is %INCLUDE%):
+@set /P INCLUDE=Set C INCLUDE variable (default is %INCLUDE%, use quotes if path contains spaces):
 @if exist %INCLUDE% goto inc_ok
 @echo ERROR: the INCLUDE %INCLUDE% can not be found. Aborting.
 pause
 exit
 :inc_ok
 @set LIB="C:\Dev-Cpp\lib"
-@set /P LIB=Set C LIB variable (default is %LIB%):
+@set /P LIB=Set C LIB variable (default is %LIB%, use quotes if path contains spaces):
 @if exist %LIB% goto lib_ok
 @echo ERROR: the LIB %LIB% can not be found. Aborting.
 pause
@@ -71,24 +71,20 @@ exit
 @mkdir %IDL2MATLAB_SITE%\bin
 
 :compile
-%CC% -c -g -O2 idl2matlab.c -I%INCLUDE%
-%CC% -c -g -O2 main.c -I%INCLUDE%
-%CC% -c -g -O2 tree.c -I%INCLUDE%
-%CC% -c -g -O2 code.c -I%INCLUDE%
-%CC% -c -g -O2 rename.c -I%INCLUDE%
-%CC% -c -g -O2 lib.c -I%INCLUDE%
-%CC% -c -g -O2 hashtable.c -I%INCLUDE%
-%CC% -c -g -O2 table_symb.c -I%INCLUDE%
-%CC% -c -g -O2 lex.yy.c -I%INCLUDE%
-%CC% -g -O2 main.o idl2matlab.o tree.o hashtable.o table_symb.o rename.o lex.yy.o lib.o code.o -o idl2matlab -I%INCLUDE%
+%CC% -c -g idl2matlab.c -I%INCLUDE%
+%CC% -c -g main.c -I%INCLUDE%
+%CC% -c -g tree.c -I%INCLUDE%
+%CC% -c -g code.c -I%INCLUDE%
+%CC% -c -g rename.c -I%INCLUDE%
+%CC% -c -g lib.c -I%INCLUDE%
+%CC% -c -g hashtable.c -I%INCLUDE%
+%CC% -c -g table_symb.c -I%INCLUDE%
+%CC% -c -g lex.yy.c -I%INCLUDE%
+%CC% -g main.o idl2matlab.o tree.o hashtable.o table_symb.o rename.o lex.yy.o lib.o code.o -o idl2matlab -I%INCLUDE%
 
 :inst
 @echo Copying in the files...
 @copy idl2matlab.exe %IDL2MATLAB_SITE%\bin
-@copy idl2matlab.html %LOOKTXT_SITE%
-@copy README %LOOKTXT_SITE%
-@copy CHANGES %LOOKTXT_SITE%
-@copy COPYING %LOOKTXT_SITE%
 @xcopy /e /i /y /q lib C:\IDL2MATLAB
 @reg add HKCU\Environment /v IDL2MATLAB /d "%IDL2MATLAB_SITE%" /f
 @reg add HKCU\Environment /v CC /d "%CC%" /f

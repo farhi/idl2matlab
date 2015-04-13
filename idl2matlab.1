@@ -73,6 +73,9 @@ The
 .B IDL2MATLAB
 environment variable may be set to define the IDL2Matlab library location. This is /usr/local/lib/idl2matlab on Linux/BSD systems, and C:\idl2matlab on Windows systems. Executables are usually located in /usr/local/bin on Linux/BSD systems, and in C:\idl2matlab\bin  on Windows systems.
 .SH "BUGS"
+GCC >= 4 installs a stack protector which leads to a buffer overflow error. 
+Add the '\-fno\-stack\-protector' and remove the optimization '\-O2' to the CFLAGS variable in the Makefile.
+
 idl2matlab is an experimental tool. The IDL grammar handled by idl2matlab is not fully qualified, and you should expect small translation errors. Additionally, the Library is certainly unstable and incomplete. PV\-Wave translation should work partially.
 Graphic functions (plot, surf, widgets) are incomplete. Translated code is not guaranteed to work. IDL objects are not translated.
 .SH "EXIT STATUS"

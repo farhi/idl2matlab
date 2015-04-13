@@ -19,11 +19,14 @@
         Release 1.3 (20 Mar 2006) dev (alpha)
         Release 1.4 (13 Jun 2007) beta
         Release 1.5 (21 jan 2009) final
+        Release 1.6 (01 may 2013) fix buffer overflow
 *
-* This file is part of IDL2Matlab  version 1.5, released Jan 21th, 2008.
+* This file is part of IDL2Matlab  version 1.6, released May 1st, 2013.
 * It gives a 'changes' list from the beginning of the project
 *
 *******************************************************************************/
+
+01 May 2013: fix buffer overflow error with gcc >= 4 (idl2matlab 1.6)
 
 31 July 2003: first dev-alpha release (idl2matlab-31_Jul_2003.zip)
 -------------------------------------

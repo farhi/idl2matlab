@@ -12,126 +12,184 @@ Initial Release 0.0 (28 jan 2003) dev (alpha)
         Release 1.2 (11 Mar 2004) dev (alpha)
         Release 1.3 (20 Mar 2006) dev (alpha)
         Release 1.4 (13 Jun 2007) beta
+        Release 1.5 (21 jan 2009) final
+        Release 1.6 (01 may 2013) fix buffer overflow
 
 This project was designed by the Institut Laue-Langevin <http://www.ill.fr>.
 This version may be redistributed as long as you also give this README file.
 
+/*******************************************************************************
+*
+* IDL2Matlab and Scilab translator
+*   Computing for Science group
+*   Institut Laue langevin, BP 156
+*   F-38042 Grenoble cedex 9, FRANCE
+*
+* Documentation: README
+*
+* %Identification
+* Written by: EF, DR
+* Date: 2003-2013
+* Origin: ILL
+*******************************************************************************/
+
+This project was designed by the Institut Laue-Langevin <http://www.ill.fr>.
+This version may be redistributed as long as you give the source code and
+also include this README file. 
+See the COPYING file for the terms of the GPL2 license.
+
+IDL2Matlab comes with ABSOLUTELY NO WARRANTY
+  Commercial use is STRICTLY forbidden.
+  You are allowed to redistribute this software but should then contact us,
+  distribute its source code and cite all the authors.
+
 SCOPE:
 ------
 
-  This is IDL2Matlab (13 June 2007).
+  This is IDL2Matlab / IDL2Scilab translator, version 1.6 (1 May 2013).
 
-  This tool translates automatically an IDL code into Matlab code.
-
-  This software is the property of the
-    Computing for Science group
-    Institut Laue langevin, BP 156
-    F-38042 Grenoble cedex 9, FRANCE
-  It comes with ABSOLUTELY NO WARRANTY
-  Direct Commercial use is STRICTLY forbidden.
-  You are allowed to redistribute this software but should then contact us,
-  distribute its source code and cite all the authors.
+  This tool translates automatically an IDL code into Matlab or Scilab code.
 
   Contact: richard@ill.fr or farhi@ill.fr for more informations
 
   Restrictions:
-    Graphic functions (plot, surf, widgets) are incomplete
-    Objects are not translated
+    Graphic functions (plot, surf, widgets) are incomplete.
+    Translated code is not guaranteed to work.
+    Objects are not translated.
 
-Usage : idl2matlab [-options] inputFile [outputDirectory]
+	Usage : idl2matlab [-options] inputFile [outputDirectory]
 
-Options :
-  -s for script files translation
-  -S for string translation
-  -q to hide messages
-  -w to stop warnings writing
-  -t to print the abstract tree
-  -V to get idl2Matlab version
-  -Tx to get x spaces for a tabulation x<10
-  -f to translate only one function
-  -C to translate in Scilab (default : Matlab)
+	Options :
+		-s for script files translation
+		-S for string translation
+		-q to hide messages
+		-w to stop warnings writing
+		-t to print the abstract tree
+		-V to get idl2Matlab version
+		-Tx to get x spaces for a tabulation x<10
+		-f to translate only one function
+		-C to translate in Scilab (default : Matlab)
 
-Examples :
-  idl2matlab -qw essai.pro outDir/
-  idl2matlab -t essai.pro outDir/ > out
-  idl2matlab -S "print,'IDL2Matlab'"
-  idl2matlab -T4 essai.pro outDir/ > out
-  idl2matlab -f essai.pro functionName outDir/ > out
+	Examples :
+		idl2matlab -qw essai.pro outDir/
+		idl2matlab -t essai.pro outDir/ > out
+		idl2matlab -S "print,'IDL2Matlab'"
+		idl2matlab -T4 essai.pro outDir/ > out
+		idl2matlab -f essai.pro functionName outDir/ > out
+		
+	See the idl2matlab man page or HTML page in the IDL2MATLAB/doc library.
 
-COMPILATION:
-------------
-This step requires a C compiler, and optionally lex/yacc (or flex/bison).
-We recommand gcc on Linux systems and Dev-Cpp on Windows systems.
+LINUX INSTALLATION: 
+-------------------
+Requirements: Linux system, C compiler (and optionally bison, flex)
 
-On Unix/Linux/BSD systems:
-  # ./configure; make (if you have super-user rights)
-  or
-  # ./configure --prefix=/home/joe; make (if you are NOT super-user, single user installation)
+	1- If you have super user permissions
 
-On windows systems, use:
-  # build.bat
+		# unzip idl2matlab-X.Y.zip
+		# cd idl2matlab-X.Y
+		# ./configure
+		# make
+		# make install
 
-The step-by-step procedure for compilation is something like:
-  bison -v -d idl2matlab.y --output-file=idl2matlab.c
-  flex -i idl2matlab.l
-  gcc -c -g -O2   idl2matlab.c
-  gcc -c -g -O2 main.c
-  gcc -c -g -O2 tree.c
-  gcc -c -g -O2 code.c
-  gcc -c -g -O2 rename.c
-  gcc -c -g -O2 lib.c
-  gcc -c -g -O2 hashtable.c
-  gcc -c -g -O2 table_symb.c
-  gcc -c -g -O2 lex.yy.c
-  gcc -g -O2 main.o idl2matlab.o tree.o hashtable.o table_symb.o rename.o lex.yy.o lib.o code.o -o idl2matlab
+	This will install the library in /usr/local/lib/idl2matlab, 
+	and binary 'idl2matlab' in /usr/local/bin/
 
-If you can not compile the program, you may use pre-built executables in the 'binaries' directory:
-The 'idl2matlab.x86' executable was built for Linux (x86) machines.
-The 'idl2matlab.exe' binary is for Windows systems.
+	2- If you are NOT superuser (using $HOME=~):
+		$ unzip idl2matlab-X.Y.zip
+		$ cd idl2matlab-X.Y
+		$ ./configure --prefix=$HOME
+		$ make
+		$ make install
+	 then
+		$tcsh: setenv IDL2MATLAB ~/lib/idl2matlab/
+	 or
+		$bash: export IDL2MATLAB=~/lib/idl2matlab/
+	 to define the user based library location. This command should be set each time
+	 you wish to use idl2matlab. It may be added to your environment scripts.
+	 Executable is then located in ~/bin
 
-INSTALLATION:
--------------
+GCC >= 4 installs a stack protector which leads to a stack overflow error. 
+Add the '-fno-stack-protector' and remove the optimization '-O2' to the CFLAGS 
+variable in the Makefile.
 
-On Unix/Linux/BSD systems :
-  # make install
+WINDOWS INSTALLATION:
+---------------------
+Requirements: Windows system, C compiler, administrator permissions.
 
-If you are NOT superuser (single user install), define the local installation path
-   (may be automated at the end of the ~/.cshrc, ~/.bashrc,
-    /etc/csh.cshrc or /etc/bash.bashrc)
-#tcsh: setenv IDL2MATLAB ~/lib/idl2matlab/
-#bash: export IDL2MATLAB=~/lib/idl2matlab/
+	1- install a C compiler, such as the free Dev-Cpp <http://www.bloodshed.net/dev/devcpp.html>
+	2- extract the idl2matlab-X.Y.zip
+	3- open the idl2matlab-X.Y folder
+	4- double click on the install.bat script in the package source.
 
-For Windows systems:
-1- copy the 'binaries/idl2matlab.exe' file into C:\IDL2MATLAB, or somewhere accessible from the PATH (e.g. C:\WINDOWS)
-2- copy the *content* of the 'lib' directory into C:\IDL2MATLAB
-3- define the Environment variable IDL2MATLAB = C:\IDL2MATLAB
+	This will install the library in C:\IDL2MATLAB, 
+	and binary 'idl2matlab' in C:\IDL2MATLAB\BIN
 
-Package comes with the full compatibility library translation.
+	5- log-out and log-in again to have PATH and environment variables updated.
+	6- in case you do not have the permissions to automatically update these,
+	open the Computer properties and add the path to idl2matlab.exe at the end of the
+	PATH environment variable.
 
-USAGE:
-------
+GCC >= 4 installs a stack protector which leads to a stack overflow error. 
+Add the '-fno-stack-protector' and remove the optimization '-O2' to the CFLAGS 
+variable in the Makefile.
 
-You may try this idl2matlab demo version with
+MATLAB USAGE:
+--------------------
+Requirements: Matlab, idl2matlab executable and library installed
 
-# idl2matlab test.pro
+We provide an 'idl2matlab.m' function for Matlab, which calls the executable. 
+It is then required to have idl2matlab properly installed (see previous sections).
+
+>> idl2matlab('file.pro');
+
+will convert the file from IDL to Matlab code and load the IDL compatibility library.
+
+
+USAGE as a command (does not require IDL nor Matlab):
+------------------
+
+You may use idl2matlab with
+
+# idl2matlab examples/test.pro
 
 will generate the test.m Matlab function.
+The log of the translation is written to file 'idl2matlab.log' and
+the translation returns 0 when no error is found.
 
-
-Within Matlab, type at the prompt (from distribution directory):
+In order to load the IDL compatibility library
+within Matlab, type at the prompt (from distribution directory):
 
 >>  p=pwd;
 >>  cd /usr/local/lib/idl2matlab/ % (or your local '~/lib/idl2matlab')
->>  i2m_install;
+>>  i2m_init;
 >>  cd(p);
 
 Within Scilab, type at the prompt (from distribution directory):
 
->  chdir('/usr/local/lib/idl2scilab') # (or your local '~/lib/idl2matlab')
+>  chdir('/usr/local/lib/idl2matlab') # (or your local '~/lib/idl2matlab')
 >  exec('i2s_init',-1);
 
 These may be automatically executed when starting Matlab/Scilab. Refer to startup scripts
 for these languages.
+
+
+The step-by-step procedure for compilation is something like:
+  bison -v -d idl2matlab.y --output-file=idl2matlab.c
+  flex -i idl2matlab.l
+  gcc -c -g idl2matlab.c
+  gcc -c -g main.c
+  gcc -c -g tree.c
+  gcc -c -g code.c
+  gcc -c -g rename.c
+  gcc -c -g lib.c
+  gcc -c -g hashtable.c
+  gcc -c -g table_symb.c
+  gcc -c -g lex.yy.c
+  gcc -g main.o idl2matlab.o tree.o hashtable.o table_symb.o rename.o lex.yy.o lib.o code.o -o idl2matlab
+
+GCC >= 4 installs a stack protector which leads to a stack overflow error. 
+Add the '-fno-stack-protector' and remove the optimization '-O2' to the CFLAGS 
+variable in the Makefile.
 
 --------------------------------------------------------------------------------
 Please visit the URL <http://sourceforge.net/projects/idl2matlab>

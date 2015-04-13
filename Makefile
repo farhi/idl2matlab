@@ -14,7 +14,7 @@ mandir = ${prefix}/share/man
 DEBUG = -DDEBUG=0
 mc_libdir = $(libdir)/idl2matlab
 
-CFLAGS = -g -O2
+CFLAGS = -g -fno-stack-protector
 CC = gcc
 FLEX = flex
 FLEXFLAGS=-i

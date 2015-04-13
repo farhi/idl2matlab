@@ -1,7 +1,7 @@
 # idl2matlab
 an IDL to Matlab/Scilab translator
 
-version 1.5 (21 jan 2009)
+version 1.6 (01 may 2013)
 
 (c) Institut Laue-Langevin, Grenoble, France.
 --------------------------------------------------------------------------------
@@ -13,6 +13,7 @@ Initial Release 0.0 (28 jan 2003) dev (alpha)
         Release 1.3 (20 Mar 2006) dev (alpha)
         Release 1.4 (13 Jun 2007) beta
         Release 1.5 (21 jan 2009) final
+        Release 1.6 (01 may 2013) fix buffer overflow
 
 This project was designed by the Institut Laue-Langevin <http://www.ill.fr>.
 This version may be redistributed as long as you also give this README file.
@@ -28,7 +29,7 @@ This version may be redistributed as long as you also give this README file.
 *
 * %Identification
 * Written by: EF, DR
-* Date: 2003-2009
+* Date: 2003-2013
 * Origin: ILL
 *******************************************************************************/
 
@@ -45,7 +46,7 @@ IDL2Matlab comes with ABSOLUTELY NO WARRANTY
 SCOPE:
 ------
 
-  This is IDL2Matlab / IDL2Scilab translator, version 1.5 (21 January 2009).
+  This is IDL2Matlab / IDL2Scilab translator, version 1.6 (1 May 2013).
 
   This tool translates automatically an IDL code into Matlab or Scilab code.
 
@@ -107,6 +108,10 @@ Requirements: Linux system, C compiler (and optionally bison, flex)
 	 you wish to use idl2matlab. It may be added to your environment scripts.
 	 Executable is then located in ~/bin
 
+GCC >= 4 installs a stack protector which leads to a stack overflow error. 
+Add the '-fno-stack-protector' and remove the optimization '-O2' to the CFLAGS 
+variable in the Makefile.
+
 WINDOWS INSTALLATION:
 ---------------------
 Requirements: Windows system, C compiler, administrator permissions.
@@ -118,6 +123,15 @@ Requirements: Windows system, C compiler, administrator permissions.
 
 	This will install the library in C:\IDL2MATLAB, 
 	and binary 'idl2matlab' in C:\IDL2MATLAB\BIN
+
+	5- log-out and log-in again to have PATH and environment variables updated.
+	6- in case you do not have the permissions to automatically update these,
+	open the Computer properties and add the path to idl2matlab.exe at the end of the
+	PATH environment variable.
+
+GCC >= 4 installs a stack protector which leads to a stack overflow error. 
+Add the '-fno-stack-protector' and remove the optimization '-O2' to the CFLAGS 
+variable in the Makefile.
 
 MATLAB USAGE:
 --------------------
@@ -139,6 +153,8 @@ You may use idl2matlab with
 # idl2matlab examples/test.pro
 
 will generate the test.m Matlab function.
+The log of the translation is written to file 'idl2matlab.log' and
+the translation returns 0 when no error is found.
 
 In order to load the IDL compatibility library
 within Matlab, type at the prompt (from distribution directory):
@@ -160,16 +176,20 @@ for these languages.
 The step-by-step procedure for compilation is something like:
   bison -v -d idl2matlab.y --output-file=idl2matlab.c
   flex -i idl2matlab.l
-  gcc -c -g -O2 idl2matlab.c
-  gcc -c -g -O2 main.c
-  gcc -c -g -O2 tree.c
-  gcc -c -g -O2 code.c
-  gcc -c -g -O2 rename.c
-  gcc -c -g -O2 lib.c
-  gcc -c -g -O2 hashtable.c
-  gcc -c -g -O2 table_symb.c
-  gcc -c -g -O2 lex.yy.c
-  gcc -g -O2 main.o idl2matlab.o tree.o hashtable.o table_symb.o rename.o lex.yy.o lib.o code.o -o idl2matlab
+  gcc -c -g idl2matlab.c
+  gcc -c -g main.c
+  gcc -c -g tree.c
+  gcc -c -g code.c
+  gcc -c -g rename.c
+  gcc -c -g lib.c
+  gcc -c -g hashtable.c
+  gcc -c -g table_symb.c
+  gcc -c -g lex.yy.c
+  gcc -g main.o idl2matlab.o tree.o hashtable.o table_symb.o rename.o lex.yy.o lib.o code.o -o idl2matlab
+
+GCC >= 4 installs a stack protector which leads to a stack overflow error. 
+Add the '-fno-stack-protector' and remove the optimization '-O2' to the CFLAGS 
+variable in the Makefile.
 
 --------------------------------------------------------------------------------
 Please visit the URL <http://sourceforge.net/projects/idl2matlab>

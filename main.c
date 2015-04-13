@@ -75,6 +75,7 @@ int openFile(char *pfileName, char *pstrLine)
 /* affiche un message d'erreur en cas de mauvaise utilisation */
 static void usage () {
   printf ("Usage : idl2matlab [-options] inputFile [outputDirectory]\n") ;
+  printf ("  IDL2Matlab %c version %s\n", PATHSEP, I2M_VERSION_2);
   printf ("Action: translate IDL source code into Matlab\n");
   printf ("\nOptions :\n") ;
   printf ("  -s for script files translation\n") ;
@@ -86,9 +87,15 @@ static void usage () {
   printf ("  -A to get idl2Matlab authors\n");
   printf ("  -Tx to get x spaces for a tabulation x<10\n");
   printf ("  -f to translate only one function\n");
-	printf ("  -C to translate in Scilab (default : Matlab)\n");
-
-  printf ("\nExamples :\n") ;
+  printf ("  -C to translate in Scilab (default : Matlab)\n");
+  printf ("\n");
+  printf ("The log of the translation is written to file 'idl2matlab.log' and\n");
+  printf ("  the translation returns 0 when no error is found\n");
+  printf ("The IDL2MATLAB environment variable can be set to specify where\n");
+  printf ("  the translation library is installed.\n"); 
+  printf ("  IDL2MATLAB=%s\n", getenv("IDL2MATLAB") ? getenv("IDL2MATLAB") : IDL2MATLAB );
+  printf ("\n");
+  printf ("Examples :\n") ;
   printf ("  idl2matlab -qw essai.pro outDir/\n") ;
   printf ("  idl2matlab -t essai.pro outDir/ > out\n") ;
   printf ("  idl2matlab -S \"print,\'IDL2Matlab\'\"\n") ;
@@ -155,7 +162,7 @@ void initParam(char* s) {
     fprintf(stderr,"############################################\n");
     fprintf(stderr,"## IDL2Matlab - version %s        ##\n", I2M_VERSION_2);
     fprintf(stderr,"##   Project by D. RICHARD and E.FARHI    ##\n");
-    fprintf(stderr,"##   (c) ILL, DS/CS 2001-2005             ##\n");
+    fprintf(stderr,"##   (c) ILL, DS/CS 2001-2013             ##\n");
     fprintf(stderr,"##                                        ##\n");
     fprintf(stderr,"## Coders: initial version                ##\n");
     fprintf(stderr,"##        AZIZI MOURIER Karim             ##\n");

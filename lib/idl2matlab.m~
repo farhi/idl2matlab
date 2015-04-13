@@ -82,8 +82,8 @@ end
 disp(w)
 
 if s
-	disp(['** Check the existence of the executable ' idl2matlab_exe ]);
-	disp( '** Place it in your IDL2MATLAB library location ' getenv('IDL2MATLAB') ])
+	disp(['Check the existence of the executable ' idl2matlab_exe ]);
+	disp( 'Place it in your IDL2MATLAB library location ' getenv('IDL2MATLAB') ])
 	error('idl2matlab: failed to exectute IDL2Matlab');
 else
 	i2m_init;
