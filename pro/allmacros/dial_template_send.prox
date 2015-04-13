@@ -1,0 +1,2 @@
+print,par5+' sent '+par3(0)+' using prox'
+par4=0

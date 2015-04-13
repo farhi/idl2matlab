@@ -1,0 +1,109 @@
+;***********************
+;* LIST OF USER MACROS * A_List_oldTOF.prox
+;***********************
+
+;Rule#1  the name of the file must be of the form (and case) A_List_*.prox
+
+;tags meaning (Lamp constructs the widgets from these tags)
+;------------
+; "logo"    filename.jpg (png) containing a small ~(64*32) grayscale image (optional).
+
+; "topic"   name of subject for grouping macros (15 char).
+; "macro"   name of the macro.
+; "author"  name of authors and date (80 char).
+; "link:"   related URL where to find a description of the macro. (optional)
+; "purpose" what does the macro (80 char).
+; "call"    macro's calling sequence.
+; "more"    any explanations and parameters meaning.
+; "more"    other lines of 80 char.
+
+; "run"     command to run the macro directly (GUI), "call" and "more" tags are ignored.
+
+;**********************
+; The file begins here
+;**********************
+
+; logo: tof.jpg
+
+; topic:TOF energy
+
+;	macro:   SqwWin
+;	author:  Arne Dallmeyer Aug94 , G.J.K. Feb95
+;	purpose: GUI to fill input parameters for Sqw function
+;	run:     sqwwin
+
+;	macro:   Sqw
+;	author:  G.J.K. 1994
+;	purpose: Converts channel array to energy/Q
+;	call:    w2=sqw(w1,0.05,0.1,-2.0,2.0,0,2)
+;	more:    convert tof spectrum in w1 to energy and output in w2
+;	more:    with energy increment 0.05meV and Q increment 0.1 A-1
+;	more:    energy range between -2.0 and 2.0 mev
+;	more:    q range between 0 and 2 A-1
+
+;	macro:   Ebin
+;	author:  G.J.K. 1995
+;	purpose: Rebin spectra in energy
+;	call:    w2=ebin(w1,-2.,2.,0.05)
+;	more:    Bin with given Emin=-2. ,Emax=2. ,Estep=0.05
+
+;	macro:   Rbin
+;	author:  Arne Dallmeyer Aug94
+;	purpose: GUI to call Ebin
+;	run:     rbin
+
+;	macro:   Tee
+;	author:  G.J.K. 1994
+;	link:    http://www.ill.fr/YellowBook/D7/home/D7_lamp_book.html#tof
+;	purpose: Converts tof spectra to energy
+;	call:    w2=tee(w1)
+;	more:    related macro is T2e
+
+; topic:TOF normalize
+
+;	macro:   BSnorm
+;	author:  D.R. 1995
+;	purpose: Normalize with monitor spectrum for in10, in16, in13
+;	call:    w2=bsnorm(w1)
+;	more:    w1 can be a vector or 2dim spectra
+
+;	macro:   VaNorm
+;	author:  D.R. 1995
+;	purpose: Normalize with Vanadium elastic peak
+;	call:    w3=vanorm(w1,w2,ch1,ch2)
+;	more:    w1 is sample
+;	more:    w2 is vanadium from channel ch1 to ch2
+
+; topic:TOF group,aline
+
+;	macro:   GroupX
+;	author:  J. COOK
+;	purpose: Group channels in tof spectra
+;	call:    w2=groupx(w1,3)
+;	more:    w1 is the 1d or 2d tof spectra , 3 is the bin_size
+
+;	macro:   GroupY
+;	author:  D.R. 1995
+;	purpose: Group angles in tof spectra
+;	call:    groupy, w1,y1 ,/average
+;	more:    w1 is the 2d tof spectra , y1 is the angle vector
+;	more:    return is done in the same variables
+
+;	macro:   LineUp
+;	author:  D.R. 1995
+;	purpose: Find elastic peak and aline each tof spectra
+;	call:    w1=lineup(w2,p)
+;	more:    w2 is the 2d tof spectra , return peak position p if present
+
+; topic:Miscellaneous
+
+;	macro:   lampInx
+;	author:  D.R. 1996
+;	purpose: TOF correction and reduction + active display GUI
+;	run:     inx
+
+;	macro:   Corel
+;	author:  D.R. 1996
+;	purpose: Standard deviation over 2d spectra or 3d runs
+;	call:    w2=corel(w1)
+;	more:    return Sigma/Error  or  Sigma if call is corel(w1,/sigma)

@@ -1,0 +1,8 @@
+pro test_window
+
+WINDOW, 3, XSIZE=400, YSIZE=400, TITLE='Square Window'
+
+WINDOW, 2, XPOS = 0, YPOS = 0
+WINDOW, 0, XPOS = 0, YPOS = 0,XSIZE=400, YSIZE=400
+
+end

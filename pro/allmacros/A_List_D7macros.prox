@@ -1,0 +1,29 @@
+;***********************
+;* LIST OF USER MACROS * A_List_D7macros.prox
+;***********************
+
+;Rule#1  the name of the file must be of the form (and case) A_List_*.prox
+
+;tags meaning (Lamp constructs the widgets from these tags)
+;------------
+; "logo"    filename.jpg (png) containing a small ~(64*32) grayscale image (optional).
+
+; "topic"   name of subject for grouping macros (15 char).
+; "macro"   name of the macro.
+; "author"  name of authors and date (80 char).
+; "link:"   related URL where to find a description of the macro. (optional)
+; "purpose" what does the macro (80 char).
+; "call"    macro's calling sequence.
+; "more"    any explanations and parameters meaning.
+; "more"    other lines of 80 char.
+
+; "run"     command to run the macro directly (GUI), "call" and "more" tags are ignored.
+
+;**********************
+; The file begins here
+;**********************
+
+; logo: d7.jpg
+
+; topic:inPreparation
+

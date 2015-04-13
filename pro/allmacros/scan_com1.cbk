@@ -1,0 +1,164 @@
+;**
+	common	my_tv,	tv_x,tv_y,tv_w,tv_b,tv_od,tv_nc,tv_col,tv_lst,tv_flg, $
+		      	tv_dx,tv_dy,tv_xp,tv_yp,tv_wsz,tv_win,tv_ini,tv_mps,tv_rd
+;**
+	common	my_tvg,	w_co,w_cw,w_fl,w_fy,w_hi,w_lo,w_lt,w_nc,w_no,w_od,$
+			w_ps,w_ty,w_ig,w_wk
+;**
+	common	my_err,	err_1 ,err_2 ,err_3 ,err_4 ,err_5 ,err_6 ,err_7 ,err_8
+;**
+	common my_vcol,	_r,_g,_b,	cr,cg,cb
+;**
+	common	my_io,	io_rec,io_spe,io_nam,io_dir,io_txt,io_dim,io_dima,$
+			io_cur,io_ext,io_seq,io_str
+;**
+	common	my_cl,	cl_i,cl_cold,cl_ctb,cl_ttl,cl_hlp,cl_colm,cl_v2,cl_v3
+;**
+	common  my_tty,	esc,osc,stt,csi,cout
+;**
+	common	my_kb,	kb_tb,kb_cs,kb_es,kb_ls,kb_gh,kb_bx,kb_by,kb_kk,kb_car
+;**
+	common  my_box,	bx_tb,bx_ty,bx_fl,bx_dc,bx_pc ,bx_pl ,bx_f,$
+			bx_c1,bx_c2,bx_l1,bx_l2,bx_cl1,bx_cl2,bx_lc1,bx_lc2,$
+			bx_cx,bx_cy,bx_dx,bx_dy
+;**
+	common	my_gf,	gf_v,gf_v1,gf_fm
+;**
+	common	my_xred,xr_is,xr_js,xr_ns,xr_xvl,xr_xvm,xr_rex
+;**
+	common	my_surf,dms,dm1,dm2,dii,djj,hoo,fxx,fyy,coo,sii,ndd,sv2,sbox,$
+			flx,flz,su_aa,su_ah,su_b,su_bb,su_di,su_dj,su_dlx,su_dm,$
+			su_fgg,su_ho,su_j,su_nd,su_ni,su_sco,su_ssi,$
+			su_sdi,su_sdj,su_bz,su_bh,su_fj,su_fj2,su_mav,su_mnv
+;**
+	common  my_insert,  i_txt,i_idx,i_fil,i_rout,i_ps,i_rs,$
+			    i_trout,i_tfil,i_tlang,i_tdx,i_enter,i_rcall
+;**
+	common	my_area,ares  ,areb  ,arec  ,ared  ,arev  ,aref  ,arer  ,$
+			ares_z,areb_z,arec_z,ared_z,arev_z,aref_z,arer_z,$
+			sare  ,tare  ,vare  ,areu  ,arei  ,arex  ,arey  ,$
+			sare_z,tare_z,vare_z,areu_z,arei_z,arex_z,arey_z,$
+			arel  ,arel_z,aregx,aregx_z,aregy,aregy_z,areo,areo_z
+;**
+	common  my_conv,care  ,care_z ,cv_k
+;**
+	common	my_refl,arefl,arefl_z,rf_cur,rf_t
+;**
+common  my_fun,	a,b,d,e,bfx,bfy,c1,c2,c3,c4,cj,ez,fmf,ifu,jfu,l1,l2,vp,vh,$
+		rbx,rby,mn,mx,mni,mxi,h,p,rvmm,rvmi,sp,int7,fmi4,fmf9,fsmo,$
+		st1,st2,st3,st4,st5,st6,st7,st8,st9,st10,st11,st12,st13,$
+		st14,st15,st16,st17,st18,f24,tap,tip,mnj,mxj,c5,c6,c7,c8,c9,c10
+;**
+common	my_glor,f_w1,f_wx,f_wy,f_bx,f_py,f_az,f_ax,f_pl,f_ic,f_vu,f_fg,f_sh,$
+		f_h1,f_h2,f_h3,f_wp,f_ib,f_tt,f_sa,f_ab,f_cn,f_ln,f_zn,f_el 
+;**
+	common  my_matx,zstring,zimg,excor,excnc,exmat,extyp,exconf,exmit,$
+			exfrm,exfri,m_frm,m_fri ,m_v6,m_pos,m_bo,$
+			m_dm1,m_dm2,m_my,m_i,m_j,m_nc,m_rec,m_sr,m_typ,m_u,m_x1	
+;**
+	common my_rotfun,wf,azt,axt,fx1,fx2,fy1,fy2,px,py,stepz,stepx,s1,s2,s3,$
+		    	 sso,fpp,fpb,fum,fux,ndx,ndy,ndz,rtyp,wcw,wno,wod
+;**
+	common my_opview,o_xdm1,o_ydm1,o_zdm1,o_typ1, $
+			 o_xdm2,o_ydm2,o_zdm2,o_typ2,o_tip,o_xi,o_yi,o_zi
+;**
+	common  my_which,wh_d,wh_m,wh_n,wh_s,wh_t,wh_spc,wh_tb,wh_ti
+;**
+	common  my_space,sp_si,sp_sj,sp_sx,sp_sy,sp_sz,sp_px1,sp_px2,sp_py1,$
+			sp_py2,sp_fdx,sp_fdy,sp_fdz,sp_dx,sp_dy,$
+			sp_vssz,sp_res,sp_stt
+;**
+	common  my_trsig,tr_bb,tr_dirc,tr_i,tr_n,tr_u,tr_v2,tr_v3
+;**
+	common  my_sr,	sr_bb,sr_dirc,sr_dwn,sr_num,sr_spdl,sr_spt,sr_u,$
+			sr_winc,sr_v2,sr_v3,sr_typ
+;**
+	common  my_ovs,	ov_sum1,ov_sum2,ov_sum3,ov_sum4,ov_sum5,ov_sum6,ov_sum7,$
+			ovs1_z ,ovs2_z ,ovs3_z ,ovs4_z ,ovs5_z ,ovs6_z ,$
+			ov_pmx,ov_f,ov_z,ov_l,ov_m
+;**
+	common my_fit , fi_ez,fi_typ,fi_f,fi_nx,fi_ny,fi_nz,fi_ne,fi_l,fi_coef,$
+			fi_pcoef,fi_min,fi_max
+;**
+	common	my_geto,go_v7,go_v2,go_v3,go_rql,go_rqm,go_x5,go_y5
+;**
+common my_click, tc_bb,tc_nb,tc_n2,tc_rti,tc_st,tc_tmtl,tc_x,tc_xc,tc_xd,$
+		 tc_xs,tc_y,tc_yp,tc_yl,tc_zerr,tc_w_cw,tc_w_no,tc_w_ft,tc_7,$
+		 tc_bo,tc_ttl,tc_st2,tc_x03,tc_y03,tc_x13,tc_y13,tc_x04,tc_y04,$
+		 tc_sz,tc_are,tc_vsz,tc_sel
+;**
+common my_views,  abt,az,ax,bbx,bby,bcx,bcy,bti,btj,btx,bty,btw,bwx,bwy,_c1,_cc,$
+		  _cf,_cm,ck1,_dif,dif3,fc,_fcg,fic,fil,_fmt,_four,_fxy,fx,fy,$
+		  f_0,f_1,$
+		  f_2,f_3,f_4,f_5,f_6,f_7,hh,ii2,ii3,ii6,k1,k2,kk,_lc,lk2,_mn,_mx
+common my_views2, mx1,mx2,_nx,_ny,_nz,o,op4,op5,_plx,_ply,pp,_rot,_spc,_spm,$
+		  _spt,stc   ,$
+		  stf,stl,spm_t,spt_t,_tip,tite,titx,vsis,vsx,vsy,vsz,_w,xsiz ,$
+		  xdm,ydm,zdm,vxl,vxm,km,bxa,bya,v_vx4,v_vy4
+;**
+common my_keep,	  rvl,rvm,vlt,vlm,$
+		  explm,explv,explz,expld,expo ,ex_o ,expn,ex_n,expgs,ex_gs  ,$
+       		  ex_o1,ex_o2,ex_o3,expo1,expo2,expo3,explo1,explo2,explo3   ,$
+		  expfi,expl ,expc ,expr ,exps ,expx ,expd ,expg ,expe ,expb ,$
+		  explp,ex_l ,ex_c ,ex_r ,ex_s1,ex_x1,ex_d ,ex_g ,ex_e ,expp
+common my_keep2,  expli,ex_s2,ex_x2,ex_x3,ex_p1,ex_p2,ex_p3,ex_t1,explk,ex_t3,$
+		  exy  ,expf ,ex_f ,expy ,ex_y ,expm ,ex_m ,explb,exph ,explr,$
+      		  explc,exci ,ex_i ,exsf ,ex_sf,ex_gh,ex_p4,ex_p5,exfi ,ex_fi
+common my_keep3,  expw ,ex_w ,ex_x4,expk ,exz  ,ex_ff,exff ,ex_fl,expfl,exadj,$
+		  ex_ad,exphc,exsph,ex_sp,exprs,ex_rs,wayt,i3,i4,i5,i6,f6,s_o,$
+		  ex_p6,ex_p7,ex_p8,expex,ex_ex,exspc,exsi ,exsj ,ex_ra,exrad
+;**
+common my_viewr,  bxy,c,cc,ccl,ccp,cf,clfc,clop,cm,cp,cpx,csiz,c_o,  $
+		  dxy,dif,bb,entitl,f,fcg,fcl,fcm,fct,fcx,fcy,ired,  $
+		  fdd,fdp,fldat,fma,fmt,fmx,four,fp,fqc,frst,fvw,fxy,f_o,g
+common my_viewr2, ins,inc,keep_col,l,lc,lcl,llp,lp,l_o,mfi,nf,nfp,nnz,nz,$
+		  num,nx,ny,ot,plnx,plny,plx,ply,recars,res,rop,ros,rot,rql,$
+		  rqm,rsl,rsm,rti,sdt,spc,spm,spt,s_out,ttl,ttlv,typ,vin,vik
+common my_viewr3, vf,vm,vo,vsiz,w,waits,w_num,x,xpa,xs,xu,y,ys,yu,zerr,zs, $
+		  i,j,ij,xq,yq,zq,vd,vl,x1,y1,xd,yd,vtm,vta
+;**
+common my_viewer, v_xsiz,v_loop,v_wndn,v_wntv,v_rec,v_wcw,v_x1,v_x5
+;**
+common my_vecfun, vf_w,vf_cw,vf_wy,vf_bx,vf_py,vf_l1,vf_l2,vf_ch,vf_st,vf_ft,$
+		  vf_x41,vf_x46,vf_y41,vf_y46,vf_y51,vf_y52,vf_xb4,vf_yb4,$
+		  vf_g,vf_tt4,vf_mm4,vf_tt5,vf_mm5,vf_tmp,iare,jare,xare,yare,$
+		  iare_z,jare_z,xare_z,yare_z,$
+		  vf_mxy,vf_mny,vf_mxx,vf_mnx,vf_a,vf_b,vf_d,vf_e,vf_p,vf_h,vf_z
+;**
+common my_tif,	tf_a,tf_b,tf_c,tf_cnt,tf_flg,tf_inv,tf_nt,tf_tag,tf_typ,tf_rect,$
+		tf_val,tf_x,tf_nbuf,tf_off0,tf_off1,tf_offr,tf_rec,tf_uni,tf_sz
+;**
+common my_ccp4, ccsiz,ccrect,ccskp,ccnc
+;**
+	common my_radia,rad_vtm,rad_bb,rad_6,rad_57
+;**
+common  my_annot, an_gm,an_gh,an_gf,an_ttl1,an_ttl2,an_xlab,an_ylab,an_ttm, $
+		  an_zlab,an_com1,an_com2,an_unit,an_offs,an_i,an_r,an_f6
+;**
+	common suprv,	s_vw,s_ns,s_x1,s_x2,s_x3,s_x4,s_x5,s_x6,s_x7,s_x8,s_x9,$
+			s_rn,s_sc,t_x1,t_x2,t_x3,t_x4,t_x5,t_x6,t_x7,t_x8,t_x9,$
+			s_x0,t_x0,s_x10,t_x10,s_x11,t_x11,s_x12,s_fl,s_siz,s_sz0
+;**
+	common c_scan,	c_ini,c_x0,c_t0,c_t2,c_t3,c_t4,c_t5,c_x1,c_x2,c_x3 ,$
+			c_x4,c_x5,c_x6,c_matdm,c_matrl,c_matdy,c_siz,c_area,$
+			c_w,c_win,c_k,c_dirc,c_frm,c_pos,c_bo,c_sr
+;**
+;*************
+;**
+	common  machin,	mc_sys,mc_sta
+;**	
+	common	my_tvi,	t_w ,t_rep ,t_max ,t_pix ,t_piy ,t_od ,t_rd ,t_sx ,t_sy
+	common  my_menu,m_err,m_dx,m_dy,m_txt,m_ttl,m_x,m_y,m_colo,m_ft0,m_ft1
+	common  tmp_men,m_wd, m_wi,m_ht,m_ch,m_nl,m_px,m_py,m_ft,m_pp,m_rs ,$
+			m_vx5,m_vy5,m_wd5,m_nl5,m_fun5,m_wm,m_xx,m_sp,m_soc,$
+			m_losx,m_losy,m_bor,m_li5,m_lf5,m_ll5,m_lx5,m_ly5,  $
+			m_clop,m_bex1,m_bex2,m_filx,m_bey1,m_bey2,m_fily,m_od,$
+			m_pat,m_siz,m_sel5,m_sta,m_str
+	common  my_sys ,ms_devs,ms_tbwin,ms_bcolor,ms_ncount,ms_xrg,ms_yrg,$
+			ms_xypos,ms_devm,ms_devp,ms_dmod,ms_ncol,ms_iodir ,$
+			ms_tbwis,ms_v2,ms_ini,ms_trans
+	common  my_eras,zr,zr_z,zrv2,zrv6,zx4,zy4
+	common  my_x,	x_foc,x_st1,x_st2,x_tmp,x_fso,x_p0,x_p1,x_p2,x_bb
+;**
+;*************
+;**

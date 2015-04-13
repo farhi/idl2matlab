@@ -1,0 +1,19 @@
+#       Add menu definitions
+# Lines should be comments (#), blank or a class definition
+#
+#       $Id: widdef.dat,v 1.1 1993/12/22 22:06:03 josh Exp $
+
+# Description           Class
+#------------           -----
+"Base"                  BASE
+"Button"                BUTTON
+"Bitmap Button"         BMPBTN
+"Button Group"          BGROUP
+"Draw"                  DRAW
+"Field w/Label"         FIELD
+"Label"                 LABEL
+"List"                  LIST
+"Pull Down Menu"        PDMENU
+"Slider"                SLIDER
+"Floating Pt. Slider"   FSLID
+"Text"                  TEXT

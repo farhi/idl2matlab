@@ -1,0 +1,59 @@
+;** IN LAMP.CBK: file_found , path_for_online , nwk_select , swk_select , inst_value , cycle
+
+common c_mic_1, choice_access_data, path_for_current, file_path,          		    $
+                list_numor, last_update_run, current_directory,                             $
+                list_path, keep_id, lab_wkp_8,list_wkp_4, label_wkp_1,                      $
+                command, len_path,                           				    $
+                nb_num_tot, list_numor_fin, list_numor_wk, nb_andto, nb_and,                $
+                nb_sumto, nb_plus, nb_minus, num_bef_andto, num_bef_and, num_bef_sumto,     $
+                num_bef_plus, num_bef_minus, num_aft_andto, num_aft_and, num_aft_sumto,     $
+                num_aft_plus, num_aft_minus, list_err_elmt, list_err_lambda,                $
+                list_err_deltae, list_err_elpp, list_err_par, pc1, pc2, snumor,             $
+                nerr_elements, nerr_lambda, nerr_deltae, nerr_elpp, nerr_par, ntot_num,     $
+                err1_wk, err2_wk, err3_wk, par_norm, flag_norm, f_norm_tof, sf_norm_tof,    $
+                f_norm_bck, sf_norm_bck, aline, iline, fline, substr1,substr2
+                      
+common c_mic_2, list_oper, list_numint, list_err_opnum, list_err_opop, list_err_numid,      $
+                list_err_mult, numint_single, num_single, nn_global, err4_wk,               $
+                code_oper, code_op_op, code_numor, nx_global, ny_global,                    $
+                cnt_andto, cnt_and, cnt_sumto, cnt_plus, cnt_minus, cnt_null,               $
+                cnt_oper, cnt_numor, cnt_num_multi, nstr_num, nstr_oper, string_hist,       $
+                where_multi, where_oper, where_andto, where_and, where_sumto,               $
+                where_plus, where_minus, where_null, where_num, string_hist_num,            $
+                flag_bef_op, flag_aft_op, flag_both_op, string_hist_oper,                   $
+                nw_num_id, nw_num, nw_oper, nw_op_op_wrong, nw_op_wrong, nw_op,             $
+                npos_num_id, npos_op_op_wrong, npos_op_wrong, npos_num, npos_oper, npos_op, $ 
+                n_wk_max, n_rk_max, n_operator, n_numor, nb_num_wk, n_op_wrong, n_num_id,   $
+                n_op_op_wrong, n_err_mult, nb_op_wk
+                
+common c_mic_3, w1_0, w1_1, w1_2, w1_3, w1_4, $
+                w2_0, w2_1, w2_2, w2_3, w2_4, $
+                w3_0, w3_1, w3_2, w3_3, w3_4, $
+                w4_0, w4_1, w4_2, w4_3, w4_4, $
+                w5_0, w5_1, w5_2, w5_3, w5_4, $
+                x1_0, x1_1, x1_2, x1_3, x1_4, $
+                x2_0, x2_1, x2_2, x2_3, x2_4, $
+                x3_0, x3_1, x3_2, x3_3, x3_4, $
+                x4_0, x4_1, x4_2, x4_3, x4_4, $
+                x5_0, x5_1, x5_2, x5_3, x5_4
+
+common c_mic_4, y1_0, y1_1, y1_2, y1_3, y1_4, $
+                y2_0, y2_1, y2_2, y2_3, y2_4, $
+                y3_0, y3_1, y3_2, y3_3, y3_4, $
+                y4_0, y4_1, y4_2, y4_3, y4_4, $
+                y5_0, y5_1, y5_2, y5_3, y5_4, $
+                p1_0, p1_1, p1_2, p1_3, p1_4, $
+                p2_0, p2_1, p2_2, p2_3, p2_4, $
+                p3_0, p3_1, p3_2, p3_3, p3_4, $
+                p4_0, p4_1, p4_2, p4_3, p4_4, $
+                p5_0, p5_1, p5_2, p5_3, p5_4
+                
+                
+common c_mic_5, tol_lambda, tol_deltae, tol_elpp, tol_par, tol_pc, label_wkp_5,           $
+                norm_value, string_norm, flag_list_fin, index2, nmax_num,                 $
+                text_fmt_1, list_err_scan, list_err_dopmin, list_err_dopmax,              $
+                list_err_mono, list_err_anal, list_err_defl, list_err_coefmono,           $
+                nerr_scan, nerr_dopmin, nerr_dopmax, nerr_mono, nerr_anal, nerr_defl,     $
+                nerr_coefmono, nerr_xval, list_err_xval, tol_doppler, tol_mono, tol_anal, $
+                tol_defl, tol_coefmono, tol_xval, flag_acces, path_for_spectra, n_wk_tot, $
+                path_for_test, sline, flag_dat1

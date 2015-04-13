@@ -1,0 +1,10 @@
+;
+; Include file for LAMP formula entry and macros
+;
+;Workspace stuff
+	common c_lamp_txt,  macros,mac_ful,curr_macr,last_form,nwk,rawmanip
+	common c_lamp_inst, last_w,formtxt,prog_mac,prog_txt
+	common c_lamp_widg, mack,script,file_text,macro_area_a,mac_help, $
+			    mac_labl,mac_file,mac_raw
+
+ 

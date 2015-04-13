@@ -1,0 +1,15 @@
+;
+; Copies work-space stuff from simple arrays back to main LAMP arrays
+      n_wk=''	
+      n_wk=string(out_wk)
+      n_wk=strtrim(n_wk,2)
+
+;     jjj=execute('w' +n_wk+'=w_out' ) ;must be in the return command.
+      jjj=execute('p' +n_wk+'=p_out' )
+      jjj=execute('pv'+n_wk+'=pv_out')
+      jjj=execute('x' +n_wk+'=x_out' )
+      jjj=execute('y' +n_wk+'=y_out' )
+      jjj=execute('z' +n_wk+'=z_out' )
+      jjj=execute('e' +n_wk+'=e_out' )
+;
+;done

@@ -1,0 +1,195 @@
+;***********************
+;* LIST OF USER MACROS * A_List_TOFtools.prox
+;***********************
+
+;Rule#1  the name of the file must be of the form (and case) A_List_*.prox
+
+;tags meaning (Lamp constructs the widgets from these tags)
+;------------
+; "logo"    filename.jpg (png) containing a small ~(64*32) grayscale image (optional).
+
+; "topic"   name of subject for grouping macros (15 char).
+
+; "macro"   name of the macro.
+; "author"  name of authors and date (80 char).
+; "link:"   related URL where to find a description of the macro. (optional)
+; "purpose" what does the macro (80 char).
+; "call"    macro's calling sequence.
+; "more"    any explanations and parameters meaning.
+; "more"    other lines of 80 char.
+
+; "run"     command to run the macro directly (GUI), "call" and "more" tags are ignored.
+
+;**********************
+; The file begins here
+;**********************
+
+; logo: tof.jpg
+
+; topic:Corrections
+
+;	macro:   Normalize
+;	author:  KHA,JRS Oct 2000
+;	link:    http://www.ill.fr/YellowBook/D7/home/D7_lamp_book.html#normalise
+;	purpose: Normalises raw data to monitor or counting time
+;	call:    w2=normalise(w1 ,detector=d ,zeroshift=z ,/raw,/monitor,/time,/alldet,/madang)
+;	more:    Extracts every other spectrum if desired(=> nspectra=32), normalises intensity.
+;	more:    DETECTOR: detector number to normalise to
+;	more:    ZEROSHIFT: angle in degrees of 2theta=0  (depends on wavelength and setup)
+;	more:    /RAW: no normalisation (error bars calculated)
+;	more:    /MONITOR: normalise data to 1000 monitor1 counts (DEFAULT)
+;	more:    /TIME: normalise data to counting time
+;	more:    /ALLDETECTORS: supresses the removal of the odd numbered detectors
+;	more:    /MADANGLES: supresses the recalculation of the detector angles using
+;	more:                the current YIG calibration
+;	more:    (Dimensions) non-TOF data: w_out(nspectra,nphases,nruns) -unless nphases is 1
+;	more:    Tof data: w_out(nchannels,nspectra*nphases,nruns)
+
+;	macro:   vnorm
+;	author:  KHA,JRS Oct 2000
+;	link:    http://www.ill.fr/YellowBook/D7/home/D7_lamp_book.html#vnorm
+;	purpose: Normalises data , vanadium data in w20 integrated between given limits
+;	call:    w5=vnorm(w2 ,w20 ,min=a ,max=b ,tv=t ,Ns=d ,ts=s)
+;	more:    Absolute normalisation is possible if desired (assumes flat-plate geometry).
+;	more:    MIN: lower time channel limit of integration over vanadium elastic peak
+;	more:    MAX: upper time channel limit
+;	more:    TV: thickness of vanadium sample
+;	more:    NS: number density of sample
+;	more:    TS: effective sample thickness
+
+;	macro:   Corr_Tof
+;	author:  KHA,JRS Aug 2000
+;	link:    http://www.ill.fr/YellowBook/D7/home/D7_lamp_book.html#corr_tof
+;	purpose: Corrects data for energy dependent factors (and/or flat background)
+;	call:    w6=corr_tof(w5,/det_eff,/frameoverlap,/bkgd_trans,/ana_eff)
+;	more:    Input W dimensions: (nchannels,nphases*nspectra)
+;	more:    /DET_EFF: corrects for energy-variation of detector efficiency.
+;	more:    /FRAMEOVERLAP: subtracts a t^-4 tail from the beginning of the time frame.
+;	more:    /BKGD_TRANS: subtracts a flat background in each detector,found using
+;	more:                 a moving filter (For IN4, IN5 and IN6 only).
+;	more:    /ANA_EFF: correct for energy dependence of analyser transmission
+;	more:              (For D7 only).
+
+;	macro:   Elastic
+;	author:  KHA,JRS Jul 2000
+;	link:    http://www.ill.fr/YellowBook/D7/home/D7_lamp_book.html#elastic.pro
+;	purpose: Finds the elastic peak position in each spectrum
+;	call:    w3=elastic(w2, min=a ,max=b ,/save)
+;	more:    by fitting a Gaussian and a flat background.
+;	more:    Looks for peak in region xmin<x<xmax
+;	more:    Input w2 dimensions: (nchannels,nspectra) or (nchannels)
+;	more:    MIN: minimum x-value for peak search
+;	more:    MAX: maximum x-value for peak search
+;	more:    /SAVE: Write out results to file "elastic.dat"
+
+;	macro:   Slab_Tof
+;	author:  JR Stewart Aug 2000
+;	link:    http://www.ill.fr/YellowBook/D7/home/D7_lamp_book.html#slab_tof
+;	purpose: Takes a 2-D tof workspace and corrects for sample attenuation...
+;	call:    w7=slab_tof(w6 ,angle=a ,inc=i ,abs=b ,thick=t ,N=n)
+;	more:    of the scattered neutrons assuming infinite slab geometry.
+;	more:    w_in(nchannels,nspectra) -> w_out(nchannels,nspectra)
+;	more:    ANGLE: the angle in degrees of sample normal relative to incident beam.
+;	more:    INC: incoherent cross-section of sample (barns)
+;	more:    ABS: absorption cross-section for thermal neutrons (lambda=1.8Å) (barns)
+;	more:    THICK: thickness of sample (mm)
+;	more:    N: number density of sample (*10^22 per cm^3)
+
+; topic:TOF Energy
+
+;	macro:   T2e
+;	author:  KHA,JRS Aug 2000
+;	link:    http://www.ill.fr/YellowBook/D7/home/D7_lamp_book.html#t2e
+;	purpose: Converts tof data in w_in to energy transfer in w_out.
+;	call:    w8=t2e(w7 ,/ken ,/in5multi)
+;	more:    Includes the factor of ki/kf.
+;	more:    w_in(nchannels,nspectra) -> w_out(nE,spectra)
+;	more:    /KEN: use Ken's expression for dEdt in t2e_tof.pro (not recommended)
+;	more:    /IN5MULTI: use data in IN5 multidetector
+
+; topic:TOF rebinning
+
+;	macro:   Reb
+;	author:  KHA,JRS Aug 2000
+;	link:    http://www.ill.fr/YellowBook/D7/home/D7_lamp_book.html#reb
+;	purpose: Rebins output data from t2e.pro to constant energy bin width
+;	call:    w9=reb(w8,dE=e ,/force)
+;	more:    w_in(nE,nspectra) -> w_out(dE,nspectra).
+;	more:    dE:required energy bin width.
+;	more:    /FORCE: rebin over entire energy range otherwise,
+;	more:            rebin only where dE is > point spacing.
+
+;	macro:   Estrip
+;	author:  KHA,JRS Jul 2000
+;	link:    http://www.ill.fr/YellowBook/D7/home/D7_lamp_book.html#estrip
+;	purpose: Rebins output data from t2e.pro and reb.pro to regular-grid S(Q,w) data
+;	call:    w10=estrip(w9,E=e,dE=d,dQ=q ,/all_angles ,/pos_angles ,/neg_angles)
+;	more:    Selects a single E-value.
+;	more:    Input workspace must be in energy transfer versus scattering angle,
+;	more:    i.e. only one component or spin phase. w_in(nE,nphi) -> w_out(nE,nQ).
+;	more:    E: E-value at centre of extracted strip
+;	more:    dE: Width of E-strip  dQ : Q bin width
+;	more:    /NEG_ANGLES: use only negative angles
+;	more:    /POS_ANGLES: use only positive angles
+;	more:    /ALL_ANGLES: use all angles (default)
+
+;	macro:   Qstrip
+;	author:  KHA,JRS Aug 2000
+;	link:    http://www.ill.fr/YellowBook/D7/home/D7_lamp_book.html#qstrip.pro
+;	purpose: Rebins output data from t2e.pro and reb.pro to regular-grid S(Q,w) data
+;	call:    w10=qstrip(w9,Q=v,dQ=q ,/all_angles ,/pos_angles ,/neg_angles)
+;	more:    Selects a single Q-value.
+;	more:    Input workspace must be in energy transfer versus scattering angle,
+;	more:    i.e. only one component or spin phase. w_in(nE,nphi) -> w_out(nE).
+;	more:    Q: Q-value at centre of extracted strip
+;	more:    dQ: Width of Q-strip
+;	more:    /NEG_ANGLES: use only negative angles
+;	more:    /POS_ANGLES: use only positive angles
+;	more:    /ALL_ANGLES: use all angles (default)
+
+;	macro:   Sqw_Interp
+;	author:  KHA,JRS Aug 2000
+;	link:    http://www.ill.fr/YellowBook/D7/home/D7_lamp_book.html#sqw_interp.pro
+;	purpose: Converts output data from t2e.pro to regular-grid interpolated S(Q,w) data
+;	call:    w10=sqw_interp(w9 ,dQ=q ,dE=e ,Emin=m ,/all_angles ,/pos_angles ,/neg_angles)
+;	more:    Input workspace must be in energy transfer versus scattering angle.
+;	more:    w_in(nE,nphi) -> w_out(nQs,nEs).
+;	more:    dQ: Q bin width
+;	more:    dE: energy bin width
+;	more:    EMIN: minimum energy (neutron energy gain is defined as negative)
+;	more:    /NEG_ANGLES: use only negative angles
+;	more:    /POS_ANGLES: use only positive angles
+;	more:    /ALL_ANGLES: use all angles (default)
+
+;	macro:   Sqw_Rebin
+;	author:  KHA,JRS Aug 2000
+;	link:    http://www.ill.fr/YellowBook/D7/home/D7_lamp_book.html#sqw_rebin.pro
+;	purpose: Rebins output data from t2e.pro and reb.pro to regular-grid S(Q,w) data
+;	call:    w10=sqw_rebin(w9 ,dQ=q ,Emin=m ,/all_angles ,/pos_angles ,/neg_angles)
+;	more:    Proper rebinning routine with error analysis (unlike sqw_interp.pro).
+;	more:    w_in(nE,nphi) -> w_out(nQs,nEs).
+;	more:    dQ: Q bin width
+;	more:    EMIN: minimum energy value (meV) - neutron energy gain is negative
+;	more:    /NEG_ANGLES: use only negative angles
+;	more:    /POS_ANGLES: use only positive angles
+;	more:    /ALL_ANGLES: use all angles (default)
+
+; topic:Miscellaneous
+
+;	macro:   Output_allAngles
+;	author:  JR Stewart Aug 2000
+;	link:    http://www.ill.fr/YellowBook/D7/home/D7_lamp_book.html#output_allangles
+;	purpose: Takes a 2-D workspace from t2e and writes spectra to a series of files.
+;	call:    output_allangles, w17, file='detector'
+;	more:    x-axis must be energy transfer and y-axis detector number.
+;	more:    w_in(nspectra,dE) output from t2e.pro [and reb.pro]
+;	more:    output files have names <file>.det2 , <>.det3 , <>.det4 ......
+
+;	macro:   Output_allQs
+;	author:  KHA,JRS Aug 2000
+;	link:    http://www.ill.fr/YellowBook/D7/home/D7_lamp_book.html#output_allqs.pro
+;	purpose: Takes a 2-D Wkspace from sqw_rebin and writes spectra to a series of files.
+;	call:    output_allqs, w17, file='detector'
+;	more:    x-axis must be Q and y-axis energy transfer.
+;	more:    w_in(dQ,dE) output from sqw_rebin.pro
+;	more:    output files have names <file>.q005 for Q=0.05 Å-1 , <>.q010 , ......

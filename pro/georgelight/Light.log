@@ -1,0 +1,100 @@
+[Fri Sep 27 09:31:42 2002] [ ] Inititialise Light
+[Fri Sep 27 09:31:43 2002] [ ] Importing real session MAD data. Setting frozen mode.
+[Fri Sep 27 09:31:43 2002] [ ] Welcome to Light 2.0.3 (Aug 08th 2002)
+[Fri Sep 27 09:31:43 2002] [ ] Instrument is IN6 Time-of-Flight
+[Fri Sep 27 09:31:43 2002] [w] Using Default settings (invalid file name /home/cs/lambda/CALIBRATION/in6/Config.ini).
+[Fri Sep 27 09:31:43 2002] [ ] Reading file /cs/users/farhi/idl/GeorgeLight/Light.ini
+
+# Light Config file: Light.ini (Preferences Displays Runs )
+# Date:              Fri Aug  9 12:29:28 2002
+# User Preferences file
+[Fri Sep 27 09:36:25 2002] [ ] Light_Base_Event_Parser:Light_Event_Base_Edit_Displays, LightVars
+[Fri Sep 27 09:38:11 2002] [I] ROI data axes:X is TOF channel, Y is det. number
+# Cumulated Data is shown as log scale from 0 to 255
+# Color table is Hue Sat Value 2 (22)
+[Fri Sep 27 09:38:12 2002] [ ] Light_Base_Event_Parser:Light_Event_Base_Edit_ROI, LightVars
+[Fri Sep 27 09:38:26 2002] Required accuracy for defined ROIs is now achieved on cumulated signal
+Regions Of Interest (count statistics) on Cumulated Data
+Date:              Fri Sep 27 09:38:26 2002
+Specified accuracy 0.500000 for Run # 3
+ROI_name Xmin Xmax Ymin Ymax   Noise/Signal  norm_ChiSq           dp/p
+Region 1 147  204  241  315      0.292854     0.0046120519      0.078602423
+Region 2 303  330    3   56      0.158255      0.010997851     0.0012700625
+[Fri Sep 27 09:38:56 2002] [ ] Light_Base_Event_Parser:Light_Event_Base_Run_Options_Build, LightVars
+[Fri Sep 27 09:39:26 2002] [ ] Light_Base_Event_Parser:Light_Event_Base_Run_Fields, LightVars
+[Fri Sep 27 09:39:35 2002] [ ] Light_Base_Event_Parser:Light_Event_Base_Edit_ROI, LightVars, /update & Light_SubDial_Base_Check_ROI, LightVars, /show
+[Fri Sep 27 09:40:35 2002] [ ] Light_Base_Event_Parser:Light_Event_Base_SuperUser, LightVars, Event=Event
+[Fri Sep 27 09:40:44 2002] [ ] Light_Base_Event_Parser:Light_Event_Custom_IN6_Setup_Build, LightVars
+[Fri Sep 27 09:40:52 2002] [ ] Light_Base_Event_Parser:Light_Event_Custom_IN6_Setup_Choppers, LightVars
+[Fri Sep 27 09:41:00 2002] [w] SuperUser Login: Success. Close window to log-out.
+[Fri Sep 27 09:41:00 2002] [ ] Light_Base_Event_Parser:Light_Event_Base_SuperUser, LightVars, Event=Event
+[Fri Sep 27 09:41:11 2002] [w] SuperUser logged out.
+[Fri Sep 27 09:41:18 2002] [ ] Light_Base_Event_Parser:Light_Event_Base_SuperUser, LightVars, Event=Event
+[Fri Sep 27 09:41:21 2002] [w] SuperUser Login: Success. Close window to log-out.
+[Fri Sep 27 09:41:21 2002] [ ] Light_Base_Event_Parser:Light_Event_Base_SuperUser, LightVars, Event=Event
+[Fri Sep 27 09:41:25 2002] [ ] Light_Base_Event_Parser:Light_Event_Base_Show_Light_Log, LightVars
+[Fri Sep 27 09:41:37 2002] [I] You will find help in menu Help:Preferences
+[Fri Sep 27 09:41:41 2002] [ ] Light_Base_Event_Parser:Light_Event_Base_Edit_Preferences, LightVars
+[Fri Sep 27 09:41:48 2002] [ ] Light_Base_Event_Parser:Light_Event_Custom_IN6_Setup_Choppers, LightVars
+[Fri Sep 27 09:41:49 2002] [ ] Light_Base_Event_Parser:Light_Event_Custom_IN6_Setup_Choppers, LightVars, /auto
+[Fri Sep 27 09:41:50 2002] [I] Starting IN6 Choppers setting for  5.12
+[Fri Sep 27 09:41:50 2002] [ ] mad: <par compute off>
+[Fri Sep 27 09:41:50 2002] [ ] mad: <par wavelength 5.120000>
+[Fri Sep 27 09:41:50 2002] [ ] mad: <par chop s 6020.57 r 1 P1 99.35 P2 90.00>
+[Fri Sep 27 09:41:50 2002] [ ] mad: <chopper synchro wait>
+[Fri Sep 27 09:41:51 2002] [I] Achieved Choppers synchronisation
+[Fri Sep 27 09:41:52 2002] [ ] mad: <par tof channel 512.000000 width 9.625000 delay 991.375000>
+[Fri Sep 27 09:41:52 2002] [ ] mad: <par elpeak 315>
+[Fri Sep 27 09:41:52 2002] [ ] mad: <par period 4982.917969>
+[Fri Sep 27 09:41:53 2002] [I] Achieved TOF/Choppers settings
+[Fri Sep 27 09:42:01 2002] [ ] Light_Base_Event_Parser:Light_Event_Custom_IN6_Setup_Monochromators, LightVars
+[Fri Sep 27 09:42:12 2002] [ ] Light_Base_Event_Parser:Light_Event_Custom_IN6_Setup_Monochromators, LightVars, /rocking
+[Fri Sep 27 09:42:13 2002] [I] Starting IN6 Monochromators Rocking Curve for  5.12
+[Fri Sep 27 09:42:14 2002] [ ] Sending all monochromators to lower switch limit (reference point, before rocking curve)
+[Fri Sep 27 09:42:17 2002] [ ] Now scanning Monochromator  3
+[Fri Sep 27 09:43:28 2002] [ ] Monochromator 3 optimum position=4216 width=22
+[Fri Sep 27 09:43:31 2002] [ ] Now scanning Monochromator  2
+[Fri Sep 27 09:44:42 2002] [ ] Monochromator 2 optimum position=3962 width=21
+[Fri Sep 27 09:44:45 2002] [ ] Now scanning Monochromator  1
+[Fri Sep 27 09:45:59 2002] [ ] Monochromator 1 optimum position=3798 width=20
+[Fri Sep 27 09:45:59 2002] [ ] Sending all monochromators to lower switch limit (reference point, before final positioning)
+[Fri Sep 27 09:46:00 2002] [ ] Positioning Monochromator 3 to optimum position=4215.91
+[Fri Sep 27 09:46:01 2002] [ ] Positioning Monochromator 2 to optimum position=3962.03
+[Fri Sep 27 09:46:02 2002] [ ] Positioning Monochromator 1 to optimum position=3797.96
+[Fri Sep 27 09:46:03 2002] [I] Achieved Monochromators settings
+[Fri Sep 27 09:46:11 2002] [ ] Light_Base_Event_Parser:Light_Custom_IN6_Setup_Check, LightVars, Changed=0
+[Fri Sep 27 09:46:16 2002] [I] Starting the Check of the Elastic Peak channel for  5.12
+[Fri Sep 27 09:46:16 2002] [ ] mad: <count 1.000000 t n>
+[Fri Sep 27 09:46:16 2002] [ ] Light_Base_Event_Parser:Light_SubDial_Custom_IN6_Check_Elastic_Peak, LightVars, /auto
+[Fri Sep 27 09:46:16 2002] [I] Counting achieved. Analysing.
+[Fri Sep 27 09:46:16 2002] [ ] Monitor 1st moment= 462.758 width= 3 channels
+[Fri Sep 27 09:46:16 2002] [ ] Monitor Channel= 463 ( 60 counts/s) Sum= 513.000 counts/s. 
+[Fri Sep 27 09:46:16 2002] [ ] TOF 1st moment= 262.565 width= 89 channels
+[Fri Sep 27 09:46:17 2002] [>] TOF Channel= 315 ( 396.950 counts/s) Sum= 24093.7 counts/s [elastic channel].
+[Fri Sep 27 09:46:20 2002] [I] Achieved Check of the Elastic Peak
+[Fri Sep 27 09:54:04 2002] [w] SuperUser logged out.
+[Fri Sep 27 09:54:12 2002] [ ] Light_Base_Event_Parser:Light_Base_Alert, LightVars, /clear, /show
+[Fri Sep 27 10:03:07 2002] [ ] Light_Base_Event_Parser:Light_Event_Custom_IN6_Setup_Build, LightVars
+[Fri Sep 27 10:03:24 2002] [ ] Light_Base_Event_Parser:Light_Event_Custom_IN6_Setup_Choppers, LightVars
+[Fri Sep 27 10:03:33 2002] [ ] Light_Base_Event_Parser:Light_Custom_IN6_Setup_Check, LightVars, Changed=0
+[Fri Sep 27 10:03:35 2002] [ ] Light_Base_Event_Parser:Light_Custom_IN6_Setup_Check, LightVars, Changed=0
+[Fri Sep 27 10:04:10 2002] [ ] Light_Base_Event_Parser:
+[Fri Sep 27 10:04:10 2002] [ ] Light_Base_Event_Parser:
+[Fri Sep 27 10:04:31 2002] [ ] Light_Base_Event_Parser:Light_Custom_IN6_Calc_TOF_Choppers, LightVars, /show
+[Fri Sep 27 10:09:22 2002] [ ] Light_Base_Event_Parser:Light_Event_Base_Run_Nb, LightVars, Run_Nb=Event.Index
+[Fri Sep 27 10:09:27 2002] [ ] Light_Base_Event_Parser:Light_Event_Base_Run_Fields, LightVars
+[Fri Sep 27 10:09:27 2002] [ ] Light_Base_Event_Parser:Light_Event_Base_Run_Fields, LightVars
+[Fri Sep 27 10:09:27 2002] [ ] Light_Base_Event_Parser:Light_Event_Base_Run_Fields, LightVars
+[Fri Sep 27 10:09:27 2002] [ ] Light_Base_Event_Parser:Light_Event_Base_Run_Fields, LightVars
+[Fri Sep 27 10:09:29 2002] [ ] Light_Base_Event_Parser:Light_Event_Base_Run_Nb, LightVars, Run_Nb=Event.Index
+[Fri Sep 27 10:09:32 2002] [ ] Light_Base_Event_Parser:Light_Event_Base_Run_Options_Build, LightVars
+[Fri Sep 27 10:10:00 2002] [ ] Light_Base_Event_Parser:Light_Event_Base_Run_Nb, LightVars, Run_Nb=Event.Index
+[Fri Sep 27 10:10:02 2002] [ ] Light_Base_Event_Parser:Light_Event_Base_Run_Nb, LightVars, Run_Nb=Event.Index
+[Fri Sep 27 10:10:06 2002] [ ] Light_Base_Event_Parser:Light_Event_Base_Run_Fields, LightVars
+[Fri Sep 27 10:10:08 2002] [ ] Light_Base_Event_Parser:Light_Event_Base_Run_Nb, LightVars, Run_Nb=Event.Index
+[Fri Sep 27 10:10:09 2002] [ ] Light_Base_Event_Parser:Light_Event_Base_Run_Nb, LightVars, Run_Nb=Event.Index
+[Fri Sep 27 10:13:04 2002] [ ] Light_Base_Event_Parser:Light_Event_Base_Run_Options_Build, LightVars
+[Fri Sep 27 10:13:24 2002] [ ] Light_Base_Event_Parser:Light_Base_Alert, LightVars, /clear, /show
+[Fri Sep 27 10:14:00 2002] [ ] Saving Preferences Displays Runs  into /cs/users/farhi/idl/GeorgeLight/Light.ini
+[Fri Sep 27 10:14:00 2002] [ ] Light Log was saved for this session in /cs/users/farhi/idl/GeorgeLight/Light.log
+[Fri Sep 27 10:14:00 2002] [ ] Exiting

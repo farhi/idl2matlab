@@ -1,0 +1,113 @@
+;***********************
+;* LIST OF USER MACROS * A_List_D17tools.prox
+;***********************
+
+;Rule#1  the name of the file must be of the form (and case) A_List_*.prox
+
+;tags meaning (Lamp constructs the widgets from these tags)
+;------------
+; "logo"    filename.jpg (png) containing a small ~(64*32) grayscale image (optional).
+
+; "topic"   name of subject for grouping macros (15 char).
+; "macro"   name of the macro.
+; "author"  name of authors and date (80 char).
+; "link:"   related URL where to find a description of the macro. (optional)
+; "purpose" what does the macro (80 char).
+; "call"    macro's calling sequence.
+; "more"    any explanations and parameters meaning.
+; "more"    other lines of 80 char.
+
+; "run"     command to run the macro directly (GUI), "call" and "more" tags are ignored.
+
+;**********************
+; The file begins here
+;**********************
+
+; logo: d17.jpg
+
+; topic:main macros
+
+;	macro:   Grund_Mask
+;	author:  J.R.S. Jun2000
+;	purpose: Takes a 2-d SANS workspace and creates a mask.
+;	call:    w2=grund_mask(w1,0)
+;	more:    removing points greater than 2 standard devs from mean.
+;	more:    Should be run on back-ground substracted water runs.
+;	more:    if ( ,1) stops from saving to file.
+
+;	macro:   Man_Mask
+;	author:  J.R.S. Jun2000
+;	purpose: Creates a mask with manual input of beamstop limits and bad lines.
+;	call:    w2=man_mask(w1,b,i,j)
+;	more:    b is a four elements central beamstop position.
+;	more:    i and j are respectively the x1 and y1 mask lines index.
+
+;	macro:   Norm_Water
+;	author:  J.R.S. Jun2000
+;	purpose: Normalise intensities using water data.
+;	call:    w2=norm_water(w1,V,M,  a,b,w,t,d,r)
+;	more:    Water integrals are in a file with number given by V.
+;	more:    if present M is mask file number.
+;	more:    For absolute intensity normalisation, additional arguments are required:
+;	more:    a = atomic mass per f.u.(amu)    b = beam diameter(mm)
+;	more:    w = water thickness(mm)          t = sample thickness(mm)
+;	more:    d = sample density (g/cm^3)      r = water transmission          
+
+;	macro:   Prime_Cell
+;	author:  J.R.S. Mar2000
+;	purpose: Calculates and applies prime_cell from transmission runs.
+;	call:    w3=prime_cell(w1,w2)
+;	more:    w2=transmission runs and apply to runs w1.
+
+;	macro:   Q_cal
+;	author:  J.R.S. Feb2000
+;	purpose: Calibrate axes in terms of Q of 1-D or 2-D input data.
+;	call:    w2=Q_cal(w1)
+;	more:    Input data w1.
+
+;	macro:   Radial
+;	author:  J.R.S. Apr2000
+;	purpose: Produces radial integration of isotropic SANS data (with proper errors).
+;	call:    w2=radial(w1 ,l,u ,b)
+;	more:    l,u define radial limits of integration.
+;	more:    b   defines number of points in outfile.
+
+;	macro:   s_Background
+;	author:  J.R.S. Mar2000
+;	purpose: Performs background subtraction of normalised SANS data.
+;	call:    w2=s_background(w1 ,e,c)
+;	more:    e is number of workspace containing the background run.
+;	more:    c is number of workspace containing the cadmium run (optional).
+;	more:    For attenuation corrections without a cadmium run set c=0
+
+;	macro:   Water
+;	author:  J.R.S. Sep1999
+;	purpose: Return water integrals and save in file.
+;	call:    w2=water(w1 ,0)
+;	more:    Takes 2-D workspace containing normalised background-subtracted water run.
+;	more:    if ( ,1) stops from saving to file.
+
+;	macro:   s_Normalise
+;	author:  J.R.S. Apr2000
+;	purpose: Normalises raw sans data to monitor or counting time.
+;	call:    w2=s_normalise(w1 ,n)
+;	more:    Also finds the position of the elastic peak. Output format:w2(xarray,yarray,nruns)
+;	more:    n=0 => no normalisation
+;	more:    n=1 => 1000 monitor counts (default)
+;	more:    n=2 => time in minutes (incorrect for data added with rdsum or '>')
+
+; topic:sub macros
+
+;	macro:   s_Concatenate
+;	author:  K.H.A. & J.R.S. Mar2000
+;	purpose: Concatenates two workspaces for SANS (D11,D22) data only.
+;	call:    w3=s_concatenate(w1 , w2)
+;	more:    Must be performed on raw data, before calling s_normalise.
+;	more:    Result is w3(nspectra,nspectra,nrun1+nrun2).
+
+;	macro:   BeamCenter
+;	author:  J.R.S. Mar2000
+;	purpose: Finds the beam centre position from a transmission run
+;	call:    beamcenter, w1, x,y
+;	more:    called from prime_cell.pro and return position x,y
+

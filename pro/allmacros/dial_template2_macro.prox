@@ -1,0 +1,5 @@
+V= DialNewValue()
+V= round(cos(V)*75)
+if V eq 60  then if D.PLOT   eq 0 then DialStop
+if V lt 50  then DialMacro, "template4"
+D.VALUE=V

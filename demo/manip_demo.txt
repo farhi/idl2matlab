@@ -1,0 +1,91 @@
+********************************************************
+*     	      	      	      	      	      	       *
+*     	      	Nombres premiers       	      	       *	  
+*     	      	      	      	      	      	       *
+********************************************************
+
+******* Ligne de commande pour IDL de nb_prem.pro ******
+.run nb_prem
+nb_prem,1
+
+
+******* Ligne de commande pour la traduction de nb_prem.pro   *****
+
+idl2matlab demonstration/nb_prem.pro demonstration/resultat/
+
+
+******* Ligne de commande pour Matlab de nb_prem.pro ******
+
+nb_prem(1)
+
+
+--------------------------------------------------------------------
+
+
+********************************************************
+*     	      	      	      	      	      	       *
+*     	      	Traduction simple      	      	       *	  
+*     	      	      	      	      	      	       *
+********************************************************
+
+
+******* Ligne de commande pour IDL de traductionsimple.pro ******
+.run traductionsimple
+traductionsimple,1,2
+
+
+
+******* Ligne de commande pour la traduction de traductionsimple.pro   *****
+
+idl2matlab demonstration/traductionsimple.pro demonstration/resultat/
+
+
+******* Ligne de commande pour Matlab de traductionsimple.pro ******
+
+traductionsimple(1,2)
+
+-----------------------------------------------------------------------
+
+********************************************************
+*     	      	      	      	      	      	       *
+*     	      	Traduction complexe    	      	       *	  
+*     	      	      	      	      	      	       *
+********************************************************
+
+******* Ligne de commande pour IDL de traductioncomplexe.pro ******
+.run traductioncomplexe
+traductioncomplexe,1
+
+
+******* Ligne de commande pour la traduction de traductioncomplexe.pro   *****
+
+idl2matlab demonstration/traductioncomplexe.pro demonstration/resultat/
+
+
+******* Ligne de commande pour Matlab de traductioncomplexe.pro ******
+
+traductioncomplexe(1)
+
+
+-----------------------------------------------------------------------
+
+********************************************************
+*     	      	      	      	      	      	       *
+*     	      	      ByGeorge        	      	       *	  
+*     	      	      	      	      	      	       *
+********************************************************
+
+
+******* Ligne de commande pour IDL de by_george.pro ******
+
+
+
+******* Ligne de commande pour la traduction de by_george.pro   *****
+
+idl2matlab demonstration/bygeorge.pro demonstration/resultat/
+
+
+******* Ligne de commande pour Matlab de by_george.pro ******
+
+mex setSignal.c
+

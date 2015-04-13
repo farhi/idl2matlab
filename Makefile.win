@@ -1,0 +1,49 @@
+# Project: idl2matlab
+# Makefile created by Dev-C++ 4.9.6.0
+
+CC   = gcc.exe
+WINDRES = windres.exe
+RES  = 
+OBJ  = hashtable.o idl2matlab.o lex.yy.o lib.o main.o rename.o table_symb.o tree.o code.o $(RES)
+LIBS =  -L"D:/DEV-CPP/lib" -L"D:/PROJET2002-2003/v18.1" -L"C:/WINDOWS/Bureau/i2m" 
+INCS =  -I"D:/DEV-CPP/include"  -I"D:/PROJET2002-2003"  -I"C:/WINDOWS/Bureau/i2m" 
+BIN  = idl2matlab.exe
+CFLAGS = $(INCS)  -s
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before idl2matlab.exe all-after
+
+
+clean: clean-custom
+	rm -f $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CC) $(OBJ) -o "idl2matlab.exe" $(LIBS) $(CFLAGS)
+
+hashtable.o: hashtable.c
+	$(CC) -c hashtable.c -o hashtable.o $(CFLAGS)
+
+idl2matlab.o: idl2matlab.c
+	$(CC) -c idl2matlab.c -o idl2matlab.o $(CFLAGS)
+
+lex.yy.o: lex.yy.c
+	$(CC) -c lex.yy.c -o lex.yy.o $(CFLAGS)
+
+lib.o: lib.c
+	$(CC) -c lib.c -o lib.o $(CFLAGS)
+
+main.o: main.c
+	$(CC) -c main.c -o main.o $(CFLAGS)
+
+rename.o: rename.c
+	$(CC) -c rename.c -o rename.o $(CFLAGS)
+
+table_symb.o: table_symb.c
+	$(CC) -c table_symb.c -o table_symb.o $(CFLAGS)
+
+tree.o: tree.c
+	$(CC) -c tree.c -o tree.o $(CFLAGS)
+
+code.o: code.c
+	$(CC) -c code.c -o code.o $(CFLAGS)

@@ -1,0 +1,36 @@
+idl
+!path=!path+':'+expand_path('+/home/cs/lambda/macros')
+ .com Tools_StructSetValue
+ .com Dialog_Fields
+ .com TagFile
+ .com dial_light
+ .com dial_display
+ .com tstcontrol
+ .com Custom
+ bygeorge,'light'
+
+total(data,1) = Channels on X (340)
+total(data,2) = TOF on X (512, 1024...)
+
+LightVars =Light_Get_LightVars()
+
+'LIGHT_EVENT_BASE_RUN_STOP'. must call InitPro, /stop
+
+c.det_sums(i) = raw sum for detector
+c.sum = sum(c.det_sums)
+
+light:dial_count_stat: count on statistics when relative error (sqrt(integral)/integral lt given value on a selected channel/detector range
+
+custom:check_elpeak
+count 1 t n
+get detectors, integrate over detectors (length=tof channels)
+get 1st, 2nd mom. 
+If 1st moment not within +/- width of max, then error
+remove mean background level around max +/- width
+again around +/- width -> int(position) is el_peak channel
+check that el_peak+/- width in within time channels
+if ok, update widget and value
+
+monitor/sec: divide monitor integral by min(now-start, stop-start)
+execute run inside Light
+Runs: save as XBU...

@@ -1,0 +1,24 @@
+Arbre abstrait : 
+->BLOCK                l:9 	->DECL_PROC: essai l:8 	->NULL
+  						->STATEMENT_LIST       l:8 	->NULL
+  									->ASSIGNMENT           l:8 	->IDENT : res l:3 	->NULL
+  															->NULL
+  												->MATRIX               l:5 	->SUITE_MATRIX         l:5 	->MATRIX               l:3 	->SUITE_MATRIX         l:3 	->IDENT : propor0 l:3 	->NULL
+  																											->NULL
+  																								->IDENT : smallest0 l:3 	->NULL
+  																											->NULL
+  																					->NULL
+  																		->SUITE_MATRIX         l:5 	->MATRIX               l:4 	->SUITE_MATRIX         l:4 	->IDENT : propor1 l:4 	->NULL
+  																														->NULL
+  																											->IDENT : smallest1 l:4 	->NULL
+  																														->NULL
+  																								->NULL
+  																					->MATRIX               l:5 	->SUITE_MATRIX         l:5 	->IDENT : propor2 l:5 	->NULL
+  																														->NULL
+  																											->IDENT : smallest2 l:5 	->NULL
+  																														->NULL
+  																								->NULL
+  															->NULL
+  			->NULL
+
+Fin Arbre abstrait

@@ -1,0 +1,13 @@
+k=5 & i=1
+FOR J=k,15,1 do begin
+i=i+1 & show,i
+endfor
+if i gt 1 then begin
+if i eq 12 then begin
+show,'toto a gagné'
+CTRL:print,'l"gros lot'
+endif
+if i ne 12 then begin
+show,'loop has been modified'
+endif
+endif

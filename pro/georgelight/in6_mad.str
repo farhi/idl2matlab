@@ -1,0 +1,257 @@
+DATA            LONG      = Array[511, 340]
+DETECTORS       FLOAT     = Array[340]
+LAMBDA          FLOAT     =       5.12000
+LIGHTVARS       STRUCT    = -> <Anonymous> Array[1]
+MAD             STRUCT    = -> <Anonymous> Array[1]
+MONITOR         LONG      = Array[1, 340]
+POWER           FLOAT     =      0.611000
+TEMPERATURES    FLOAT     = Array[4]
+TOF             FLOAT     = Array[511]
+TREG            FLOAT     =       304.994
+TSAMPLE         FLOAT     =       304.929
+TSET            FLOAT     =       305.000
+T_CHOPPER       FLOAT     =       3.14000
+T_COUNTS        STRUCT    = -> <Anonymous> Array[1]
+T_NOTHER        STRUCT    = -> TT_NOTHER Array[1]
+T_PARA          STRUCT    = -> TT_PARA Array[1]
+T_RES           STRUCT    = -> TT_RES Array[1]
+T_STATUS        STRUCT    = -> TT_STATUS Array[1]
+
+** Structure TT_RES, 38 tags, length=1008, data length=1008:
+   LASNUM          LONG              3285 <<<<<<<<<<<<<<<<<<<<<<<<<<<<
+   ISODIS          LONG                 1
+   NKMES           LONG                 1
+   JC              LONG                 1
+   ICHECK          LONG                 0
+   CHOP_STATUS     LONG      Array[2] <<<<<<<<<<<<<<<<<<<<<<<<<<<<
+   NFUNC           LONG                 0
+   NKEY            LONG                 0
+   RST_COMMI       BYTE      Array[80]
+   N_RST_COMMAND   LONG                 0
+   NPMES           LONG                 0
+   N_TOTAL_SPECT   LONG               340 <<<<<<<<<<<<<<<<<<<<<<<<<<<<
+   N_MON_SPECT     LONG                 3 <<<<<<<<<<<<<<<<<<<<<<<<<<<<
+   N_SINGLE_SPECT  LONG               337
+   LOG_FILE        LONG                99
+   IXBFIL          LONG                 0
+   NXFILE          LONG                 0
+   NREPET          LONG                20
+   NPREP           LONG                19 /* nprep=nprep+1 until eq nrepet
+   NUM_TEMP        LONG                16
+   NUMOR_TO_SEND   LONG              3285                    
+   LASTSEND        LONG              3285
+   XC              LONG                30
+   UPDATE_DATA     LONG           9221330
+   MAD_GET_INPUT   LONG                 0
+   FREE1           LONG      Array[96]
+   CHECK1          LONG               111
+   TEMPEA          FLOAT     Array[4]
+   TEMPE           FLOAT       1.40130e-45
+   SPEED_REQ       FLOAT     Array[2] <<<<<<<<<<<<<<<<<<<<<<<<<<<<
+   PHASE_REQ       FLOAT     Array[2] <<<<<<<<<<<<<<<<<<<<<<<<<<<<
+   SPEED_ACT       FLOAT     Array[2] <<<<<<<<<<<<<<<<<<<<<<<<<<<<
+   PHASE_ACT       FLOAT     Array[2] <<<<<<<<<<<<<<<<<<<<<<<<<<<<
+   TREQ            FLOAT          0.000000
+   FIRST_UPDATE_DATA
+                   FLOAT              -NaN
+   CHAMP           FLOAT          0.000000
+   FREE2           FLOAT     Array[93]
+   CHECK2          FLOAT           222.000
+
+** Structure T_COUNTS <40017a08>, 3 tags, length=697684, data length=697684, refs=1:
+   DATA            LONG      Array[512, 340] <<<<<<<<<<<<<<<<<<<<<<<<<<<<
+   DET_SUMS        LONG      Array[340]       all 0
+   SUM             LONG                 0
+   
+help, T_NOTHER, /str
+** Structure TT_NOTHER, 52 tags, length=668, data length=664:
+   PCODE           LONG                 2
+   PSTATE          LONG                 0
+   CSTATE          LONG                 1
+   XBU_STATE       LONG                 0
+   NWHICHR         LONG                 0
+   NFUNC           LONG                 0
+   NKEY            LONG                 1
+   NKEY1           LONG                 0
+   IREMOT          LONG                 0
+   IXBFIL          LONG                 0
+   CHOP_STOP_NUMBER
+                   LONG      Array[2]
+   CHOP_STOP_TIME  LONG      Array[2]
+   NUM_TIME        LONG        1198296672
+   NUM_DURATION    LONG                 0
+   PRESET_REST     LONG                30 <<<<<<<<<<<<<<<<<<<<<<<<<<<<
+   IPCP1           LONG                 0
+   IPCP2           LONG                 0
+   IPCP3           LONG                 0
+   RESET           LONG                 0
+   SUCCES          LONG                25                    
+   INST_NAME       BYTE      Array[8] <<<<<<<<<<<<<<<<<<<<<<<<<<<<
+   INST_LEN        LONG                42
+   COUNT_FLAG      LONG                 1
+   VME_OPTION      LONG                -1
+   XBU_INTER       LONG                 0
+   TAB_FILS        LONG      Array[20]
+   NB_FILS         LONG                 0
+   FILE_FLUN1      LONG                 0
+   NSWITCH         LONG                 3
+   START_TIME      BYTE      Array[18]
+   AL1             LONG        1244476208
+   STOP_TIME       BYTE      Array[18]
+   AL2             LONG        1165540557
+   ACTANG          FLOAT     Array[16] <<<<<<<<<<<<<<<<<<<<<<<<<<<<
+   COLF            LONG                 0
+   COLB            LONG                 0
+   PCP_KILL        LONG                 0
+   PCP_PAUSE       LONG                 2
+   PCP_CONTINUE    LONG                 0
+   CSTATE_FLAGS    LONG                 0
+   MOTOR_FLAGS     LONG                 0                    
+   ICONS           LONG              1000
+   JCODE           LONG                 0
+   SS_RATES        LONG      Array[4]
+   MOTOR_ERROR     LONG      Array[16] <<<<<<<<<<<<<<<<<<<<<<<<<<<<
+   HFR_FLAG        LONG                 0
+   HFR             FLOAT          0.000000
+   FLAG_KILL_UPDATE
+                   LONG                 1
+   SIM             LONG                 0 <<<<<<<<<<<<<<<<<<<<<<<<<<<<
+   IPCP_WAIT       LONG           6648946
+   FREE3           LONG      Array[53]
+   CHECK           LONG                 0
+   
+   help, T_PARA, /str
+** Structure TT_PARA, 53 tags, length=1092, data length=1092:
+   TST_BEAM        LONG                 0
+   JCODE           LONG                 0
+   TOF_CHA_RESOL   LONG               512 <<<<<<<<<<<<<<<<<<<<<<<<<<<<
+   TOF_CHA_WIDTH   LONG                77 <<<<<<<<<<<<<<<<<<<<<<<<<<<<
+   TOF_DIVID       LONG                 0
+   NUM_CHAN_USED   LONG                 0
+   COMPUTE_PAR     LONG                 0
+   MIN_RATE        LONG                 0
+   MAX_RATE        LONG                 0
+   UPDATE_TIMER    LONG                20
+   STATE_TIMER     LONG                 0
+   OUTPUT_TIMER    LONG                 0
+   ALARM_TIMER     LONG                 0
+   CHOP_OPTION     LONG                 0
+   ENVIRONMENT     LONG                12 <<<<<<<<<<<<<<<<<<<<<<<<<<<<
+   ICRY            LONG                 1
+   IRVOLT          LONG                 0
+   IVOLT           LONG                 0
+   ITVOLT          LONG                 0
+   IREGUL          LONG                 0
+   ISWITCH         LONG                 1                    
+   MAD_REMOTE_TERM BYTE      Array[8]
+   C_TXT           BYTE      Array[80] <<<<<<<<<<<<<<<<<<<<<<<<<<<<
+   LONG_TXT        LONG                 0
+   C_USER          BYTE      Array[8] <<<<<<<<<<<<<<<<<<<<<<<<<<<<
+   LONG_C_USER     LONG                 0
+   C_LC            BYTE      Array[8] <<<<<<<<<<<<<<<<<<<<<<<<<<<<
+   LONG_C_LC       LONG                 0
+   SUB_TITLE       BYTE      Array[80] <<<<<<<<<<<<<<<<<<<<<<<<<<<<
+   LONG_PROPAL     LONG                 0 
+   ELPEAK          LONG               315 <<<<<<<<<<<<<<<<<<<<<<<<<<<<
+   FREE1           LONG      Array[85]
+   CHECK1          LONG               311
+   WAVE            FLOAT           5.12000 <<<<<<<<<<<<<<<<<<<<<<<<<<<<
+   RAT_CHOPPER     FLOAT           1.00000 <<<<<<<<<<<<<<<<<<<<<<<<<<<<
+   SPE_CHOPPER     FLOAT     Array[2] <<<<<<<<<<<<<<<<<<<<<<<<<<<<
+   DEPH_CHOPPER    FLOAT     Array[2] <<<<<<<<<<<<<<<<<<<<<<<<<<<<
+   DEPH_OFFSET     FLOAT          0.000000
+   PERIOD          FLOAT           4983.39 <<<<<<<<<<<<<<<<<<<<<<<<<<<<
+   CHA_WIDTH       FLOAT           9.62500 <<<<<<<<<<<<<<<<<<<<<<<<<<<<
+   TOF_DELAY       FLOAT           991.375 <<<<<<<<<<<<<<<<<<<<<<<<<<<<
+   CONS            FLOAT          0.000000                   
+   RES_CHOPPER     FLOAT          0.000000
+   EI_CHOPPER      FLOAT          0.000000
+   QMIN_CHOPPER    FLOAT          0.000000
+   QMAX_CHOPPER    FLOAT          0.000000
+   EMIN_CHOPPER    FLOAT          0.000000
+   EMAX_CHOPPER    FLOAT          0.000000
+   DISTANCE        FLOAT     Array[6] <<<<<<<<<<<<<<<<<<<<<<<<<<<<
+   DIS_S_M         FLOAT          0.000000
+   SAMPLE_ANG      FLOAT          0.000000 <<<<<<<<<<<<<<<<<<<<<<<<<<<<
+   FREE2           FLOAT     Array[89]
+   CHECK2          FLOAT           312.000
+   
+help, T_STATUS, /str
+** Structure TT_STATUS, 9 tags, length=132, data length=132:
+   PCODE           LONG                 2
+   PSTATE          LONG                 0
+   CSTATE          LONG                 1
+   COUNT_FLAG      LONG                 1
+   JC              LONG                 1
+   TIME_COUNTS     LONG              1023
+   VSUM            FLOAT     Array[8]
+   FREE2           LONG      Array[18]
+   CHECK1          LONG               999
+   
+     print, t_res.CHOP_STATUS
+          63          63
+IDL> print, t_res.PHASE_ACT
+      99.0640      90.0010
+IDL> print, t_para.C_USER
+  74  46  80 101 114 101 122  32
+IDL> print, string(t_para.C_USER)
+J.Perez 
+IDL> print, string(t_para.C_LC)  
+JO      
+IDL> print, string(t_para.SUB_TITLE)
+8-04-253 apo neocarzinostatin                                                   
+IDL> print, t_para.SPE_CHOPPER
+      6020.00      6020.00
+IDL> print, t_res.SPEED_ACT         
+      6019.00      6020.00
+IDL> print, t_res.SPEED_REQ
+      6020.00     0.000000
+IDL> print, t_para.DEPH_CHOPPER
+      99.3492      90.0000
+IDL> print, t_res.PHASE_REQ         
+      99.3492      90.0000
+IDL> print, t_para.DISTANCE
+     0.122000     0.395000     0.273000     0.843000      2.74000      2.48300
+     
+par2.f:
+para.compute_par = 'compute mode'
+r.ixbfil         = 
+numor         -> r.lastnum  
+wavelength    -> para.wave -> COMPUTE_TOF and act if r.ixbfil
+period        -> para.PERIOD
+elpeak        -> para.ELPEAK -> COMPUTE_TOF and act if r.ixbfil
+distances     -> para.distance[6]
+        ' (C4M1) Distance (m) Fermi     - Monitor 1 : ',para.DIS_C4_M1,
+	      ' (C4Sa)     "    (m) Fermi     - Sample    : ',para.DIS_C4_S,
+	      ' (M1Sa)     "    (m) Monitor 1 - Sample    : ',para.DIS_M1_S,
+	      ' (M1M2)     "    (m) Monitor 1 - Monitor 2 : ',para.DIS_M1_M2,
+	      ' (M1M3)     "    (m) Monitor 1 - Monitor 3 : ',para.DIS_M1_M3,
+	      ' (SaDe)     "    (m) Sample    - Detector  : ',para.DIS_S_D
+SANGLE        -> para.SAMPLE_ANG     'sample angle
+title         -> para.c_txt
+subtitle/proposal -> para.sub_title
+user/name     -> para.c_user ' ' para.c_lc
+compute 0/1   -> para.COMPUTE_PAR
+BUTEES/LIMITS -> [butees]
+ZERO/OFFSET   -> [zeros]
+motor         -> [reserved]
+cryogenic 0/1 -> para.ICRY 'Reading temperatures'/'No reading temperatures'
+environment   -> para.environment
+tof           -> para.TOF_CHA_RESOL,  channel number'
+                 if not compute_par: +
+                 +para.CHA_WIDTH,      channel width (unit=microsec)
+                 +para.TOF_DELAY       delay (unit=microsec)
+chopper       -> para.SPE_CHOPPER(1) 'Speed of Fermi'
+                 para.RAT_CHOPPER,   'Ratio chop. Fermi/Sup.'
+                 para.DEPH_CHOPPER(1)'Phase of Fermi'
+                 para.DEPH_CHOPPER(2)'Phase of Suppressor'
+                 para.DEPH_OFFSET    'Dephasage offset' (not used)
+                 
+                 +para.SPE_CHOPPER(2)=para.SPE_CHOPPER(1)/para.RAT_CHOPPER 'Speed of Suppressor',   
+                 if para.compute_par, COMPUTE_TOF
+ratio         -> para.rat_chopper    'Ratio chop. Fermi/Sup.'  
+                 +para.SPE_CHOPPER(2)=para.SPE_CHOPPER(1)/para.RAT_CHOPPER 'Speed of Suppressor'
+flux          -> [reserved]
+timer [update/state] -> para.UPDATE_TIMER 'Update timer'
+                        para.STATE_TIMER  'State timer'           
+

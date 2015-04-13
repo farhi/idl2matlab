@@ -1,0 +1,7 @@
+;*************
+;**
+	common  my_motif, mot_f,mot_w,mot_wg,mot_wd,mot_setuv,mot_getuv,$
+			  mot_resev,mot_t1,mot_t2,mot_sz,mot_wn,mot_str,mot_ev,$
+			  mot_t3,mot_t4,mot_t5,mot_t6,mot_wghinf,mot_wdcur
+common  my_handy, hand_ini,hand_wg,hand_txt,hand_ttl,hand_x,hand_y,hand_scr
+;**

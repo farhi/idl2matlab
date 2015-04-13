@@ -1,0 +1,73 @@
+;
+; Include file for LAMP formula entry and macros
+;
+;Workspace stuff
+
+        common c_lamp,	lamp_b1,lamp_act,lamp_focus,lamp_mic,lamp_don,lamp_did,lamp_ben,lamp_wrd,$
+        		lamp_data,lamp_host,lamp_dir,lamp_sys,lamp_exec,lamp_entry,lamp_devps,$
+        		lamp_hlp,lamp_siz,lamp_loc ,lamp_cyc,lamp_man ,lamp_dvd,lamp_asite,lamp_fsite,$
+        		lamp_ins,lamp_proc,lamp_grp,lamp_ali,lamp_path,lamp_touch,lamp_macro,$
+        		lamp_ziz,lamp_6,lamp_proxy,lamp_wrti,lamp_wrtp
+
+        common c_lamp_font,	ft_biggest , ft_bigger  , ft_normal , ft_smaller, ft_smallest,$
+    			        ft_b_bigger, ft_b_normal, ft_propor
+
+	common c_lamp_w,  w1 ,w2 ,w3 ,w4 ,w5 ,w6 ,w7 ,w8 ,w9 ,w10,$
+			  w11,w12,w13,w14,w15,w16,w17,w18,w19,w20,w21,w22,w23,wtb,wintb,$
+			  w_in,w_out,w_buf,w_min,w_max,w_numor
+
+        common c_lamp_x,  x0,x1 ,x2 ,x3 ,x4 ,x5 ,x6 ,x7 ,x8 ,x9 ,x10,$
+                          x11,x12,x13,x14,x15,x16,x17,x18,x19,x20,x21,x22,x23,$
+			  x_in,x_out,x_buf
+
+        common c_lamp_y,  y0,y1,y2,y3,y4,y5,y6,y7,y8,y9,y10,$
+                          y11,y12,y13,y14,y15,y16,y17,y18,y19,y20,y21,y22,y23,$
+			  y_in,y_out,y_buf		
+
+        common c_lamp_z,  z0,z1,z2,z3,z4,z5,z6,z7,z8,z9,z10,$
+                          z11,z12,z13,z14,z15,z16,z17,z18,z19,z20,z21,z22,z23,$
+			  z_in,z_out,z_buf		
+
+	common c_lamp_e,  e0,e1 ,e2 ,e3 ,e4 ,e5 ,e6 ,e7 ,e8 ,e9 ,e10,$
+			  e11,e12,e13,e14,e15,e16,e17,e18,e19,e20,e21,e22,e23,$
+   			  e_in,e_out,e_buf
+
+        common dialshare2,dialbase,d0,d1,d2,d3,d4,d5,d6,d7,d8,d9,d10,$
+                          d11,d12,d13,d14,d15,d16,d17,d18,d19,d20,d21,d22,d23,$
+                          proxcod,dt0,dt1,dt2,dt3,dt4,dt5,dt6,dt7,dt8,dt9,dt10,$
+                          dt11,dt12,dt13,dt14,dt15,dt16,dt17,dt18,dt19,dt20,dt21,dt22,dt23,$
+                          george,dial_ini,duduch1,duduch2,duduch3
+
+	common c_lamp_n,  n0,n1 ,n2 ,n3 ,n4 ,n5 ,n6 ,n7 ,n8 ,n9 ,n10,$
+			  n11,n12,n13,n14,n15,n16,n17,n18,n19,n20,n21,n22,n23,$
+   			  n_in,n_out,n_buf
+
+	common c_lamp_p,  p0,p1 ,p2 ,p3 ,p4 ,p5 ,p6 ,p7 ,p8 ,p9 ,p10,$
+			  p11,p12,p13,p14,p15,p16,p17,p18,p19,p20,p21,p22,p23,npars,$
+   			  p_in,p_out,p_buf,par_txt,par_txt_all	
+
+	common c_lamp_pv, pv0,pv1 ,pv2 ,pv3 ,pv4 ,pv5 ,pv6 ,pv7 ,pv8 ,pv9 ,pv10,$
+			  pv11,pv12,pv13,pv14,pv15,pv16,pv17,pv18,pv19,pv20,pv21,pv22,pv23,$
+   			  pv_in,pv_out,pv_buf
+
+   	common c_lamp_par,par1,par2,par3,par4,par5,par6,par7,par8,par9,par10,$
+                          par11,par12,par13,par14,par15,par16,par17,par18,$
+                          par19,par20,par21,par22,par23
+
+   	common c_lamp_Sna,Sna1,Sna2,Sna3,Sna4,Sna5,Sna6,Sna7,Sna8,Sna9,Sna10,$
+                          Sna11,Sna12,Sna13,Sna14,Sna15,Sna16,Sna17,Sna18,$
+                          Sna19,Sna20,Sna0 ,Snapix, Snapil
+
+	common c_lamp_info, one,two,three,alone,ifixed,b_labins,my_path,l_message,did_win0
+
+	common c_lamp_tit,x_tit , y_tit , z_tit , w_tit , other_tit , head_tit
+
+	common c_lamp_his,his,histxt,his_info,ihis,lims,limtxt,jou_c,jou_w
+
+	common c_lamp_access,inst_value,cycle,path_for_online,file_found,nwk_select,swk_select,$
+			     inst_group
+
+	common c_lamp_transformations, triang, tolerance,toler,monimon
+
+	common c_lamp_isis, isis_integration, isis_wrapping, isis_binning, $
+			    isis_calibration, isis_spectra

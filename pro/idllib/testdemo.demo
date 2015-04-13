@@ -1,0 +1,202 @@
+; $Id: testdemo.demo 1.2 1993/04/26 23:50:56 dave Exp $
+
+; IDL Demonstration script.  A sequence of IDL statements just
+;	as they would be entered from the keyboard.
+;
+if !d.n_colors gt 2 then loadct,5	;Color display?
+
+;
+;	Simple Vector demonstration:
+;
+y = [0,1,2,3,4,5]	;Define a 6 element integer vector
+plot,y,title='Simple Plot'  ;Plot it
+oplot,sqrt(y),color=151	;overplot the square root
+;
+n = 100			;Size of vectors
+;
+;	n element vector demonstration:
+;
+x = findgen(n)		;n element floating array: 0, 1, 2, ..., n-1.
+plot,x,title='Original Vector' ;Show it
+y = sin(8*!pi/n * x) / exp(x/(n/2.))	;Make a dampend sine wave
+plot,y,title='Dampened Sine Wave'
+for i=1,3 do oplot,y/(i+1),linestyle=i	;Show differing line styles
+;
+;	Polygon filling:
+;
+xx = [x, reverse(x)]	;Vector of X values concatenated with reversed vector.
+yy = [y, -reverse(y)]	;Same with Y but negate last half
+for i=0,3 do polyfill,xx,yy/(i+1),color=255/(i+1) & end
+;
+;	Example of spline interpolation.
+;
+window,2,title='Splines'	;make a new window
+a = randomn(aa,12)	;12 element normal dist random vectors
+plot,a,title='Spline Interpolation' ;simple plot
+xx = findgen(121)/10.	;grid for spline interpolation, 121 pts from 0 to 12.0
+yy = spline(findgen(12),a,xx) ;apply spline function to random points
+oplot,xx,yy,thick = 2	;overplot with double thick lines
+;
+;	Gaussian fitting demo:
+;
+window,1,title='Gaussian Fitting'
+x = findgen(50)		;5 element vector
+v = randomu(aa,3)*[30,10,10]+[10,1,1] ;random #'s for center width and height.
+z = v(2) * (exp(-((x-v(0))/v(1))^2) + 0.2*randomn(aa,50)) ;make signal
+plot,z,title='Gaussian',psym=3
+zz = gaussfit(x,z,a)	;Fit it using library function
+oplot,zz,color=200
+xyouts,2,.8*!y.crange(1),'!8y = a!I0!N e!A-z!E2!A/2!3',siz=2.5
+print,'Center',v(0),', 1/e width',v(1),', Height',v(2)
+print,'Calculated:'
+print,'Center',a(1),', 1/e width',a(2),', Height',a(0)
+;
+;
+;	Frequency domain filter demonstration:
+;
+window,2,xs=700, ys=500, title='Low Pass Filtering'
+!p.multi = [0,2,2]		;Gang plots, 2 by 2.
+ynoise = y + randomn(aa,n)/4.	;Add noise to corrupt dampened sine wave
+plot,ynoise, psym=3,title='Signal + Noise', color = 201
+oplot,y				;Original signal as a line
+;
+z = abs(fft(y,1))		;Original power spectrum
+znoise = abs(fft(ynoise,1))	;Corrupted Power spectrum
+;				Log Plot of power spectra:
+;				Plot original power spectum
+plot_io,shift(z,n/2),title='Power Spectra',ytitle='Log Power'
+;				;If color, fill original
+if demo$color then polyfill,findgen(n),shift(z,n/2)
+oplot, shift(znoise,n/2), psym=3, col = 201 ;Overplot noise
+;
+freq = findgen(n)/n		;Make a vector proportional to freq
+freq = freq < (1.-freq)		;symmetrical about Nyquist freq
+filter = 1./(1 + (freq/(4./n))^2) ;Low pass butterworth
+plot, shift(filter,n/2), title='Butterworth Filter Function', color = 151
+
+result = fft(filter * fft(ynoise, -1), 1) ;apply filter
+plot, ynoise, psym=3, title='Filtered Result',  color=201
+oplot, result, col=151		;filtered result
+oplot, y, lines=2		;original signal
+
+!p.multi = 0			;Reset standard plots
+
+;
+;	Two dimensional array Section
+;
+loadct,3			;red color tables
+wset,0 & wshow,0		;clean up things
+if !d.n_colors le 2 then top = 255 else top = !d.n_colors-1 ;Max Col index
+
+a=shift(dist(40),20,20)		;Make distance array
+a=exp(-(a/8.)^2)		;Yes, the proverbial Gaussian.
+				;Demonstrate contour plot
+contour, /follow, a, title='Contour Plot',c_line=[0,1,2,3]
+threed,a,title='Stacked Row Plot'	;Show stacked row plot
+
+window, 1, title='Second IDL Window',xsiz=480,ysiz=360	;make a new window
+surface, a, /save, /xst, /yst, bot=129, skirt=0. ;combine them
+contour, a, /t3d, /noerase, zval=1.0, /xst,  /yst, c_color=[101,151,201,251]
+; More Demonstrations of Contouring:
+a = randomu(seed, 6, 5)		;Make a 6x5 array of random numbers
+
+
+;  Show some contours
+levels = findgen(9)/10. + .1
+contour, a, level=levels, title='Simple Contour Plot'
+b = min_curve_surf(a)
+wset, 0
+tek_color
+contour, b, level=levels, title='Minimum Curvature Surface'
+contour, b, /fill, level = levels, title='Polygon Fill', c_color=indgen(9)+2
+contour, b, color = 0, /overplot, /downhill, levels = levels
+wait, 1 
+
+if not demo$color then demo$done = 1	;bail out now if can't display images.
+;
+; Image processing demo.
+;
+openr,1, demo$imagedir + 'cereb.dat',err=i  ;Open image file
+if i ne 0 then begin print,'Image files not found' &  demo$done=1 & end
+file = assoc(1, bytarr(512,512))	;contains 512 by 512 byte images
+a = file(0)				;read 1st image
+loadct, 3
+wset, 0					;use original image
+erase					;clean out display
+tv, a					;display image
+h = histogram(a)			;get pixel distribution
+wset, 1					;other window
+plot, h(1:*), title='Pixel Distribution Histogram'
+wset, 0
+hist_equal_ct, a			;show histogram equalized image
+xyouts, 310, 480, /noclip, 'Histogram Equalized Image', /dev
+;
+;	Image subtraction.  The first image is before Iodine dye injection,
+;		and the second image is after.
+;
+b = bytscl(fix(a) - file(1),top=top)	;subtract 2nd image
+close, 1				;done with file
+stretch					;restore normal color table
+tv, b					;show difference image
+xyouts, 310, 480, /noclip, 'Mask Subtraction Image',  /dev
+b = hist_equal(b, top = top)		;histogram equalize pixels
+tv,b					;Show it
+shades = rebin(b,64,64)			;shades for later use (4d display)
+height = rebin(a,64,64)-50>0		;Heights
+;
+;	Unsharp masking
+;
+b = bytscl(fix(a) - smooth(a, 5),top=top) ;subtract smoothed orig from smoothed
+stretch					;restore color tables
+tv, b					;show diff
+xyouts, 330, 490, /noclip, 'Unsharp Masking', /dev
+hist_equal_ct,b				;Histogram equalize it
+;
+;	2D Fourier Filtering
+;
+openr,1, demo$imagedir + 'abnorm.dat'	;Open image file
+a=bytarr(64,64)			;define array
+readu,1,a			;read image
+close,1				;done with file
+erase  & stretch		;clean out display
+tvscl,rebin(a,256,256),0	;show it
+
+xyouts,0,480,/dev,/nocl,'Original Image'
+b = fft(a,1)			;forward transform
+z = alog(abs(b))		;Log power spectrum
+tv,rebin(shift(bytscl(z,top=top),32,32),256,256),1	;show it
+
+xyouts,256,480,/dev,/nocl,'Power Spectrum'
+freq = dist(64)			;make a butterworth low pass filter
+filter = 1./(1 + (freq/5)^2)	;cutoff = 5 cycles/image.
+tvscl,rebin(bytscl(shift(filter,32,32),top=top),256,256),2	;show it
+
+xyouts,0,224,/dev,/nocl,'Butterworth Filter Function'
+result = fft(filter * b,-1)	;filter & retransform
+tv,rebin(bytscl(result,top=top),256,256),3 ;show result
+xyouts,256,224,/dev,/nocl,'Low Pass Filtered'
+;
+;	Combined view of image:
+;
+window,2,title='Combined Display',xsize=400, ysize=400
+show3,smooth(a,5),/interp,sscale=2	;show image 3 ways
+;
+;	Shaded view of image:
+;
+window,1,title='Shaded Surfaces',xsize=480, ysize=400
+shade_surf,rebin(a,32,32)	;Make a shaded surface
+;
+;	4D view of brain and circulation:
+;
+;	The elevation is the X-ray density, and the shading shows the 
+;	blood perfusion.
+;
+wset,0
+shade_surf,height, shades=shades, ax=70,/xst,/yst ;show it
+surface,rebin(height, 32,32),ax=70,col=0,/xst,/yst,/noer ;overprint lines
+loadct,15		;Load a pretty color table
+xyouts,10,480,/dev,/nocl,font=0,'Elevation = X-Ray Density'
+xyouts,10,450,/dev,/nocl,font=0,'Shading = Blood perfusion'
+;
+;
+;	ALL DONE!!

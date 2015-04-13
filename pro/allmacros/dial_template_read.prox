@@ -1,0 +1,6 @@
+n=par1  ;name
+t=par3  ;text
+s=par2  ;sequence
+if n_elements (par9) ne 1 then par9=0
+if s ne par9 then begin par9=s & v=randomu(par10,1) & endif
+par4=v(0)

@@ -1,0 +1,81 @@
+*******             
+SESSION             8-Aug-2002 14:30:11.00
+*******             
+RDSET,base="Current Path            
+*******             
+SESSION             8-Aug-2002 14:31:34.00
+*******             
+RDSET,base="Current Path            
+Dial light stopped            
+Dial light started            
+Dial light stopped            
+Dial light stopped            
+Dial light started            
+Dial light stopped            
+Dial light started            
+Dial light stopped            
+Dial light stopped            
+Dial light started            
+Dial display started            
+Dial light stopped            
+Dial light started            
+Dial light stopped            
+Dial  stopped            
+Dial  started            
+Dial display stopped            
+Dial  stopped            
+Dial  started            
+Dial  stopped            
+Dial  started            
+Ctrl:tornade ;;  8-Aug-2002 14:53:49.00            
+Dial tornade stopped            
+Dial tornade started            
+Dial display stopped            
+Ctrl:tornade ;;  8-Aug-2002 14:55:13.00            
+Dial tornade stopped            
+Dial display stopped            
+Dial tornade stopped            
+Dial light started            
+Dial display started            
+Dial display started            
+Dial light started            
+Ctrl:tornade ;;  8-Aug-2002 15:17:47.00            
+Dial tornade stopped            
+*******             
+SESSION             8-Aug-2002 15:17:48.00
+*******             
+Dial tornade started            
+Ctrl:tornade ;;  8-Aug-2002 15:17:56.00            
+Dial tornade stopped            
+Dial tornade stopped            
+Ctrl:template1 ;;  8-Aug-2002 15:18:06.00            
+Dial template1 stopped            
+Dial template1 started            
+Ctrl:Start brothers ;;  8-Aug-2002 15:18:07.00            
+Dial template2 stopped            
+Dial template2 started            
+Dial template3 stopped            
+Dial template3 started            
+Dial template4 stopped            
+Dial template1 stopped            
+Dial template2 stopped            
+Dial template3 stopped            
+Dial display stopped            
+Dial light stopped            
+Dial light started            
+Dial light stopped            
+Dial display started            
+Dial light started            
+Dial display stopped            
+Dial display started            
+Dial display stopped            
+Dial display stopped            
+Dial light stopped            
+Dial light started            
+Dial light stopped            
+*******             
+SESSION             9-Aug-2002 12:03:46.00
+*******             
+RDSET,base="Current Path            
+READ_LAMP,"/tmp_mnt/home/cs/farhi/test1.hdf",w=1            ;w 1: Float   dim = 64 * 64 min=0.000000 max=30.0000
+SEE ,w=1 ,/image,/below            

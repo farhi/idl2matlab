@@ -1,0 +1,4 @@
+Pour que bygeorge tourne il faut changer
+
+* dans bytimer => dd= a ajouter dans un procedure call
+* dans dialbygeorge => () a enlever dans un functioncall
